@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор сложного процента — FinPulse</title>
+    <meta
+      name="description"
+      content="Калькулятор накоплений со сложным процентом и ежемесячными пополнениями. Бесплатно онлайн."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Калькулятор сложного процента</h1>
+        <p>Сколько накопится, если откладывать каждый месяц под процент.</p>
+      </section>
+
+      <div class="panel">
+        <form id="compound-form">
+          <div class="form-row">
+            <label for="start">Стартовая сумма (₽)</label>
+            <input id="start" name="start" type="number" value="50000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="monthly">Пополнение в месяц (₽)</label>
+            <input id="monthly" name="monthly" type="number" value="10000" min="0" step="500" />
+          </div>
+          <div class="form-row">
+            <label for="rate">Годовая ставка (%)</label>
+            <input id="rate" name="rate" type="number" value="16" min="0" max="100" step="0.1" />
+          </div>
+          <div class="form-row">
+            <label for="months">Срок (месяцев)</label>
+            <input id="months" name="months" type="number" value="36" min="1" max="600" />
+          </div>
+        </form>
+
+        <div class="result">
+          <div>Итого: <strong id="compound-total">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row">
+              <span>Вложено своими</span>
+              <span id="compound-invested">—</span>
+            </div>
+            <div class="result-row">
+              <span>Доход от процентов</span>
+              <span id="compound-profit">—</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Модель с ежемесячной капитализацией. Налоги, комиссии и изменение
+          ставки не учитываются.
+        </p>
+      </div>
+
+      <footer>
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>

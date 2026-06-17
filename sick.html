@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор больничного — FinPulse</title>
+    <meta
+      name="description"
+      content="Рассчитайте больничные онлайн по доходу за 2 года и стажу. Бесплатный калькулятор пособия по временной нетрудоспособности."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Калькулятор больничного</h1>
+        <p>Оценка выплаты по доходу за 2 календарных года и дням на больничном.</p>
+      </section>
+
+      <div class="panel">
+        <form id="sick-form">
+          <div class="form-row">
+            <label for="income2y">Доход за 2 года (₽, с НДФЛ)</label>
+            <input id="income2y" name="income2y" type="number" value="2880000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="days">Дней на больничном</label>
+            <input id="days" name="days" type="number" value="10" min="1" max="365" />
+          </div>
+          <div class="form-row">
+            <label for="rate">Процент от среднего (стаж)</label>
+            <select id="rate" name="rate">
+              <option value="0.6">60% — стаж менее 5 лет</option>
+              <option value="0.8">80% — стаж 5–8 лет</option>
+              <option value="1" selected>100% — стаж 8+ лет</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="result">
+          <div>Больничные: <strong id="sick-total">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row">
+              <span>Средний дневной доход</span>
+              <span id="sick-base">—</span>
+            </div>
+            <div class="result-row">
+              <span>Дневная выплата с учётом стажа</span>
+              <span id="sick-daily">—</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Формула: доход за 2 года ÷ 730 × процент стажа × дни. Не учитывает
+          предельную базу, пособие по уходу за ребёнком и региональные особенности.
+        </p>
+      </div>
+
+      <section class="seo-block">
+        <h2>Как считается больничный</h2>
+        <p>
+          Средний дневной заработок берётся за два предыдущих календарных года.
+          От него зависит сумма пособия. Чем больше официальный доход и стаж,
+          тем выше выплата за каждый день нетрудоспособности.
+        </p>
+      </section>
+
+      <footer>
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>

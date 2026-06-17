@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Бюджет на месяц — шаблон FinPulse</title>
+    <meta
+      name="description"
+      content="Простой шаблон личного бюджета на месяц. Считает остаток автоматически, сохраняется в браузере."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .budget-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+
+      .budget-table th,
+      .budget-table td {
+        padding: 0.55rem 0.4rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        text-align: left;
+      }
+
+      .budget-table input {
+        padding: 0.5rem;
+      }
+
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+
+      .summary .card {
+        padding: 0.9rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="no-print">
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Бюджет на месяц</h1>
+        <p>Заполните статьи — остаток считается сам. Данные хранятся только у вас в браузере.</p>
+      </section>
+
+      <div class="panel">
+        <div class="form-row no-print">
+          <label for="month-name">Месяц</label>
+          <input id="month-name" type="text" placeholder="Июнь 2026" />
+        </div>
+
+        <table class="budget-table" id="budget-table">
+          <thead>
+            <tr>
+              <th>Статья</th>
+              <th>План (₽)</th>
+              <th>Факт (₽)</th>
+            </tr>
+          </thead>
+          <tbody id="budget-body"></tbody>
+        </table>
+
+        <div class="summary">
+          <div class="card">
+            <div class="note">Доход (факт)</div>
+            <strong id="sum-income">0 ₽</strong>
+          </div>
+          <div class="card">
+            <div class="note">Расход (факт)</div>
+            <strong id="sum-expense">0 ₽</strong>
+          </div>
+          <div class="card">
+            <div class="note">Остаток</div>
+            <strong id="sum-balance">0 ₽</strong>
+          </div>
+        </div>
+
+        <div class="actions no-print">
+          <button class="btn btn-secondary" type="button" id="add-row">+ Статья</button>
+          <button class="btn btn-secondary" type="button" id="reset-budget">Сбросить</button>
+          <button class="btn" type="button" onclick="window.print()">Распечатать / PDF</button>
+        </div>
+      </div>
+
+      <footer class="no-print">
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script>
+      const STORAGE_KEY = "finpulse-budget-v1";
+      const DEFAULT_ROWS = [
+        { name: "Зарплата", type: "income", plan: 120000, fact: 120000 },
+        { name: "Подработка", type: "income", plan: 0, fact: 0 },
+        { name: "Аренда / ипотека", type: "expense", plan: 45000, fact: 45000 },
+        { name: "Продукты", type: "expense", plan: 20000, fact: 0 },
+        { name: "Транспорт", type: "expense", plan: 5000, fact: 0 },
+        { name: "Подписки", type: "expense", plan: 3000, fact: 0 },
+        { name: "Накопления", type: "expense", plan: 15000, fact: 0 },
+      ];
+
+      const body = document.getElementById("budget-body");
+      const monthInput = document.getElementById("month-name");
+
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return { month: "", rows: structuredClone(DEFAULT_ROWS) };
+          return JSON.parse(raw);
+        } catch {
+          return { month: "", rows: structuredClone(DEFAULT_ROWS) };
+        }
+      }
+
+      function saveState(state) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      }
+
+      function readStateFromDom() {
+        const rows = [...body.querySelectorAll("tr")].map((row) => ({
+          name: row.querySelector('[data-field="name"]').value,
+          type: row.dataset.type,
+          plan: parseNumber(row.querySelector('[data-field="plan"]').value),
+          fact: parseNumber(row.querySelector('[data-field="fact"]').value),
+        }));
+        return { month: monthInput.value, rows };
+      }
+
+      function renderRow(row, index) {
+        const tr = document.createElement("tr");
+        tr.dataset.type = row.type;
+        tr.innerHTML = `
+          <td><input data-field="name" type="text" value="${row.name}" aria-label="Статья ${index + 1}" /></td>
+          <td><input data-field="plan" type="number" value="${row.plan}" min="0" step="100" /></td>
+          <td><input data-field="fact" type="number" value="${row.fact}" min="0" step="100" /></td>
+        `;
+        body.appendChild(tr);
+      }
+
+      function updateTotals() {
+        const state = readStateFromDom();
+        let income = 0;
+        let expense = 0;
+
+        state.rows.forEach((row) => {
+          if (row.type === "income") income += row.fact;
+          else expense += row.fact;
+        });
+
+        setText("sum-income", formatRub(income));
+        setText("sum-expense", formatRub(expense));
+        setText("sum-balance", formatRub(income - expense));
+        saveState(state);
+      }
+
+      function render(state) {
+        body.innerHTML = "";
+        monthInput.value = state.month || "";
+        state.rows.forEach(renderRow);
+        updateTotals();
+      }
+
+      body.addEventListener("input", updateTotals);
+      monthInput.addEventListener("input", updateTotals);
+
+      document.getElementById("add-row").addEventListener("click", () => {
+        const state = readStateFromDom();
+        state.rows.push({ name: "Новая статья", type: "expense", plan: 0, fact: 0 });
+        render(state);
+      });
+
+      document.getElementById("reset-budget").addEventListener("click", () => {
+        if (!confirm("Сбросить бюджет к шаблону?")) return;
+        render({ month: "", rows: structuredClone(DEFAULT_ROWS) });
+      });
+
+      render(loadState());
+    </script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>

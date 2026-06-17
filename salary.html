@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор зарплаты на руки — FinPulse</title>
+    <meta
+      name="description"
+      content="Посчитайте зарплату на руки после НДФЛ. Калькулятор чистой зарплаты онлайн, бесплатно."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Калькулятор зарплаты на руки</h1>
+        <p>Введите зарплату до вычета налогов и ставку НДФЛ.</p>
+      </section>
+
+      <div class="panel">
+        <form id="salary-form">
+          <div class="form-row">
+            <label for="gross">Зарплата до НДФЛ (₽/мес)</label>
+            <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="rate">Ставка НДФЛ</label>
+            <select id="rate" name="rate">
+              <option value="0.13" selected>13% (базовая)</option>
+              <option value="0.15">15% (доход выше порога)</option>
+            </select>
+          </div>
+        </form>
+
+        <div class="result">
+          <div>На руки: <strong id="salary-net">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row"><span>НДФЛ</span><span id="salary-tax">—</span></div>
+            <div class="result-row"><span>До вычета</span><span id="salary-gross">—</span></div>
+            <div class="result-row"><span>Годовой доход (брутто)</span><span id="salary-year">—</span></div>
+          </div>
+        </div>
+
+        <p class="note">
+          Упрощённый расчёт без вычетов и региональных коэффициентов. Для точного
+          расчёта смотрите расчётный лист от работодателя.
+        </p>
+      </div>
+
+      <section class="seo-block">
+        <h2>Как пользоваться</h2>
+        <p>
+          Укажите сумму в employment contract (до налогов) и выберите ставку.
+          Калькулятор покажет, сколько придёт на карту, сколько удержит налог
+          и какой годовой доход получится при фиксированной зарплате.
+        </p>
+      </section>
+
+      <footer>
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>

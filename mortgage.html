@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ипотечный калькулятор — FinPulse</title>
+    <meta
+      name="description"
+      content="Рассчитайте ежемесячный платёж по ипотеке, переплату и общую сумму. Бесплатный ипотечный калькулятор онлайн."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Ипотечный калькулятор</h1>
+        <p>Аннуитетный платёж: сумма кредита, ставка и срок.</p>
+      </section>
+
+      <div class="panel">
+        <form id="mortgage-form">
+          <div class="form-row">
+            <label for="amount">Сумма кредита (₽)</label>
+            <input id="amount" name="amount" type="number" value="6000000" min="0" step="10000" />
+          </div>
+          <div class="form-row">
+            <label for="rate">Ставка (% годовых)</label>
+            <input id="rate" name="rate" type="number" value="18" min="0" max="100" step="0.1" />
+          </div>
+          <div class="form-row">
+            <label for="years">Срок (лет)</label>
+            <input id="years" name="years" type="number" value="20" min="1" max="40" />
+          </div>
+        </form>
+
+        <div class="result">
+          <div>Платёж в месяц: <strong id="mortgage-payment">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row">
+              <span>Выплатите всего</span>
+              <span id="mortgage-total">—</span>
+            </div>
+            <div class="result-row">
+              <span>Переплата банку</span>
+              <span id="mortgage-overpay">—</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Расчёт по аннуитетной схеме без страховок, комиссий и досрочных
+          погашений. Для одобренного банком графика смотрите свой договор.
+        </p>
+      </div>
+
+      <section class="seo-block">
+        <h2>Аннуитетный платёж</h2>
+        <p>
+          При аннуитете сумма платежа каждый месяц одинаковая, но в начале
+          срока большая часть уходит на проценты. Калькулятор помогает сравнить
+          варианты: другой срок, первоначальный взнос или ставка.
+        </p>
+      </section>
+
+      <footer>
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Калькулятор отпускных — FinPulse</title>
+    <meta
+      name="description"
+      content="Рассчитайте отпускные онлайн по среднему заработку за 12 месяцев. Бесплатный калькулятор отпускных."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <section class="hero">
+        <h1>Калькулятор отпускных</h1>
+        <p>Оценка выплаты по доходу за год и числу дней отпуска.</p>
+      </section>
+
+      <div class="panel">
+        <form id="vacation-form">
+          <div class="form-row">
+            <label for="income">Доход за 12 месяцев (₽)</label>
+            <input id="income" name="income" type="number" value="1440000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="days">Дней отпуска</label>
+            <input id="days" name="days" type="number" value="14" min="1" max="365" />
+          </div>
+        </form>
+
+        <div class="result">
+          <div>Отпускные: <strong id="vacation-total">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row">
+              <span>Средний дневной заработок</span>
+              <span id="vacation-daily">—</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="note">
+          Формула: доход за 12 мес. ÷ 12 ÷ 29,3 × дни отпуска. Исключения по
+          больничным и периодам считаются в бухгалтерии отдельно.
+        </p>
+      </div>
+
+      <footer>
+        <p><a href="index.html">← Все калькуляторы</a></p>
+      </footer>
+    </div>
+    <script src="js/common.js"></script>
+    <script src="js/calculators.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/analytics.js"></script>
+  </body>
+</html>
