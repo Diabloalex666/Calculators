@@ -4,7 +4,7 @@
 
 Сайт (после загрузки файлов и включения Pages):
 
-**https://diabloalex666.github.io/Calculators/**
+**https://finraz.ru/**
 
 ## Что внутри
 
