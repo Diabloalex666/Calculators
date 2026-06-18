@@ -11,7 +11,7 @@
     <meta property="og:title" content="FinPulse — финансовые калькуляторы" />
     <meta property="og:url" content="https://finraz.ru/" />
     <meta property="og:type" content="website" />
-    <link rel="stylesheet" href="css/style.css?v=3" />
+    <link rel="stylesheet" href="css/style.css?v=4" />
     <link rel="canonical" href="https://finraz.ru/" />
   </head>
   <body>
@@ -77,6 +77,45 @@
         >
       </div>
 
+      <section class="feedback no-print" id="feedback">
+        <h2>Предложить калькулятор или идею</h2>
+        <p class="note">Расскажите, чего не хватает — мы читаем все сообщения.</p>
+        <form id="feedback-form" class="feedback-form" novalidate>
+          <div class="form-row">
+            <label for="feedback-message">Ваше сообщение</label>
+            <textarea
+              id="feedback-message"
+              name="message"
+              rows="4"
+              required
+              minlength="5"
+              maxlength="2000"
+              placeholder="Например: калькулятор декретных или налоговый вычет"
+            ></textarea>
+          </div>
+          <div class="form-row">
+            <label for="feedback-contact">Контакт для ответа (необязательно)</label>
+            <input
+              id="feedback-contact"
+              name="contact"
+              type="text"
+              maxlength="120"
+              placeholder="Email или @username"
+            />
+          </div>
+          <input
+            type="text"
+            name="website"
+            class="feedback-honeypot"
+            tabindex="-1"
+            autocomplete="off"
+            aria-hidden="true"
+          />
+          <button type="submit" class="feedback-submit">Отправить</button>
+          <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="seo-block">
         <h2>Для кого этот сайт</h2>
         <p>
@@ -92,5 +131,6 @@
     </div>
     <script src="js/config.js"></script>
     <script src="js/analytics.js"></script>
+    <script src="js/feedback.js"></script>
   </body>
 </html>

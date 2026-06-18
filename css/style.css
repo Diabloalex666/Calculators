@@ -291,6 +291,83 @@ footer {
   color: var(--accent);
 }
 
+.feedback {
+  margin-top: 2rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+}
+
+.feedback h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.feedback-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.feedback-honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.feedback-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.2rem;
+  border: none;
+  border-radius: 10px;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.feedback-submit:hover:not(:disabled) {
+  background: #2a3a52;
+  border-color: rgba(94, 234, 212, 0.35);
+}
+
+.feedback-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback-status {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-height: 1.25rem;
+}
+
+.feedback-status--success {
+  color: #5eead4;
+}
+
+.feedback-status--error {
+  color: #f87171;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
 @media print {
   body {
     background: #fff;
