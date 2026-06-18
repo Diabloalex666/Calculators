@@ -1,6 +1,6 @@
 // Настройки сайта Calculators / FinPulse
 window.FINPULSE_CONFIG = {
-  siteUrl: "https://fincalc.ru/",
+  siteUrl: "https://finraz.ru/",
   boostyUrl: "https://boosty.to/alexeyvasilev/donate",
   // После регистрации на metrika.yandex.ru вставьте номер счётчика (только цифры)
   yandexMetrikaId: "",
