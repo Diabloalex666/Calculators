@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://diabloalex666.github.io/Calculators/sitemap.xml
+Sitemap: https://fincalc.ru/sitemap.xml
