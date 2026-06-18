@@ -11,6 +11,6 @@ window.FINPULSE_CONFIG = {
   // Старый формат блоков R-A-... (не нужен при Autoplacement)
   rsyaBlockId: "",
 
-  // URL Cloudflare Worker после настройки (см. TELEGRAM-FEEDBACK.md)
-  feedbackEndpoint: "",
+  // URL Cloudflare Worker (обратная связь → Telegram)
+  feedbackEndpoint: "https://finpulse-feedback.finraz.workers.dev",
 };
