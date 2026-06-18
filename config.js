@@ -1,9 +1,13 @@
-// Настройки сайта Calculators / FinPulse
+// Настройки сайта FinPulse — https://finraz.ru/
 window.FINPULSE_CONFIG = {
   siteUrl: "https://finraz.ru/",
   boostyUrl: "https://boosty.to/alexeyvasilev/donate",
-  // После регистрации на metrika.yandex.ru вставьте номер счётчика (только цифры)
-  yandexMetrikaId: "",
-  // После модерации в partner.yandex.ru вставьте ID блока, например "R-A-1234567-1"
+  yandexMetrikaId: "109961609",
+  yandexWebmasterVerification: "",
+
+  // РСЯ Autoplacement (из кабинета Яндекса)
+  yandexAutoplacementPageId: "19466291",
+
+  // Старый формат блоков R-A-... (не нужен при Autoplacement)
   rsyaBlockId: "",
 };
