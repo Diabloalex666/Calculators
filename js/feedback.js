@@ -30,6 +30,12 @@
       return;
     }
 
+    const consent = form.querySelector('[name="consent"]');
+    if (consent && !consent.checked) {
+      setStatus("Отметьте согласие на обработку данных.", "error");
+      return;
+    }
+
     const submitBtn = form.querySelector('[type="submit"]');
     submitBtn.disabled = true;
     setStatus("Отправляем…", "");

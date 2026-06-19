@@ -8,7 +8,7 @@
       name="description"
       content="Рассчитайте отпускные онлайн по среднему заработку за 12 месяцев. Бесплатный калькулятор отпускных."
     />
-    <link rel="stylesheet" href="css/style.css?v=4" />
+    <link rel="stylesheet" href="css/style.css?v=5" />
   </head>
   <body>
     <div class="wrap">
@@ -78,22 +78,32 @@
             <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
           </div>
           <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label class="feedback-consent">
+            <input type="checkbox" name="consent" required />
+            <span>Согласен на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a></span>
+          </label>
           <button type="submit" class="feedback-submit">Отправить</button>
           <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
         </form>
       </section>
 
-      <footer>
-        <p>
+      <footer class="site-footer">
+        <p class="footer-nav">
           <a href="index.html">← Все калькуляторы</a>
           · <a href="index.html#feedback">Предложить идею</a>
         </p>
+        <p class="footer-nav">
+          <a href="about.html">О проекте</a>
+          · <a href="privacy.html">Конфиденциальность</a>
+          · <a href="terms.html">Соглашение</a>
+        </p>
+        <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
     <script src="js/common.js"></script>
     <script src="js/calculators.js"></script>
     <script src="js/config.js?v=2"></script>
-    <script src="js/analytics.js"></script>
-    <script src="js/feedback.js?v=1"></script>
+    <script src="js/analytics.js?v=2"></script>
+    <script src="js/feedback.js?v=2"></script>
   </body>
 </html>
