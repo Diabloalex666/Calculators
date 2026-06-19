@@ -131,7 +131,7 @@ label {
   color: var(--muted);
 }
 
-input,
+input:not([type="checkbox"]):not([type="radio"]),
 select {
   width: 100%;
   padding: 0.75rem 0.9rem;
@@ -140,6 +140,12 @@ select {
   background: var(--surface-2);
   color: var(--text);
   font-size: 1rem;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  width: auto;
+  padding: 0;
 }
 
 input:focus,
@@ -372,11 +378,12 @@ footer {
   max-width: 100%;
 }
 
-.feedback-consent input {
+.feedback-consent input[type="checkbox"] {
   margin-top: 0.15rem;
   flex: 0 0 auto;
   width: 1rem;
   height: 1rem;
+  min-width: 1rem;
 }
 
 .feedback-consent span {
