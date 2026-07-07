@@ -223,6 +223,62 @@ select:focus {
   color: var(--muted);
 }
 
+.article-block {
+  margin-top: 2.5rem;
+}
+
+.article-block h2 {
+  font-size: 1.25rem;
+  margin: 2rem 0 0.75rem;
+}
+
+.article-block h2:first-child {
+  margin-top: 0;
+}
+
+.article-block h3 {
+  font-size: 1.05rem;
+  margin: 1.25rem 0 0.5rem;
+  color: var(--text);
+}
+
+.article-block p,
+.article-block li {
+  color: var(--muted);
+}
+
+.article-block ul,
+.article-block ol {
+  padding-left: 1.25rem;
+}
+
+.article-block li {
+  margin: 0.35rem 0;
+}
+
+.article-block a {
+  color: var(--accent);
+}
+
+.article-formula {
+  margin: 1rem 0;
+  padding: 0.85rem 1rem;
+  background: var(--surface);
+  border-radius: 10px;
+  border: 1px solid rgba(94, 234, 212, 0.2);
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.article-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-left: 3px solid rgba(94, 234, 212, 0.4);
+  padding-left: 0.75rem;
+  margin: 1rem 0;
+}
+
 .breadcrumb {
   font-size: 0.85rem;
   color: var(--muted);
