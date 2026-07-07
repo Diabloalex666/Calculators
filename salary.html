@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Калькулятор зарплаты на руки — FinPulse</title>
+    <title>Калькулятор зарплаты на руки онлайн — после НДФЛ | FinPulse</title>
     <meta
       name="description"
-      content="Посчитайте зарплату на руки после НДФЛ. Калькулятор чистой зарплаты онлайн, бесплатно."
+      content="Бесплатный калькулятор зарплаты на руки: посчитайте чистую зарплату после НДФЛ 13% или 15%, сумму налога и годовой доход. Онлайн, без регистрации."
     />
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/salary.html" />
+    <meta property="og:title" content="Калькулятор зарплаты на руки — FinPulse" />
+    <meta property="og:description" content="Посчитайте чистую зарплату после НДФЛ онлайн." />
+    <meta property="og:url" content="https://finraz.ru/salary.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/style.css?v=8" />
   </head>
   <body>
     <div class="wrap">
       <header>
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
       </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Зарплата на руки</span>
+      </nav>
 
       <section class="hero">
         <h1>Калькулятор зарплаты на руки</h1>
@@ -52,13 +63,39 @@
       </div>
 
       <section class="seo-block">
-        <h2>Как пользоваться</h2>
+        <h2>Как посчитать зарплату на руки</h2>
         <p>
-          Укажите сумму в employment contract (до налогов) и выберите ставку.
-          Калькулятор покажет, сколько придёт на карту, сколько удержит налог
-          и какой годовой доход получится при фиксированной зарплате.
+          Калькулятор зарплаты на руки помогает быстро узнать, сколько денег придёт
+          на карту после удержания НДФЛ. Укажите зарплату до вычета налогов (gross)
+          и ставку 13% или 15%. Результат — чистая зарплата, сумма налога и
+          годовой доход при фиксированной оплате.
         </p>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Какая формула зарплаты на руки?</h3>
+          <p>
+            Зарплата на руки = зарплата до НДФЛ − (зарплата до НДФЛ × ставка НДФЛ).
+            Калькулятор не учитывает стандартные и социальные вычеты.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Чем 13% отличается от 15%?</h3>
+          <p>
+            Базовая ставка НДФЛ — 13%. Ставка 15% применяется к части дохода,
+            превышающей установленный порог. Для точного расчёта смотрите
+            расчётный лист работодателя.
+          </p>
+        </div>
       </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="vacation.html">Калькулятор отпускных онлайн</a></li>
+          <li><a href="sick.html">Калькулятор больничного</a></li>
+          <li><a href="budget.html">Бюджет на месяц</a></li>
+        </ul>
+      </nav>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -129,6 +166,7 @@
     <script src="js/calculators.js"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
     <script src="js/feedback.js?v=2"></script>
   </body>
 </html>

@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ипотечный калькулятор — FinPulse</title>
+    <title>Ипотечный калькулятор онлайн — платёж и переплата | FinPulse</title>
     <meta
       name="description"
-      content="Рассчитайте ежемесячный платёж по ипотеке, переплату и общую сумму. Бесплатный ипотечный калькулятор онлайн."
+      content="Ипотечный калькулятор онлайн: ежемесячный платёж, переплата по процентам, общая сумма кредита. Бесплатный расчёт ипотеки без регистрации."
     />
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/mortgage.html" />
+    <meta property="og:title" content="Ипотечный калькулятор — FinPulse" />
+    <meta property="og:description" content="Расчёт ежемесячного платежа и переплаты по ипотеке." />
+    <meta property="og:url" content="https://finraz.ru/mortgage.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/style.css?v=8" />
   </head>
   <body>
     <div class="wrap">
       <header>
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
       </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Ипотека</span>
+      </nav>
 
       <section class="hero">
         <h1>Ипотечный калькулятор</h1>
@@ -58,13 +69,38 @@
       </div>
 
       <section class="seo-block">
-        <h2>Аннуитетный платёж</h2>
+        <h2>Ипотечный калькулятор онлайн</h2>
         <p>
-          При аннуитете сумма платежа каждый месяц одинаковая, но в начале
-          срока большая часть уходит на проценты. Калькулятор помогает сравнить
-          варианты: другой срок, первоначальный взнос или ставка.
+          Рассчитайте ежемесячный платёж по ипотеке при аннуитетной схеме:
+          укажите сумму кредита, срок в годах и процентную ставку. Калькулятор
+          покажет переплату по процентам и общую сумму выплат — удобно сравнить
+          предложения банков до подачи заявки.
         </p>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Что такое аннуитетный платёж?</h3>
+          <p>
+            Это одинаковая сумма каждый месяц. В начале срока большая часть
+            платежа — проценты, к концу — погашение основного долга.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Учитывает ли калькулятор страховку и комиссии?</h3>
+          <p>
+            Нет. Банк может добавить страхование, оценку и другие расходы.
+            Итоговый график смотрите в одобренном договоре.
+          </p>
+        </div>
       </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="compound.html">Калькулятор накоплений</a></li>
+          <li><a href="budget.html">Бюджет на месяц</a></li>
+          <li><a href="salary.html">Зарплата на руки</a></li>
+        </ul>
+      </nav>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -121,6 +157,7 @@
     <script src="js/calculators.js"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
     <script src="js/feedback.js?v=2"></script>
   </body>
 </html>

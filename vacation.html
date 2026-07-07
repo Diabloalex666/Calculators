@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Калькулятор отпускных — FinPulse</title>
+    <title>Калькулятор отпускных онлайн — расчёт выплаты | FinPulse</title>
     <meta
       name="description"
-      content="Рассчитайте отпускные онлайн по среднему заработку за 12 месяцев. Бесплатный калькулятор отпускных."
+      content="Рассчитайте отпускные онлайн бесплатно: средний заработок за 12 месяцев, дни отпуска, сумма выплаты. Калькулятор отпускных 2026."
     />
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/vacation.html" />
+    <meta property="og:title" content="Калькулятор отпускных — FinPulse" />
+    <meta property="og:description" content="Бесплатный расчёт отпускных по среднему заработку." />
+    <meta property="og:url" content="https://finraz.ru/vacation.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/style.css?v=8" />
   </head>
   <body>
     <div class="wrap">
       <header>
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
       </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Отпускные</span>
+      </nav>
 
       <section class="hero">
         <h1>Калькулятор отпускных</h1>
@@ -48,6 +59,39 @@
           больничным и периодам считаются в бухгалтерии отдельно.
         </p>
       </div>
+
+      <section class="seo-block">
+        <h2>Как рассчитать отпускные</h2>
+        <p>
+          Отпускные считаются от среднего заработка за 12 месяцев. Калькулятор
+          использует упрощённую формулу: доход за год ÷ 12 ÷ 29,3 × число дней
+          отпуска. Подходит, чтобы прикинуть сумму до расчёта в бухгалтерии.
+        </p>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Какие данные нужны для расчёта отпускных?</h3>
+          <p>
+            Укажите суммарный доход за 12 месяцев (зарплата, премии по правилам)
+            и количество календарных дней отпуска.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Почему сумма может отличаться от выплаты на работе?</h3>
+          <p>
+            Бухгалтерия исключает некоторые периоды и выплаты, применяет
+            коэффициенты и округления. Наш расчёт — ориентир.
+          </p>
+        </div>
+      </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="salary.html">Калькулятор зарплаты на руки</a></li>
+          <li><a href="sick.html">Калькулятор больничного</a></li>
+          <li><a href="mortgage.html">Ипотечный калькулятор</a></li>
+        </ul>
+      </nav>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -104,6 +148,7 @@
     <script src="js/calculators.js"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
     <script src="js/feedback.js?v=2"></script>
   </body>
 </html>

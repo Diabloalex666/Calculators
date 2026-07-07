@@ -3,18 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Калькулятор больничного — FinPulse</title>
+    <title>Калькулятор больничного онлайн — пособие по стажу | FinPulse</title>
     <meta
       name="description"
-      content="Рассчитайте больничные онлайн по доходу за 2 года и стажу. Бесплатный калькулятор пособия по временной нетрудоспособности."
+      content="Бесплатный калькулятор больничного: пособие по временной нетрудоспособности по доходу за 2 года и стажу. Расчёт онлайн без регистрации."
     />
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/sick.html" />
+    <meta property="og:title" content="Калькулятор больничного — FinPulse" />
+    <meta property="og:description" content="Расчёт больничного по стажу и доходу за 2 года." />
+    <meta property="og:url" content="https://finraz.ru/sick.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/style.css?v=8" />
   </head>
   <body>
     <div class="wrap">
       <header>
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
       </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Больничный</span>
+      </nav>
 
       <section class="hero">
         <h1>Калькулятор больничного</h1>
@@ -64,11 +75,36 @@
       <section class="seo-block">
         <h2>Как считается больничный</h2>
         <p>
-          Средний дневной заработок берётся за два предыдущих календарных года.
-          От него зависит сумма пособия. Чем больше официальный доход и стаж,
-          тем выше выплата за каждый день нетрудоспособности.
+          Пособие по временной нетрудоспособности зависит от дохода за два
+          предыдущих года и страхового стажа. Калькулятор больничного онлайн
+          показывает ориентировочную сумму: средний дневной заработок × процент
+          по стажу × число дней больничного.
         </p>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Как стаж влияет на больничный?</h3>
+          <p>
+            При стаже до 5 лет выплачивается 60% от среднего заработка, 5–8 лет —
+            80%, от 8 лет — 100%. Точные правила зависят от основания больничного.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Какой доход указывать?</h3>
+          <p>
+            Сумма официального дохода, с которого уплачивались страховые взносы,
+            за два календарных года до года болезни.
+          </p>
+        </div>
       </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="salary.html">Калькулятор зарплаты на руки</a></li>
+          <li><a href="vacation.html">Калькулятор отпускных</a></li>
+          <li><a href="budget.html">Бюджет на месяц</a></li>
+        </ul>
+      </nav>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -125,6 +161,7 @@
     <script src="js/calculators.js"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
     <script src="js/feedback.js?v=2"></script>
   </body>
 </html>

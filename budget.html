@@ -3,12 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Бюджет на месяц — шаблон FinPulse</title>
+    <title>Бюджет на месяц онлайн — шаблон и калькулятор | FinPulse</title>
     <meta
       name="description"
-      content="Простой шаблон личного бюджета на месяц. Считает остаток автоматически, сохраняется в браузере."
+      content="Бесплатный шаблон личного бюджета на месяц: доходы, расходы, остаток. Сохраняется в браузере, можно распечатать. Калькулятор бюджета онлайн."
     />
-    <link rel="stylesheet" href="css/style.css?v=7" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/budget.html" />
+    <meta property="og:title" content="Бюджет на месяц — FinPulse" />
+    <meta property="og:description" content="Шаблон личного бюджета с автоматическим подсчётом остатка." />
+    <meta property="og:url" content="https://finraz.ru/budget.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/style.css?v=8" />
     <style>
       .budget-table {
         width: 100%;
@@ -51,6 +58,10 @@
       <header class="no-print">
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
       </header>
+
+      <nav class="breadcrumb no-print" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Бюджет</span>
+      </nav>
 
       <section class="hero">
         <h1>Бюджет на месяц</h1>
@@ -95,6 +106,39 @@
           <button class="btn" type="button" onclick="window.print()">Распечатать / PDF</button>
         </div>
       </div>
+
+      <section class="seo-block no-print">
+        <h2>Личный бюджет на месяц</h2>
+        <p>
+          Шаблон бюджета помогает распределить доходы и расходы: добавьте статьи,
+          укажите план и факт — калькулятор покажет остаток. Данные сохраняются
+          в браузере, можно распечатать таблицу в PDF.
+        </p>
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Куда сохраняется бюджет?</h3>
+          <p>
+            Только в вашем браузере (localStorage). FinPulse не получает доступ
+            к вашим суммам.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Можно ли распечатать?</h3>
+          <p>
+            Да, нажмите «Распечатать / PDF» — форма и кнопки скроются, останется
+            таблица с итогами.
+          </p>
+        </div>
+      </section>
+
+      <nav class="related-calc no-print" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="salary.html">Калькулятор зарплаты на руки</a></li>
+          <li><a href="mortgage.html">Ипотечный калькулятор</a></li>
+          <li><a href="compound.html">Калькулятор накоплений</a></li>
+        </ul>
+      </nav>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -240,6 +284,7 @@
     </script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
     <script src="js/feedback.js?v=2"></script>
   </body>
 </html>
