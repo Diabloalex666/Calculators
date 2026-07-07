@@ -6,6 +6,24 @@
   const config = window.FINPULSE_CONFIG || {};
   const endpoint = config.feedbackEndpoint;
 
+  /** Убирает HTML, управляющие символы и опасные фрагменты */
+  function sanitizeText(input, maxLen) {
+    return String(input || "")
+      .replace(/\0/g, "")
+      .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, "")
+      .replace(/<[^>]*>/g, "")
+      .replace(/javascript\s*:/gi, "")
+      .replace(/data\s*:\s*text\/html/gi, "")
+      .replace(/on\w+\s*=/gi, "")
+      .trim()
+      .slice(0, maxLen);
+  }
+
+  function sanitizePage(path) {
+    const p = String(path || "/").slice(0, 200);
+    return /^\/[\w\-./]*$/.test(p) ? p : "/";
+  }
+
   function setStatus(text, type) {
     status.textContent = text;
     status.className = `feedback-status${type ? ` feedback-status--${type}` : ""}`;
@@ -22,11 +40,18 @@
     const honeypot = form.querySelector('[name="website"]');
     if (honeypot && honeypot.value.trim()) return;
 
-    const message = form.querySelector('[name="message"]').value.trim();
-    const contact = form.querySelector('[name="contact"]').value.trim();
+    const rawMessage = form.querySelector('[name="message"]').value;
+    const rawContact = form.querySelector('[name="contact"]').value;
+    const message = sanitizeText(rawMessage, 2000);
+    const contact = sanitizeText(rawContact, 120);
 
     if (message.length < 5) {
       setStatus("Напишите чуть подробнее (минимум 5 символов).", "error");
+      return;
+    }
+
+    if ((message.match(/https?:\/\//gi) || []).length > 5) {
+      setStatus("Слишком много ссылок в сообщении.", "error");
       return;
     }
 
@@ -47,7 +72,7 @@
         body: JSON.stringify({
           message,
           contact,
-          page: window.location.pathname || "/",
+          page: sanitizePage(window.location.pathname),
         }),
       });
 
