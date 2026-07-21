@@ -6,6 +6,13 @@
     if (config.boostyUrl) node.href = config.boostyUrl;
   });
 
+  if (config.googleSearchConsoleVerification) {
+    const meta = document.createElement("meta");
+    meta.name = "google-site-verification";
+    meta.content = config.googleSearchConsoleVerification;
+    document.head.appendChild(meta);
+  }
+
   if (config.yandexWebmasterVerification) {
     const meta = document.createElement("meta");
     meta.name = "yandex-verification";

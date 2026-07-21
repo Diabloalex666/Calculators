@@ -46,6 +46,27 @@
     }
   }
 
+  if (page === "/" || page === "/index.html") {
+    const cards = document.querySelectorAll(".grid .card");
+    if (cards.length) {
+      addJsonLd({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Финансовые калькуляторы FinPulse",
+        itemListElement: [...cards].map((card, i) => {
+          const link = card.querySelector("a");
+          const href = link?.getAttribute("href") || "";
+          return {
+            "@type": "ListItem",
+            position: i + 1,
+            name: card.querySelector("h2")?.textContent.trim(),
+            url: href.startsWith("http") ? href : SITE + "/" + href.replace(/^\//, ""),
+          };
+        }),
+      });
+    }
+  }
+
   const appName = document.querySelector("h1");
   if (appName && page !== "/" && page !== "/index.html") {
     addJsonLd({
