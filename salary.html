@@ -7,10 +7,10 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <title>Как посчитать зарплату на руки в 2026 — калькулятор НДФЛ | FinPulse</title>
+    <title>Калькулятор зарплаты на руки 2026 — НДФЛ 13/15/18/20/22%, gross и net | FinPulse</title>
     <meta
       name="description"
-      content="Как посчитать зарплату на руки в 2026: формула НДФЛ 13% и 15%, пример расчёта, чем gross отличается от net. Бесплатный калькулятор зарплаты онлайн."
+      content="Калькулятор зарплаты на руки 2026: прогрессивный НДФЛ, расчёт из gross и net, вычеты на детей, взносы работодателя. Пошаговый расчёт онлайн."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://finraz.ru/salary.html" />
@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://finraz.ru/salary.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=9" />
+    <link rel="stylesheet" href="css/style.css?v=10" />
   </head>
   <body>
     <div class="wrap">
@@ -33,20 +33,51 @@
 
       <section class="hero">
         <h1>Калькулятор зарплаты на руки</h1>
-        <p>Введите зарплату до вычета налогов и ставку НДФЛ.</p>
+        <p>Расчёт из оклада или желаемой суммы на руки с прогрессивным НДФЛ 2026 и вычетами на детей.</p>
       </section>
 
       <div class="panel">
         <form id="salary-form">
           <div class="form-row">
+            <label for="mode">Режим расчёта</label>
+            <select id="mode" name="mode">
+              <option value="gross" selected>Из оклада (gross) → на руки</option>
+              <option value="net">Из суммы на руки (net) → оклад</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="gross">
             <label for="gross">Зарплата до НДФЛ (₽/мес)</label>
             <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" />
           </div>
+          <div class="form-row" data-field="net" hidden>
+            <label for="net">Желаемая сумма на руки (₽/мес)</label>
+            <input id="net" name="net" type="number" value="87000" min="0" step="1000" />
+          </div>
           <div class="form-row">
+            <label for="taxMode">НДФЛ</label>
+            <select id="taxMode" name="taxMode">
+              <option value="auto" selected>Авто — прогрессивная шкала 2026</option>
+              <option value="manual">Фиксированная ставка</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="manual-rate" hidden>
             <label for="rate">Ставка НДФЛ</label>
             <select id="rate" name="rate">
-              <option value="0.13" selected>13% (базовая)</option>
-              <option value="0.15">15% (доход выше порога)</option>
+              <option value="0.13" selected>13%</option>
+              <option value="0.15">15%</option>
+              <option value="0.18">18%</option>
+              <option value="0.2">20%</option>
+              <option value="0.22">22%</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="children">Детей на стандартном вычете</label>
+            <select id="children" name="children">
+              <option value="0" selected>Нет</option>
+              <option value="1">1 ребёнок (1 400 ₽/мес)</option>
+              <option value="2">2 детей (2 800 ₽/мес)</option>
+              <option value="3">3 ребёнка (5 800 ₽/мес)</option>
+              <option value="4">4 ребёнка (8 800 ₽/мес)</option>
             </select>
           </div>
         </form>
@@ -54,15 +85,22 @@
         <div class="result">
           <div>На руки: <strong id="salary-net">—</strong></div>
           <div class="result-grid">
-            <div class="result-row"><span>НДФЛ</span><span id="salary-tax">—</span></div>
-            <div class="result-row"><span>До вычета</span><span id="salary-gross">—</span></div>
-            <div class="result-row"><span>Годовой доход (брутто)</span><span id="salary-year">—</span></div>
+            <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
+            <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
+            <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
+            <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
+            <div class="result-row"><span>Годовой доход (gross)</span><span id="salary-year">—</span></div>
+            <div class="result-row"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
           </div>
         </div>
 
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="salary-steps"></div>
+
         <p class="note">
-          Упрощённый расчёт без вычетов и региональных коэффициентов. Для точного
-          расчёта смотрите расчётный лист от работодателя.
+          Прогрессивная шкала 2026: 13% до 2,4 млн ₽/год, 15% — 2,4–5 млн, 18% — 5–20 млн,
+          20% — 20–50 млн, 22% — свыше 50 млн. Расчёт при равном доходе каждый месяц.
+          Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
         </p>
       </div>
 
@@ -94,15 +132,21 @@
           <li>Годовой доход (gross): 120&nbsp;000 × 12 = <strong>1&nbsp;440&nbsp;000&nbsp;₽</strong></li>
         </ol>
 
-        <h3>НДФЛ 13% и 15% в 2026 году</h3>
+        <h3>НДФЛ 13/15/18/20/22% в 2026 году</h3>
         <p>
-          Базовая ставка НДФЛ — <strong>13%</strong> с годового дохода до 5 млн ₽. С суммы,
-          превышающей 5 млн ₽ в год, удерживают <strong>15%</strong>. Работодатель считает
-          налог прогрессивно: пока годовой доход не перевалил порог, действует 13%.
+          С 2025 года действует <strong>пятиступенчатая прогрессивная шкала НДФЛ</strong>. В 2026 году
+          пороги не менялись:
         </p>
+        <ul>
+          <li><strong>13%</strong> — годовой доход до 2,4 млн ₽</li>
+          <li><strong>15%</strong> — от 2,4 до 5 млн ₽</li>
+          <li><strong>18%</strong> — от 5 до 20 млн ₽</li>
+          <li><strong>20%</strong> — от 20 до 50 млн ₽</li>
+          <li><strong>22%</strong> — свыше 50 млн ₽</li>
+        </ul>
         <p>
-          Калькулятор не учитывает стандартные, социальные и имущественные вычеты — с ними
-          «на руки» будет больше. Точные суммы смотрите в расчётном листе.
+          Повышенная ставка применяется только к сумме <strong>превышения</strong> порога, а не ко
+          всему доходу. Калькулятор считает налог автоматически и показывает разбивку по ступеням.
         </p>
 
         <h3>Чем gross отличается от net</h3>
@@ -139,8 +183,16 @@
         <div class="faq-item">
           <h3>Учитывает ли калькулятор вычеты на детей?</h3>
           <p>
-            Нет. Стандартные вычеты уменьшают базу НДФЛ — реальная зарплата на руки может быть
-            выше. Для точного расчёта смотрите расчётный лист работодателя.
+            Да. Выберите число детей в форме — применится стандартный вычет: 1 400 ₽ на первого
+            и второго, 3 000 ₽ на третьего и каждого следующего. Социальные и имущественные
+            вычеты не учитываются.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Как посчитать, какой нужен оклад, чтобы получать 100 000 на руки?</h3>
+          <p>
+            Выберите режим «Из суммы на руки → оклад», введите 100 000 — калькулятор покажет
+            gross с учётом прогрессивного НДФЛ и вычетов.
           </p>
         </div>
         <div class="faq-item">
@@ -152,8 +204,8 @@
         <div class="faq-item">
           <h3>Изменились ли ставки НДФЛ в 2026 году?</h3>
           <p>
-            Прогрессивная шкала 13% / 15% действует с 2021 года и сохраняется в 2026. Порог —
-            5 млн ₽ годового дохода.
+            С 2025 года действует пятиступенчатая шкала 13/15/18/20/22%. В 2026 году пороги
+            и ставки не менялись. Первый порог — 2,4 млн ₽ годового дохода (≈ 200 000 ₽/мес).
           </p>
         </div>
       </section>
@@ -232,8 +284,8 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js"></script>
-    <script src="js/calculators.js"></script>
+    <script src="js/common.js?v=2"></script>
+    <script src="js/calculators.js?v=2"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

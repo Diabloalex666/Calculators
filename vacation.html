@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://finraz.ru/vacation.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=9" />
+    <link rel="stylesheet" href="css/style.css?v=10" />
   </head>
   <body>
     <div class="wrap">
@@ -39,8 +39,23 @@
       <div class="panel">
         <form id="vacation-form">
           <div class="form-row">
+            <label for="incomeMode">Способ ввода дохода</label>
+            <select id="incomeMode" name="incomeMode">
+              <option value="yearly" selected>Доход за 12 месяцев</option>
+              <option value="monthly">Средняя зарплата в месяц</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="yearly-income">
             <label for="income">Доход за 12 месяцев (₽)</label>
             <input id="income" name="income" type="number" value="1440000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="monthly-income" hidden>
+            <label for="monthly">Средняя зарплата в месяц (₽)</label>
+            <input id="monthly" name="monthly" type="number" value="120000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="months">Месяцев в расчётном периоде</label>
+            <input id="months" name="months" type="number" value="12" min="1" max="12" />
           </div>
           <div class="form-row">
             <label for="days">Дней отпуска</label>
@@ -49,18 +64,29 @@
         </form>
 
         <div class="result">
-          <div>Отпускные: <strong id="vacation-total">—</strong></div>
+          <div>Отпускные до НДФЛ: <strong id="vacation-total">—</strong></div>
           <div class="result-grid">
             <div class="result-row">
               <span>Средний дневной заработок</span>
               <span id="vacation-daily">—</span>
             </div>
+            <div class="result-row">
+              <span>НДФЛ</span>
+              <span id="vacation-ndfl">—</span>
+            </div>
+            <div class="result-row">
+              <span>На руки</span>
+              <span id="vacation-net">—</span>
+            </div>
           </div>
         </div>
 
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="vacation-steps"></div>
+
         <p class="note">
-          Формула: доход за 12 мес. ÷ 12 ÷ 29,3 × дни отпуска. Исключения по
-          больничным и периодам считаются в бухгалтерии отдельно.
+          Если отработали менее 12 месяцев — укажите фактическое число месяцев в расчётном
+          периоде. НДФЛ считается по прогрессивной шкале 2026.
         </p>
       </div>
 
@@ -228,8 +254,8 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js"></script>
-    <script src="js/calculators.js"></script>
+    <script src="js/common.js?v=2"></script>
+    <script src="js/calculators.js?v=2"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://finraz.ru/sick.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=9" />
+    <link rel="stylesheet" href="css/style.css?v=10" />
   </head>
   <body>
     <div class="wrap">
@@ -39,8 +39,23 @@
       <div class="panel">
         <form id="sick-form">
           <div class="form-row">
+            <label for="incomeMode">Доход за 2 года</label>
+            <select id="incomeMode" name="incomeMode">
+              <option value="total" selected>Общая сумма</option>
+              <option value="split">Отдельно 2024 и 2025</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="total-income">
             <label for="income2y">Доход за 2 года (₽, с НДФЛ)</label>
             <input id="income2y" name="income2y" type="number" value="2880000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="split-income" hidden>
+            <label for="income2024">Доход за 2024 год (₽)</label>
+            <input id="income2024" name="income2024" type="number" value="1440000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="split-income" hidden>
+            <label for="income2025">Доход за 2025 год (₽)</label>
+            <input id="income2025" name="income2025" type="number" value="1440000" min="0" step="1000" />
           </div>
           <div class="form-row">
             <label for="days">Дней на больничном</label>
@@ -60,19 +75,27 @@
           <div>Больничные: <strong id="sick-total">—</strong></div>
           <div class="result-grid">
             <div class="result-row">
-              <span>Средний дневной доход</span>
+              <span>Средний дневной заработок</span>
               <span id="sick-base">—</span>
             </div>
             <div class="result-row">
               <span>Дневная выплата с учётом стажа</span>
               <span id="sick-daily">—</span>
             </div>
+            <div class="result-row">
+              <span>Лимит</span>
+              <span id="sick-limit-note">—</span>
+            </div>
           </div>
         </div>
 
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="sick-steps"></div>
+
         <p class="note">
-          Формула: доход за 2 года ÷ 730 × процент стажа × дни. Не учитывает
-          предельную базу, пособие по уходу за ребёнком и региональные особенности.
+          Лимиты 2026: максимум 6 827,40 ₽/день (база 2024 — 2 225 000 ₽, 2025 — 2 759 000 ₽),
+          минимум 890,73 ₽/день по МРОТ. Первые 3 дня оплачивает работодатель — в калькуляторе
+          не разделяется.
         </p>
       </div>
 
@@ -239,8 +262,8 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js"></script>
-    <script src="js/calculators.js"></script>
+    <script src="js/common.js?v=2"></script>
+    <script src="js/calculators.js?v=2"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

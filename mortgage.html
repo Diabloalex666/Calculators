@@ -19,7 +19,7 @@
     <meta property="og:url" content="https://finraz.ru/mortgage.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=9" />
+    <link rel="stylesheet" href="css/style.css?v=10" />
   </head>
   <body>
     <div class="wrap">
@@ -50,6 +50,21 @@
             <label for="years">Срок (лет)</label>
             <input id="years" name="years" type="number" value="20" min="1" max="40" />
           </div>
+          <div class="form-row">
+            <label for="earlyMode">Досрочное погашение</label>
+            <select id="earlyMode" name="earlyMode">
+              <option value="off" selected>Без досрочного</option>
+              <option value="on">С досрочным платежом</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="early" hidden>
+            <label for="extra">Сумма досрочного платежа (₽)</label>
+            <input id="extra" name="extra" type="number" value="500000" min="0" step="10000" />
+          </div>
+          <div class="form-row" data-field="early" hidden>
+            <label for="extraMonth">На каком месяце (№)</label>
+            <input id="extraMonth" name="extraMonth" type="number" value="12" min="1" max="480" />
+          </div>
         </form>
 
         <div class="result">
@@ -63,12 +78,27 @@
               <span>Переплата банку</span>
               <span id="mortgage-overpay">—</span>
             </div>
+            <div class="result-row">
+              <span>Срок с досрочным</span>
+              <span id="mortgage-early-months">—</span>
+            </div>
+            <div class="result-row">
+              <span>Экономия на процентах</span>
+              <span id="mortgage-early-saved">—</span>
+            </div>
+            <div class="result-row">
+              <span>Выплатите с досрочным</span>
+              <span id="mortgage-early-total">—</span>
+            </div>
           </div>
         </div>
 
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="mortgage-steps"></div>
+
         <p class="note">
-          Расчёт по аннуитетной схеме без страховок, комиссий и досрочных
-          погашений. Для одобренного банком графика смотрите свой договор.
+          Аннуитетная схема без страховок и комиссий. Досрочный платёж уменьшает срок при
+          том же ежемесячном платеже — как при типичном «сокращении срока» в банке.
         </p>
       </div>
 
@@ -225,8 +255,8 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js"></script>
-    <script src="js/calculators.js"></script>
+    <script src="js/common.js?v=2"></script>
+    <script src="js/calculators.js?v=2"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

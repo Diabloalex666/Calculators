@@ -205,6 +205,40 @@ select:focus {
   font-weight: 600;
 }
 
+.calc-steps-title {
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1rem;
+}
+
+.calc-steps {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+}
+
+.calc-steps th,
+.calc-steps td {
+  padding: 0.55rem 0.65rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  vertical-align: top;
+}
+
+.calc-steps th {
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.calc-steps td:last-child {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.calc-steps tr:last-child td {
+  border-bottom: none;
+}
+
 .note {
   font-size: 0.85rem;
   color: var(--muted);
