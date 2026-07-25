@@ -239,6 +239,56 @@ select:focus {
   border-bottom: none;
 }
 
+.article-cta {
+  margin-top: 1.5rem;
+}
+
+.article-cta h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.1rem;
+}
+
+.article-cta .btn {
+  display: inline-flex;
+  margin-top: 0.75rem;
+  text-decoration: none;
+}
+
+.articles-hub {
+  margin-top: 1rem;
+}
+
+.articles-section {
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.4rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.articles-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.05rem;
+}
+
+.articles-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.articles-list li {
+  margin: 0.45rem 0;
+}
+
+.articles-list a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.articles-list a:hover {
+  text-decoration: underline;
+}
+
 .note {
   font-size: 0.85rem;
   color: var(--muted);

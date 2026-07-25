@@ -1,0 +1,164 @@
+function articleHtml(a) {
+  const relatedLinks = a.related
+    .map((slug) => {
+      const r = ARTICLES.find((x) => x.slug === slug);
+      return r ? `<li><a href="${slug}.html">${r.h1}</a></li>` : "";
+    })
+    .join("\n          ");
+
+  const faqHtml = a.faq
+    .map(
+      (f) => `
+        <div class="faq-item">
+          <h3>${f.q}</h3>
+          <p>${f.a}</p>
+        </div>`
+    )
+    .join("");
+
+  return `<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>${a.title}</title>
+    <meta name="description" content="${a.description}" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="${SITE}/articles/${a.slug}.html" />
+    <meta property="og:title" content="${a.h1} — FinPulse" />
+    <meta property="og:description" content="${a.description}" />
+    <meta property="og:url" content="${SITE}/articles/${a.slug}.html" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="../css/style.css?v=11" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="../index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="../index.html">Главная</a> →
+        <a href="index.html">Статьи</a> →
+        <span aria-current="page">${a.category}</span>
+      </nav>
+
+      <section class="hero">
+        <h1>${a.h1}</h1>
+        <p>${a.hero}</p>
+      </section>
+
+      <section class="seo-block article-block article-page">
+        ${a.body}
+
+        <h2>Частые вопросы</h2>
+        ${faqHtml}
+      </section>
+
+      <div class="article-cta panel">
+        <h2>Посчитать онлайн</h2>
+        <p class="note" style="margin-top:0">Бесплатный калькулятор FinPulse — результат сразу, без регистрации.</p>
+        <a class="btn" href="${a.calc}">${a.calcLabel} →</a>
+      </div>
+
+      <nav class="related-calc" aria-label="Похожие статьи">
+        <h2>Читайте также</h2>
+        <ul>
+          ${relatedLinks}
+        </ul>
+      </nav>
+
+      <footer class="site-footer">
+        <p class="footer-nav">
+          <a href="../index.html">← Все калькуляторы</a>
+          · <a href="index.html">Все статьи</a>
+        </p>
+        <p class="footer-nav">
+          <a href="../about.html">О проекте</a>
+          · <a href="../privacy.html">Конфиденциальность</a>
+        </p>
+        <p class="footer-copy">© FinPulse. Справочные расчёты.</p>
+      </footer>
+    </div>
+    <script src="../js/config.js?v=3"></script>
+    <script src="../js/analytics.js?v=3"></script>
+    <script src="../js/seo.js?v=3"></script>
+  </body>
+</html>`;
+}
+
+function indexHtml() {
+  const byCategory = {};
+  for (const a of ARTICLES) {
+    if (!byCategory[a.category]) byCategory[a.category] = [];
+    byCategory[a.category].push(a);
+  }
+
+  const sections = Object.entries(byCategory)
+    .map(
+      ([cat, items]) => `
+        <section class="articles-section">
+          <h2>${cat}</h2>
+          <ul class="articles-list">
+            ${items.map((a) => `<li><a href="${a.slug}.html">${a.h1}</a></li>`).join("\n            ")}
+          </ul>
+        </section>`
+    )
+    .join("");
+
+  return `<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <title>Статьи и инструкции по расчётам — FinPulse</title>
+    <meta name="description" content="18 статей FinPulse: зарплата на руки, больничный, отпускные, ипотека, накопления и бюджет. Формулы, примеры и ссылки на калькуляторы." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="${SITE}/articles/" />
+    <link rel="stylesheet" href="../css/style.css?v=11" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <a class="logo" href="../index.html">Fin<span>Pulse</span></a>
+      </header>
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="../index.html">Главная</a> → <span aria-current="page">Статьи</span>
+      </nav>
+
+      <section class="hero">
+        <h1>Статьи и инструкции</h1>
+        <p>Пошаговые расчёты с примерами — зарплата, больничный, отпускные, ипотека и личные финансы.</p>
+      </section>
+
+      <div class="articles-hub">
+        ${sections}
+      </div>
+
+      <footer class="site-footer">
+        <p class="footer-nav"><a href="../index.html">← К калькуляторам</a></p>
+        <p class="footer-copy">© FinPulse</p>
+      </footer>
+    </div>
+    <script src="../js/config.js?v=3"></script>
+    <script src="../js/analytics.js?v=3"></script>
+    <script src="../js/seo.js?v=3"></script>
+  </body>
+</html>`;
+}
+
+fs.mkdirSync(OUT, { recursive: true });
+
+for (const a of ARTICLES) {
+  fs.writeFileSync(path.join(OUT, `${a.slug}.html`), articleHtml(a), "utf8");
+  console.log("✓", a.slug);
+}
+
+fs.writeFileSync(path.join(OUT, "index.html"), indexHtml(), "utf8");
+console.log("✓ index.html");
+console.log(`\nGenerated ${ARTICLES.length} articles + index`);

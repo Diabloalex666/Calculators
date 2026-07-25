@@ -68,7 +68,19 @@
   }
 
   const appName = document.querySelector("h1");
-  if (appName && page !== "/" && page !== "/index.html") {
+  const articlePage = document.querySelector(".article-page");
+
+  if (articlePage && appName) {
+    addJsonLd({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: appName.textContent.trim(),
+      url: SITE + page,
+      author: { "@type": "Organization", name: "FinPulse" },
+      publisher: { "@type": "Organization", name: "FinPulse", url: SITE + "/" },
+      inLanguage: "ru-RU",
+    });
+  } else if (appName && page !== "/" && page !== "/index.html" && !page.includes("/articles")) {
     addJsonLd({
       "@context": "https://schema.org",
       "@type": "WebApplication",
