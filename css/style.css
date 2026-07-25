@@ -126,6 +126,10 @@ header {
   margin-bottom: 1rem;
 }
 
+.form-row[hidden] {
+  display: none !important;
+}
+
 label {
   font-size: 0.9rem;
   color: var(--muted);
@@ -181,6 +185,10 @@ select:focus {
   border-radius: 12px;
   background: rgba(94, 234, 212, 0.08);
   border: 1px solid rgba(94, 234, 212, 0.25);
+}
+
+.result-row[hidden] {
+  display: none !important;
 }
 
 .result strong {

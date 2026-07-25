@@ -50,7 +50,8 @@ function setHtml(id, html) {
 }
 
 function toggleFormFields(form, fieldName, visible) {
-  form.querySelectorAll(`[data-field="${fieldName}"]`).forEach((node) => {
+  const scope = form.closest(".panel") || form;
+  scope.querySelectorAll(`[data-field="${fieldName}"]`).forEach((node) => {
     node.hidden = !visible;
   });
 }
