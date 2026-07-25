@@ -62,14 +62,14 @@ function salaryFromGross(gross, children, manualRate) {
       deduction,
       effectiveRate: gross > 0 ? tax / gross : 0,
       breakdown: [
-        { label: "Оклад до НДФЛ (gross)", value: formatRub(gross) },
+        { label: "Оклад до НДФЛ", value: formatRub(gross) },
         { label: "Стандартный вычет на детей", value: deduction ? `− ${formatRub(deduction)}` : "нет" },
         { label: "База для НДФЛ", value: formatRub(monthlyTaxable) },
         {
           label: `НДФЛ ${formatPercent(manualRate)}`,
           value: `${formatRub(monthlyTaxable)} × ${formatPercent(manualRate)} = ${formatRub(tax)}`,
         },
-        { label: "На руки (net)", value: formatRub(gross - tax) },
+        { label: "На руки", value: formatRub(gross - tax) },
       ],
     };
   }
@@ -89,14 +89,14 @@ function salaryFromGross(gross, children, manualRate) {
     annualTax,
     effectiveRate: gross > 0 ? monthlyTax / gross : 0,
     breakdown: [
-      { label: "Оклад до НДФЛ (gross)", value: formatRub(gross) },
+      { label: "Оклад до НДФЛ", value: formatRub(gross) },
       { label: "Стандартный вычет на детей", value: deduction ? `− ${formatRub(deduction)}` : "нет" },
       { label: "База для НДФЛ в месяц", value: formatRub(monthlyTaxable) },
       { label: "Годовая база (× 12)", value: formatRub(annualTaxable) },
       ...ndflBreakdown,
       { label: "НДФЛ за год", value: formatRub(annualTax) },
       { label: "НДФЛ в месяц", value: formatRub(monthlyTax) },
-      { label: "На руки (net)", value: formatRub(gross - monthlyTax) },
+      { label: "На руки", value: formatRub(gross - monthlyTax) },
     ],
   };
 }

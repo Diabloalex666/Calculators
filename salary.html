@@ -7,10 +7,10 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
-    <title>Калькулятор зарплаты на руки 2026 — НДФЛ 13/15/18/20/22%, gross и net | FinPulse</title>
+    <title>Калькулятор зарплаты на руки 2026 — НДФЛ 13/15/18/20/22% | FinPulse</title>
     <meta
       name="description"
-      content="Калькулятор зарплаты на руки 2026: прогрессивный НДФЛ, расчёт из gross и net, вычеты на детей, взносы работодателя. Пошаговый расчёт онлайн."
+      content="Калькулятор зарплаты на руки 2026: прогрессивный НДФЛ, расчёт из оклада и суммы на руки, вычеты на детей, взносы работодателя."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://finraz.ru/salary.html" />
@@ -41,8 +41,8 @@
           <div class="form-row">
             <label for="mode">Режим расчёта</label>
             <select id="mode" name="mode">
-              <option value="gross" selected>Из оклада (gross) → на руки</option>
-              <option value="net">Из суммы на руки (net) → оклад</option>
+              <option value="gross" selected>Из оклада в договоре → на руки</option>
+              <option value="net">Из суммы на руки → оклад в договоре</option>
             </select>
           </div>
           <div class="form-row" data-field="gross">
@@ -89,7 +89,7 @@
             <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
             <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
             <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
-            <div class="result-row"><span>Годовой доход (gross)</span><span id="salary-year">—</span></div>
+            <div class="result-row"><span>Годовой доход до НДФЛ</span><span id="salary-year">—</span></div>
             <div class="result-row"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
           </div>
         </div>
@@ -107,9 +107,9 @@
       <section class="seo-block article-block">
         <h2>Как посчитать зарплату на руки в 2026</h2>
         <p>
-          Зарплата «на руки» (net) — это сумма после удержания НДФЛ. В договоре и оффере
-          обычно указывают зарплату <strong>до вычета налога</strong> (gross). Чтобы понять,
-          сколько придёт на карту, из gross вычитают НДФЛ по ставке 13% или 15%.
+          Зарплата «на руки» — это сумма после удержания НДФЛ, которая приходит на карту.
+          В договоре и оффере обычно указывают зарплату <strong>до вычета налога</strong>.
+          Чтобы понять, сколько придёт на карту, из оклада вычитают НДФЛ.
           Введите цифры в <a href="#salary-form">калькулятор выше</a> или посчитайте по формуле.
         </p>
 
@@ -118,8 +118,8 @@
           На руки = зарплата до НДФЛ − (зарплата до НДФЛ × ставка НДФЛ)
         </p>
         <p>
-          Или короче: <strong>на руки = gross × (1 − ставка)</strong>. При ставке 13% умножайте
-          gross на 0,87, при 15% — на 0,85.
+          Или короче: <strong>на руки = оклад до НДФЛ × (1 − ставка)</strong>. При ставке 13% умножайте
+          оклад на 0,87, при 15% — на 0,85.
         </p>
 
         <h3>Пример расчёта</h3>
@@ -129,7 +129,7 @@
         <ol>
           <li>НДФЛ: 120&nbsp;000 × 0,13 = <strong>15&nbsp;600&nbsp;₽</strong></li>
           <li>На руки: 120&nbsp;000 − 15&nbsp;600 = <strong>104&nbsp;400&nbsp;₽</strong></li>
-          <li>Годовой доход (gross): 120&nbsp;000 × 12 = <strong>1&nbsp;440&nbsp;000&nbsp;₽</strong></li>
+          <li>Годовой доход до НДФЛ: 120&nbsp;000 × 12 = <strong>1&nbsp;440&nbsp;000&nbsp;₽</strong></li>
         </ol>
 
         <h3>НДФЛ 13/15/18/20/22% в 2026 году</h3>
@@ -149,13 +149,13 @@
           всему доходу. Калькулятор считает налог автоматически и показывает разбивку по ступеням.
         </p>
 
-        <h3>Чем gross отличается от net</h3>
+        <h3>Чем «до НДФЛ» отличается от «на руки»</h3>
         <ul>
-          <li><strong>Gross</strong> — до налогов, как в трудовом договоре.</li>
-          <li><strong>Net</strong> — «чистыми», то что приходит на счёт.</li>
+          <li><strong>До НДФЛ</strong> — сумма в трудовом договоре, до вычета налога.</li>
+          <li><strong>На руки</strong> — «чистыми», то что приходит на счёт.</li>
         </ul>
         <p>
-          При собеседовании уточняйте, о какой сумме идёт речь. 100&nbsp;000 ₽ gross при 13% —
+          При собеседовании уточняйте, о какой сумме идёт речь. 100&nbsp;000 ₽ в договоре при 13% —
           это 87&nbsp;000 ₽ на руки, а не 100&nbsp;000.
         </p>
 
@@ -191,14 +191,14 @@
         <div class="faq-item">
           <h3>Как посчитать, какой нужен оклад, чтобы получать 100 000 на руки?</h3>
           <p>
-            Выберите режим «Из суммы на руки → оклад», введите 100 000 — калькулятор покажет
-            gross с учётом прогрессивного НДФЛ и вычетов.
+            Выберите режим «Из суммы на руки → оклад в договоре», введите 100 000 — калькулятор покажет
+            нужный оклад с учётом прогрессивного НДФЛ и вычетов.
           </p>
         </div>
         <div class="faq-item">
-          <h3>Из gross можно посчитать net и наоборот?</h3>
+          <h3>Можно ли посчитать «на руки» и «до НДФЛ» друг из друга?</h3>
           <p>
-            Да. Net = gross × (1 − ставка). Gross = net ÷ (1 − ставка). При 13%: gross ≈ net ÷ 0,87.
+            Да. На руки = оклад × (1 − ставка). Оклад = сумма на руки ÷ (1 − ставка). При 13%: оклад ≈ сумма на руки ÷ 0,87.
           </p>
         </div>
         <div class="faq-item">
@@ -285,7 +285,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=3"></script>
+    <script src="js/calculators.js?v=4"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
