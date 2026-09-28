@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-28T17:22:20",
+  "generated": "2026-09-28T18:03:20",
   "semantics": {
     "counts": {
-      "published": 25,
-      "planned": 3
+      "published": 26,
+      "planned": 2
     },
     "holes": [],
     "total": 28
@@ -11,11 +11,11 @@
   "briefs_missing": [],
   "antidup": [],
   "drip": {
-    "enabled": false,
-    "published": [],
-    "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
-    ]
+    "enabled": true,
+    "published": [
+      "zarplata-za-nepolnyy-mesyats.html"
+    ],
+    "skipped": []
   },
   "monitor": {
     "ok": 0,
@@ -55,7 +55,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 3 planned",
+      "в очереди 2 planned",
       "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
     ],
     "missing": [
@@ -66,8 +66,8 @@
     ],
     "tempo": "1 статья в сутки с вычиткой",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
+      "залиты из очереди: zarplata-za-nepolnyy-mesyats.html"
     ],
-    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой."
   }
 }

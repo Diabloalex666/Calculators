@@ -3,25 +3,27 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 3 planned",
+    "в очереди 2 planned",
     "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
   ],
   "actions": [
     {
-      "title": "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
-      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+      "title": "залиты из очереди: zarplata-za-nepolnyy-mesyats.html",
+      "prompt": "Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой."
     }
   ],
   "publish": {
-    "today": 0,
+    "today": 1,
     "yesterday": 0,
     "plan": 1,
-    "latest": []
+    "latest": [
+      "zarplata-za-nepolnyy-mesyats.html"
+    ]
   },
   "topics": {
-    "planned": 3,
+    "planned": 2,
     "reserved": 0,
-    "published": 25,
+    "published": 26,
     "daysLeft": "без Wordstat"
   },
   "traffic": {
@@ -67,7 +69,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 3 planned",
+      "в очереди 2 planned",
       "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
     ],
     "missing": [
@@ -78,8 +80,8 @@
     ],
     "tempo": "1 статья в сутки с вычиткой",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
+      "залиты из очереди: zarplata-za-nepolnyy-mesyats.html"
     ],
-    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой."
   }
 }

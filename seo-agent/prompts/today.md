@@ -1,1 +1,1 @@
-В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки.
+Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой.
