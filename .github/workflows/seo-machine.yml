@@ -41,7 +41,6 @@ jobs:
 
   factory:
     needs: gate
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     permissions:
       contents: write
