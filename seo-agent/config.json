@@ -1,0 +1,11 @@
+{
+  "domain": "finraz.ru",
+  "siteUrl": "https://finraz.ru/",
+  "indexNowKey": "a8c3e17f6b924d0ea51c8f2d9b4e60c1",
+  "indexNowKeyFile": "/a8c3e17f6b924d0ea51c8f2d9b4e60c1.txt",
+  "semanticMap": "seo-agent/semantic-map.json",
+  "publishMode": "github-actions-factory",
+  "publishQueue": true,
+  "dailyArticleCap": 1,
+  "stack": "github-pages-static"
+}

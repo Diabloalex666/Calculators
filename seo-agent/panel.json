@@ -1,0 +1,85 @@
+{
+  "generated": "2026-09-28",
+  "verdict": "yellow",
+  "verdictText": "Жёлтый.",
+  "reasons": [
+    "в очереди 3 planned",
+    "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+  ],
+  "actions": [
+    {
+      "title": "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
+      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    }
+  ],
+  "publish": {
+    "today": 0,
+    "yesterday": 0,
+    "plan": 1,
+    "latest": []
+  },
+  "topics": {
+    "planned": 3,
+    "reserved": 0,
+    "published": 25,
+    "daysLeft": "без Wordstat"
+  },
+  "traffic": {
+    "status": "не подключено",
+    "hint": "Выгрузка Метрики/GSC → seo-agent/raw/"
+  },
+  "positions": {
+    "status": "не подключено",
+    "hint": "Search Console или Топвизор"
+  },
+  "audit": {
+    "orphans": [],
+    "no_money_cta": [],
+    "no_source": [
+      "bolnichny-10-dney-raschet.html",
+      "bolnichny-maksimum-2026.html",
+      "bolnichny-stazh-5-8-let.html",
+      "bolnichny-stazh-8-let.html",
+      "bolnichny-stazh-menshe-5-let.html",
+      "byudzhet-semi-na-mesyats.html",
+      "ipoteka-6-millionov-platezh.html",
+      "ipoteka-dosrochnoe-pogashenie.html",
+      "ndfl-15-procentov-kogda.html",
+      "ndfl-vychet-na-detey.html",
+      "otpusknye-14-dney.html",
+      "otpusknye-nepolnyy-god.html",
+      "otpusknye-pri-zarplate-50000.html",
+      "slozhnyy-procent-10000-v-mesyats.html",
+      "zarplata-100000-na-ruki.html",
+      "zarplata-120000-ndfl.html",
+      "zarplata-200000-ndfl-15.html",
+      "zarplata-80000-na-ruki.html"
+    ],
+    "noindex": []
+  },
+  "health": {
+    "ok": 0,
+    "bad": [],
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
+  },
+  "advisor": {
+    "verdict": "yellow",
+    "reasons": [
+      "в очереди 3 planned",
+      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+    ],
+    "missing": [
+      "TELEGRAM_BOT_TOKEN",
+      "TELEGRAM_CHAT_ID",
+      "ключ модели (статьи сам не пишет)",
+      "выгрузка GSC/Вебмастера"
+    ],
+    "tempo": "1 статья в сутки с вычиткой",
+    "week": [
+      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
+    ],
+    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+  }
+}

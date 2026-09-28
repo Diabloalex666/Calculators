@@ -1,0 +1,51 @@
+{
+  "updated": "2026-09-28",
+  "note": "Цифры без источника и даты в статьи не идут. status=missing — тема ждёт, нейронка не выдумывает.",
+  "items": [
+    {
+      "id": "vacation-days-115",
+      "value": "28 календарных дней",
+      "law": "ст. 115 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": ["otpusknye-28", "otpusknye-14"]
+    },
+    {
+      "id": "avg-days-29-3",
+      "value": "29,3",
+      "law": "постановление Правительства РФ № 922",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_72461/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": ["otpusknye", "otpusknye-28"]
+    },
+    {
+      "id": "salary-time-pay",
+      "value": "оплата по фактически отработанному времени",
+      "law": "ст. 129, 93 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": ["zarplata-nepolnyy-mesyats"]
+    },
+    {
+      "id": "advance-not-fixed-50",
+      "value": "доля аванса в ТК не зафиксирована как 50%",
+      "law": "ст. 136 ТК РФ — выплата не реже чем каждые полмесяца",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": ["avans-ot-oklada"]
+    },
+    {
+      "id": "ndfl-brackets-2026",
+      "value": null,
+      "law": "ст. 224 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/",
+      "status": "missing",
+      "note": "Пороги 18/20/22% не писать, пока не внесена сумма из актуальной редакции НК со датой проверки.",
+      "used_by": ["ndfl-18-20-22"]
+    }
+  ]
+}

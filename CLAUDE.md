@@ -29,12 +29,31 @@
 
 ## Автомат (GitHub Actions)
 
-Файл `.github/workflows/seo-machine.yml`: после пуша в `main` и каждый день в 08:15 МСК
-проверяет, что сайт отвечает, пингует Яндекс (sitemap) и IndexNow (Яндекс/Bing).
+Файл `.github/workflows/seo-machine.yml`:
 
-Статьи **не пишет**. Без ключа модели это был бы спам.
+- пуш в `main` — гейт + IndexNow + пинг Яндекса;
+- каждый день 08:15 МСК и суббота 07:00 МСК — то же плюс завод `python scripts/factory.py`;
+- вручную: Actions → SEO machine → Run workflow.
 
-Опционально: в GitHub Secrets `TELEGRAM_BOT_TOKEN` и `TELEGRAM_CHAT_ID` — короткий отчёт в Telegram.
+Завод (10 систем гайда Васина, DIY на статике):
+
+1. семантика — покрытие `semantic-map.json` vs файлы;
+2. подготовка — брифы в `seo-agent/briefs/`;
+3. написание — **не нейросеть**. Текст только из `seo-agent/queue/` после гейта;
+4. анти-дубли — один интент / один title;
+5. обложки — не генерируем (в Цехе);
+6. публикация — дрип 1 файл/сутки из очереди + IndexNow;
+7. мониторинг — живые URL из sitemap;
+8. аудит — сироты, источники, CTA на калькулятор;
+9. актуализация — статьи старше 120 дней;
+10. советник — вердикт, чего не хватает, промпт дня.
+
+Кап: `dailyArticleCap` 1. Дрип на GitHub: `publishQueue: true` и `FACTORY_DRIP=1`.
+Тема без фактуры в `seo-agent/facts.json` в прод не идёт.
+
+Статьи нейросеть сама не публикует: YMYL, стоп-лист, нет ключа модели в CI.
+
+Опционально Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
 
 ## Запуск локально
 
@@ -44,4 +63,10 @@ python -m http.server 8080
 ```
 
 Панель: открой `seo-agent/panel.html` двойным кликом.
-python scripts/machine.py — проверка живого сайта и пинг поиска (нужен залитый ключ IndexNow).
+
+```powershell
+python scripts/quality-gate.py
+python scripts/factory.py --offline
+python scripts/machine.py
+python scripts/factory.py --drip
+```

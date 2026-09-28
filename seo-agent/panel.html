@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Панель SEO-машины — FinPulse</title>
+    <style>
+      :root { color-scheme: dark; }
+      body { margin: 0; font-family: Segoe UI, system-ui, sans-serif; background: #0f1419; color: #e7ecf3; }
+      .wrap { max-width: 820px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      h1 { font-size: 1.4rem; }
+      .verdict { padding: 1rem 1.2rem; border-radius: 12px; background: #243044; margin: 1rem 0; }
+      .verdict.yellow { border-left: 4px solid #eab308; }
+      .verdict.green { border-left: 4px solid #34d399; }
+      .verdict.red { border-left: 4px solid #f87171; }
+      .grid { display: grid; gap: 0.8rem; grid-template-columns: 1fr 1fr; }
+      @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+      .tile { background: #1a2332; border-radius: 12px; padding: 1rem; }
+      .num { font-variant-numeric: tabular-nums; font-size: 1.6rem; font-weight: 700; }
+      .muted { color: #8b9cb3; font-size: 0.9rem; }
+      pre { white-space: pre-wrap; background: #0b0f14; padding: 0.8rem; border-radius: 8px; font-size: 0.8rem; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Панель FinPulse</h1>
+      <p class="muted">Завод обновляет эту страницу сам. 2026-09-28</p>
+      <div class="verdict yellow" id="verdict">
+        <strong>Жёлтый.</strong>
+        <ul><li>в очереди 3 planned</li><li>не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)</li></ul>
+      </div>
+      <div class="grid">
+        <div class="tile">
+          <div class="muted">Публикации сегодня / кап</div>
+          <div class="num">0 / 1</div>
+          <p>Последние: нет</p>
+        </div>
+        <div class="tile">
+          <div class="muted">Запас тем</div>
+          <div class="num">3</div>
+          <p>published 25, reserved 0</p>
+        </div>
+        <div class="tile">
+          <div class="muted">Живой сайт</div>
+          <div class="num">0/0</div>
+          <p>4xx: 0</p>
+        </div>
+        <div class="tile">
+          <div class="muted">Аудит</div>
+          <p>сироты 0, без источника 18</p>
+        </div>
+        <div class="tile">
+          <div class="muted">Трафик 30 дней</div>
+          <p>не подключено</p>
+        </div>
+        <div class="tile">
+          <div class="muted">Позиции</div>
+          <p>не подключено</p>
+        </div>
+      </div>
+      <h2>План на неделю</h2>
+      <pre>дрип очереди: zarplata-za-nepolnyy-mesyats.html</pre>
+      <h2>Промпт на сегодня</h2>
+      <pre>В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки.</pre>
+    </div>
+  </body>
+</html>

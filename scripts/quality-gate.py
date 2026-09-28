@@ -74,14 +74,28 @@ def check(path: Path) -> list[str]:
     return errors
 
 
+def strict_extra(path: Path, html: str) -> list[str]:
+    extra: list[str] = []
+    sources = ("consultant.ru", "pravo.gov.ru", "nalog.gov.ru", "sfr.gov.ru")
+    if not any(s in html for s in sources):
+        extra.append("нет ссылки на первоисточник")
+    money = ("salary.html", "vacation.html", "sick.html", "mortgage.html", "compound.html", "budget.html")
+    if not any(m in html for m in money):
+        extra.append("нет ссылки на калькулятор")
+    return extra
+
+
 def main() -> int:
-    targets = [Path(a) for a in sys.argv[1:]]
+    strict = "--strict" in sys.argv
+    targets = [Path(a) for a in sys.argv[1:] if not a.startswith("--")]
     if not targets:
         targets = sorted((ROOT / "articles").glob("*.html"))
         targets = [t for t in targets if t.name != "index.html"]
     failed = 0
     for t in targets:
         errs = check(t)
+        if strict:
+            errs.extend(strict_extra(t, t.read_text(encoding="utf-8")))
         if errs:
             failed += 1
             print(f"FAIL {t}: {'; '.join(errs)}")
