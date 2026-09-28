@@ -1,4 +1,31 @@
 User-agent: *
 Allow: /
+Disallow: /worker/
+Disallow: /scripts/
+Disallow: /seo-agent/
+Disallow: /docs/
+Disallow: /Обновление/
+Disallow: /README.md
+Disallow: /DEPLOY.md
+Disallow: /FINISH.md
+Disallow: /MONETIZATION.md
+Disallow: /TELEGRAM-FEEDBACK.md
+Disallow: /CLAUDE.md
+Disallow: /AGENTS.md
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Yandex
+Allow: /
+Disallow: /worker/
+Disallow: /scripts/
+Disallow: /seo-agent/
+Disallow: /docs/
+Disallow: /Обновление/
+Host: finraz.ru
 
 Sitemap: https://finraz.ru/sitemap.xml
