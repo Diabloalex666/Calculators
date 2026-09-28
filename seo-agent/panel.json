@@ -1,19 +1,22 @@
 {
   "generated": "2026-09-28",
-  "verdict": "yellow",
-  "verdictText": "Жёлтый.",
+  "verdict": "red",
+  "verdictText": "Красный.",
   "reasons": [
-    "в очереди 2 planned",
-    "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+    "дыры в карте, живые 4xx или дубли интента"
   ],
   "actions": [
     {
-      "title": "залиты из очереди: zarplata-za-nepolnyy-mesyats.html",
-      "prompt": "Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой."
+      "title": "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
+      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    },
+    {
+      "title": "починить URL из monitor.bad",
+      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
-    "today": 1,
+    "today": 0,
     "yesterday": 0,
     "plan": 1,
     "latest": [
@@ -60,17 +63,21 @@
     "noindex": []
   },
   "health": {
-    "ok": 0,
-    "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "ok": 31,
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/zarplata-za-nepolnyy-mesyats.html",
+        "status": "404"
+      }
+    ],
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 32
   },
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 2 planned",
-      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [
       "TELEGRAM_BOT_TOKEN",
@@ -80,8 +87,9 @@
     ],
     "tempo": "1 статья в сутки с вычиткой",
     "week": [
-      "залиты из очереди: zarplata-za-nepolnyy-mesyats.html"
+      "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
+      "починить URL из monitor.bad"
     ],
-    "next_prompt": "Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой."
+    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
   }
 }

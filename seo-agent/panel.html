@@ -25,14 +25,14 @@
     <div class="wrap">
       <h1>Панель FinPulse</h1>
       <p class="muted">Завод обновляет эту страницу сам. 2026-09-28</p>
-      <div class="verdict yellow" id="verdict">
-        <strong>Жёлтый.</strong>
-        <ul><li>в очереди 2 planned</li><li>не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)</li></ul>
+      <div class="verdict red" id="verdict">
+        <strong>Красный.</strong>
+        <ul><li>дыры в карте, живые 4xx или дубли интента</li></ul>
       </div>
       <div class="grid">
         <div class="tile">
           <div class="muted">Публикации сегодня / кап</div>
-          <div class="num">1 / 1</div>
+          <div class="num">0 / 1</div>
           <p>Последние: zarplata-za-nepolnyy-mesyats.html</p>
         </div>
         <div class="tile">
@@ -42,8 +42,8 @@
         </div>
         <div class="tile">
           <div class="muted">Живой сайт</div>
-          <div class="num">0/0</div>
-          <p>4xx: 0</p>
+          <div class="num">31/32</div>
+          <p>4xx: 1</p>
         </div>
         <div class="tile">
           <div class="muted">Аудит</div>
@@ -59,9 +59,10 @@
         </div>
       </div>
       <h2>План на неделю</h2>
-      <pre>залиты из очереди: zarplata-za-nepolnyy-mesyats.html</pre>
+      <pre>дрип очереди: zarplata-za-nepolnyy-mesyats.html
+починить URL из monitor.bad</pre>
       <h2>Промпт на сегодня</h2>
-      <pre>Напиши одну статью по брифу seo-agent/briefs/avans-ot-oklada.md и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. Положи HTML в seo-agent/queue/. Не публикуй пачкой.</pre>
+      <pre>В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки.</pre>
     </div>
   </body>
 </html>
