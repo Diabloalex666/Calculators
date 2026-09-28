@@ -5,13 +5,14 @@ on:
     branches: [main]
   schedule:
     - cron: "15 5 * * *"
+    - cron: "0 4 * * 6"
   workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  ping:
+  gate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +21,15 @@ jobs:
           python-version: "3.12"
       - name: Quality gate
         run: python scripts/quality-gate.py
+
+  ping:
+    needs: gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Wait for GitHub Pages
         if: github.event_name == 'push'
         run: sleep 150
@@ -28,3 +38,32 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python scripts/machine.py
+
+  factory:
+    needs: gate
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Factory
+        env:
+          CI: "true"
+          FACTORY_DRIP: "1"
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python scripts/factory.py
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seo-agent articles/index.html articles/*.html sitemap.xml
+          git diff --cached --quiet && echo "no factory changes" && exit 0
+          git commit -m "seo-factory: daily report [skip ci]"
+          git push
