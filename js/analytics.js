@@ -1,6 +1,13 @@
 (function initFinPulse() {
   const config = window.FINPULSE_CONFIG || {};
-  const CONSENT_KEY = "finpulse_cookie_consent";
+  const NOTICE_KEY = "finpulse_cookie_notice";
+
+  if (location.hostname.endsWith("github.io")) {
+    const robots = document.createElement("meta");
+    robots.name = "robots";
+    robots.content = "noindex, nofollow";
+    document.head.appendChild(robots);
+  }
 
   document.querySelectorAll("[data-boosty-link]").forEach((node) => {
     if (config.boostyUrl) node.href = config.boostyUrl;
@@ -95,27 +102,25 @@
     const bar = document.createElement("div");
     bar.className = "cookie-banner";
     bar.setAttribute("role", "dialog");
-    bar.setAttribute("aria-label", "Согласие на cookie");
+    bar.setAttribute("aria-label", "Уведомление о cookie");
     bar.innerHTML = `
       <p class="cookie-banner__text">
-        Мы используем cookie для аналитики (Яндекс.Метрика) и показа рекламы (РСЯ).
+        Используем cookie для статистики (Яндекс.Метрика) и рекламы (РСЯ).
         Подробнее — <a href="privacy.html">политика конфиденциальности</a>.
       </p>
-      <button type="button" class="cookie-banner__btn">Принять</button>
+      <button type="button" class="cookie-banner__btn">Понятно</button>
     `;
 
     bar.querySelector(".cookie-banner__btn").addEventListener("click", () => {
-      localStorage.setItem(CONSENT_KEY, "1");
+      localStorage.setItem(NOTICE_KEY, "1");
       bar.remove();
-      initTracking();
     });
 
     document.body.appendChild(bar);
   }
 
-  if (localStorage.getItem(CONSENT_KEY)) {
-    initTracking();
-  } else {
+  initTracking();
+  if (!localStorage.getItem(NOTICE_KEY)) {
     showCookieBanner();
   }
 })();
