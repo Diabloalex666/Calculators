@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T14:54:11",
+  "generated": "2026-09-29T12:19:27",
   "semantics": {
     "counts": {
       "published": 27,
@@ -16,24 +16,29 @@
   "antidup": [],
   "write": {
     "enabled": true,
-    "queued": [
-      "avans-ot-oklada.html"
-    ],
-    "skipped": []
+    "queued": [],
+    "skipped": [
+      "дневной кап уже выбран"
+    ]
   },
   "drip": {
     "enabled": true,
-    "published": [
-      "avans-ot-oklada.html"
-    ],
-    "skipped": []
+    "published": [],
+    "skipped": [
+      "дневной кап уже выбран"
+    ]
   },
   "monitor": {
-    "ok": 0,
-    "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "ok": 32,
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/avans-ot-oklada.html",
+        "status": "404"
+      }
+    ],
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 33
   },
   "audit": {
     "orphans": [],
@@ -67,17 +72,17 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 1 planned",
-      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [
       "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: avans-ot-oklada.html"
+      "пакет или фактура для следующей planned-темы",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
   }

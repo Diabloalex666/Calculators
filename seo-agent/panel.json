@@ -1,19 +1,22 @@
 {
   "generated": "2026-09-29",
-  "verdict": "yellow",
-  "verdictText": "Жёлтый.",
+  "verdict": "red",
+  "verdictText": "Красный.",
   "reasons": [
-    "в очереди 1 planned",
-    "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+    "дыры в карте, живые 4xx или дубли интента"
   ],
   "actions": [
     {
-      "title": "залиты из очереди: avans-ot-oklada.html",
+      "title": "пакет или фактура для следующей planned-темы",
+      "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
+    },
+    {
+      "title": "починить URL из monitor.bad",
       "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
     }
   ],
   "publish": {
-    "today": 1,
+    "today": 0,
     "yesterday": 0,
     "plan": 1,
     "latest": [
@@ -62,24 +65,29 @@
     "noindex": []
   },
   "health": {
-    "ok": 0,
-    "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "ok": 32,
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/avans-ot-oklada.html",
+        "status": "404"
+      }
+    ],
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 33
   },
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 1 planned",
-      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [
       "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: avans-ot-oklada.html"
+      "пакет или фактура для следующей planned-темы",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
   }
