@@ -23,7 +23,9 @@
       "expires": "2027-01-01",
       "used_by": [
         "otpusknye",
-        "otpusknye-28"
+        "otpusknye-28",
+        "kompensaciya-otpuska-pri-uvolnenii",
+        "otpusknye-sredniy-zarabotok"
       ]
     },
     {
@@ -34,7 +36,9 @@
       "status": "verified",
       "expires": "2027-01-01",
       "used_by": [
-        "zarplata-nepolnyy-mesyats"
+        "zarplata-nepolnyy-mesyats",
+        "zarplata-za-neskolko-dney",
+        "zarplata-za-pervuyu-nedelyu"
       ]
     },
     {
@@ -45,7 +49,8 @@
       "status": "verified",
       "expires": "2027-01-01",
       "used_by": [
-        "avans-ot-oklada"
+        "avans-ot-oklada",
+        "avans-i-ndfl"
       ]
     },
     {
@@ -57,7 +62,10 @@
       "expires": "2027-01-01",
       "used_by": [
         "zarplata_pri_uvolnenii",
-        "kompensaciya_otpuska_pri_uvolnenii_za_sk"
+        "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+        "zarplata-pri-uvolnenii",
+        "kompensaciya-otpuska-pri-uvolnenii",
+        "otpusk-i-uvolnenie-raznica"
       ]
     },
     {
@@ -73,7 +81,84 @@
       "used_by": [
         "ndfl-18-20-22",
         "ndfl-15-kogda",
-        "salary"
+        "salary",
+        "ndfl-s-kakoy-summy-schitaetsya",
+        "effektivnaya-stavka-ndfl",
+        "oklad-150000-na-ruki",
+        "oklad-300000-ndfl",
+        "avans-i-ndfl",
+        "ndfl-i-premia",
+        "oklad-na-ruki-obratnyy-schyot",
+        "dve-raboty-ndfl",
+        "otpusknye-i-ndfl",
+        "bolnichny-i-ndfl",
+        "oklad-180000-na-ruki",
+        "oklad-220000-ndfl-15"
+      ]
+    },
+    {
+      "id": "tk-127-unused-vacation",
+      "value": "при увольнении выплачивается денежная компенсация за все неиспользованные отпуска",
+      "law": "ст. 127 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": [
+        "kompensaciya-otpuska-pri-uvolnenii",
+        "otpusk-i-uvolnenie-raznica"
+      ]
+    },
+    {
+      "id": "tk-138-deduction-limits",
+      "value": "размер удержаний из зарплаты ограничен: как правило не более 20%, в отдельных случаях до 50% или 70%",
+      "law": "ст. 138 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": [
+        "uderzhaniya-iz-zarplaty-predel"
+      ]
+    },
+    {
+      "id": "nk-218-child-deduction-exists",
+      "value": "стандартный налоговый вычет на детей предусмотрен ст. 218 НК РФ; конкретный размер смотрите в актуальной редакции НК",
+      "law": "ст. 218 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "note": "Рубли в статью не писать без отдельной verified-карточки суммы.",
+      "used_by": [
+        "vychet-na-detey-kak-rabotaet"
+      ]
+    },
+    {
+      "id": "tk-136-pay-twice",
+      "value": "зарплату выплачивают не реже чем каждые полмесяца",
+      "law": "ст. 136 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": [
+        "zarplata-ne-rezhe-polumesyaca",
+        "avans-i-ndfl",
+        "raschetnyy-listok-chto-smotret",
+        "indexaciya-zarplaty-tk"
+      ]
+    },
+    {
+      "id": "edu-no-rate",
+      "value": "справочная методика без нормативных ставок и лимитов; суммы — только из калькулятора и документов пользователя",
+      "law": "рамка контента FinPulse (стоп-лист: не выдумывать ставки)",
+      "source": "https://finraz.ru/about.html",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": [
+        "bolnichny-procent-ot-stazha",
+        "ipoteka-srok-ili-platezh",
+        "annuitet-vs-differencirovannyy",
+        "slozhnyy-procent-popolnenie",
+        "byudzhet-50-30-20",
+        "podushka-bezopasnosti"
       ]
     }
   ]

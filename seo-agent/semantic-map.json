@@ -481,52 +481,494 @@
       }
     },
     {
-      "id": "zarplata_pri_uvolnenii",
+      "id": "zarplata-pri-uvolnenii",
       "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "planned",
       "intent": "info",
       "main": {
-        "q": "зарплата при увольнении",
+        "q": "зарплата при увольнении когда выплатить",
         "vol": null
       },
       "demand": {
         "score": 1.0,
         "sources": [
-          "yandex-suggest"
+          "month-pack"
         ],
         "updated": "2026-09-29"
       }
     },
     {
-      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
+      "id": "kompensaciya-otpuska-pri-uvolnenii",
+      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "planned",
       "intent": "info",
       "main": {
-        "q": "сумма вычета на детей в 2026 году по ндфл",
+        "q": "компенсация отпуска при увольнении как считают",
         "vol": null
       },
       "demand": {
         "score": 1.0,
         "sources": [
-          "yandex-suggest"
+          "month-pack"
         ],
         "updated": "2026-09-29"
       }
     },
     {
-      "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii-za-skolko-let.html",
+      "id": "vychet-na-detey-kak-rabotaet",
+      "page": "/articles/vychet-na-detey-kak-rabotaet.html",
       "status": "planned",
       "intent": "info",
       "main": {
-        "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
+        "q": "как работает вычет на детей по ндфл",
         "vol": null
       },
       "demand": {
         "score": 1.0,
         "sources": [
-          "yandex-suggest"
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "uderzhaniya-iz-zarplaty-predel",
+      "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "сколько можно удерживать из зарплаты",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "zarplata-ne-rezhe-polumesyaca",
+      "page": "/articles/zarplata-ne-rezhe-polumesyaca.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как часто должны платить зарплату",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "ndfl-s-kakoy-summy-schitaetsya",
+      "page": "/articles/ndfl-s-kakoy-summy-schitaetsya.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "с какой суммы считается ндфл",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "effektivnaya-stavka-ndfl",
+      "page": "/articles/effektivnaya-stavka-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "что такое эффективная ставка ндфл",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "oklad-150000-na-ruki",
+      "page": "/articles/oklad-150000-na-ruki.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "оклад 150000 сколько на руки",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "oklad-300000-ndfl",
+      "page": "/articles/oklad-300000-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "оклад 300000 какой ндфл",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "zarplata-za-neskolko-dney",
+      "page": "/articles/zarplata-za-neskolko-dney.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как посчитать зарплату за несколько дней",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "otpusknye-sredniy-zarabotok",
+      "page": "/articles/otpusknye-sredniy-zarabotok.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как считают средний заработок для отпускных",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "avans-i-ndfl",
+      "page": "/articles/avans-i-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "удерживают ли ндфл с аванса",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "otpusk-i-uvolnenie-raznica",
+      "page": "/articles/otpusk-i-uvolnenie-raznica.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "отпускные или компенсация при увольнении в чем разница",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "bolnichny-procent-ot-stazha",
+      "page": "/articles/bolnichny-procent-ot-stazha-kak.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как процент больничного зависит от стажа",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "ipoteka-srok-ili-platezh",
+      "page": "/articles/ipoteka-srok-ili-platezh.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "досрочное погашение ипотеки сократить срок или платеж",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "annuitet-vs-differencirovannyy",
+      "page": "/articles/annuitet-vs-differencirovannyy.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "аннуитетный или дифференцированный платеж ипотеки",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "slozhnyy-procent-popolnenie",
+      "page": "/articles/slozhnyy-procent-s-popolneniem.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "сложный процент с ежемесячным пополнением",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "byudzhet-50-30-20",
+      "page": "/articles/byudzhet-50-30-20.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "бюджет 50 30 20 как применять",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "podushka-bezopasnosti",
+      "page": "/articles/podushka-bezopasnosti-skolko.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "подушка безопасности сколько месяцев",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "raschetnyy-listok-chto-smotret",
+      "page": "/articles/raschetnyy-listok-chto-smotret.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как читать расчетный листок",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "ndfl-i-premia",
+      "page": "/articles/ndfl-s-premii.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "берется ли ндфл с премии",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "oklad-na-ruki-obratnyy-schyot",
+      "page": "/articles/oklad-na-ruki-obratnyy-schyot.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как посчитать оклад до ндфл от суммы на руки",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "dve-raboty-ndfl",
+      "page": "/articles/dve-raboty-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "ндфл если две работы",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "otpusknye-i-ndfl",
+      "page": "/articles/otpusknye-i-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как облагаются отпускные ндфл",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "bolnichny-i-ndfl",
+      "page": "/articles/bolnichny-i-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "удерживают ли ндфл с больничного",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "oklad-180000-na-ruki",
+      "page": "/articles/oklad-180000-na-ruki.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "оклад 180000 сколько на руки",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "oklad-220000-ndfl-15",
+      "page": "/articles/oklad-220000-ndfl-15.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "оклад 220000 когда ндфл 15",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "zarplata-za-pervuyu-nedelyu",
+      "page": "/articles/zarplata-za-pervuyu-nedelyu.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "как посчитать зарплату за первую неделю",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "indexaciya-zarplaty-tk",
+      "page": "/articles/indexaciya-zarplaty-tk.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "обязана ли компания индексировать зарплату",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "month-pack"
         ],
         "updated": "2026-09-29"
       }
