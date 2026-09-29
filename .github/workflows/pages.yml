@@ -44,6 +44,7 @@ jobs:
             --exclude '.env.*' \
             --exclude '_site/' \
             --exclude '_live-check/' \
+            --exclude '_design-concepts/' \
             --exclude '_config.yml' \
             --exclude '.gitignore' \
             --exclude '*.md' \
@@ -57,7 +58,7 @@ jobs:
 
           # Safety net: purge if anything slipped through
           rm -rf _site/seo-agent _site/scripts _site/worker _site/docs _site/Обновление \
-                 _site/.github _site/.cursor _site/node_modules _site/_live-check
+                 _site/.github _site/.cursor _site/node_modules _site/_live-check _site/_design-concepts
           find _site -type f \( -name '*.md' -o -name '*.py' -o -name '*.toml' -o -name '.env*' \) -delete
 
           test ! -e _site/seo-agent

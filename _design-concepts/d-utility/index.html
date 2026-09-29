@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Концепт · Калькулятор зарплаты на руки — FinPulse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f6f7f8;
+        --surface: #ffffff;
+        --text: #111111;
+        --text-2: #3d4450;
+        --muted: #5c6570;
+        --line: #e2e8f0;
+        --field: #d0d5dd;
+        --accent: #0e6b4f;
+        --accent-hover: #0a5540;
+        --accent-press: #084833;
+        --on-accent: #ffffff;
+        --radius: 6px;
+        --font: "Inter", "Segoe UI", system-ui, sans-serif;
+        --mono: "Roboto Mono", ui-monospace, monospace;
+      }
+
+      * { box-sizing: border-box; }
+
+      html { color-scheme: light; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 15px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; }
+
+      .page {
+        width: min(1040px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 28px 0 72px;
+      }
+
+      .top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand {
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+        font-size: 15px;
+      }
+
+      .top-meta {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .intro {
+        padding: 36px 0 28px;
+        max-width: 36rem;
+      }
+
+      .intro h1 {
+        margin: 0 0 8px;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+      }
+
+      .intro p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+        gap: 20px;
+        align-items: start;
+      }
+
+      .panel,
+      .result,
+      .ledger {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+      }
+
+      .panel { padding: 20px 20px 16px; }
+
+      .block-label {
+        margin: 0 0 14px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .field { margin-bottom: 16px; }
+
+      .field[hidden] { display: none !important; }
+
+      label,
+      .field-name {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-2);
+      }
+
+      .segment {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        border: 1px solid var(--field);
+        border-radius: var(--radius);
+        overflow: hidden;
+      }
+
+      .seg { position: relative; margin: 0; }
+
+      .seg input {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        margin: 0;
+      }
+
+      .seg span {
+        display: block;
+        padding: 10px 8px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-2);
+        background: var(--surface);
+        cursor: pointer;
+      }
+
+      .seg + .seg span { border-left: 1px solid var(--field); }
+
+      .seg:has(input:checked) span {
+        background: var(--accent);
+        color: var(--on-accent);
+      }
+
+      .seg input:focus-visible + span {
+        outline: 1px solid var(--accent);
+        outline-offset: -2px;
+      }
+
+      .money { position: relative; }
+
+      .money input { padding-right: 88px; }
+
+      .suffix {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        font-size: 13px;
+        pointer-events: none;
+      }
+
+      input[type="number"],
+      select {
+        width: 100%;
+        height: 44px;
+        padding: 0 12px;
+        border: 1px solid var(--field);
+        border-radius: var(--radius);
+        background: var(--surface);
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 16px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.02em;
+      }
+
+      select {
+        font-family: var(--font);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0;
+        appearance: none;
+        padding-right: 36px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 L6 6.5 L11 1.5' fill='none' stroke='%233D4450' stroke-width='1.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+      }
+
+      input:focus,
+      select:focus {
+        outline: 1px solid var(--accent);
+        outline-offset: 1px;
+        border-color: var(--accent);
+      }
+
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+      }
+
+      .slider-wrap { margin: -4px 0 16px; }
+
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 16px;
+        margin: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      input[type="range"]:focus { outline: none; }
+
+      input[type="range"]:focus-visible {
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      input[type="range"]::-webkit-slider-runnable-track {
+        height: 2px;
+        background: var(--track, var(--line));
+        border: none;
+      }
+
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        width: 16px;
+        height: 16px;
+        margin-top: -7px;
+        border: none;
+        border-radius: 50%;
+        background: var(--accent);
+        box-shadow: none;
+      }
+
+      input[type="range"]::-moz-range-track {
+        height: 2px;
+        background: var(--line);
+        border: none;
+      }
+
+      input[type="range"]::-moz-range-progress {
+        height: 2px;
+        background: var(--accent);
+      }
+
+      input[type="range"]::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+        border: none;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .scale {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .hint {
+        margin: 6px 0 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .hint[hidden] { display: none; }
+
+      .calc-submit {
+        width: 100%;
+        height: 44px;
+        margin-top: 4px;
+        border: 1px solid var(--accent);
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: var(--on-accent);
+        font-family: var(--font);
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .calc-submit:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+      .calc-submit:active { background: var(--accent-press); border-color: var(--accent-press); }
+
+      .calc-submit:focus-visible {
+        outline: 1px solid var(--accent);
+        outline-offset: 2px;
+      }
+
+      .result {
+        position: sticky;
+        top: 20px;
+        padding: 20px 22px 8px;
+      }
+
+      .result-kicker {
+        margin: 0;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .result-hero {
+        margin: 10px 0 18px;
+        font-family: var(--mono);
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+        letter-spacing: -0.04em;
+        line-height: 1;
+        color: var(--text);
+      }
+
+      .result-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 16px;
+        padding: 11px 0;
+        border-top: 1px solid var(--line);
+        font-size: 14px;
+      }
+
+      .result-row span:first-child { color: var(--muted); }
+
+      .result-row span:last-child {
+        font-family: var(--mono);
+        font-variant-numeric: tabular-nums;
+        font-weight: 500;
+        text-align: right;
+      }
+
+      .ledger {
+        margin-top: 20px;
+        padding: 8px 20px 12px;
+      }
+
+      .ledger h2 {
+        margin: 14px 0 4px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .calc-steps {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      .calc-steps th,
+      .calc-steps td {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .calc-steps th {
+        color: var(--muted);
+        font-weight: 500;
+        font-size: 12px;
+      }
+
+      .calc-steps td:last-child,
+      .calc-steps th:last-child {
+        text-align: right;
+        font-family: var(--mono);
+        font-variant-numeric: tabular-nums;
+        font-weight: 500;
+      }
+
+      .calc-steps tr:last-child td { border-bottom: none; }
+
+      .note {
+        margin: 16px 0 0;
+        max-width: 68ch;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .spec {
+        margin-top: 28px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .spec summary { cursor: pointer; }
+
+      .spec dl {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 6px 16px;
+        margin: 12px 0 0;
+      }
+
+      .spec dt { color: var(--text-2); }
+
+      .spec code {
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+
+      @media (max-width: 800px) {
+        .page { width: min(1040px, calc(100% - 32px)); }
+        .workspace { grid-template-columns: 1fr; }
+        .result { position: static; }
+        .intro h1 { font-size: 24px; }
+        .segment { grid-template-columns: 1fr; }
+        .seg + .seg span { border-left: none; border-top: 1px solid var(--field); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="top">
+        <a class="brand" href="../index.html">FinPulse</a>
+        <p class="top-meta">Концепт · не прод</p>
+      </header>
+
+      <section class="intro">
+        <h1>Зарплата на руки</h1>
+        <p>Оклад или сумма на карту, прогрессивный НДФЛ 2026 и вычет на детей. Сумма пересчитывается сразу.</p>
+      </section>
+
+      <div class="workspace">
+        <div class="panel">
+          <p class="block-label">Параметры</p>
+          <form id="salary-form">
+            <div class="field">
+              <span class="field-name">Направление</span>
+              <div class="segment" role="radiogroup" aria-label="Режим расчёта">
+                <label class="seg">
+                  <input type="radio" name="mode" value="gross" checked />
+                  <span>Из оклада</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="mode" value="net" />
+                  <span>Из суммы на руки</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="field" data-field="gross">
+              <label for="gross">Оклад до НДФЛ</label>
+              <div class="money">
+                <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" inputmode="numeric" />
+                <span class="suffix">₽ / мес</span>
+              </div>
+            </div>
+
+            <div class="field" data-field="net" hidden>
+              <label for="net">Сумма на руки</label>
+              <div class="money">
+                <input id="net" name="net" type="number" value="87000" min="0" step="1000" inputmode="numeric" />
+                <span class="suffix">₽ / мес</span>
+              </div>
+            </div>
+
+            <div class="slider-wrap">
+              <input
+                id="amount-slider"
+                type="range"
+                min="20000"
+                max="500000"
+                step="1000"
+                value="120000"
+                aria-label="Сумма, ползунок"
+              />
+              <div class="scale"><span>20 000</span><span>500 000</span></div>
+              <p class="hint" id="slider-hint" hidden>Ползунок до 500 000 ₽. Большую сумму оставьте в поле.</p>
+            </div>
+
+            <div class="field">
+              <label for="taxMode">НДФЛ</label>
+              <select id="taxMode" name="taxMode">
+                <option value="auto" selected>Авто — прогрессивная шкала 2026</option>
+                <option value="manual">Фиксированная ставка</option>
+              </select>
+            </div>
+
+            <div class="field" data-field="manual-rate" hidden>
+              <label for="rate">Ставка НДФЛ</label>
+              <select id="rate" name="rate">
+                <option value="0.13" selected>13%</option>
+                <option value="0.15">15%</option>
+                <option value="0.18">18%</option>
+                <option value="0.2">20%</option>
+                <option value="0.22">22%</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="children">Детей на стандартном вычете</label>
+              <select id="children" name="children">
+                <option value="0" selected>Нет</option>
+                <option value="1">1 ребёнок (1 400 ₽/мес)</option>
+                <option value="2">2 детей (2 800 ₽/мес)</option>
+                <option value="3">3 ребёнка (5 800 ₽/мес)</option>
+                <option value="4">4 ребёнка (8 800 ₽/мес)</option>
+              </select>
+            </div>
+
+            <button class="calc-submit" type="submit">Рассчитать</button>
+          </form>
+        </div>
+
+        <aside class="result" id="result" aria-live="polite">
+          <p class="result-kicker">На руки в месяц</p>
+          <p class="result-hero" id="salary-net">—</p>
+          <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
+          <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
+          <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
+          <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
+          <div class="result-row"><span>Годовой доход до НДФЛ</span><span id="salary-year">—</span></div>
+          <div class="result-row"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
+        </aside>
+      </div>
+
+      <section class="ledger">
+        <h2>Как посчитано</h2>
+        <div id="salary-steps"></div>
+      </section>
+
+      <p class="note">
+        Прогрессивная шкала 2026: 13% до 2,4 млн ₽/год, 15% — 2,4–5 млн, 18% — 5–20 млн,
+        20% — 20–50 млн, 22% — свыше 50 млн. Расчёт при равном доходе каждый месяц.
+        Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
+        Формулы те же, что на странице зарплаты: <code>js/calculators.js</code>.
+      </p>
+
+      <details class="spec">
+        <summary>Палитра и шрифты этого концепта</summary>
+        <dl>
+          <dt>Фон</dt><dd><code>#F6F7F8</code></dd>
+          <dt>Карточки</dt><dd><code>#FFFFFF</code></dd>
+          <dt>Текст</dt><dd><code>#111111</code> / вторичный <code>#3D4450</code> / приглушённый <code>#5C6570</code></dd>
+          <dt>Линии</dt><dd><code>#E2E8F0</code>, поля <code>#D0D5DD</code>, 1px</dd>
+          <dt>Акцент</dt><dd><code>#0E6B4F</code>, наведение <code>#0A5540</code>, нажатие <code>#084833</code></dd>
+          <dt>Шрифты</dt><dd>Inter — интерфейс, Roboto Mono + tabular-nums — цифры</dd>
+          <dt>Радиус</dt><dd>6px, без теней и без градиентов на кнопке</dd>
+        </dl>
+      </details>
+    </div>
+
+    <script src="../../js/common.js"></script>
+    <script src="../../js/calculators.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.getElementById("salary-form");
+        const slider = document.getElementById("amount-slider");
+        const hint = document.getElementById("slider-hint");
+        const result = document.getElementById("result");
+
+        const activeAmount = () => (form.mode.value === "net" ? form.net : form.gross);
+
+        const paintSlider = () => {
+          const min = Number(slider.min);
+          const max = Number(slider.max);
+          const val = Number(slider.value);
+          const pct = ((val - min) / (max - min)) * 100;
+          slider.style.setProperty("--track", `linear-gradient(90deg, #0E6B4F ${pct}%, #E2E8F0 ${pct}%)`);
+        };
+
+        const pullFieldToSlider = () => {
+          const value = Number(activeAmount().value);
+          const max = Number(slider.max);
+          const min = Number(slider.min);
+          if (!Number.isFinite(value)) return;
+          hint.hidden = value <= max;
+          slider.value = String(Math.min(max, Math.max(min, value)));
+          slider.setAttribute(
+            "aria-label",
+            form.mode.value === "net" ? "Сумма на руки, ползунок" : "Оклад до НДФЛ, ползунок"
+          );
+          paintSlider();
+        };
+
+        form.addEventListener(
+          "input",
+          (event) => {
+            if (event.target === slider) {
+              activeAmount().value = slider.value;
+              hint.hidden = true;
+              paintSlider();
+            }
+          },
+          true
+        );
+
+        form.addEventListener("input", (event) => {
+          if (event.target === form.gross || event.target === form.net || event.target.name === "mode") {
+            pullFieldToSlider();
+          }
+        });
+
+        form.addEventListener("change", (event) => {
+          if (event.target.name === "mode") pullFieldToSlider();
+        });
+
+        form.addEventListener("submit", () => {
+          result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        });
+
+        pullFieldToSlider();
+      });
+    </script>
+  </body>
+</html>
