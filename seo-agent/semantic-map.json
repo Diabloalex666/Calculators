@@ -983,11 +983,10 @@
         "vol": null
       },
       "demand": {
-        "score": 8.0,
+        "score": 3.0,
         "sources": [
           "yandex-suggest"
         ],
-        "added": "2026-09-29",
         "updated": "2026-09-29"
       }
     }

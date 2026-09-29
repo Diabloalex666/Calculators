@@ -543,8 +543,8 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
@@ -888,6 +888,20 @@
       "status": "published"
     },
     {
+      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "status": "planned"
+    },
+    {
       "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
       "score": 8.0,
       "clicks": 0.0,
@@ -1124,20 +1138,6 @@
       ],
       "cluster": "uderzhaniya-iz-zarplaty-predel",
       "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
-      "status": "planned"
-    },
-    {
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": null,
       "status": "planned"
     },
     {
@@ -1694,8 +1694,8 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
@@ -1742,29 +1742,8 @@
       "status": "published"
     }
   ],
-  "unmatched": [
-    {
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": null,
-      "status": "planned"
-    }
-  ],
-  "added_planned": [
-    {
-      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-      "slug": "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu"
-    }
-  ],
+  "unmatched": [],
+  "added_planned": [],
   "retired": [],
   "cluster_rank": [
     {
@@ -1877,7 +1856,7 @@
     },
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "score": 8.0
+      "score": 9.0
     },
     {
       "id": "zarplata-120000",

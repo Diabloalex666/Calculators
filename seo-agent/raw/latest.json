@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T14:29:52",
+  "generated": "2026-09-29T15:08:31",
   "semantics": {
     "counts": {
       "published": 27,
@@ -9,9 +9,7 @@
     "total": 58
   },
   "briefs": {
-    "created": [
-      "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu"
-    ],
+    "created": [],
     "missing": []
   },
   "briefs_missing": [],
@@ -84,13 +82,7 @@
     "suggest_ok": 29,
     "webmaster": true,
     "wordstat": false,
-    "added": [
-      {
-        "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-        "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-        "slug": "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu"
-      }
-    ],
+    "added": [],
     "retired": [],
     "top": [
       "ипотечный калькулятор",
