@@ -1,0 +1,21 @@
+{
+  "updated": "2026-09-29",
+  "files": [],
+  "connected": false,
+  "traffic": {
+    "status": "файлов нет — положи CSV в seo-agent/raw/",
+    "clicks": 0,
+    "impressions": 0,
+    "visits": 0
+  },
+  "positions": {
+    "status": "нет запросов в CSV",
+    "top": []
+  },
+  "counts": {
+    "gsc": 0,
+    "webmaster": 0,
+    "metrika": 0,
+    "unknown": 0
+  }
+}

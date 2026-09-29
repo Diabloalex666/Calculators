@@ -1,28 +1,39 @@
 {
-  "generated": "2026-09-29T11:20:34",
+  "generated": "2026-09-29T14:54:11",
   "semantics": {
     "counts": {
-      "published": 26,
-      "planned": 2
+      "published": 27,
+      "planned": 1
     },
     "holes": [],
     "total": 28
   },
+  "briefs": {
+    "created": [],
+    "missing": []
+  },
   "briefs_missing": [],
   "antidup": [],
+  "write": {
+    "enabled": true,
+    "queued": [
+      "avans-ot-oklada.html"
+    ],
+    "skipped": []
+  },
   "drip": {
     "enabled": true,
-    "published": [],
-    "skipped": [
-      "zarplata-za-nepolnyy-mesyats.html уже в articles/"
-    ]
+    "published": [
+      "avans-ot-oklada.html"
+    ],
+    "skipped": []
   },
   "monitor": {
-    "ok": 32,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 32
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -50,24 +61,24 @@
     "noindex": []
   },
   "refresh": [],
-  "covers": "пропуск: обложки в Цехе, здесь не генерируем",
-  "write": "нейронка не включена; текст только из seo-agent/queue после гейта",
+  "console": {
+    "connected": false,
+    "files": []
+  },
+  "covers": "пропуск: обложки не генерируем",
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 2 planned",
-      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+      "в очереди 1 planned",
+      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "missing": [
-      "TELEGRAM_BOT_TOKEN",
-      "TELEGRAM_CHAT_ID",
-      "ключ модели (статьи сам не пишет)",
-      "выгрузка GSC/Вебмастера"
+      "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
-    "tempo": "1 статья в сутки с вычиткой",
+    "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
+      "залиты из очереди: avans-ot-oklada.html"
     ],
-    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
   }
 }

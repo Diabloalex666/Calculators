@@ -17,15 +17,18 @@
 | Журнал решений | `docs/changelog.md` |
 | План сессии | `docs/plan.md` |
 | Панель машины | `seo-agent/panel.html` |
+| Разведка ниши | `seo-agent/razvedka-finpulse-2026-09-29.md` |
+| Пакеты статей | `seo-agent/packs/` |
+| Выгрузки консолей | `seo-agent/raw/` (CSV, см. HOW-TO.md) |
 | Публикация | не коммитить и не пушить без явной просьбы |
 
 ## Правила сессии
 
 1. Начинай с этого файла, затем `docs/plan.md` и последний `docs/changelog.md`.
 2. SEO-правки — по `seo-agent/semantic-map.json`: один интент = одна страница-владелец.
-3. Новая статья: status `planned` → `reserved` → черновик → гейт `python scripts/quality-gate.py` → `published` + IndexNow.
-4. Не выдумывай цифры (ставки НДФЛ, лимиты СФР, МРОТ). Нет источника — не пиши число.
-5. Не залп: темп на старте — до 1–2 статей за прогон с вычиткой. Стоп-лист — `docs/stop-list.md`.
+3. Новая статья: status `planned` → пакет в `seo-agent/packs/` → завод собирает в `queue/` → гейт → `published` + IndexNow. Нейросеть в прод не пишет.
+4. Не выдумывай цифры (ставки НДФЛ, лимиты СФР, МРОТ). Нет verified в `facts.json` — пакет не публикуется.
+5. Не залп: кап 1 статья/сутки. Стоп-лист — `docs/stop-list.md`.
 
 ## Автомат (GitHub Actions)
 
@@ -35,38 +38,30 @@
 - каждый день 08:15 МСК и суббота 07:00 МСК — то же плюс завод `python scripts/factory.py`;
 - вручную: Actions → SEO machine → Run workflow.
 
-Завод (10 систем гайда Васина, DIY на статике):
+Завод (свои цеха, не пакет Васина):
 
 1. семантика — покрытие `semantic-map.json` vs файлы;
-2. подготовка — брифы в `seo-agent/briefs/`;
-3. написание — **не нейросеть**. Текст только из `seo-agent/queue/` после гейта;
+2. брифы — заглушка на каждую planned-тему;
+3. писатель — HTML из `seo-agent/packs/` в очередь, только при verified-фактах;
 4. анти-дубли — один интент / один title;
-5. обложки — не генерируем (в Цехе);
-6. публикация — дрип 1 файл/сутки из очереди + IndexNow;
+5. обложки — не генерируем;
+6. публикация — дрип 1 файл/сутки + IndexNow;
 7. мониторинг — живые URL из sitemap;
 8. аудит — сироты, источники, CTA на калькулятор;
 9. актуализация — статьи старше 120 дней;
-10. советник — вердикт, чего не хватает, промпт дня.
+10. советник — вердикт и промпт дня;
+11. консоли — CSV GSC/Вебмастер/Метрика → панель.
 
-Кап: `dailyArticleCap` 1. Дрип на GitHub: `publishQueue: true` и `FACTORY_DRIP=1`.
-Тема без фактуры в `seo-agent/facts.json` в прод не идёт.
+Кап: `dailyArticleCap` 1. Дрип и писатель: `publishQueue: true`, `tsekhWrite: true`, в Actions `FACTORY_DRIP=1` и `FACTORY_WRITE=1`.
 
-Статьи нейросеть сама не публикует: YMYL, стоп-лист, нет ключа модели в CI.
+Платный Цех Васина (64 механики, Wordstat/XMLRiver/Топвизор) не копируем. Telegram-алерты не требуются.
 
-Опционально Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`.
-
-## Запуск локально
+Локально: `python -m http.server 8080`. Панель — `seo-agent/panel.html`.
 
 ```powershell
-cd F:\AI\side-income
-python -m http.server 8080
-```
-
-Панель: открой `seo-agent/panel.html` двойным кликом.
-
-```powershell
-python scripts/quality-gate.py
-python scripts/factory.py --offline
+python scripts/quality-gate.py --strict
+python scripts/factory.py --offline --drip
+python scripts/assemble.py avans-ot-oklada
+python scripts/ingest-console.py
 python scripts/machine.py
-python scripts/factory.py --drip
 ```

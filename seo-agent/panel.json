@@ -3,36 +3,38 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 2 planned",
-    "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+    "в очереди 1 planned",
+    "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
   ],
   "actions": [
     {
-      "title": "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
-      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+      "title": "залиты из очереди: avans-ot-oklada.html",
+      "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
     }
   ],
   "publish": {
-    "today": 0,
+    "today": 1,
     "yesterday": 0,
     "plan": 1,
     "latest": [
-      "zarplata-za-nepolnyy-mesyats.html"
+      "avans-ot-oklada.html"
     ]
   },
   "topics": {
-    "planned": 2,
+    "planned": 1,
     "reserved": 0,
-    "published": 26,
+    "published": 27,
     "daysLeft": "без Wordstat"
   },
   "traffic": {
-    "status": "не подключено",
-    "hint": "Выгрузка Метрики/GSC → seo-agent/raw/"
+    "status": "файлов нет — положи CSV в seo-agent/raw/",
+    "clicks": 0,
+    "impressions": 0,
+    "visits": 0
   },
   "positions": {
-    "status": "не подключено",
-    "hint": "Search Console или Топвизор"
+    "status": "нет запросов в CSV",
+    "top": []
   },
   "audit": {
     "orphans": [],
@@ -60,28 +62,25 @@
     "noindex": []
   },
   "health": {
-    "ok": 32,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 32
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 2 planned",
-      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
+      "в очереди 1 planned",
+      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "missing": [
-      "TELEGRAM_BOT_TOKEN",
-      "TELEGRAM_CHAT_ID",
-      "ключ модели (статьи сам не пишет)",
-      "выгрузка GSC/Вебмастера"
+      "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
-    "tempo": "1 статья в сутки с вычиткой",
+    "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
+      "залиты из очереди: avans-ot-oklada.html"
     ],
-    "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
   }
 }

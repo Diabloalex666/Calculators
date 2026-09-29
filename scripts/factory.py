@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """SEO factory: 10 systems from Vasin's guide, GitHub Pages edition.
 
-Writes reports. Optionally drips 1 queued article/day. Does not call an LLM
-unless AUTO_WRITE=1 and a model key exist — even then output is drafts/, not live.
+Own tsekh on GitHub Pages: briefs, pack assembler, drip, consoles, audit.
+Does not call an LLM. HTML comes from seo-agent/packs/ → queue → gate → articles/.
 """
 from __future__ import annotations
 
@@ -35,6 +35,8 @@ def load_hyphen(name: str):
 
 quality_gate = load_hyphen("quality-gate")
 build_sitemap = load_hyphen("build-sitemap")
+assemble = load_hyphen("assemble")
+ingest_console = load_hyphen("ingest-console")
 
 SITE = "https://finraz.ru"
 UA = {"User-Agent": "FinPulseFactory/1.0"}
@@ -195,17 +197,111 @@ def sys1_semantics(smap: dict) -> dict:
     }
 
 
-def sys2_briefs(smap: dict) -> list[str]:
+def sys2_briefs(smap: dict) -> dict:
     briefs = ROOT / "seo-agent" / "briefs"
     briefs.mkdir(parents=True, exist_ok=True)
+    created = []
     missing = []
     for c in smap.get("clusters", []):
         if c.get("status") != "planned":
             continue
         slug = Path(c["page"]).stem
-        if not (briefs / f"{slug}.md").exists():
+        path = briefs / f"{slug}.md"
+        if path.exists():
+            continue
+        cid = c.get("id") or slug
+        ok, reason = facts_ok(cid)
+        q = ((c.get("main") or {}).get("q") or slug).strip()
+        owner = owner_for(c)
+        path.write_text(
+            (
+                f"# Бриф: {q}\n\n"
+                f"- id: `{cid}`\n"
+                f"- slug: `{Path(c['page']).name}`\n"
+                f"- интент: {c.get('intent') or 'info'}\n"
+                f"- владелец денег: `{owner}`\n"
+                f"- статус фактуры: {reason}\n\n"
+                f"## Поля\n\n"
+                f"- title: {q}\n"
+                f"- H1: (заполнить)\n"
+                f"- description: (до 250 символов, заполнить)\n\n"
+                f"## Стоп\n\n"
+                f"Цифры только из `seo-agent/facts.json`. "
+                f"Пока фактура не verified — пакет в `seo-agent/packs/` не собирать "
+                f"и в очередь не класть.\n"
+            ),
+            encoding="utf-8",
+            newline="\n",
+        )
+        created.append(slug)
+        if not ok:
             missing.append(slug)
-    return missing
+    return {"created": created, "missing": missing}
+
+
+def sys3_write(smap: dict) -> dict:
+    conf = cfg()
+    write_on = bool(conf.get("tsekhWrite", True)) and (
+        os.environ.get("FACTORY_WRITE") == "1"
+        or os.environ.get("FACTORY_DRIP") == "1"
+        or "--write" in sys.argv
+        or "--drip" in sys.argv
+    )
+    cap = int(conf.get("dailyArticleCap") or 1)
+    result = {"enabled": write_on, "queued": [], "skipped": []}
+    if not write_on:
+        result["skipped"].append("цех-писатель выключен")
+        return result
+    stamp = load_json(ROOT / "seo-agent" / "raw" / "last-publish.json", {})
+    today = date.today().isoformat()
+    if stamp.get("date") == today and len(stamp.get("files") or []) >= cap:
+        result["skipped"].append("дневной кап уже выбран")
+        return result
+    queue_dir = ROOT / "seo-agent" / "queue"
+    queue_dir.mkdir(parents=True, exist_ok=True)
+    if any(queue_dir.glob("*.html")):
+        result["skipped"].append("очередь уже не пуста")
+        return result
+    packs_dir = ROOT / "seo-agent" / "packs"
+    if not packs_dir.exists():
+        result["skipped"].append("нет папки packs")
+        return result
+    for pack_path in sorted(packs_dir.glob("*.json")):
+        if len(result["queued"]) >= cap:
+            break
+        pack = load_json(pack_path, {})
+        slug = pack.get("slug") or f"{pack_path.stem}.html"
+        if not slug.endswith(".html"):
+            slug += ".html"
+        live = ROOT / "articles" / slug
+        queued = queue_dir / slug
+        if live.exists():
+            result["skipped"].append(f"{slug} уже в articles/")
+            continue
+        if queued.exists():
+            result["skipped"].append(f"{slug} уже в очереди")
+            continue
+        cluster_id = pack.get("cluster_id") or next(
+            (c["id"] for c in smap.get("clusters", []) if (c.get("page") or "").endswith(slug)),
+            "",
+        )
+        ok, reason = facts_ok(cluster_id) if cluster_id else (False, "кластер не найден")
+        if not ok:
+            result["skipped"].append(f"{slug}: {reason}")
+            continue
+        dest = assemble.write_queue(pack)
+        html = dest.read_text(encoding="utf-8")
+        errs = quality_gate.check(dest)
+        if not any(s in html for s in SOURCES):
+            errs.append("нет первоисточника")
+        if not any(Path(m).name in html for m in MONEY):
+            errs.append("нет ссылки на калькулятор")
+        if errs:
+            dest.unlink(missing_ok=True)
+            result["skipped"].append(f"{slug}: {'; '.join(errs)}")
+            continue
+        result["queued"].append(slug)
+    return result
 
 
 def sys4_antidup(smap: dict) -> list[str]:
@@ -397,25 +493,23 @@ def sys6_drip(smap: dict) -> dict:
 
 def sys10_advisor(report: dict) -> dict:
     missing = []
-    if not os.environ.get("TELEGRAM_BOT_TOKEN"):
-        missing.append("TELEGRAM_BOT_TOKEN")
-    if not os.environ.get("TELEGRAM_CHAT_ID"):
-        missing.append("TELEGRAM_CHAT_ID")
-    if not (os.environ.get("OPENAI_API_KEY") or os.environ.get("ANTHROPIC_API_KEY")):
-        missing.append("ключ модели (статьи сам не пишет)")
     raw = ROOT / "seo-agent" / "raw"
-    if not any(raw.glob("gsc*")) and not any(raw.glob("*webmaster*")):
-        missing.append("выгрузка GSC/Вебмастера")
+    console = load_json(raw / "console-summary.json", {})
+    csvs = list(raw.glob("*.csv")) + list(raw.glob("*.tsv"))
+    if not console.get("connected") and not csvs:
+        missing.append("выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)")
     planned = report["semantics"]["counts"].get("planned", 0)
-    tempo = "1 статья в сутки с вычиткой" if planned else "очередь пуста — сначала семантика"
+    tempo = "1 статья в сутки из пакета" if planned else "очередь пуста — сначала семантика"
     week = []
     queued = sorted((ROOT / "seo-agent" / "queue").glob("*.html"))
     if report["drip"]["published"]:
         week.append("залиты из очереди: " + ", ".join(report["drip"]["published"]))
+    elif (report.get("write") or {}).get("queued"):
+        week.append("собраны в очередь: " + ", ".join(report["write"]["queued"]))
     elif queued:
         week.append("дрип очереди: " + ", ".join(p.name for p in queued[:3]))
     elif planned:
-        week.append("следующая тема из брифа, не залп")
+        week.append("пакет или фактура для следующей planned-темы")
     if report["monitor"]["bad"]:
         week.append("починить URL из monitor.bad")
     if report["refresh"]:
@@ -451,8 +545,8 @@ def next_prompt(report: dict) -> str:
     queued = sorted((ROOT / "seo-agent" / "queue").glob("*.html"))
     if queued:
         return (
-            f"В очереди {queued[0].name}. Actions - SEO machine - Run workflow. "
-            "Завод прогонит гейт и зальёт не больше одной статьи за сутки."
+            f"В очереди {queued[0].name}. Завод сам прогонит гейт и зальёт "
+            "не больше одной статьи за сутки."
         )
     planned = [
         c
@@ -461,11 +555,30 @@ def next_prompt(report: dict) -> str:
     ]
     if not planned:
         return "Очередь planned пуста. Пополни semantic-map.json после разведки ниши."
+    packs = ROOT / "seo-agent" / "packs"
+    for c in planned:
+        stem = Path(c["page"]).stem
+        pack = packs / f"{stem}.json"
+        ok, reason = facts_ok(c.get("id") or "")
+        if pack.exists() and ok:
+            return (
+                f"Пакет {stem}.html готов. Завод сам соберёт HTML, прогонит гейт "
+                "и зальёт не больше одной статьи за сутки."
+            )
+        if pack.exists() and not ok:
+            return f"Пакет {stem} ждёт фактуру: {reason}."
     c = planned[0]
+    stem = Path(c["page"]).stem
+    ok, reason = facts_ok(c.get("id") or "")
+    if not ok:
+        return (
+            f"Тема {stem} в плане, но {reason}. "
+            "Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
+        )
     return (
-        f"Напиши одну статью по брифу seo-agent/briefs/{Path(c['page']).stem}.md "
-        f"и эталону docs/article-standard.md. Цифры только из seo-agent/facts.json. "
-        f"Положи HTML в seo-agent/queue/. Не публикуй пачкой."
+        f"Собери пакет seo-agent/packs/{stem}.json по брифу "
+        f"seo-agent/briefs/{stem}.md и эталону docs/article-standard.md. "
+        "Цифры только из facts.json. Не публикуй пачкой."
     )
 
 
@@ -564,11 +677,13 @@ def telegram(text: str) -> None:
 
 def main() -> int:
     live = "--offline" not in sys.argv
+    console = ingest_console.ingest()
     smap = semantic_map()
+    briefs = sys2_briefs(smap)
+    write = sys3_write(smap)
     drip = sys6_drip(smap)
     smap = semantic_map()
     semantics = sys1_semantics(smap)
-    briefs_missing = sys2_briefs(smap)
     antidup = sys4_antidup(smap)
     monitor = sys7_monitor() if live else {"ok": 0, "bad": [], "robots": "offline", "indexnow_key": "offline", "checked": 0}
     audit = sys8_audit()
@@ -576,14 +691,16 @@ def main() -> int:
     report = {
         "generated": datetime.now().isoformat(timespec="seconds"),
         "semantics": semantics,
-        "briefs_missing": briefs_missing,
+        "briefs": briefs,
+        "briefs_missing": briefs.get("missing") or [],
         "antidup": antidup,
+        "write": write,
         "drip": drip,
         "monitor": monitor,
         "audit": audit,
         "refresh": refresh,
-        "covers": "пропуск: обложки в Цехе, здесь не генерируем",
-        "write": "нейронка не включена; текст только из seo-agent/queue после гейта",
+        "console": {"connected": console.get("connected"), "files": console.get("files") or []},
+        "covers": "пропуск: обложки не генерируем",
     }
     advisor = sys10_advisor(report)
     report["advisor"] = advisor
@@ -606,8 +723,8 @@ def main() -> int:
             "published": semantics["counts"].get("published", 0),
             "daysLeft": "без Wordstat",
         },
-        "traffic": {"status": "не подключено", "hint": "Выгрузка Метрики/GSC → seo-agent/raw/"},
-        "positions": {"status": "не подключено", "hint": "Search Console или Топвизор"},
+        "traffic": console.get("traffic") or {"status": "не подключено", "hint": "CSV → seo-agent/raw/"},
+        "positions": console.get("positions") or {"status": "не подключено", "hint": "GSC или Вебмастер CSV"},
         "audit": audit,
         "health": monitor,
         "advisor": advisor,
@@ -623,6 +740,7 @@ def main() -> int:
         f"карта {semantics['counts']}",
         f"живые {monitor['ok']}/{monitor['checked']} 4xx={len(monitor['bad'])}",
         f"очередь {drip}",
+        f"писатель {write}",
         advisor["next_prompt"],
     ]
     text = "\n".join(lines)

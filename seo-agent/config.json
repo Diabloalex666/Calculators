@@ -6,6 +6,7 @@
   "semanticMap": "seo-agent/semantic-map.json",
   "publishMode": "github-actions-factory",
   "publishQueue": true,
+  "tsekhWrite": true,
   "dailyArticleCap": 1,
   "stack": "github-pages-static"
 }

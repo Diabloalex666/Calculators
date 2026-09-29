@@ -1,0 +1,6 @@
+---
+description: Правила SEO-машины FinPulse. Читать CLAUDE.md и docs/ перед правками контента и URL.
+alwaysApply: true
+---
+
+Перед статьёй, мета-тегами и сменой URL прочитай `CLAUDE.md`, `docs/stop-list.md` и `seo-agent/semantic-map.json`. Один интент — одна страница. Не выдумывай ставки и лимиты. Не публикуй пачкой. Гейт: `python scripts/quality-gate.py`.

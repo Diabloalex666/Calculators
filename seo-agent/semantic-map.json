@@ -1,6 +1,6 @@
 {
   "site": "https://finraz.ru",
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "note": "Частотности — гипотеза до выгрузки Wordstat/консолей. Не использовать как факт в статьях.",
   "clusters": [
     {
@@ -266,7 +266,7 @@
     {
       "id": "avans-ot-oklada",
       "page": "/articles/avans-ot-oklada.html",
-      "status": "planned",
+      "status": "published",
       "intent": "info",
       "main": {
         "q": "как посчитать аванс от оклада",

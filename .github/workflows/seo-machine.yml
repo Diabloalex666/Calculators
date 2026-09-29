@@ -34,9 +34,6 @@ jobs:
         if: github.event_name == 'push'
         run: sleep 150
       - name: Health + IndexNow + Yandex ping
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python scripts/machine.py
 
   factory:
@@ -55,8 +52,7 @@ jobs:
         env:
           CI: "true"
           FACTORY_DRIP: "1"
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          FACTORY_WRITE: "1"
         run: python scripts/factory.py
       - name: Commit report
         run: |

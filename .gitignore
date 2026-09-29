@@ -1,0 +1,13 @@
+.DS_Store
+Thumbs.db
+*.log
+_live-check/
+*.zip
+*.tar.gz
+.env
+*credentials*.json
+seo-agent/secrets/
+seo-agent/raw/*.csv
+seo-agent/raw/*.tsv
+Обновление/_tmp*
+Обновление/seo-mashina-pro.pdf
