@@ -3,13 +3,13 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 4 planned",
+    "в очереди 31 planned",
     "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
     {
-      "title": "дрип очереди: ndfl-18-20-22-procenta.html",
-      "prompt": "В очереди ndfl-18-20-22-procenta.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+      "title": "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html",
+      "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
@@ -21,7 +21,7 @@
     ]
   },
   "topics": {
-    "planned": 4,
+    "planned": 31,
     "reserved": 0,
     "published": 27,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
@@ -89,8 +89,7 @@
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "yandex-suggest",
-          "seed"
+          "yandex-suggest"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -196,7 +195,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 4 planned",
+      "в очереди 31 planned",
       "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
@@ -204,8 +203,8 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: ndfl-18-20-22-procenta.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html"
     ],
-    "next_prompt": "В очереди ndfl-18-20-22-procenta.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
 }

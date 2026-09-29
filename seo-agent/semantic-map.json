@@ -115,7 +115,7 @@
         "vol": 507
       },
       "demand": {
-        "score": 2.0,
+        "score": 6.0,
         "sources": [
           "yandex-suggest"
         ],
@@ -492,7 +492,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "month-pack"
+          "seed"
         ],
         "updated": "2026-09-29"
       }
@@ -509,7 +509,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "month-pack"
+          "seed"
         ],
         "updated": "2026-09-29"
       }
@@ -526,7 +526,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "month-pack"
+          "yandex-suggest"
         ],
         "updated": "2026-09-29"
       }
@@ -543,7 +543,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "month-pack"
+          "yandex-suggest"
         ],
         "updated": "2026-09-29"
       }
@@ -970,6 +970,24 @@
         "sources": [
           "month-pack"
         ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "зарплата при увольнении по собственному желанию сроки выплаты",
+        "vol": null
+      },
+      "demand": {
+        "score": 8.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "added": "2026-09-29",
         "updated": "2026-09-29"
       }
     }

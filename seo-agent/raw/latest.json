@@ -1,15 +1,17 @@
 {
-  "generated": "2026-09-29T14:04:18",
+  "generated": "2026-09-29T14:29:52",
   "semantics": {
     "counts": {
       "published": 27,
-      "planned": 4
+      "planned": 31
     },
     "holes": [],
-    "total": 31
+    "total": 58
   },
   "briefs": {
-    "created": [],
+    "created": [
+      "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu"
+    ],
     "missing": []
   },
   "briefs_missing": [],
@@ -82,7 +84,13 @@
     "suggest_ok": 29,
     "webmaster": true,
     "wordstat": false,
-    "added": [],
+    "added": [
+      {
+        "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+        "q": "зарплата при увольнении по собственному желанию сроки выплаты",
+        "slug": "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu"
+      }
+    ],
     "retired": [],
     "top": [
       "ипотечный калькулятор",
@@ -99,7 +107,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 4 planned",
+      "в очереди 31 planned",
       "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
@@ -107,8 +115,8 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: ndfl-18-20-22-procenta.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html"
     ],
-    "next_prompt": "В очереди ndfl-18-20-22-procenta.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+    "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
 }
