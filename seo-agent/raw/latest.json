@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-28T15:06:29",
+  "generated": "2026-09-29T11:20:34",
   "semantics": {
     "counts": {
       "published": 26,
@@ -14,17 +14,12 @@
     "enabled": true,
     "published": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "zarplata-za-nepolnyy-mesyats.html уже в articles/"
     ]
   },
   "monitor": {
-    "ok": 31,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/zarplata-za-nepolnyy-mesyats.html",
-        "status": "404"
-      }
-    ],
+    "ok": 32,
+    "bad": [],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 32
@@ -58,9 +53,10 @@
   "covers": "пропуск: обложки в Цехе, здесь не генерируем",
   "write": "нейронка не включена; текст только из seo-agent/queue после гейта",
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 2 planned",
+      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
     ],
     "missing": [
       "TELEGRAM_BOT_TOKEN",
@@ -70,8 +66,7 @@
     ],
     "tempo": "1 статья в сутки с вычиткой",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
-      "починить URL из monitor.bad"
+      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
     ],
     "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
   }

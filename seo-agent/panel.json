@@ -1,17 +1,14 @@
 {
-  "generated": "2026-09-28",
-  "verdict": "red",
-  "verdictText": "Красный.",
+  "generated": "2026-09-29",
+  "verdict": "yellow",
+  "verdictText": "Жёлтый.",
   "reasons": [
-    "дыры в карте, живые 4xx или дубли интента"
+    "в очереди 2 planned",
+    "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
   ],
   "actions": [
     {
       "title": "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
-      "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
-    },
-    {
-      "title": "починить URL из monitor.bad",
       "prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
@@ -63,21 +60,17 @@
     "noindex": []
   },
   "health": {
-    "ok": 31,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/zarplata-za-nepolnyy-mesyats.html",
-        "status": "404"
-      }
-    ],
+    "ok": 32,
+    "bad": [],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 32
   },
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 2 planned",
+      "не все контуры подключены: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ключ модели (статьи сам не пишет)"
     ],
     "missing": [
       "TELEGRAM_BOT_TOKEN",
@@ -87,8 +80,7 @@
     ],
     "tempo": "1 статья в сутки с вычиткой",
     "week": [
-      "дрип очереди: zarplata-za-nepolnyy-mesyats.html",
-      "починить URL из monitor.bad"
+      "дрип очереди: zarplata-za-nepolnyy-mesyats.html"
     ],
     "next_prompt": "В очереди zarplata-za-nepolnyy-mesyats.html. Actions - SEO machine - Run workflow. Завод прогонит гейт и зальёт не больше одной статьи за сутки."
   }
