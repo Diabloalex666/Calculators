@@ -3,8 +3,8 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 1 planned",
-    "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+    "в очереди 3 planned",
+    "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
     {
@@ -21,20 +21,135 @@
     ]
   },
   "topics": {
-    "planned": 1,
+    "planned": 3,
     "reserved": 0,
     "published": 27,
-    "daysLeft": "Частотность Wordstat — только из CSV. Иначе ранг = подсказки Яндекса + клики консолей."
+    "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "файлов нет — положи CSV в seo-agent/raw/",
-    "clicks": 0,
-    "impressions": 0,
-    "visits": 0
+    "status": "файлов нет — положи CSV в seo-agent/raw/"
   },
   "positions": {
-    "status": "нет запросов в CSV",
-    "top": []
+    "status": "спрос самообновляется",
+    "top": [
+      {
+        "q": "калькулятор зарплаты на руки",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "zarplata-na-ruki",
+        "page": "/salary.html",
+        "status": "published"
+      },
+      {
+        "q": "как посчитать аванс от оклада за отработанные дни",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "cluster": "avans-ot-oklada",
+        "page": "/articles/avans-ot-oklada.html",
+        "status": "published"
+      },
+      {
+        "q": "как посчитать зарплату за неполный месяц по окладу калькулятор",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "cluster": "zarplata-nepolnyy-mesyats",
+        "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор отпускных",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "otpusknye",
+        "page": "/vacation.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор больничного листа в 2026 году онлайн",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "cluster": "bolnichny",
+        "page": "/sick.html",
+        "status": "published"
+      },
+      {
+        "q": "когда ндфл 15 процентов",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "ndfl-15-kogda",
+        "page": "/articles/ndfl-15-procentov-kogda.html",
+        "status": "published"
+      },
+      {
+        "q": "когда ндфл 15 процентов в 2026",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "yandex-suggest",
+          "seed"
+        ],
+        "cluster": "ndfl-15-kogda",
+        "page": "/articles/ndfl-15-procentov-kogda.html",
+        "status": "published"
+      },
+      {
+        "q": "если зарплата 100000 сколько на руки",
+        "score": 10.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 0.0,
+        "suggest": 10.0,
+        "sources": [
+          "yandex-suggest",
+          "seed"
+        ],
+        "cluster": "zarplata-100000",
+        "page": "/articles/zarplata-100000-na-ruki.html",
+        "status": "published"
+      }
+    ]
   },
   "audit": {
     "orphans": [],
@@ -71,11 +186,12 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 1 planned",
-      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "в очереди 3 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
-      "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
+      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [

@@ -1,18 +1,25 @@
 {
-  "generated": "2026-09-29T12:45:58",
+  "generated": "2026-09-29T12:55:00",
   "semantics": {
     "counts": {
       "published": 27,
-      "planned": 1
+      "planned": 3
     },
     "holes": [],
-    "total": 28
+    "total": 30
   },
   "briefs": {
-    "created": [],
-    "missing": []
+    "created": [
+      "zarplata-pri-uvolnenii",
+      "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+    ],
+    "missing": [
+      "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+    ]
   },
-  "briefs_missing": [],
+  "briefs_missing": [
+    "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+  ],
   "antidup": [],
   "write": {
     "enabled": true,
@@ -65,29 +72,57 @@
     "connected": false,
     "files": []
   },
+  "yandex": {
+    "updated": "2026-09-29",
+    "webmaster": {
+      "connected": false,
+      "error": "нет YANDEX_WEBMASTER_TOKEN",
+      "n": 0
+    },
+    "wordstat": {
+      "connected": false,
+      "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
+      "n": 0
+    }
+  },
   "demand": {
-    "suggest_ok": 22,
-    "added": [],
+    "suggest_ok": 30,
+    "webmaster": false,
+    "wordstat": false,
+    "added": [
+      {
+        "id": "zarplata_pri_uvolnenii",
+        "q": "зарплата при увольнении",
+        "slug": "zarplata-pri-uvolnenii"
+      },
+      {
+        "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+        "q": "сумма вычета на детей в 2026 году по ндфл",
+        "slug": "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+      }
+    ],
+    "retired": [],
     "top": [
       "калькулятор зарплаты на руки",
-      "если зарплата 100000 сколько на руки",
-      "80000 на руки сколько с ндфл",
+      "как посчитать аванс от оклада за отработанные дни",
+      "как посчитать зарплату за неполный месяц по окладу калькулятор",
+      "калькулятор отпускных",
+      "калькулятор больничного листа в 2026 году онлайн",
+      "когда ндфл 15 процентов",
       "когда ндфл 15 процентов в 2026",
-      "сколько вычет на детей в 2026 году по ндфл",
-      "калькулятор отпускных онлайн рассчитать",
-      "отпускные за 14 дней расчет онлайн калькулятор",
-      "отпускные при зарплате 50000"
+      "если зарплата 100000 сколько на руки"
     ]
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 1 planned",
-      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "в очереди 3 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
-      "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
+      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [

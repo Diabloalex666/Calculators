@@ -11,6 +11,13 @@
       "main": {
         "q": "калькулятор зарплаты на руки",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -21,6 +28,13 @@
       "main": {
         "q": "100000 на руки какой оклад",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -31,6 +45,13 @@
       "main": {
         "q": "80000 на руки сколько до ндфл",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -41,6 +62,13 @@
       "main": {
         "q": "120000 до ндфл сколько на руки",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -51,6 +79,13 @@
       "main": {
         "q": "зарплата 200000 ндфл 15",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -61,6 +96,13 @@
       "main": {
         "q": "когда ндфл 15 процентов 2026",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -71,6 +113,13 @@
       "main": {
         "q": "вычет на детей ндфл сколько",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -81,6 +130,13 @@
       "main": {
         "q": "калькулятор отпускных онлайн",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -91,6 +147,13 @@
       "main": {
         "q": "отпускные за 14 дней",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -101,6 +164,13 @@
       "main": {
         "q": "отпускные при зарплате 50000",
         "vol": null
+      },
+      "demand": {
+        "score": 8.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -111,6 +181,13 @@
       "main": {
         "q": "отпускные если работал меньше года",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -121,6 +198,13 @@
       "main": {
         "q": "отпускные за 28 дней как посчитать",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -131,6 +215,13 @@
       "main": {
         "q": "калькулятор больничного",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -141,6 +232,13 @@
       "main": {
         "q": "больничный стаж менее 5 лет",
         "vol": null
+      },
+      "demand": {
+        "score": 8.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -151,6 +249,13 @@
       "main": {
         "q": "больничный стаж 5-8 лет",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -161,6 +266,14 @@
       "main": {
         "q": "больничный стаж 8 лет",
         "vol": null
+      },
+      "demand": {
+        "score": 10.0,
+        "sources": [
+          "seed",
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -171,6 +284,13 @@
       "main": {
         "q": "максимальный больничный 2026",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -181,6 +301,13 @@
       "main": {
         "q": "больничный за 10 дней расчёт",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -191,6 +318,13 @@
       "main": {
         "q": "ипотечный калькулятор",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -201,6 +335,13 @@
       "main": {
         "q": "досрочное погашение ипотеки расчёт",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -211,6 +352,13 @@
       "main": {
         "q": "ипотека 6 миллионов ежемесячный платёж",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -221,6 +369,13 @@
       "main": {
         "q": "калькулятор сложного процента",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -231,6 +386,13 @@
       "main": {
         "q": "накопления 10000 в месяц",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -241,6 +403,13 @@
       "main": {
         "q": "бюджет на месяц шаблон",
         "vol": null
+      },
+      "demand": {
+        "score": 9.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -251,6 +420,13 @@
       "main": {
         "q": "бюджет семьи на месяц",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -261,6 +437,13 @@
       "main": {
         "q": "как посчитать зарплату за неполный месяц",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -271,6 +454,13 @@
       "main": {
         "q": "как посчитать аванс от оклада",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
       }
     },
     {
@@ -281,6 +471,50 @@
       "main": {
         "q": "ндфл 18 20 22 процента с какой суммы",
         "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "зарплата при увольнении",
+        "vol": null
+      },
+      "demand": {
+        "score": 10.0,
+        "sources": [
+          "seed",
+          "yandex-suggest"
+        ],
+        "added": "2026-09-29",
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "сумма вычета на детей в 2026 году по ндфл",
+        "vol": null
+      },
+      "demand": {
+        "score": 9.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "added": "2026-09-29",
+        "updated": "2026-09-29"
       }
     }
   ]

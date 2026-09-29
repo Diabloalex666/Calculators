@@ -55,7 +55,9 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
       "status": "verified",
       "expires": "2027-01-01",
-      "used_by": []
+      "used_by": [
+        "zarplata_pri_uvolnenii"
+      ]
     },
     {
       "id": "ndfl-brackets-2026",
