@@ -22,27 +22,51 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Build public tree (no seo-agent / scripts / worker)
+
+      - name: Build public tree (whitelist)
         run: |
+          set -euo pipefail
+          rm -rf _site
           mkdir -p _site
+
+          # Copy only public site surface — never seo-agent / scripts / worker / docs
           rsync -a \
-            --exclude '.git' \
-            --exclude '.github' \
-            --exclude '.cursor' \
-            --exclude 'seo-agent' \
-            --exclude 'scripts' \
-            --exclude 'worker' \
-            --exclude 'docs' \
-            --exclude 'Обновление' \
-            --exclude 'node_modules' \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '.cursor/' \
+            --exclude 'seo-agent/' \
+            --exclude 'scripts/' \
+            --exclude 'worker/' \
+            --exclude 'docs/' \
+            --exclude 'Обновление/' \
+            --exclude 'node_modules/' \
             --exclude '.env' \
-            --exclude '_site' \
-            --exclude '*.md' \
+            --exclude '.env.*' \
+            --exclude '_site/' \
+            --exclude '_live-check/' \
             --exclude '_config.yml' \
+            --exclude '.gitignore' \
+            --exclude '*.md' \
+            --exclude '*.py' \
+            --exclude '*.pyc' \
+            --exclude '*.toml' \
+            --exclude 'Gemfile*' \
+            --exclude 'package*.json' \
+            --exclude 'wrangler.toml' \
             ./ _site/
-          # keep robots and required text files; md excluded above is fine
-          cp robots.txt llms.txt _site/ 2>/dev/null || true
-          find _site -type f -name '*.md' -delete
+
+          # Safety net: purge if anything slipped through
+          rm -rf _site/seo-agent _site/scripts _site/worker _site/docs _site/Обновление \
+                 _site/.github _site/.cursor _site/node_modules _site/_live-check
+          find _site -type f \( -name '*.md' -o -name '*.py' -o -name '*.toml' -o -name '.env*' \) -delete
+
+          test ! -e _site/seo-agent
+          test ! -e _site/scripts
+          test ! -e _site/worker
+          test -f _site/index.html
+          test -f _site/robots.txt
+          echo "Public file count: $(find _site -type f | wc -l)"
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

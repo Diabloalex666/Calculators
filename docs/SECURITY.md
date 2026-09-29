@@ -12,18 +12,20 @@
 |---------|------|--------|
 | Нет CSP / referrer meta | XSS / утечка URL | закрыто meta CSP + referrer |
 | Нет HSTS / X-Frame-Options как HTTP-заголовков | MITM / clickjacking | **нужен Cloudflare/прокси** (GH Pages не даёт) |
-| `seo-agent/`, `scripts/`, `worker/` отдавались с Pages | утечка панели/фактов/кода | `_config.yml` exclude |
+| `seo-agent/`, `scripts/`, `worker/` отдавались с Pages | утечка панели/фактов/кода | закрыто: убран `.nojekyll` + `_config.yml` exclude + Actions whitelist |
 | Feedback Worker без rate-limit и soft CORS | спам в Telegram / abuse | worker hardened |
 | IndexNow key в репо | ожидаемо публичный | ок по протоколу IndexNow |
 | Секреты в git | высокий | `.env` в gitignore; токены только Secrets |
 
 ## Что сделано в репо
 
-1. `worker/telegram-feedback.js` — allowlist Origin, лимит тела, sanitize, rate-limit 5/мин/IP, безопасные ответы.
-2. `_config.yml` — Jekyll exclude: `seo-agent`, `scripts`, `worker`, `docs`, markdown-инструкции.
-3. CSP + referrer на публичных HTML (`scripts/stamp-security-meta.py` + `assemble.py`).
-4. `robots.txt` уже Disallow на внутреннее; панель с `noindex`.
-5. Этот файл — чеклист для повторного прогона.
+1. `worker/telegram-feedback.js` — allowlist Origin, лимит тела, sanitize, rate-limit 5/мин по `CF-Connecting-IP`, безопасные ответы.
+2. Удалён `.nojekyll` — иначе GitHub Pages отдаёт **весь** git-tree и игнорирует `_config.yml`.
+3. `_config.yml` — Jekyll exclude: `seo-agent`, `scripts`, `worker`, `docs`, markdown-инструкции.
+4. `.github/workflows/pages.yml` — whitelist-сборка `_site` (страховка; Source лучше = GitHub Actions).
+5. CSP + referrer на публичных HTML (`scripts/stamp-security-meta.py` + `assemble.py`).
+6. `robots.txt` Disallow на внутреннее; панель с `noindex`.
+7. Этот файл — чеклист для повторного прогона.
 
 ## Что сделать тебе (разово)
 

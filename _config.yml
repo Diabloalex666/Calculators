@@ -1,17 +1,27 @@
 # Jekyll config for GitHub Pages — do NOT publish internal machine files.
-# (No .nojekyll on purpose: exclude must apply.)
+# Must NOT have .nojekyll, or exclude is ignored and the whole repo is public.
 
 exclude:
   - seo-agent
+  - seo-agent/
   - scripts
+  - scripts/
   - worker
+  - worker/
   - docs
+  - docs/
   - Обновление
+  - Обновление/
   - .github
   - .cursor
   - .env
   - .env.example
   - node_modules
+  - _live-check
+  - _site
+  - vendor/bundle
+  - Gemfile
+  - Gemfile.lock
   - CLAUDE.md
   - AGENTS.md
   - README.md
@@ -25,9 +35,10 @@ exclude:
   - FINISH.md
   - MONETIZATION.md
   - TELEGRAM-FEEDBACK.md
-  - vendor/bundle
-  - Gemfile
-  - Gemfile.lock
+  - "*.py"
+  - "*.pyc"
+  - "*.toml"
+  - "*.example"
 
 include:
   - .well-known

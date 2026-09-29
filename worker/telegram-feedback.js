@@ -42,10 +42,8 @@ export default {
       return json({ ok: false, error: "forbidden origin" }, 403, corsHeaders);
     }
 
-    const ip =
-      request.headers.get("CF-Connecting-IP") ||
-      request.headers.get("X-Forwarded-For")?.split(",")[0]?.trim() ||
-      "unknown";
+    // Only CF-Connecting-IP — X-Forwarded-For is client-spoofable.
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
 
     const limited = await isRateLimited(ip);
     if (limited) {

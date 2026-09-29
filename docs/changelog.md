@@ -1,5 +1,6 @@
 # Журнал решений
 
+- 2026-09-29 — Fix Pages leak: удалён `.nojekyll` (из‑за него exclude не работал), whitelist Actions deploy, Worker rate-limit только по CF-Connecting-IP.
 - 2026-09-29 — Security hardening: CSP/referrer meta, Worker rate-limit+CORS, `_config.yml` exclude seo-agent/scripts/worker с Pages, docs/SECURITY.md.
 - 2026-09-29 — Запас на месяц: 30 пакетов в `queue/` (дрип 1/сутки). Без залпа в articles. Факты ТК/НК + edu-no-rate.
 - 2026-09-29 — Алерт пустого конвейера: `conveyor-alert.json` + GitHub Issue `conveyor-empty` (без Telegram). Чат сам не будит.
