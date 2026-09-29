@@ -669,7 +669,8 @@ def render_panel(panel: dict) -> None:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Панель SEO-машины — FinPulse</title>
+      <title>Панель SEO-машины — FinPulse (локально)</title>
+      <meta name="robots" content="noindex, nofollow" />
     <style>
       :root {{ color-scheme: dark; }}
       body {{ margin: 0; font-family: Segoe UI, system-ui, sans-serif; background: #0f1419; color: #e7ecf3; }}

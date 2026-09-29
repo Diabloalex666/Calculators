@@ -12,6 +12,9 @@ Disallow: /MONETIZATION.md
 Disallow: /TELEGRAM-FEEDBACK.md
 Disallow: /CLAUDE.md
 Disallow: /AGENTS.md
+Disallow: /.env
+Disallow: /.github/
+Disallow: /_config.yml
 
 User-agent: GPTBot
 Allow: /

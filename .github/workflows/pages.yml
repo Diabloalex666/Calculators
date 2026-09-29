@@ -1,0 +1,51 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build public tree (no seo-agent / scripts / worker)
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude '.git' \
+            --exclude '.github' \
+            --exclude '.cursor' \
+            --exclude 'seo-agent' \
+            --exclude 'scripts' \
+            --exclude 'worker' \
+            --exclude 'docs' \
+            --exclude 'Обновление' \
+            --exclude 'node_modules' \
+            --exclude '.env' \
+            --exclude '_site' \
+            --exclude '*.md' \
+            --exclude '_config.yml' \
+            ./ _site/
+          # keep robots and required text files; md excluded above is fine
+          cp robots.txt llms.txt _site/ 2>/dev/null || true
+          find _site -type f -name '*.md' -delete
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+      - id: deployment
+        uses: actions/deploy-pages@v4

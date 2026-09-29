@@ -1,0 +1,33 @@
+# Jekyll config for GitHub Pages — do NOT publish internal machine files.
+# (No .nojekyll on purpose: exclude must apply.)
+
+exclude:
+  - seo-agent
+  - scripts
+  - worker
+  - docs
+  - Обновление
+  - .github
+  - .cursor
+  - .env
+  - .env.example
+  - node_modules
+  - CLAUDE.md
+  - AGENTS.md
+  - README.md
+  - CUSTOM-DOMAIN.md
+  - FINRAZ-ONLINE-REDIRECT.md
+  - OPTIONAL-DONE.md
+  - SAMOZANYATOST.md
+  - SEO-YANDEX.md
+  - SETUP-YANDEX.md
+  - DEPLOY.md
+  - FINISH.md
+  - MONETIZATION.md
+  - TELEGRAM-FEEDBACK.md
+  - vendor/bundle
+  - Gemfile
+  - Gemfile.lock
+
+include:
+  - .well-known
