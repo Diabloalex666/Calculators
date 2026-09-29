@@ -127,6 +127,65 @@ def suggest(part: str) -> list[str]:
     return []
 
 
+def live_queries() -> list[dict]:
+    rows = []
+    wm = load_json(RAW / "webmaster-live.json", {})
+    for item in wm.get("queries") or []:
+        if item.get("query"):
+            rows.append(
+                {
+                    "q": item["query"],
+                    "clicks": item.get("clicks") or 0,
+                    "impressions": item.get("impressions") or 0,
+                    "freq": 0,
+                    "source": "webmaster-api",
+                }
+            )
+    ws = load_json(RAW / "wordstat-live.json", {})
+    for item in ws.get("queries") or []:
+        q = item.get("query") or item.get("q") or ""
+        if q:
+            rows.append(
+                {
+                    "q": q,
+                    "clicks": 0,
+                    "impressions": 0,
+                    "freq": item.get("freq") or 0,
+                    "source": "wordstat-live",
+                }
+            )
+    return rows
+
+
+def evolving_seeds(clusters: list[dict]) -> list[str]:
+    """Self-updating seed list: map + previous demand top + unmatched + fixed base."""
+    seeds = list(SEEDS_EXTRA)
+    for c in clusters:
+        q = ((c.get("main") or {}).get("q") or "").strip()
+        if q:
+            seeds.append(q)
+    prev = load_json(RAW / "demand.json", {})
+    for row in (prev.get("queries") or [])[:25]:
+        if row.get("q"):
+            seeds.append(row["q"])
+    for row in (prev.get("unmatched") or [])[:15]:
+        if row.get("q"):
+            seeds.append(row["q"])
+    dyn = load_json(RAW / "seeds.json", {})
+    for q in dyn.get("seeds") or []:
+        if isinstance(q, str) and q.strip():
+            seeds.append(q.strip())
+    seen = set()
+    out = []
+    for s in seeds:
+        k = nrm(s)
+        if not k or k in seen:
+            continue
+        seen.add(k)
+        out.append(s)
+    return out
+
+
 def csv_queries() -> list[dict]:
     summary = load_json(RAW / "console-summary.json", {})
     rows = []
@@ -153,6 +212,7 @@ def csv_queries() -> list[dict]:
                 "source": "wordstat-json",
             }
         )
+    rows.extend(live_queries())
     return [r for r in rows if r["q"]]
 
 
@@ -239,20 +299,7 @@ def is_tool_query(q: str) -> bool:
 def collect(smap: dict | None = None, live: bool = True) -> dict:
     smap = smap or load_json(MAP_PATH, {"clusters": []})
     clusters = smap.get("clusters") or []
-    seeds = []
-    for c in clusters:
-        q = ((c.get("main") or {}).get("q") or "").strip()
-        if q:
-            seeds.append(q)
-    seeds.extend(SEEDS_EXTRA)
-    seen_seed = set()
-    uniq_seeds = []
-    for s in seeds:
-        k = nrm(s)
-        if k in seen_seed:
-            continue
-        seen_seed.add(k)
-        uniq_seeds.append(s)
+    uniq_seeds = evolving_seeds(clusters)
 
     bag: dict[str, dict] = {}
 
@@ -273,7 +320,7 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
 
     suggest_ok = 0
     if live:
-        for seed in uniq_seeds[:28]:
+        for seed in uniq_seeds[:36]:
             hints = suggest(seed)
             if hints:
                 suggest_ok += 1
@@ -301,8 +348,42 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
         }
         if c:
             ranked.append(row)
+            # Self-update volume / demand score on the cluster
+            main = c.setdefault("main", {})
+            if item.get("freq"):
+                main["vol"] = int(item["freq"])
+            elif item.get("impressions"):
+                main["vol_proxy"] = int(item["impressions"])
+            c["demand"] = {
+                "score": row["score"],
+                "sources": item["sources"],
+                "updated": date.today().isoformat(),
+            }
         else:
             unmatched.append(row)
+
+    # Soft-retire planned topics with no fact link for 45+ days
+    retired = []
+    for c in list(clusters):
+        if c.get("status") != "planned":
+            continue
+        added_at = (c.get("demand") or {}).get("added") or (c.get("demand") or {}).get("updated")
+        if not added_at:
+            c.setdefault("demand", {})["added"] = date.today().isoformat()
+            continue
+        try:
+            age = (date.today() - date.fromisoformat(str(added_at)[:10])).days
+        except ValueError:
+            continue
+        if age < 45:
+            continue
+        # keep if facts attached
+        facts = load_json(ROOT / "seo-agent" / "facts.json", {}).get("items") or []
+        linked = any(c.get("id") in (f.get("used_by") or []) and f.get("status") == "verified" for f in facts)
+        if linked:
+            continue
+        c["status"] = "retired"
+        retired.append(c.get("id"))
 
     cap = int((load_json(ROOT / "seo-agent" / "config.json", {}) or {}).get("demandAddPlannedCap") or 2)
     added = []
@@ -333,8 +414,13 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
             "page": page,
             "status": "planned",
             "intent": "info",
-            "main": {"q": q, "vol": None},
-            "demand": {"score": item["score"], "sources": item["sources"]},
+            "main": {"q": q, "vol": item.get("freq") or None},
+            "demand": {
+                "score": item["score"],
+                "sources": item["sources"],
+                "added": date.today().isoformat(),
+                "updated": date.today().isoformat(),
+            },
         }
         clusters.append(cluster)
         existing_pages.add(page)
@@ -346,7 +432,8 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
 
     smap["clusters"] = clusters
     smap["updated"] = date.today().isoformat()
-    if added:
+    map_dirty = bool(added or retired)
+    if map_dirty or any((c.get("demand") or {}).get("updated") == date.today().isoformat() for c in clusters):
         save_json(MAP_PATH, smap)
 
     by_id: dict[str, float] = {}
@@ -356,14 +443,38 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
             by_id[cid] = max(by_id.get(cid) or 0, row["score"])
     cluster_rank = sorted(by_id.items(), key=lambda x: x[1], reverse=True)
 
+    # Rewrite evolving seed bank for next runs
+    next_seeds = []
+    for row in sorted(ranked + unmatched, key=lambda x: x["score"], reverse=True)[:40]:
+        next_seeds.append(row["q"])
+    for s in SEEDS_EXTRA:
+        if s not in next_seeds:
+            next_seeds.append(s)
+    save_json(
+        RAW / "seeds.json",
+        {
+            "updated": date.today().isoformat(),
+            "note": "Автообновляется заводом. Семена следующего прогона = живой спрос.",
+            "seeds": next_seeds[:50],
+        },
+    )
+
+    wm = load_json(RAW / "webmaster-live.json", {})
+    ws = load_json(RAW / "wordstat-live.json", {})
     report = {
         "updated": date.today().isoformat(),
-        "note": "Частотность Wordstat — только из CSV. Иначе ранг = подсказки Яндекса + клики консолей.",
+        "note": (
+            "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. "
+            "Частотность Wordstat без ключа не выдумывается."
+        ),
         "suggest_seeds_ok": suggest_ok,
+        "webmaster_connected": bool(wm.get("connected")),
+        "wordstat_connected": bool(ws.get("connected")),
         "queries": sorted(ranked + unmatched, key=lambda x: x["score"], reverse=True)[:80],
         "ranked": ranked[:40],
         "unmatched": unmatched[:40],
         "added_planned": added,
+        "retired": retired,
         "cluster_rank": [{"id": i, "score": s} for i, s in cluster_rank],
     }
     save_json(OUT, report)

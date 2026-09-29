@@ -53,6 +53,10 @@ jobs:
           CI: "true"
           FACTORY_DRIP: "1"
           FACTORY_WRITE: "1"
+          YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
+          YANDEX_WEBMASTER_HOST_ID: ${{ secrets.YANDEX_WEBMASTER_HOST_ID }}
+          XMLRIVER_USER: ${{ secrets.XMLRIVER_USER }}
+          XMLRIVER_KEY: ${{ secrets.XMLRIVER_KEY }}
         run: python scripts/factory.py
       - name: Commit report
         run: |

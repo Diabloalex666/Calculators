@@ -1,0 +1,9 @@
+{
+  "updated": "2026-09-29",
+  "connected": false,
+  "source": "webmaster-api",
+  "queries": [],
+  "error": "нет YANDEX_WEBMASTER_TOKEN",
+  "user_id": null,
+  "host_id": null
+}

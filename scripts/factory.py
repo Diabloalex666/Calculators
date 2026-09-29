@@ -39,6 +39,7 @@ assemble = load_hyphen("assemble")
 ingest_console = load_hyphen("ingest-console")
 demand = load_hyphen("demand")
 pack_auto = load_hyphen("pack_auto")
+yandex_api = load_hyphen("yandex_api")
 
 SITE = "https://finraz.ru"
 UA = {"User-Agent": "FinPulseFactory/1.0"}
@@ -517,8 +518,12 @@ def sys10_advisor(report: dict) -> dict:
     raw = ROOT / "seo-agent" / "raw"
     console = load_json(raw / "console-summary.json", {})
     csvs = list(raw.glob("*.csv")) + list(raw.glob("*.tsv"))
-    if not console.get("connected") and not csvs:
-        missing.append("выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)")
+    yandex = report.get("yandex") or {}
+    wm = (yandex.get("webmaster") or {})
+    if not wm.get("connected") and not console.get("connected") and not csvs:
+        missing.append("YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)")
+    if not (report.get("demand") or {}).get("wordstat"):
+        missing.append("Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv")
     planned = report["semantics"]["counts"].get("planned", 0)
     tempo = "1 статья в сутки из пакета" if planned else "очередь пуста — сначала семантика"
     week = []
@@ -699,6 +704,14 @@ def telegram(text: str) -> None:
 def main() -> int:
     live = "--offline" not in sys.argv
     console = ingest_console.ingest()
+    yandex_pull = {"summary": {}}
+    if live:
+        seeds = []
+        for c in semantic_map().get("clusters", []):
+            q = ((c.get("main") or {}).get("q") or "").strip()
+            if q:
+                seeds.append(q)
+        yandex_pull = yandex_api.pull_all(seeds)
     demand_rep = demand.collect(live=live)
     smap = semantic_map()
     briefs = sys2_briefs(smap)
@@ -722,9 +735,13 @@ def main() -> int:
         "audit": audit,
         "refresh": refresh,
         "console": {"connected": console.get("connected"), "files": console.get("files") or []},
+        "yandex": yandex_pull.get("summary") or {},
         "demand": {
             "suggest_ok": demand_rep.get("suggest_seeds_ok"),
+            "webmaster": demand_rep.get("webmaster_connected"),
+            "wordstat": demand_rep.get("wordstat_connected"),
             "added": demand_rep.get("added_planned") or [],
+            "retired": demand_rep.get("retired") or [],
             "top": [x.get("q") for x in (demand_rep.get("queries") or [])[:8]],
         },
         "covers": "пропуск: обложки не генерируем",
@@ -750,8 +767,25 @@ def main() -> int:
             "published": semantics["counts"].get("published", 0),
             "daysLeft": (demand_rep.get("note") or "спрос: подсказки Яндекса"),
         },
-        "traffic": console.get("traffic") or {"status": "не подключено", "hint": "CSV → seo-agent/raw/"},
-        "positions": console.get("positions") or {"status": "не подключено", "hint": "GSC или Вебмастер CSV"},
+        "traffic": {
+            "status": (
+                f"Вебмастер API: {((yandex_pull.get('summary') or {}).get('webmaster') or {}).get('n', 0)} запросов"
+                if ((yandex_pull.get("summary") or {}).get("webmaster") or {}).get("connected")
+                else (
+                    (console.get("traffic") or {}).get("status")
+                    if isinstance(console.get("traffic"), dict)
+                    else (console.get("traffic") or "положи токен Вебмастера")
+                )
+            )
+        },
+        "positions": {
+            "status": (
+                "спрос самообновляется"
+                if demand_rep.get("queries")
+                else "ждём Вебмастер/подсказки"
+            ),
+            "top": (demand_rep.get("queries") or [])[:8],
+        },
         "audit": audit,
         "health": monitor,
         "advisor": advisor,

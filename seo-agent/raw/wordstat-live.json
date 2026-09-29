@@ -1,0 +1,7 @@
+{
+  "updated": "2026-09-29",
+  "connected": false,
+  "source": "xmlriver-wordstat",
+  "queries": [],
+  "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем"
+}

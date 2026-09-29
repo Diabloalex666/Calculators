@@ -51,10 +51,12 @@
 9. актуализация — статьи старше 120 дней;
 10. советник — вердикт и промпт дня;
 11. консоли — CSV GSC/Вебмастер/Метрика/Wordstat → панель;
-12. спрос — подсказки Яндекса + выгрузки; новые темы в карту (кап 2/сутки), без каннибализации калькулятора.
+12. спрос — Вебмастер API + подсказки Яндекса (+ Wordstat XMLRiver опционально); семена самообновляются; planned кап 2/сутки; retired без фактуры >45 дней.
 
 Кап: `dailyArticleCap` 1. Дрип и писатель: `publishQueue: true`, `tsekhWrite: true`, в Actions `FACTORY_DRIP=1` и `FACTORY_WRITE=1`.
-Спрос: `demandSuggest: true`, `demandAddPlannedCap: 2`. Частотности Wordstat — только из CSV, иначе ранг по подсказкам.
+Спрос: `demandSuggest: true`, `demandAddPlannedCap: 2`. Частотности Wordstat — только из API/CSV, иначе ранг по показам Вебмастера и подсказкам.
+
+Секреты Actions (не в репо): `YANDEX_WEBMASTER_TOKEN`, опционально `YANDEX_WEBMASTER_HOST_ID`, `XMLRIVER_USER`, `XMLRIVER_KEY`. Инструкция: `seo-agent/raw/YANDEX-API-SETUP.md`.
 
 Платный Цех Васина (64 механики, Wordstat/XMLRiver/Топвизор) не копируем. Telegram-алерты не требуются.
 

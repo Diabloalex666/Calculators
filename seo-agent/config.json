@@ -9,6 +9,8 @@
   "tsekhWrite": true,
   "demandSuggest": true,
   "demandAddPlannedCap": 2,
+  "demandSelfEvolve": true,
+  "webmasterApi": true,
   "dailyArticleCap": 1,
   "stack": "github-pages-static"
 }
