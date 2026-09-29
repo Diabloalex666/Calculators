@@ -62,11 +62,11 @@
     "noindex": []
   },
   "health": {
-    "ok": 0,
+    "ok": 33,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 33
   },
   "advisor": {
     "verdict": "yellow",

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29T15:43:36",
+  "generated": "2026-09-29T12:45:58",
   "semantics": {
     "counts": {
       "published": 27,
@@ -15,25 +15,25 @@
   "briefs_missing": [],
   "antidup": [],
   "write": {
-    "enabled": false,
+    "enabled": true,
     "queued": [],
     "skipped": [
-      "цех-писатель выключен"
+      "дневной кап уже выбран"
     ]
   },
   "drip": {
-    "enabled": false,
+    "enabled": true,
     "published": [],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "дневной кап уже выбран"
     ]
   },
   "monitor": {
-    "ok": 0,
+    "ok": 33,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 33
   },
   "audit": {
     "orphans": [],
@@ -66,9 +66,18 @@
     "files": []
   },
   "demand": {
-    "suggest_ok": 0,
+    "suggest_ok": 22,
     "added": [],
-    "top": []
+    "top": [
+      "калькулятор зарплаты на руки",
+      "если зарплата 100000 сколько на руки",
+      "80000 на руки сколько с ндфл",
+      "когда ндфл 15 процентов в 2026",
+      "сколько вычет на детей в 2026 году по ндфл",
+      "калькулятор отпускных онлайн рассчитать",
+      "отпускные за 14 дней расчет онлайн калькулятор",
+      "отпускные при зарплате 50000"
+    ]
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
