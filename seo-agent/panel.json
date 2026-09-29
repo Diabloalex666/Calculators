@@ -1,17 +1,14 @@
 {
   "generated": "2026-09-29",
-  "verdict": "red",
-  "verdictText": "Красный.",
+  "verdict": "yellow",
+  "verdictText": "Жёлтый.",
   "reasons": [
-    "дыры в карте, живые 4xx или дубли интента"
+    "в очереди 1 planned",
+    "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
   ],
   "actions": [
     {
       "title": "пакет или фактура для следующей planned-темы",
-      "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
-    },
-    {
-      "title": "починить URL из monitor.bad",
       "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
     }
   ],
@@ -27,7 +24,7 @@
     "planned": 1,
     "reserved": 0,
     "published": 27,
-    "daysLeft": "без Wordstat"
+    "daysLeft": "Частотность Wordstat — только из CSV. Иначе ранг = подсказки Яндекса + клики консолей."
   },
   "traffic": {
     "status": "файлов нет — положи CSV в seo-agent/raw/",
@@ -65,29 +62,24 @@
     "noindex": []
   },
   "health": {
-    "ok": 32,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/avans-ot-oklada.html",
-        "status": "404"
-      }
-    ],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 33
+    "ok": 0,
+    "bad": [],
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 1 planned",
+      "не все контуры подключены: выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "missing": [
       "выгрузка GSC/Вебмастера (CSV в seo-agent/raw/)"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "пакет или фактура для следующей planned-темы",
-      "починить URL из monitor.bad"
+      "пакет или фактура для следующей planned-темы"
     ],
     "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
   }

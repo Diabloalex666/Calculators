@@ -12,10 +12,12 @@
     "status": "нет запросов в CSV",
     "top": []
   },
+  "queries": [],
   "counts": {
     "gsc": 0,
     "webmaster": 0,
     "metrika": 0,
+    "wordstat": 0,
     "unknown": 0
   }
 }

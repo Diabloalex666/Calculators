@@ -9,7 +9,10 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
       "status": "verified",
       "expires": "2027-01-01",
-      "used_by": ["otpusknye-28", "otpusknye-14"]
+      "used_by": [
+        "otpusknye-28",
+        "otpusknye-14"
+      ]
     },
     {
       "id": "avg-days-29-3",
@@ -18,7 +21,10 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_72461/",
       "status": "verified",
       "expires": "2027-01-01",
-      "used_by": ["otpusknye", "otpusknye-28"]
+      "used_by": [
+        "otpusknye",
+        "otpusknye-28"
+      ]
     },
     {
       "id": "salary-time-pay",
@@ -27,7 +33,9 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
       "status": "verified",
       "expires": "2027-01-01",
-      "used_by": ["zarplata-nepolnyy-mesyats"]
+      "used_by": [
+        "zarplata-nepolnyy-mesyats"
+      ]
     },
     {
       "id": "advance-not-fixed-50",
@@ -36,7 +44,18 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
       "status": "verified",
       "expires": "2027-01-01",
-      "used_by": ["avans-ot-oklada"]
+      "used_by": [
+        "avans-ot-oklada"
+      ]
+    },
+    {
+      "id": "final-pay-140",
+      "value": "при увольнении выплатить все причитающиеся суммы в день увольнения",
+      "law": "ст. 140 ТК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_34683/",
+      "status": "verified",
+      "expires": "2027-01-01",
+      "used_by": []
     },
     {
       "id": "ndfl-brackets-2026",
@@ -45,7 +64,9 @@
       "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/",
       "status": "missing",
       "note": "Пороги 18/20/22% не писать, пока не внесена сумма из актуальной редакции НК со датой проверки.",
-      "used_by": ["ndfl-18-20-22"]
+      "used_by": [
+        "ndfl-18-20-22"
+      ]
     }
   ]
 }

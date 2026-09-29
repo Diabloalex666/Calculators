@@ -37,6 +37,8 @@ quality_gate = load_hyphen("quality-gate")
 build_sitemap = load_hyphen("build-sitemap")
 assemble = load_hyphen("assemble")
 ingest_console = load_hyphen("ingest-console")
+demand = load_hyphen("demand")
+pack_auto = load_hyphen("pack_auto")
 
 SITE = "https://finraz.ru"
 UA = {"User-Agent": "FinPulseFactory/1.0"}
@@ -169,6 +171,12 @@ def http_status(url: str) -> str:
         return str(exc)[:80]
 
 
+def fact_record(cluster_id: str):
+    items = [f for f in facts() if cluster_id in (f.get("used_by") or [])]
+    good = [f for f in items if f.get("status") == "verified" and f.get("value")]
+    return good[0] if good else None
+
+
 def facts_ok(cluster_id: str) -> tuple[bool, str]:
     linked = [f for f in facts() if cluster_id in (f.get("used_by") or [])]
     if not linked:
@@ -263,10 +271,23 @@ def sys3_write(smap: dict) -> dict:
         result["skipped"].append("очередь уже не пуста")
         return result
     packs_dir = ROOT / "seo-agent" / "packs"
-    if not packs_dir.exists():
-        result["skipped"].append("нет папки packs")
-        return result
-    for pack_path in sorted(packs_dir.glob("*.json")):
+    packs_dir.mkdir(parents=True, exist_ok=True)
+    for c in smap.get("clusters", []):
+        if c.get("status") != "planned":
+            continue
+        rec = fact_record(c.get("id") or "")
+        if rec:
+            pack_auto.ensure(c, rec)
+    demand_rep = load_json(ROOT / "seo-agent" / "raw" / "demand.json", {})
+    rank = {x["id"]: i for i, x in enumerate(demand_rep.get("cluster_rank") or [])}
+
+    def pack_key(path: Path):
+        pack = load_json(path, {})
+        cid = pack.get("cluster_id") or path.stem
+        return rank.get(cid, 9999), path.name
+
+    pack_list = sorted(packs_dir.glob("*.json"), key=pack_key)
+    for pack_path in pack_list:
         if len(result["queued"]) >= cap:
             break
         pack = load_json(pack_path, {})
@@ -678,6 +699,7 @@ def telegram(text: str) -> None:
 def main() -> int:
     live = "--offline" not in sys.argv
     console = ingest_console.ingest()
+    demand_rep = demand.collect(live=live)
     smap = semantic_map()
     briefs = sys2_briefs(smap)
     write = sys3_write(smap)
@@ -700,6 +722,11 @@ def main() -> int:
         "audit": audit,
         "refresh": refresh,
         "console": {"connected": console.get("connected"), "files": console.get("files") or []},
+        "demand": {
+            "suggest_ok": demand_rep.get("suggest_seeds_ok"),
+            "added": demand_rep.get("added_planned") or [],
+            "top": [x.get("q") for x in (demand_rep.get("queries") or [])[:8]],
+        },
         "covers": "пропуск: обложки не генерируем",
     }
     advisor = sys10_advisor(report)
@@ -721,7 +748,7 @@ def main() -> int:
             "planned": semantics["counts"].get("planned", 0),
             "reserved": semantics["counts"].get("reserved", 0),
             "published": semantics["counts"].get("published", 0),
-            "daysLeft": "без Wordstat",
+            "daysLeft": (demand_rep.get("note") or "спрос: подсказки Яндекса"),
         },
         "traffic": console.get("traffic") or {"status": "не подключено", "hint": "CSV → seo-agent/raw/"},
         "positions": console.get("positions") or {"status": "не подключено", "hint": "GSC или Вебмастер CSV"},
@@ -740,7 +767,7 @@ def main() -> int:
         f"карта {semantics['counts']}",
         f"живые {monitor['ok']}/{monitor['checked']} 4xx={len(monitor['bad'])}",
         f"очередь {drip}",
-        f"писатель {write}",
+        f"спрос {demand_rep.get('suggest_seeds_ok')} семян, +{len(demand_rep.get('added_planned') or [])} тем",
         advisor["next_prompt"],
     ]
     text = "\n".join(lines)

@@ -17,6 +17,7 @@ IMP_HINTS = ("impressions", "показы", "показов")
 POS_HINTS = ("position", "позиция", "ср. позиция", "средняя позиция")
 CTR_HINTS = ("ctr",)
 VISIT_HINTS = ("visits", "визиты", "посетители", "sessions")
+FREQ_HINTS = ("freq", "частота", "частотность", "число запросов", "ws")
 
 
 def nrm(s: str) -> str:
@@ -74,6 +75,9 @@ def sniff(path: Path) -> list[dict]:
             item["position"] = num(raw[pi])
         if vi is not None and vi < len(raw):
             item["visits"] = num(raw[vi])
+        fi = col(headers, FREQ_HINTS)
+        if fi is not None and fi < len(raw):
+            item["freq"] = num(raw[fi])
         if item.get("query") or item.get("visits"):
             out.append(item)
     return out
@@ -87,10 +91,14 @@ def detect_kind(path: Path, rows: list[dict]) -> str:
         return "webmaster"
     if "metrika" in name or "метрика" in name:
         return "metrika"
+    if "wordstat" in name or "вордстат" in name:
+        return "wordstat"
     if rows and rows[0].get("query") and ("clicks" in rows[0] or "impressions" in rows[0]):
         return "gsc"
     if rows and rows[0].get("visits"):
         return "metrika"
+    if rows and rows[0].get("freq") and not rows[0].get("clicks"):
+        return "wordstat"
     return "unknown"
 
 
@@ -101,7 +109,7 @@ def ingest() -> dict:
         for p in RAW.iterdir()
         if p.suffix.lower() in {".csv", ".tsv"} and not p.name.startswith("_")
     )
-    buckets = {"gsc": [], "webmaster": [], "metrika": [], "unknown": []}
+    buckets = {"gsc": [], "webmaster": [], "metrika": [], "wordstat": [], "unknown": []}
     for path in files:
         rows = sniff(path)
         kind = detect_kind(path, rows)
@@ -114,6 +122,7 @@ def ingest() -> dict:
     gsc = buckets["gsc"]
     wm = buckets["webmaster"]
     met = buckets["metrika"]
+    ws = buckets["wordstat"]
     clicks = sum(x.get("clicks") or 0 for x in gsc + wm)
     imps = sum(x.get("impressions") or 0 for x in gsc + wm)
     visits = sum(x.get("visits") or 0 for x in met)
@@ -133,9 +142,10 @@ def ingest() -> dict:
             "visits": visits,
         },
         "positions": {
-            "status": "топ запросов из выгрузки" if (gsc or wm) else "нет запросов в CSV",
-            "top": top(gsc or wm, "clicks"),
+            "status": "топ запросов из выгрузки" if (gsc or wm or ws) else "нет запросов в CSV",
+            "top": top(gsc or wm, "clicks") or top(ws, "freq"),
         },
+        "queries": (gsc + wm + ws)[:250],
         "counts": {k: len(v) for k, v in buckets.items()},
     }
     OUT.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

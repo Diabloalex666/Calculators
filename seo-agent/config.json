@@ -7,6 +7,8 @@
   "publishMode": "github-actions-factory",
   "publishQueue": true,
   "tsekhWrite": true,
+  "demandSuggest": true,
+  "demandAddPlannedCap": 2,
   "dailyArticleCap": 1,
   "stack": "github-pages-static"
 }
