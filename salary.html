@@ -5,7 +5,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data: https://fonts.gstatic.com; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -26,7 +26,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
-    <link rel="stylesheet" href="css/style.css?v=14-mono" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=15-mono" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -41,21 +42,27 @@
     </script>
   </head>
   <body>
-    <div class="wrap">
-      <header>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Основная навигация">
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
-      </header>
-
+        <ul class="nav-links">
+          <li><a href="index.html#calculators">Калькуляторы</a></li>
+          <li><a href="articles/index.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrap">
       <nav class="breadcrumb" aria-label="Навигация">
         <a href="index.html">Главная</a> → <span aria-current="page">Зарплата на руки</span>
       </nav>
 
-      <section class="hero">
+      <section class="hero page-hero">
         <h1>Калькулятор зарплаты на руки</h1>
         <p>Расчёт из оклада или желаемой суммы на руки с прогрессивным НДФЛ 2026 и вычетами на детей.</p>
       </section>
 
-      <div class="panel">
+      <div class="panel calc-shell">
         <form id="salary-form">
           <div class="form-row">
             <label for="mode">Режим расчёта</label>
@@ -102,7 +109,8 @@
         </form>
 
         <div class="result">
-          <div>На руки: <strong id="salary-net">—</strong></div>
+          <div class="result-hero-label">На руки</div>
+          <div class="result-hero" id="salary-net">—</div>
           <div class="result-grid">
             <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
             <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
@@ -113,6 +121,7 @@
           </div>
         </div>
 
+        <div class="calc-extras">
         <h2 class="calc-steps-title">Пошаговый расчёт</h2>
         <div id="salary-steps"></div>
 
@@ -121,6 +130,7 @@
           20% — 20–50 млн, 22% — свыше 50 млн. Расчёт при равном доходе каждый месяц.
           Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
         </p>
+        </div>
       </div>
 
       <section class="seo-block article-block">

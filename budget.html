@@ -5,7 +5,7 @@
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data: https://fonts.gstatic.com; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
     />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,7 +25,8 @@
     <meta property="og:url" content="https://finraz.ru/budget.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=14-mono" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=15-mono" />
     <style>
       .budget-table {
         width: 100%;
@@ -64,16 +65,22 @@
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <header class="no-print">
+    <header class="site-header no-print">
+      <nav class="site-nav" aria-label="Основная навигация">
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
-      </header>
-
+        <ul class="nav-links">
+          <li><a href="index.html#calculators">Калькуляторы</a></li>
+          <li><a href="articles/index.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrap">
       <nav class="breadcrumb no-print" aria-label="Навигация">
         <a href="index.html">Главная</a> → <span aria-current="page">Бюджет</span>
       </nav>
 
-      <section class="hero">
+      <section class="hero page-hero">
         <h1>Бюджет на месяц</h1>
         <p>Заполните статьи — остаток считается сам. Данные хранятся только у вас в браузере.</p>
       </section>

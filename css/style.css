@@ -1,5 +1,4 @@
 /* FinPulse — Mono Minimal (design/mono-minimal) */
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@600;700;800&display=swap");
 :root {
   --bg: #f6f5f2;
   --surface: #ffffff;
@@ -1000,4 +999,197 @@ footer a:hover {
     border: 1px solid #ccc;
     break-inside: avoid;
   }
+}
+
+
+/* —— Polish pass v15 —— */
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.65rem 1rem;
+  z-index: 100;
+  font-size: 0.9rem;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(18, 18, 18, 0.035) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(246, 245, 242, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  margin: 0;
+  padding: 0;
+}
+
+.site-header .site-nav {
+  width: min(1080px, 90vw);
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+header.site-header {
+  padding-bottom: 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 0;
+}
+
+a.card {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+a.card .go {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.88rem;
+  margin-top: auto;
+}
+a.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  background: var(--accent-soft);
+}
+
+.card {
+  transition: background 0.2s ease;
+}
+.btn {
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.hero-layout,
+.section-head,
+.grid,
+.articles-layout {
+  animation: rise 0.55s ease both;
+}
+.grid { animation-delay: 0.06s; }
+.articles-layout { animation-delay: 0.12s; }
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero-layout,
+  .section-head,
+  .grid,
+  .articles-layout { animation: none; }
+  .card, .btn { transition: none; }
+}
+
+.panel.calc-shell {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.panel.calc-shell > form {
+  padding: 1.5rem;
+  border-right: 1px solid var(--line);
+}
+.panel.calc-shell > .result {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem;
+  background: var(--accent-soft);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.panel.calc-shell > .calc-extras {
+  grid-column: 1 / -1;
+  padding: 0 1.5rem 1.5rem;
+  border-top: 1px solid var(--line);
+}
+@media (max-width: 780px) {
+  .panel.calc-shell { grid-template-columns: 1fr; }
+  .panel.calc-shell > form { border-right: none; border-bottom: 1px solid var(--line); }
+}
+
+.result-hero {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--accent);
+}
+.result-hero-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+}
+.result strong,
+.result-row span:last-child {
+  font-variant-numeric: tabular-nums;
+}
+
+.page-hero {
+  margin: 2.25rem 0 1.5rem;
+}
+.page-hero h1 {
+  max-width: none;
+  font-size: clamp(1.7rem, 3.5vw, 2.35rem);
+}
+.page-hero p {
+  margin-bottom: 0;
+}
+
+.article-block {
+  max-width: 68ch;
+}
+.article-block.seo-block {
+  max-width: none;
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline-offset: 2px;
+}
+
+.preview-banner {
+  font-family: var(--font);
+  font-weight: 400;
 }
