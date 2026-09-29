@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-09-29",
   "note": "Цифры без источника и даты в статьи не идут. status=missing — тема ждёт, нейронка не выдумывает.",
   "items": [
     {
@@ -62,13 +62,18 @@
     },
     {
       "id": "ndfl-brackets-2026",
-      "value": null,
-      "law": "ст. 224 НК РФ",
-      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/",
-      "status": "missing",
-      "note": "Пороги 18/20/22% не писать, пока не внесена сумма из актуальной редакции НК со датой проверки.",
+      "value": "13% ≤2,4 млн; 15% >2,4–≤5 млн; 18% >5–≤20 млн; 20% >20–≤50 млн; 22% >50 млн ₽/год (совокупность баз п. 2.1 ст. 210 НК РФ, с 2025)",
+      "law": "ст. 224 НК РФ (ставки), ст. 210 п. 2.1 НК РФ (базы)",
+      "source": "https://www.nalog.gov.ru/rn77/taxation/taxes/ndfl/",
+      "source_alt": "https://www.consultant.ru/document/cons_doc_LAW_28165/",
+      "status": "verified",
+      "checked": "2026-09-29",
+      "expires": "2027-01-01",
+      "note": "Текст ФНС: 18% при сумме баз свыше 5 и не более 20 млн; 20% свыше 20 и не более 50 млн; 22% свыше 50 млн. Совпадает с js/calculators.js.",
       "used_by": [
-        "ndfl-18-20-22"
+        "ndfl-18-20-22",
+        "ndfl-15-kogda",
+        "salary"
       ]
     }
   ]

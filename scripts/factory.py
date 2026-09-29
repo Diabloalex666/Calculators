@@ -567,12 +567,70 @@ def sys10_advisor(report: dict) -> dict:
     }
 
 
+def conveyor_status() -> dict:
+    """Готовый конвейер = HTML в queue или planned с пакетом + verified-фактами."""
+    from datetime import date
+
+    queue = sorted((ROOT / "seo-agent" / "queue").glob("*.html"))
+    packs_dir = ROOT / "seo-agent" / "packs"
+    planned = [
+        c
+        for c in load_json(ROOT / "seo-agent" / "semantic-map.json", {}).get("clusters", [])
+        if c.get("status") == "planned"
+    ]
+    ready_packs: list[str] = []
+    blocked: list[dict] = []
+    for c in planned:
+        stem = Path(c["page"]).stem
+        pack = packs_dir / f"{stem}.json"
+        ok, reason = facts_ok(c.get("id") or "")
+        if pack.exists() and ok:
+            ready_packs.append(stem)
+        else:
+            blocked.append(
+                {
+                    "id": c.get("id"),
+                    "stem": stem,
+                    "has_pack": pack.exists(),
+                    "reason": reason if pack.exists() else "нет пакета в seo-agent/packs/",
+                }
+            )
+    empty = not queue and not ready_packs
+    return {
+        "updated": date.today().isoformat(),
+        "empty": empty,
+        "queue": [p.name for p in queue],
+        "ready_packs": ready_packs,
+        "planned": len(planned),
+        "blocked": blocked,
+        "message": (
+            "Конвейер пуст: нет HTML в queue и нет planned-пакетов с verified-фактами. "
+            "Нужен новый пакет или фактура — открой чат с агентом FinPulse."
+            if empty
+            else f"На конвейере: queue={len(queue)}, ready_packs={len(ready_packs)}"
+        ),
+    }
+
+
 def next_prompt(report: dict) -> str:
-    queued = sorted((ROOT / "seo-agent" / "queue").glob("*.html"))
+    status = conveyor_status()
+    if status["empty"]:
+        return (
+            "⚠️ КОНВЕЙЕР ПУСТ. Нет статей в queue и нет готовых пакетов. "
+            "Собери пакет в seo-agent/packs/ + verified в facts.json "
+            "(или допиши planned в semantic-map). Иначе дрип остановится."
+        )
+    queued = status["queue"]
     if queued:
         return (
-            f"В очереди {queued[0].name}. Завод сам прогонит гейт и зальёт "
+            f"В очереди {queued[0]}. Завод сам прогонит гейт и зальёт "
             "не больше одной статьи за сутки."
+        )
+    ready = status["ready_packs"]
+    if ready:
+        return (
+            f"Пакет {ready[0]}.html готов. Завод сам соберёт HTML, прогонит гейт "
+            "и зальёт не больше одной статьи за сутки."
         )
     planned = [
         c
@@ -586,11 +644,6 @@ def next_prompt(report: dict) -> str:
         stem = Path(c["page"]).stem
         pack = packs / f"{stem}.json"
         ok, reason = facts_ok(c.get("id") or "")
-        if pack.exists() and ok:
-            return (
-                f"Пакет {stem}.html готов. Завод сам соберёт HTML, прогонит гейт "
-                "и зальёт не больше одной статьи за сутки."
-            )
         if pack.exists() and not ok:
             return f"Пакет {stem} ждёт фактуру: {reason}."
     c = planned[0]
@@ -792,6 +845,8 @@ def main() -> int:
     }
     save_json(ROOT / "seo-agent" / "raw" / "latest.json", report)
     save_json(ROOT / "seo-agent" / "panel.json", panel)
+    convey = conveyor_status()
+    save_json(ROOT / "seo-agent" / "raw" / "conveyor-alert.json", convey)
     render_panel(panel)
     prompt_path = ROOT / "seo-agent" / "prompts" / "today.md"
     prompt_path.parent.mkdir(parents=True, exist_ok=True)
@@ -801,6 +856,7 @@ def main() -> int:
         f"карта {semantics['counts']}",
         f"живые {monitor['ok']}/{monitor['checked']} 4xx={len(monitor['bad'])}",
         f"очередь {drip}",
+        f"конвейер {'ПУСТ' if convey.get('empty') else 'ok'}: q={len(convey.get('queue') or [])} packs={len(convey.get('ready_packs') or [])}",
         f"спрос {demand_rep.get('suggest_seeds_ok')} семян, +{len(demand_rep.get('added_planned') or [])} тем",
         advisor["next_prompt"],
     ]

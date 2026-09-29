@@ -41,6 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write
     steps:
       - uses: actions/checkout@v4
         with:
@@ -58,6 +59,10 @@ jobs:
           XMLRIVER_USER: ${{ secrets.XMLRIVER_USER }}
           XMLRIVER_KEY: ${{ secrets.XMLRIVER_KEY }}
         run: python scripts/factory.py
+      - name: Alert if conveyor empty
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/conveyor-alert.py
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"

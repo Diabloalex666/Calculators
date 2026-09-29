@@ -149,6 +149,21 @@ def ingest() -> dict:
         "counts": {k: len(v) for k, v in buckets.items()},
     }
     OUT.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    # Отдельный файл для цеха спроса (demand.py читает wordstat.json)
+    if ws:
+        ws_payload = {
+            "updated": date.today().isoformat(),
+            "source": "csv-ingest",
+            "connected": True,
+            "queries": [
+                {"q": x.get("query") or "", "freq": x.get("freq") or 0, "file": x.get("file")}
+                for x in ws
+                if x.get("query")
+            ],
+        }
+        (RAW / "wordstat.json").write_text(
+            json.dumps(ws_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
     return summary
 
 

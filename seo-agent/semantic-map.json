@@ -10,12 +10,13 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор зарплаты на руки",
-        "vol": null
+        "vol": 647
       },
       "demand": {
-        "score": 1.0,
+        "score": 6470.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -95,12 +96,13 @@
       "intent": "info",
       "main": {
         "q": "когда ндфл 15 процентов 2026",
-        "vol": null
+        "vol": 436
       },
       "demand": {
-        "score": 1.0,
+        "score": 4360.0,
         "sources": [
-          "seed"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -112,12 +114,13 @@
       "intent": "info",
       "main": {
         "q": "вычет на детей ндфл сколько",
-        "vol": null
+        "vol": 507
       },
       "demand": {
-        "score": 1.0,
+        "score": 5070.0,
         "sources": [
-          "seed"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -129,12 +132,13 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор отпускных онлайн",
-        "vol": null
+        "vol": 65522
       },
       "demand": {
-        "score": 1.0,
+        "score": 655220.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -214,12 +218,13 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор больничного",
-        "vol": null
+        "vol": 14648
       },
       "demand": {
-        "score": 1.0,
+        "score": 146480.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -317,12 +322,13 @@
       "intent": "tool",
       "main": {
         "q": "ипотечный калькулятор",
-        "vol": null
+        "vol": 292364
       },
       "demand": {
-        "score": 1.0,
+        "score": 2923640.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -368,12 +374,13 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор сложного процента",
-        "vol": null
+        "vol": 38747
       },
       "demand": {
-        "score": 1.0,
+        "score": 387470.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -436,12 +443,13 @@
       "intent": "info",
       "main": {
         "q": "как посчитать зарплату за неполный месяц",
-        "vol": null
+        "vol": 49
       },
       "demand": {
-        "score": 1.0,
+        "score": 490.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -453,12 +461,13 @@
       "intent": "info",
       "main": {
         "q": "как посчитать аванс от оклада",
-        "vol": null
+        "vol": 79
       },
       "demand": {
-        "score": 1.0,
+        "score": 790.0,
         "sources": [
-          "yandex-suggest"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
@@ -470,12 +479,13 @@
       "intent": "info",
       "main": {
         "q": "ндфл 18 20 22 процента с какой суммы",
-        "vol": null
+        "vol": 13
       },
       "demand": {
-        "score": 1.0,
+        "score": 130.0,
         "sources": [
-          "seed"
+          "console",
+          "wordstat-json"
         ],
         "updated": "2026-09-29"
       }
