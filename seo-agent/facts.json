@@ -56,7 +56,8 @@
       "status": "verified",
       "expires": "2027-01-01",
       "used_by": [
-        "zarplata_pri_uvolnenii"
+        "zarplata_pri_uvolnenii",
+        "kompensaciya_otpuska_pri_uvolnenii_za_sk"
       ]
     },
     {

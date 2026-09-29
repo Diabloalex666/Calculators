@@ -1,9 +1,12 @@
 {
   "updated": "2026-09-29",
-  "connected": false,
+  "connected": true,
   "source": "webmaster-api",
   "queries": [],
-  "error": "нет YANDEX_WEBMASTER_TOKEN",
-  "user_id": null,
-  "host_id": null
+  "error": null,
+  "user_id": 1035357254,
+  "host_id": "https:finraz.ru:443",
+  "date_from": "2026-09-21",
+  "date_to": "2026-09-27",
+  "count": 0
 }

@@ -3,8 +3,8 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 3 planned",
-    "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+    "в очереди 4 planned",
+    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
     {
@@ -21,13 +21,13 @@
     ]
   },
   "topics": {
-    "planned": 3,
+    "planned": 4,
     "reserved": 0,
     "published": 27,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "файлов нет — положи CSV в seo-agent/raw/"
+    "status": "Вебмастер API: 0 запросов"
   },
   "positions": {
     "status": "спрос самообновляется",
@@ -55,7 +55,8 @@
         "freq": 0.0,
         "suggest": 10.0,
         "sources": [
-          "yandex-suggest"
+          "yandex-suggest",
+          "seed"
         ],
         "cluster": "avans-ot-oklada",
         "page": "/articles/avans-ot-oklada.html",
@@ -69,7 +70,8 @@
         "freq": 0.0,
         "suggest": 10.0,
         "sources": [
-          "yandex-suggest"
+          "yandex-suggest",
+          "seed"
         ],
         "cluster": "zarplata-nepolnyy-mesyats",
         "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
@@ -98,7 +100,8 @@
         "freq": 0.0,
         "suggest": 10.0,
         "sources": [
-          "yandex-suggest"
+          "yandex-suggest",
+          "seed"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -127,27 +130,26 @@
         "freq": 0.0,
         "suggest": 10.0,
         "sources": [
-          "yandex-suggest",
-          "seed"
+          "yandex-suggest"
         ],
         "cluster": "ndfl-15-kogda",
         "page": "/articles/ndfl-15-procentov-kogda.html",
         "status": "published"
       },
       {
-        "q": "если зарплата 100000 сколько на руки",
+        "q": "зарплата при увольнении",
         "score": 10.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 0.0,
         "suggest": 10.0,
         "sources": [
-          "yandex-suggest",
-          "seed"
+          "seed",
+          "yandex-suggest"
         ],
-        "cluster": "zarplata-100000",
-        "page": "/articles/zarplata-100000-na-ruki.html",
-        "status": "published"
+        "cluster": "zarplata_pri_uvolnenii",
+        "page": "/articles/zarplata-pri-uvolnenii.html",
+        "status": "planned"
       }
     ]
   },
@@ -186,11 +188,10 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 3 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 4 planned",
+      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",

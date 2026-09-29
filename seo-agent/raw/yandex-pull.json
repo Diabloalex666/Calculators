@@ -1,8 +1,8 @@
 {
   "updated": "2026-09-29",
   "webmaster": {
-    "connected": false,
-    "error": "нет YANDEX_WEBMASTER_TOKEN",
+    "connected": true,
+    "error": null,
     "n": 0
   },
   "wordstat": {

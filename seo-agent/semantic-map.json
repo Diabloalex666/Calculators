@@ -117,7 +117,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "yandex-suggest"
+          "seed"
         ],
         "updated": "2026-09-29"
       }
@@ -490,12 +490,10 @@
         "vol": null
       },
       "demand": {
-        "score": 10.0,
+        "score": 1.0,
         "sources": [
-          "seed",
           "yandex-suggest"
         ],
-        "added": "2026-09-29",
         "updated": "2026-09-29"
       }
     },
@@ -509,7 +507,24 @@
         "vol": null
       },
       "demand": {
-        "score": 9.0,
+        "score": 1.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "updated": "2026-09-29"
+      }
+    },
+    {
+      "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii-za-skolko-let.html",
+      "status": "planned",
+      "intent": "info",
+      "main": {
+        "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
+        "vol": null
+      },
+      "demand": {
+        "score": 8.0,
         "sources": [
           "yandex-suggest"
         ],

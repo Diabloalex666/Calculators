@@ -1,25 +1,20 @@
 {
-  "generated": "2026-09-29T12:55:00",
+  "generated": "2026-09-29T13:11:21",
   "semantics": {
     "counts": {
       "published": 27,
-      "planned": 3
+      "planned": 4
     },
     "holes": [],
-    "total": 30
+    "total": 31
   },
   "briefs": {
     "created": [
-      "zarplata-pri-uvolnenii",
-      "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+      "kompensaciya-otpuska-pri-uvolnenii-za-skolko-let"
     ],
-    "missing": [
-      "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
-    ]
+    "missing": []
   },
-  "briefs_missing": [
-    "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
-  ],
+  "briefs_missing": [],
   "antidup": [],
   "write": {
     "enabled": true,
@@ -75,8 +70,8 @@
   "yandex": {
     "updated": "2026-09-29",
     "webmaster": {
-      "connected": false,
-      "error": "нет YANDEX_WEBMASTER_TOKEN",
+      "connected": true,
+      "error": null,
       "n": 0
     },
     "wordstat": {
@@ -87,18 +82,13 @@
   },
   "demand": {
     "suggest_ok": 30,
-    "webmaster": false,
+    "webmaster": true,
     "wordstat": false,
     "added": [
       {
-        "id": "zarplata_pri_uvolnenii",
-        "q": "зарплата при увольнении",
-        "slug": "zarplata-pri-uvolnenii"
-      },
-      {
-        "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-        "q": "сумма вычета на детей в 2026 году по ндфл",
-        "slug": "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+        "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+        "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
+        "slug": "kompensaciya-otpuska-pri-uvolnenii-za-skolko-let"
       }
     ],
     "retired": [],
@@ -110,18 +100,17 @@
       "калькулятор больничного листа в 2026 году онлайн",
       "когда ндфл 15 процентов",
       "когда ндфл 15 процентов в 2026",
-      "если зарплата 100000 сколько на руки"
+      "зарплата при увольнении"
     ]
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 3 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 4 planned",
+      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",

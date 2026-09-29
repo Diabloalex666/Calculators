@@ -2,7 +2,7 @@
   "updated": "2026-09-29",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
   "suggest_seeds_ok": 30,
-  "webmaster_connected": false,
+  "webmaster_connected": true,
   "wordstat_connected": false,
   "queries": [
     {
@@ -28,7 +28,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "avans-ot-oklada",
       "page": "/articles/avans-ot-oklada.html",
@@ -42,7 +43,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "zarplata-nepolnyy-mesyats",
       "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
@@ -71,7 +73,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -100,12 +103,26 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
       "status": "published"
+    },
+    {
+      "q": "зарплата при увольнении",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
     },
     {
       "q": "если зарплата 100000 сколько на руки",
@@ -115,8 +132,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "zarplata-100000",
       "page": "/articles/zarplata-100000-na-ruki.html",
@@ -130,8 +146,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "zarplata-80000",
       "page": "/articles/zarplata-80000-na-ruki.html",
@@ -145,8 +160,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
@@ -356,7 +370,7 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении",
+      "q": "сумма вычета на детей в 2026 году по ндфл",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -366,8 +380,8 @@
         "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata_pri_uvolnenii",
-      "page": null,
+      "cluster": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
       "status": "planned"
     },
     {
@@ -407,6 +421,20 @@
       "suggest": 9.0,
       "sources": [
         "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "avans-ot-oklada",
+      "page": "/articles/avans-ot-oklada.html",
+      "status": "published"
+    },
+    {
+      "q": "как посчитать аванс от оклада за отработанные дни калькулятор",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
         "yandex-suggest"
       ],
       "cluster": "avans-ot-oklada",
@@ -458,7 +486,7 @@
       "status": "published"
     },
     {
-      "q": "80000 до вычета налогов это сколько на руки",
+      "q": "калькулятор больничного листа в 2026 году онлайн бесплатно",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -467,12 +495,41 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": "zarplata-80000",
-      "page": "/articles/zarplata-80000-na-ruki.html",
+      "cluster": "bolnichny",
+      "page": "/sick.html",
       "status": "published"
     },
     {
-      "q": "80 000 на руки сколько с ндфл",
+      "q": "зарплата при увольнении сроки выплаты",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
+    },
+    {
+      "q": "компенсация отпуска при увольнении",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
+    },
+    {
+      "q": "80000 до вычета налогов это сколько на руки",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -670,36 +727,7 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении сроки выплаты",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "компенсация отпуска при увольнении",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "сумма вычета на детей в 2026 году по ндфл",
+      "q": "сумма вычета на детей в 2026 году по ндфл с зарплаты",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -709,7 +737,7 @@
         "yandex-suggest"
       ],
       "cluster": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-      "page": null,
+      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
       "status": "planned"
     },
     {
@@ -724,20 +752,6 @@
       ],
       "cluster": "zarplata-na-ruki",
       "page": "/salary.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать аванс от оклада за отработанные дни калькулятор",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "avans-ot-oklada",
-      "page": "/articles/avans-ot-oklada.html",
       "status": "published"
     },
     {
@@ -794,6 +808,34 @@
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
+      "status": "published"
+    },
+    {
+      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
+    },
+    {
+      "q": "80 000 на руки сколько с ндфл",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-80000",
+      "page": "/articles/zarplata-80000-na-ruki.html",
       "status": "published"
     },
     {
@@ -966,7 +1008,7 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
+      "q": "предельная сумма дохода для вычета по ндфл в 2026 году на детей с зарплаты",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -975,9 +1017,23 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
+      "status": "planned"
+    },
+    {
+      "q": "калькулятор больничного листа в 2026 году онлайн расчет",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "bolnichny",
+      "page": "/sick.html",
+      "status": "published"
     },
     {
       "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
@@ -989,23 +1045,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
+      "cluster": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
       "page": null,
-      "status": "new"
-    },
-    {
-      "q": "сумма вычета на детей в 2026 году по ндфл с зарплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "status": "planned"
     },
     {
       "q": "калькулятор зарплаты на руки за вычетом ндфл и взносов",
@@ -1092,7 +1134,7 @@
       "status": "published"
     },
     {
-      "q": "вычет на ребенка сколько в месяц",
+      "q": "зарплата при увольнении калькулятор",
       "score": 7.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1101,51 +1143,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": "ndfl-vychet-deti",
-      "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "сколько вычет на ребенка в 2026 году по ндфл",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-vychet-deti",
-      "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт отпускных в 2026 калькулятор онлайн",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "отпускные за 2 недели сколько начисляют калькулятор",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-14",
-      "page": "/articles/otpusknye-14-dney.html",
-      "status": "published"
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
     }
   ],
   "ranked": [
@@ -1172,7 +1172,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "avans-ot-oklada",
       "page": "/articles/avans-ot-oklada.html",
@@ -1186,7 +1187,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "zarplata-nepolnyy-mesyats",
       "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
@@ -1215,7 +1217,8 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest"
+        "yandex-suggest",
+        "seed"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -1244,12 +1247,26 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
       "status": "published"
+    },
+    {
+      "q": "зарплата при увольнении",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
     },
     {
       "q": "если зарплата 100000 сколько на руки",
@@ -1259,8 +1276,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "zarplata-100000",
       "page": "/articles/zarplata-100000-na-ruki.html",
@@ -1274,8 +1290,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "zarplata-80000",
       "page": "/articles/zarplata-80000-na-ruki.html",
@@ -1289,8 +1304,7 @@
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "yandex-suggest",
-        "seed"
+        "yandex-suggest"
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
@@ -1500,6 +1514,21 @@
       "status": "published"
     },
     {
+      "q": "сумма вычета на детей в 2026 году по ндфл",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+      "page": "/articles/summa-vycheta-na-detei-v-2026-godu-po-ndfl.html",
+      "status": "planned"
+    },
+    {
       "q": "калькулятор зарплаты на руки за вычетом ндфл",
       "score": 9.0,
       "clicks": 0.0,
@@ -1522,6 +1551,20 @@
       "suggest": 9.0,
       "sources": [
         "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "avans-ot-oklada",
+      "page": "/articles/avans-ot-oklada.html",
+      "status": "published"
+    },
+    {
+      "q": "как посчитать аванс от оклада за отработанные дни калькулятор",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
         "yandex-suggest"
       ],
       "cluster": "avans-ot-oklada",
@@ -1573,7 +1616,7 @@
       "status": "published"
     },
     {
-      "q": "80000 до вычета налогов это сколько на руки",
+      "q": "калькулятор больничного листа в 2026 году онлайн бесплатно",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1582,12 +1625,41 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": "zarplata-80000",
-      "page": "/articles/zarplata-80000-na-ruki.html",
+      "cluster": "bolnichny",
+      "page": "/sick.html",
       "status": "published"
     },
     {
-      "q": "80 000 на руки сколько с ндфл",
+      "q": "зарплата при увольнении сроки выплаты",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
+    },
+    {
+      "q": "компенсация отпуска при увольнении",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata_pri_uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "status": "planned"
+    },
+    {
+      "q": "80000 до вычета налогов это сколько на руки",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1656,94 +1728,9 @@
       "cluster": "otpusknye-50000",
       "page": "/articles/otpusknye-pri-zarplate-50000.html",
       "status": "published"
-    },
-    {
-      "q": "как рассчитываются отпускные если работаешь меньше года",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-nepolnyy-god",
-      "page": "/articles/otpusknye-nepolnyy-god.html",
-      "status": "published"
-    },
-    {
-      "q": "как рассчитать отпускные за 28 дней",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-28",
-      "page": "/articles/otpusknye-28-dney.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный если стаж менее 5 лет",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5",
-      "page": "/articles/bolnichny-stazh-menshe-5-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный 2026 в день",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-max-2026",
-      "page": "/articles/bolnichny-maksimum-2026.html",
-      "status": "published"
-    },
-    {
-      "q": "ипотечный калькулятор онлайн",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ipoteka",
-      "page": "/mortgage.html",
-      "status": "published"
     }
   ],
   "unmatched": [
-    {
-      "q": "зарплата при увольнении",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii",
-      "page": null,
-      "status": "planned"
-    },
     {
       "q": "компенсация отпуска при увольнении в 2026 году калькулятор онлайн",
       "score": 10.0,
@@ -1751,63 +1738,6 @@
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "зарплата при увольнении сроки выплаты",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "компенсация отпуска при увольнении",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "сумма вычета на детей в 2026 году по ндфл",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-      "page": null,
-      "status": "planned"
-    },
-    {
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
       "sources": [
         "yandex-suggest"
       ],
@@ -1825,37 +1755,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
+      "cluster": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
       "page": null,
-      "status": "new"
-    },
-    {
-      "q": "сумма вычета на детей в 2026 году по ндфл с зарплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "зарплата при увольнении калькулятор",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "status": "planned"
     },
     {
       "q": "компенсация отпуска при увольнении в 2025 году калькулятор онлайн",
@@ -1864,62 +1766,6 @@
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "зарплата при увольнении по собственному желанию",
-      "score": 6.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 6.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "компенсация отпуска при увольнении калькулятор",
-      "score": 6.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 6.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "предельная сумма дохода для вычета по ндфл в 2026 году на детей с зарплаты",
-      "score": 6.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 6.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "когда приходит зарплата при увольнении",
-      "score": 5.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 5.0,
       "sources": [
         "yandex-suggest"
       ],
@@ -1942,82 +1788,12 @@
       "status": "new"
     },
     {
-      "q": "предельная сумма вычета на детей по ндфл в 2026 году до какой суммы",
-      "score": 5.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 5.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "расчетная зарплата при увольнении",
-      "score": 4.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 4.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
       "q": "компенсация отпуска при увольнении в 2026 году калькулятор",
       "score": 4.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 4.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "выплата зарплата по трудовому кодексу при увольнении",
-      "score": 3.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 3.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "компенсация отпуска при увольнении в 2026",
-      "score": 3.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 3.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
-    },
-    {
-      "q": "как выплачивается зарплата при увольнении",
-      "score": 2.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 2.0,
       "sources": [
         "yandex-suggest"
       ],
@@ -2040,7 +1816,7 @@
       "status": "new"
     },
     {
-      "q": "когда выплачивается зарплата при увольнении",
+      "q": "компенсация отпуска при увольнении за какой период выплачивается",
       "score": 1.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -2054,7 +1830,7 @@
       "status": "new"
     },
     {
-      "q": "компенсация отпуска при увольнении за какой период выплачивается",
+      "q": "расчет больничного листа в 2026 году калькулятор онлайн",
       "score": 1.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -2070,14 +1846,9 @@
   ],
   "added_planned": [
     {
-      "id": "zarplata_pri_uvolnenii",
-      "q": "зарплата при увольнении",
-      "slug": "zarplata-pri-uvolnenii"
-    },
-    {
-      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-      "q": "сумма вычета на детей в 2026 году по ндфл",
-      "slug": "summa-vycheta-na-detei-v-2026-godu-po-ndfl"
+      "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+      "q": "компенсация отпуска при увольнении за сколько лет можно вернуть",
+      "slug": "kompensaciya-otpuska-pri-uvolnenii-za-skolko-let"
     }
   ],
   "retired": [],
@@ -2104,6 +1875,10 @@
     },
     {
       "id": "ndfl-15-kogda",
+      "score": 10.0
+    },
+    {
+      "id": "zarplata_pri_uvolnenii",
       "score": 10.0
     },
     {
@@ -2171,12 +1946,12 @@
       "score": 10.0
     },
     {
-      "id": "zarplata_pri_uvolnenii",
+      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
       "score": 10.0
     },
     {
-      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
-      "score": 9.0
+      "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+      "score": 8.0
     },
     {
       "id": "zarplata-120000",
