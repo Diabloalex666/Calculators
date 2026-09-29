@@ -4,11 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Концепт · Калькулятор зарплаты на руки — FinPulse</title>
+    <title>Калькулятор зарплаты на руки — FinPulse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto+Mono:wght@500&display=swap"
       rel="stylesheet"
     />
     <style>
@@ -25,12 +25,12 @@
         --accent-press: #084833;
         --on-accent: #ffffff;
         --radius: 6px;
+        --h: 44px;
         --font: "Inter", "Segoe UI", system-ui, sans-serif;
         --mono: "Roboto Mono", ui-monospace, monospace;
       }
 
       * { box-sizing: border-box; }
-
       html { color-scheme: light; }
 
       body {
@@ -49,7 +49,7 @@
       .page {
         width: min(1040px, calc(100% - 40px));
         margin: 0 auto;
-        padding: 28px 0 72px;
+        padding: 24px 0 80px;
       }
 
       .top {
@@ -57,7 +57,7 @@
         align-items: baseline;
         justify-content: space-between;
         gap: 16px;
-        padding-bottom: 16px;
+        padding-bottom: 14px;
         border-bottom: 1px solid var(--line);
       }
 
@@ -65,51 +65,39 @@
         font-weight: 600;
         letter-spacing: -0.03em;
         text-decoration: none;
-        font-size: 15px;
       }
 
       .top-meta {
         margin: 0;
         color: var(--muted);
         font-size: 12px;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
       }
 
-      .intro {
-        padding: 36px 0 28px;
-        max-width: 36rem;
-      }
+      .intro { padding: 28px 0 22px; max-width: 36rem; }
 
       .intro h1 {
-        margin: 0 0 8px;
+        margin: 0 0 6px;
         font-size: 28px;
         font-weight: 600;
         letter-spacing: -0.03em;
         line-height: 1.15;
       }
 
-      .intro p {
-        margin: 0;
-        color: var(--muted);
-      }
+      .intro p { margin: 0; color: var(--muted); }
 
       .workspace {
         display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
-        gap: 20px;
+        grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+        gap: 28px;
         align-items: start;
       }
 
-      .panel,
-      .result,
-      .ledger {
+      .panel {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: var(--radius);
+        padding: 20px 20px 16px;
       }
-
-      .panel { padding: 20px 20px 16px; }
 
       .block-label {
         margin: 0 0 14px;
@@ -121,7 +109,6 @@
       }
 
       .field { margin-bottom: 16px; }
-
       .field[hidden] { display: none !important; }
 
       label,
@@ -136,9 +123,11 @@
       .segment {
         display: grid;
         grid-template-columns: 1fr 1fr;
+        height: var(--h);
         border: 1px solid var(--field);
         border-radius: var(--radius);
         overflow: hidden;
+        background: var(--surface);
       }
 
       .seg { position: relative; margin: 0; }
@@ -151,46 +140,33 @@
       }
 
       .seg span {
-        display: block;
-        padding: 10px 8px;
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
         font-size: 13px;
         font-weight: 500;
-        color: var(--text-2);
-        background: var(--surface);
+        color: var(--muted);
         cursor: pointer;
       }
 
       .seg + .seg span { border-left: 1px solid var(--field); }
 
       .seg:has(input:checked) span {
-        background: var(--accent);
-        color: var(--on-accent);
+        background: #f3f4f6;
+        color: var(--text);
+        font-weight: 600;
       }
 
       .seg input:focus-visible + span {
-        outline: 1px solid var(--accent);
+        outline: 1px solid var(--text);
         outline-offset: -2px;
       }
 
-      .money { position: relative; }
-
-      .money input { padding-right: 88px; }
-
-      .suffix {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--muted);
-        font-size: 13px;
-        pointer-events: none;
-      }
-
-      input[type="number"],
+      input[type="text"],
       select {
         width: 100%;
-        height: 44px;
+        height: var(--h);
         padding: 0 12px;
         border: 1px solid var(--field);
         border-radius: var(--radius);
@@ -220,17 +196,6 @@
         outline: 1px solid var(--accent);
         outline-offset: 1px;
         border-color: var(--accent);
-      }
-
-      input[type="number"]::-webkit-outer-spin-button,
-      input[type="number"]::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      input[type="number"] {
-        -moz-appearance: textfield;
-        appearance: textfield;
       }
 
       .slider-wrap { margin: -4px 0 16px; }
@@ -275,10 +240,7 @@
         border: none;
       }
 
-      input[type="range"]::-moz-range-progress {
-        height: 2px;
-        background: var(--accent);
-      }
+      input[type="range"]::-moz-range-progress { height: 2px; background: var(--accent); }
 
       input[type="range"]::-moz-range-thumb {
         width: 16px;
@@ -298,17 +260,59 @@
         font-variant-numeric: tabular-nums;
       }
 
-      .hint {
-        margin: 6px 0 0;
-        color: var(--muted);
-        font-size: 12px;
+      .hint { margin: 6px 0 0; color: var(--muted); font-size: 12px; }
+      .hint[hidden] { display: none; }
+
+      .stepper {
+        display: grid;
+        grid-template-columns: var(--h) 1fr var(--h);
+        height: var(--h);
+        border: 1px solid var(--field);
+        border-radius: var(--radius);
+        background: var(--surface);
       }
 
-      .hint[hidden] { display: none; }
+      .stepper button {
+        border: none;
+        background: transparent;
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 18px;
+        line-height: 1;
+        cursor: pointer;
+      }
+
+      .stepper button:first-child { border-right: 1px solid var(--field); }
+      .stepper button:last-child { border-left: 1px solid var(--field); }
+
+      .stepper button:disabled { color: var(--field); cursor: default; }
+
+      .stepper button:focus-visible {
+        outline: 1px solid var(--accent);
+        outline-offset: -2px;
+      }
+
+      .stepper-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .stepper-label small {
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 11px;
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
 
       .calc-submit {
         width: 100%;
-        height: 44px;
+        height: var(--h);
         margin-top: 4px;
         border: 1px solid var(--accent);
         border-radius: var(--radius);
@@ -328,11 +332,7 @@
         outline-offset: 2px;
       }
 
-      .result {
-        position: sticky;
-        top: 20px;
-        padding: 20px 22px 8px;
-      }
+      .result { position: sticky; top: 20px; padding-top: 20px; }
 
       .result-kicker {
         margin: 0;
@@ -344,22 +344,40 @@
       }
 
       .result-hero {
-        margin: 10px 0 18px;
+        margin: 8px 0 8px;
         font-family: var(--mono);
-        font-size: clamp(2rem, 4vw, 2.75rem);
-        font-weight: 600;
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        font-weight: 500;
         font-variant-numeric: tabular-nums;
         letter-spacing: -0.04em;
         line-height: 1;
-        color: var(--text);
+      }
+
+      .result-context {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .mix {
+        height: 4px;
+        margin-bottom: 8px;
+        background: var(--line);
+      }
+
+      .mix i {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: var(--text);
       }
 
       .result-row {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
+        align-items: center;
         gap: 16px;
-        padding: 11px 0;
+        min-height: var(--h);
         border-top: 1px solid var(--line);
         font-size: 14px;
       }
@@ -373,13 +391,12 @@
         text-align: right;
       }
 
-      .ledger {
-        margin-top: 20px;
-        padding: 8px 20px 12px;
-      }
+      .result-row.quiet span:last-child { color: var(--text-2); font-weight: 400; }
+
+      .ledger { margin-top: 28px; }
 
       .ledger h2 {
-        margin: 14px 0 4px;
+        margin: 0 0 4px;
         font-size: 13px;
         font-weight: 600;
       }
@@ -412,7 +429,11 @@
         font-weight: 500;
       }
 
-      .calc-steps tr:last-child td { border-bottom: none; }
+      .calc-steps tr:last-child td {
+        border-bottom: none;
+        font-weight: 500;
+        color: var(--text);
+      }
 
       .note {
         margin: 16px 0 0;
@@ -421,35 +442,46 @@
         font-size: 13px;
       }
 
-      .spec {
-        margin-top: 28px;
-        color: var(--muted);
-        font-size: 13px;
-      }
-
-      .spec summary { cursor: pointer; }
-
-      .spec dl {
-        display: grid;
-        grid-template-columns: 140px 1fr;
-        gap: 6px 16px;
-        margin: 12px 0 0;
-      }
-
-      .spec dt { color: var(--text-2); }
-
-      .spec code {
-        font-family: var(--mono);
-        font-size: 12px;
-      }
+      .dock { display: none; }
 
       @media (max-width: 800px) {
-        .page { width: min(1040px, calc(100% - 32px)); }
-        .workspace { grid-template-columns: 1fr; }
-        .result { position: static; }
+        .page { width: min(1040px, calc(100% - 32px)); padding-bottom: 96px; }
+        .workspace { grid-template-columns: 1fr; gap: 8px; }
+        .result { position: static; padding-top: 8px; }
         .intro h1 { font-size: 24px; }
-        .segment { grid-template-columns: 1fr; }
-        .seg + .seg span { border-left: none; border-top: 1px solid var(--field); }
+
+        .dock.is-hidden { display: none; }
+
+        .dock {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          position: fixed;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          min-height: 56px;
+          padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+          background: var(--surface);
+          border-top: 1px solid var(--line);
+        }
+
+        .dock span {
+          color: var(--muted);
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+
+        .dock strong {
+          font-family: var(--mono);
+          font-size: 18px;
+          font-weight: 500;
+          font-variant-numeric: tabular-nums;
+          letter-spacing: -0.03em;
+        }
       }
     </style>
   </head>
@@ -457,12 +489,12 @@
     <div class="page">
       <header class="top">
         <a class="brand" href="../index.html">FinPulse</a>
-        <p class="top-meta">Концепт · не прод</p>
+        <p class="top-meta">Черновик</p>
       </header>
 
       <section class="intro">
         <h1>Зарплата на руки</h1>
-        <p>Оклад или сумма на карту, прогрессивный НДФЛ 2026 и вычет на детей. Сумма пересчитывается сразу.</p>
+        <p>Оклад или сумма на карту. Прогрессивный НДФЛ 2026, сумма обновляется сразу.</p>
       </section>
 
       <div class="workspace">
@@ -470,7 +502,7 @@
           <p class="block-label">Параметры</p>
           <form id="salary-form">
             <div class="field">
-              <span class="field-name">Направление</span>
+              <span class="field-name">Считать</span>
               <div class="segment" role="radiogroup" aria-label="Режим расчёта">
                 <label class="seg">
                   <input type="radio" name="mode" value="gross" checked />
@@ -478,37 +510,23 @@
                 </label>
                 <label class="seg">
                   <input type="radio" name="mode" value="net" />
-                  <span>Из суммы на руки</span>
+                  <span>На руки</span>
                 </label>
               </div>
             </div>
 
             <div class="field" data-field="gross">
-              <label for="gross">Оклад до НДФЛ</label>
-              <div class="money">
-                <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" inputmode="numeric" />
-                <span class="suffix">₽ / мес</span>
-              </div>
+              <label for="gross">Оклад до НДФЛ, ₽ в месяц</label>
+              <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="120 000" />
             </div>
 
             <div class="field" data-field="net" hidden>
-              <label for="net">Сумма на руки</label>
-              <div class="money">
-                <input id="net" name="net" type="number" value="87000" min="0" step="1000" inputmode="numeric" />
-                <span class="suffix">₽ / мес</span>
-              </div>
+              <label for="net">Сумма на руки, ₽ в месяц</label>
+              <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
             </div>
 
             <div class="slider-wrap">
-              <input
-                id="amount-slider"
-                type="range"
-                min="20000"
-                max="500000"
-                step="1000"
-                value="120000"
-                aria-label="Сумма, ползунок"
-              />
+              <input id="amount-slider" type="range" min="20000" max="500000" step="1000" value="120000" aria-label="Сумма, ползунок" />
               <div class="scale"><span>20 000</span><span>500 000</span></div>
               <p class="hint" id="slider-hint" hidden>Ползунок до 500 000 ₽. Большую сумму оставьте в поле.</p>
             </div>
@@ -533,29 +551,30 @@
             </div>
 
             <div class="field">
-              <label for="children">Детей на стандартном вычете</label>
-              <select id="children" name="children">
-                <option value="0" selected>Нет</option>
-                <option value="1">1 ребёнок (1 400 ₽/мес)</option>
-                <option value="2">2 детей (2 800 ₽/мес)</option>
-                <option value="3">3 ребёнка (5 800 ₽/мес)</option>
-                <option value="4">4 ребёнка (8 800 ₽/мес)</option>
-              </select>
+              <span class="field-name" id="children-name">Дети на вычете</span>
+              <div class="stepper">
+                <button type="button" id="children-dec" aria-label="Меньше детей">−</button>
+                <span class="stepper-label" id="children-label">Нет</span>
+                <button type="button" id="children-inc" aria-label="Больше детей">+</button>
+              </div>
+              <input type="hidden" id="children" name="children" value="0" />
             </div>
 
             <button class="calc-submit" type="submit">Рассчитать</button>
           </form>
         </div>
 
-        <aside class="result" id="result" aria-live="polite">
+        <aside class="result" id="result">
           <p class="result-kicker">На руки в месяц</p>
-          <p class="result-hero" id="salary-net">—</p>
+          <p class="result-hero" id="salary-net" aria-live="polite">—</p>
+          <p class="result-context" id="salary-context"></p>
+          <div class="mix" id="mix" aria-hidden="true"><i id="mix-net"></i></div>
           <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
           <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
           <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
           <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
-          <div class="result-row"><span>Годовой доход до НДФЛ</span><span id="salary-year">—</span></div>
-          <div class="result-row"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
+          <div class="result-row quiet"><span>Год до НДФЛ</span><span id="salary-year">—</span></div>
+          <div class="result-row quiet"><span>Взносы работодателя</span><span id="salary-employer">—</span></div>
         </aside>
       </div>
 
@@ -565,24 +584,14 @@
       </section>
 
       <p class="note">
-        Прогрессивная шкала 2026: 13% до 2,4 млн ₽/год, 15% — 2,4–5 млн, 18% — 5–20 млн,
-        20% — 20–50 млн, 22% — свыше 50 млн. Расчёт при равном доходе каждый месяц.
-        Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
-        Формулы те же, что на странице зарплаты: <code>js/calculators.js</code>.
+        Шкала 2026: 13% до 2,4 млн ₽/год, 15% — 2,4–5 млн, 18% — 5–20 млн, 20% — 20–50 млн, 22% — свыше 50 млн.
+        Доход каждый месяц одинаковый. Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
       </p>
+    </div>
 
-      <details class="spec">
-        <summary>Палитра и шрифты этого концепта</summary>
-        <dl>
-          <dt>Фон</dt><dd><code>#F6F7F8</code></dd>
-          <dt>Карточки</dt><dd><code>#FFFFFF</code></dd>
-          <dt>Текст</dt><dd><code>#111111</code> / вторичный <code>#3D4450</code> / приглушённый <code>#5C6570</code></dd>
-          <dt>Линии</dt><dd><code>#E2E8F0</code>, поля <code>#D0D5DD</code>, 1px</dd>
-          <dt>Акцент</dt><dd><code>#0E6B4F</code>, наведение <code>#0A5540</code>, нажатие <code>#084833</code></dd>
-          <dt>Шрифты</dt><dd>Inter — интерфейс, Roboto Mono + tabular-nums — цифры</dd>
-          <dt>Радиус</dt><dd>6px, без теней и без градиентов на кнопке</dd>
-        </dl>
-      </details>
+    <div class="dock" aria-hidden="true">
+      <span>На руки</span>
+      <strong id="dock-net">—</strong>
     </div>
 
     <script src="../../js/common.js"></script>
@@ -593,36 +602,84 @@
         const slider = document.getElementById("amount-slider");
         const hint = document.getElementById("slider-hint");
         const result = document.getElementById("result");
+        const childrenInput = document.getElementById("children");
+        const childrenLabel = document.getElementById("children-label");
+        const dec = document.getElementById("children-dec");
+        const inc = document.getElementById("children-inc");
+        const childNames = ["Нет", "1 ребёнок", "2 детей", "3 ребёнка", "4 ребёнка"];
+
+        const formatGrouped = (value) =>
+          new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(Math.round(Number(value) || 0));
 
         const activeAmount = () => (form.mode.value === "net" ? form.net : form.gross);
 
         const paintSlider = () => {
           const min = Number(slider.min);
           const max = Number(slider.max);
-          const val = Number(slider.value);
-          const pct = ((val - min) / (max - min)) * 100;
+          const pct = ((Number(slider.value) - min) / (max - min)) * 100;
           slider.style.setProperty("--track", `linear-gradient(90deg, #0E6B4F ${pct}%, #E2E8F0 ${pct}%)`);
         };
 
         const pullFieldToSlider = () => {
-          const value = Number(activeAmount().value);
+          const value = parseNumber(activeAmount().value);
           const max = Number(slider.max);
           const min = Number(slider.min);
-          if (!Number.isFinite(value)) return;
           hint.hidden = value <= max;
-          slider.value = String(Math.min(max, Math.max(min, value)));
-          slider.setAttribute(
-            "aria-label",
-            form.mode.value === "net" ? "Сумма на руки, ползунок" : "Оклад до НДФЛ, ползунок"
-          );
+          slider.value = String(Math.min(max, Math.max(min, value || min)));
+          slider.setAttribute("aria-label", form.mode.value === "net" ? "Сумма на руки, ползунок" : "Оклад до НДФЛ, ползунок");
           paintSlider();
         };
+
+        const paintChildren = () => {
+          const count = Math.max(0, Math.min(4, parseNumber(childrenInput.value)));
+          childrenInput.value = String(count);
+          const deduction = childDeductionMonthly(count);
+          childrenLabel.innerHTML = deduction
+            ? `${childNames[count]}<small>${formatRub(deduction)} / мес</small>`
+            : childNames[0];
+          dec.disabled = count <= 0;
+          inc.disabled = count >= 4;
+        };
+
+        const bracketNote = (salary, manualRate) => {
+          if (manualRate != null) return `Фиксированная ставка ${formatPercent(manualRate)}`;
+          const year = salary.annualTaxable || 0;
+          let prev = 0;
+          let reached = NDFL_BRACKETS_2026[0];
+          for (const bracket of NDFL_BRACKETS_2026) {
+            if (year > prev) reached = bracket;
+            prev = bracket.upTo;
+          }
+          return `Ступень ${formatPercent(reached.rate)} · ${reached.label}`;
+        };
+
+        const paintExtras = () => {
+          const manualRate = form.taxMode.value === "manual" ? Number(form.rate.value) : null;
+          const children = parseNumber(childrenInput.value);
+          const gross = form.mode.value === "gross"
+            ? parseNumber(form.gross.value)
+            : grossFromNet(parseNumber(form.net.value), children, manualRate);
+          const salary = salaryFromGross(gross, children, manualRate);
+          const share = salary.gross > 0 ? Math.max(0, Math.min(100, (salary.net / salary.gross) * 100)) : 0;
+          document.getElementById("mix-net").style.width = `${share}%`;
+          document.getElementById("salary-context").textContent = bracketNote(salary, manualRate);
+          document.getElementById("dock-net").textContent = document.getElementById("salary-net").textContent;
+        };
+
+        const setChildren = (next) => {
+          childrenInput.value = String(next);
+          paintChildren();
+          childrenInput.dispatchEvent(new Event("input", { bubbles: true }));
+        };
+
+        dec.addEventListener("click", () => setChildren(parseNumber(childrenInput.value) - 1));
+        inc.addEventListener("click", () => setChildren(parseNumber(childrenInput.value) + 1));
 
         form.addEventListener(
           "input",
           (event) => {
             if (event.target === slider) {
-              activeAmount().value = slider.value;
+              activeAmount().value = formatGrouped(slider.value);
               hint.hidden = true;
               paintSlider();
             }
@@ -631,20 +688,41 @@
         );
 
         form.addEventListener("input", (event) => {
-          if (event.target === form.gross || event.target === form.net || event.target.name === "mode") {
-            pullFieldToSlider();
-          }
+          if (event.target === form.gross || event.target === form.net || event.target.name === "mode") pullFieldToSlider();
+          paintExtras();
         });
 
         form.addEventListener("change", (event) => {
           if (event.target.name === "mode") pullFieldToSlider();
+          paintExtras();
+        });
+
+        form.addEventListener("focusout", (event) => {
+          if (event.target === form.gross || event.target === form.net) {
+            event.target.value = formatGrouped(parseNumber(event.target.value));
+          }
         });
 
         form.addEventListener("submit", () => {
-          result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          const rect = result.getBoundingClientRect();
+          if (rect.top > window.innerHeight * 0.7) {
+            result.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
         });
 
+        const dock = document.querySelector(".dock");
+        const hero = document.getElementById("salary-net");
+        if ("IntersectionObserver" in window) {
+          const watcher = new IntersectionObserver(
+            ([entry]) => dock.classList.toggle("is-hidden", entry.isIntersecting),
+            { threshold: 0.5 }
+          );
+          watcher.observe(hero);
+        }
+
+        paintChildren();
         pullFieldToSlider();
+        paintExtras();
       });
     </script>
   </body>
