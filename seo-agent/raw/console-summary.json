@@ -1,9 +1,7 @@
 {
   "updated": "2026-09-29",
-  "files": [
-    "wordstat-10.csv"
-  ],
-  "connected": true,
+  "files": [],
+  "connected": false,
   "traffic": {
     "status": "файлов нет — положи CSV в seo-agent/raw/",
     "clicks": 0,
@@ -11,117 +9,15 @@
     "visits": 0
   },
   "positions": {
-    "status": "топ запросов из выгрузки",
-    "top": [
-      {
-        "file": "wordstat-10.csv",
-        "query": "ипотечный калькулятор",
-        "freq": 292364.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "калькулятор отпускных",
-        "freq": 65522.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "калькулятор сложного процента",
-        "freq": 38747.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "калькулятор больничного листа в 2026 году онлайн",
-        "freq": 14648.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "калькулятор зарплаты на руки",
-        "freq": 647.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "вычет на детей ндфл сколько",
-        "freq": 507.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "когда ндфл 15 процентов",
-        "freq": 436.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "как посчитать аванс от оклада",
-        "freq": 79.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "как посчитать зарплату за неполный месяц",
-        "freq": 49.0
-      },
-      {
-        "file": "wordstat-10.csv",
-        "query": "ндфл 18 20 22 процента",
-        "freq": 13.0
-      }
-    ]
+    "status": "нет запросов в CSV",
+    "top": []
   },
-  "queries": [
-    {
-      "file": "wordstat-10.csv",
-      "query": "калькулятор зарплаты на руки",
-      "freq": 647.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "калькулятор отпускных",
-      "freq": 65522.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "калькулятор больничного листа в 2026 году онлайн",
-      "freq": 14648.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "когда ндфл 15 процентов",
-      "freq": 436.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "ипотечный калькулятор",
-      "freq": 292364.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "калькулятор сложного процента",
-      "freq": 38747.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "как посчитать аванс от оклада",
-      "freq": 79.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "как посчитать зарплату за неполный месяц",
-      "freq": 49.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "ндфл 18 20 22 процента",
-      "freq": 13.0
-    },
-    {
-      "file": "wordstat-10.csv",
-      "query": "вычет на детей ндфл сколько",
-      "freq": 507.0
-    }
-  ],
+  "queries": [],
   "counts": {
     "gsc": 0,
     "webmaster": 0,
     "metrika": 0,
-    "wordstat": 10,
+    "wordstat": 0,
     "unknown": 0
   }
 }

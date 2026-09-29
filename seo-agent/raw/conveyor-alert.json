@@ -1,0 +1,32 @@
+{
+  "updated": "2026-09-29",
+  "empty": false,
+  "queue": [
+    "ndfl-18-20-22-procenta.html"
+  ],
+  "ready_packs": [
+    "ndfl-18-20-22-procenta"
+  ],
+  "planned": 4,
+  "blocked": [
+    {
+      "id": "zarplata_pri_uvolnenii",
+      "stem": "zarplata-pri-uvolnenii",
+      "has_pack": false,
+      "reason": "нет пакета в seo-agent/packs/"
+    },
+    {
+      "id": "summa_vycheta_na_detei_v_2026_godu_po_nd",
+      "stem": "summa-vycheta-na-detei-v-2026-godu-po-ndfl",
+      "has_pack": false,
+      "reason": "нет пакета в seo-agent/packs/"
+    },
+    {
+      "id": "kompensaciya_otpuska_pri_uvolnenii_za_sk",
+      "stem": "kompensaciya-otpuska-pri-uvolnenii-za-skolko-let",
+      "has_pack": false,
+      "reason": "нет пакета в seo-agent/packs/"
+    }
+  ],
+  "message": "На конвейере: queue=1, ready_packs=1"
+}

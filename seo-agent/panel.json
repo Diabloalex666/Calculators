@@ -8,8 +8,8 @@
   ],
   "actions": [
     {
-      "title": "пакет или фактура для следующей planned-темы",
-      "prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
+      "title": "дрип очереди: ndfl-18-20-22-procenta.html",
+      "prompt": "В очереди ndfl-18-20-22-procenta.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
@@ -33,58 +33,30 @@
     "status": "спрос самообновляется",
     "top": [
       {
-        "q": "калькулятор зарплаты на руки",
-        "score": 10.0,
+        "q": "ипотечный калькулятор",
+        "score": 2923650.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 0.0,
+        "freq": 292364.0,
         "suggest": 10.0,
         "sources": [
+          "wordstat-json",
           "seed",
           "yandex-suggest"
         ],
-        "cluster": "zarplata-na-ruki",
-        "page": "/salary.html",
-        "status": "published"
-      },
-      {
-        "q": "как посчитать аванс от оклада за отработанные дни",
-        "score": 10.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 0.0,
-        "suggest": 10.0,
-        "sources": [
-          "yandex-suggest",
-          "seed"
-        ],
-        "cluster": "avans-ot-oklada",
-        "page": "/articles/avans-ot-oklada.html",
-        "status": "published"
-      },
-      {
-        "q": "как посчитать зарплату за неполный месяц по окладу калькулятор",
-        "score": 10.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 0.0,
-        "suggest": 10.0,
-        "sources": [
-          "yandex-suggest",
-          "seed"
-        ],
-        "cluster": "zarplata-nepolnyy-mesyats",
-        "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
+        "cluster": "ipoteka",
+        "page": "/mortgage.html",
         "status": "published"
       },
       {
         "q": "калькулятор отпускных",
-        "score": 10.0,
+        "score": 655230.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 0.0,
+        "freq": 65522.0,
         "suggest": 10.0,
         "sources": [
+          "wordstat-json",
           "seed",
           "yandex-suggest"
         ],
@@ -93,13 +65,30 @@
         "status": "published"
       },
       {
-        "q": "калькулятор больничного листа в 2026 году онлайн",
-        "score": 10.0,
+        "q": "калькулятор сложного процента",
+        "score": 387480.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 0.0,
+        "freq": 38747.0,
         "suggest": 10.0,
         "sources": [
+          "wordstat-json",
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "compound",
+        "page": "/compound.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор больничного листа в 2026 году онлайн",
+        "score": 146490.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 14648.0,
+        "suggest": 10.0,
+        "sources": [
+          "wordstat-json",
           "yandex-suggest",
           "seed"
         ],
@@ -108,13 +97,45 @@
         "status": "published"
       },
       {
+        "q": "калькулятор зарплаты на руки",
+        "score": 6480.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 647.0,
+        "suggest": 10.0,
+        "sources": [
+          "wordstat-json",
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "zarplata-na-ruki",
+        "page": "/salary.html",
+        "status": "published"
+      },
+      {
+        "q": "вычет на детей ндфл сколько",
+        "score": 5071.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 507.0,
+        "suggest": 1.0,
+        "sources": [
+          "wordstat-json",
+          "seed"
+        ],
+        "cluster": "ndfl-vychet-deti",
+        "page": "/articles/ndfl-vychet-na-detey.html",
+        "status": "published"
+      },
+      {
         "q": "когда ндфл 15 процентов",
-        "score": 10.0,
+        "score": 4370.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 0.0,
+        "freq": 436.0,
         "suggest": 10.0,
         "sources": [
+          "wordstat-json",
           "seed",
           "yandex-suggest"
         ],
@@ -123,33 +144,20 @@
         "status": "published"
       },
       {
-        "q": "когда ндфл 15 процентов в 2026",
-        "score": 10.0,
+        "q": "как посчитать аванс от оклада",
+        "score": 799.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 0.0,
-        "suggest": 10.0,
+        "freq": 79.0,
+        "suggest": 9.0,
         "sources": [
-          "yandex-suggest"
-        ],
-        "cluster": "ndfl-15-kogda",
-        "page": "/articles/ndfl-15-procentov-kogda.html",
-        "status": "published"
-      },
-      {
-        "q": "зарплата при увольнении",
-        "score": 10.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 0.0,
-        "suggest": 10.0,
-        "sources": [
+          "wordstat-json",
           "seed",
           "yandex-suggest"
         ],
-        "cluster": "zarplata_pri_uvolnenii",
-        "page": "/articles/zarplata-pri-uvolnenii.html",
-        "status": "planned"
+        "cluster": "avans-ot-oklada",
+        "page": "/articles/avans-ot-oklada.html",
+        "status": "published"
       }
     ]
   },
@@ -196,8 +204,8 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "пакет или фактура для следующей planned-темы"
+      "дрип очереди: ndfl-18-20-22-procenta.html"
     ],
-    "next_prompt": "Тема ndfl-18-20-22-procenta в плане, но нет фактуры: ndfl-brackets-2026. Внеси verified-цифру в seo-agent/facts.json — завод сам не выдумает ставку."
+    "next_prompt": "В очереди ndfl-18-20-22-procenta.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
 }
