@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>Калькулятор потребительского кредита — платёж и график | FinPulse</title>
+    <meta
+      name="description"
+      content="Калькулятор потребительского кредита: аннуитет и дифференцированный платёж, досрочное погашение, график. Ставку и срок вводите сами — без выдуманных тарифов."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/credit.html" />
+    <meta property="og:title" content="Калькулятор потребительского кредита — FinPulse" />
+    <meta
+      property="og:description"
+      content="Аннуитет или дифференцированный платёж, досрочное погашение и график. Ставка — ваш ввод."
+    />
+    <meta property="og:url" content="https://finraz.ru/credit.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=15-mono" />
+  </head>
+  <body>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+          <ul class="nav-links">
+            <li><a href="index.html#calculators">Калькуляторы</a></li>
+            <li><a href="articles/index.html">Статьи</a></li>
+            <li><a href="about.html">О проекте</a></li>
+          </ul>
+        </nav>
+      </header>
+
+    <div class="wrap">
+
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Потребительский кредит</span>
+      </nav>
+
+      <section class="hero page-hero">
+        <h1>Калькулятор потребительского кредита</h1>
+        <p>Аннуитет или дифференцированный платёж, досрочное погашение и график. Ставку вводите сами.</p>
+      </section>
+
+      <div class="panel">
+        <form id="credit-form">
+          <div class="form-row">
+            <label for="amount">Сумма кредита (₽)</label>
+            <input id="amount" name="amount" type="number" value="100000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="rate">Ставка (% годовых)</label>
+            <input id="rate" name="rate" type="number" value="12" min="0" max="100" step="0.1" />
+            <p class="note">Значение в поле — пример для расчёта, не рыночная ставка банка.</p>
+          </div>
+          <div class="form-row">
+            <label for="months">Срок (месяцев)</label>
+            <input id="months" name="months" type="number" value="12" min="1" max="360" />
+          </div>
+          <div class="form-row">
+            <label for="paymentType">Схема платежа</label>
+            <select id="paymentType" name="paymentType">
+              <option value="annuity" selected>Аннуитет (равный платёж)</option>
+              <option value="diff">Дифференцированный</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="fee">Разовая комиссия (₽), необязательно</label>
+            <input id="fee" name="fee" type="number" value="0" min="0" step="100" />
+          </div>
+          <div class="form-row">
+            <label for="insurance">Страховка разово (₽), необязательно</label>
+            <input id="insurance" name="insurance" type="number" value="0" min="0" step="100" />
+            <p class="note">Комиссия и страховка учитываются только если вы сами ввели сумму. Это не официальная ПСК.</p>
+          </div>
+          <div class="form-row">
+            <label for="earlyMode">Досрочное погашение</label>
+            <select id="earlyMode" name="earlyMode">
+              <option value="off" selected>Без досрочного</option>
+              <option value="on">С досрочным платежом</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="early" hidden>
+            <label for="earlyEffect">Как применить досрочное</label>
+            <select id="earlyEffect" name="earlyEffect">
+              <option value="term" selected>Уменьшить срок</option>
+              <option value="payment">Уменьшить платёж</option>
+            </select>
+          </div>
+          <div class="form-row" data-field="early" hidden>
+            <label for="extra">Сумма досрочного платежа (₽)</label>
+            <input id="extra" name="extra" type="number" value="10000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="early" hidden>
+            <label for="extraMonth">На каком месяце (№)</label>
+            <input id="extraMonth" name="extraMonth" type="number" value="3" min="1" max="360" />
+          </div>
+        </form>
+
+        <div class="result">
+          <div>Платёж: <strong id="credit-payment">—</strong></div>
+          <div class="result-grid">
+            <div class="result-row">
+              <span>Переплата по процентам</span>
+              <span id="credit-overpay">—</span>
+            </div>
+            <div class="result-row">
+              <span>Всего выплатить</span>
+              <span id="credit-total">—</span>
+            </div>
+            <div class="result-row">
+              <span>Срок по графику</span>
+              <span id="credit-months">—</span>
+            </div>
+            <div class="result-row">
+              <span>Комиссия + страховка</span>
+              <span id="credit-fee-total">—</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="credit-steps"></div>
+
+        <h2 class="calc-steps-title">График платежей</h2>
+        <div id="credit-schedule"></div>
+
+        <p class="note">
+          Оценка для планирования бюджета. Итоговый график и условия — только в договоре банка.
+          Переплата по процентам здесь не равна официальной полной стоимости кредита (ПСК).
+        </p>
+      </div>
+
+      <section class="seo-block article-block">
+        <h2>Как считать потребительский кредит</h2>
+        <p>
+          Потребительский кредит — заём наличными или на покупку без залога жилья. В отличие от
+          <a href="mortgage.html">ипотеки</a>, срок обычно короче, а ставка и комиссии зависят от
+          банка и вашей заявки. В калькуляторе <strong>нет зашитых тарифов</strong>: ставку, срок и
+          сумму вводите сами по оферте или предварительному расчёту банка.
+        </p>
+
+        <h3>Аннуитет и дифференцированный платёж</h3>
+        <p>
+          <strong>Аннуитет</strong> — одинаковый платёж каждый месяц: сначала больше процентов,
+          потом больше тела долга.
+          <strong>Дифференцированный</strong> — тело долга делят поровну, проценты считают на
+          остаток: первые платежи выше, к концу ниже.
+        </p>
+        <p class="article-formula">
+          Аннуитет: Платёж = S × (i × (1 + i)<sup>n</sup>) ÷ ((1 + i)<sup>n</sup> − 1)
+        </p>
+        <p>
+          Где <strong>S</strong> — сумма, <strong>i</strong> — месячная ставка (годовая ÷ 12),
+          <strong>n</strong> — число месяцев. Для дифференцированного: доля долга = S ÷ n,
+          проценты = остаток × i.
+        </p>
+
+        <h3>Досрочное погашение</h3>
+        <ul>
+          <li><strong>Уменьшить срок</strong> — платёж тот же, кредит закрывается раньше.</li>
+          <li><strong>Уменьшить платёж</strong> — срок тот же, после досрочного пересчитывается платёж.</li>
+        </ul>
+
+        <h3>Комиссия и страховка</h3>
+        <p>
+          Если банк берёт разовую комиссию или страховку — введите суммы сами. По умолчанию 0.
+          Мы не подставляем «типовые» проценты страховки и не выдаём переплату за официальную ПСК.
+        </p>
+
+        <p class="article-note">
+          См. также:
+          <a href="mortgage.html">ипотечный калькулятор</a> и
+          <a href="budget.html">бюджет на месяц</a>.
+        </p>
+
+        <h2>Частые вопросы</h2>
+        <div class="faq-item">
+          <h3>Чем этот калькулятор отличается от ипотечного?</h3>
+          <p>
+            Другой интент: короткий потребительский кредит, срок в месяцах, выбор аннуитета или
+            дифференцированного платежа и явные поля под комиссию/страховку. Ипотека — отдельно.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Откуда берётся ставка?</h3>
+          <p>
+            Только из вашего ввода. Число в поле по умолчанию — пример для проверки формулы, не
+            ключевая ставка и не оферта банка.
+          </p>
+        </div>
+        <div class="faq-item">
+          <h3>Это полная стоимость кредита (ПСК)?</h3>
+          <p>
+            Нет. Здесь считается переплата по процентам по введённой ставке плюс опциональные
+            разовые суммы, которые вы указали. Официальную ПСК смотрите в договоре.
+          </p>
+        </div>
+      </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="mortgage.html">Ипотечный калькулятор</a></li>
+          <li><a href="budget.html">Бюджет на месяц</a></li>
+          <li><a href="salary.html">Зарплата на руки</a></li>
+        </ul>
+      </nav>
+
+      <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
+
+      <div class="donate no-print">
+        <strong>Поддержать проект</strong>
+        <p class="note" style="margin-top: 0.5rem">Если калькулятор помог — можно оставить чаевые.</p>
+        <a
+          class="donate-btn"
+          style="color:#fff;background:#0f766e"
+          href="https://boosty.to/alexeyvasilev/donate"
+          data-boosty-link
+          target="_blank"
+          rel="noopener"
+          >Поддержать на Boosty</a
+        >
+      </div>
+
+      <section class="feedback no-print" id="feedback">
+        <h2>Предложить калькулятор или идею</h2>
+        <p class="note">Расскажите, чего не хватает — мы читаем все сообщения.</p>
+        <form id="feedback-form" class="feedback-form" novalidate>
+          <div class="form-row">
+            <label for="feedback-message">Ваше сообщение</label>
+            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Например: калькулятор рефинансирования"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="feedback-contact">Контакт для ответа (необязательно)</label>
+            <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
+          </div>
+          <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label class="feedback-consent">
+            <input type="checkbox" name="consent" required />
+            <span>Согласен на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a></span>
+          </label>
+          <button type="submit" class="feedback-submit">Отправить</button>
+          <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="site-footer">
+        <p class="footer-nav">
+          <a href="index.html">← Все калькуляторы</a>
+          · <a href="index.html#feedback">Предложить идею</a>
+        </p>
+        <p class="footer-nav">
+          <a href="about.html">О проекте</a>
+          · <a href="privacy.html">Конфиденциальность</a>
+          · <a href="terms.html">Соглашение</a>
+        </p>
+        <p class="footer-copy">© FinPulse</p>
+      </footer>
+    </div>
+    <script src="js/common.js?v=3"></script>
+    <script src="js/calculators.js?v=4"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
+    <script src="js/feedback.js?v=3"></script>
+  </body>
+</html>

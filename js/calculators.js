@@ -399,10 +399,186 @@ function calcMortgage(form) {
   setHtml("mortgage-steps", renderStepsTable(steps));
 }
 
+function simulateCredit(options) {
+  const amount = Math.max(0, options.amount || 0);
+  const months = Math.max(1, Math.floor(options.months || 1));
+  const monthlyRate = (options.annualRate || 0) / 12;
+  const type = options.type === "diff" ? "diff" : "annuity";
+  const earlyOn = options.earlyMode === "on";
+  const extraPayment = Math.max(0, options.extraPayment || 0);
+  const extraMonth = Math.max(0, Math.floor(options.extraMonth || 0));
+  const reducePayment = options.earlyEffect === "payment";
+
+  const schedule = [];
+  let balance = amount;
+  let totalInterest = 0;
+  let totalPrincipal = 0;
+  let totalPayments = 0;
+
+  let annuityPay = type === "annuity" ? annuityPayment(amount, monthlyRate, months) : 0;
+  let diffPrincipal = type === "diff" ? amount / months : 0;
+
+  const maxMonths = months;
+
+  for (let month = 1; month <= maxMonths && balance > 0.005; month += 1) {
+    const interest = balance * monthlyRate;
+    let principalDue =
+      type === "annuity" ? Math.max(0, annuityPay - interest) : diffPrincipal;
+
+    if (principalDue > balance) principalDue = balance;
+
+    let extra = 0;
+    if (earlyOn && extraPayment > 0 && month === extraMonth) {
+      extra = Math.min(extraPayment, Math.max(0, balance - principalDue));
+    }
+
+    let principal = principalDue + extra;
+    if (principal > balance) principal = balance;
+
+    const paymentTotal = interest + principal;
+    balance = Math.max(0, balance - principal);
+    if (balance < 0.005) balance = 0;
+
+    schedule.push({
+      month,
+      payment: paymentTotal,
+      interest,
+      principal,
+      balance,
+    });
+
+    totalInterest += interest;
+    totalPrincipal += principal;
+    totalPayments += paymentTotal;
+
+    if (balance <= 0) break;
+
+    if (earlyOn && extraPayment > 0 && month === extraMonth && reducePayment) {
+      const left = months - month;
+      if (left > 0) {
+        if (type === "annuity") {
+          annuityPay = annuityPayment(balance, monthlyRate, left);
+        } else {
+          diffPrincipal = balance / left;
+        }
+      }
+    }
+  }
+
+  const firstPayment = schedule[0] ? schedule[0].payment : 0;
+  const lastPayment = schedule.length ? schedule[schedule.length - 1].payment : 0;
+  const displayPayment =
+    type === "annuity" ? annuityPayment(amount, monthlyRate, months) : firstPayment;
+
+  return {
+    type,
+    basePayment: displayPayment,
+    firstPayment,
+    lastPayment,
+    monthCount: schedule.length,
+    schedule,
+    totalInterest,
+    totalPrincipal,
+    totalPayments,
+    balance,
+  };
+}
+
+function renderCreditSchedule(schedule) {
+  if (!schedule.length) {
+    return '<p class="note">Нет данных для графика.</p>';
+  }
+
+  const rows = schedule
+    .map(
+      (row) =>
+        `<tr><td>${row.month}</td><td>${formatRubPrecise(row.payment)}</td><td>${formatRubPrecise(row.interest)}</td><td>${formatRubPrecise(row.principal)}</td><td>${formatRubPrecise(row.balance)}</td></tr>`
+    )
+    .join("");
+
+  return `<div class="table-scroll"><table class="calc-steps"><thead><tr><th>Месяц</th><th>Платёж</th><th>Проценты</th><th>Долг</th><th>Остаток</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+function calcCredit(form) {
+  const amount = parseNumber(form.amount.value);
+  const months = Math.max(1, Math.floor(parseNumber(form.months.value) || 1));
+  const annualRate = parseNumber(form.rate.value) / 100;
+  const type = form.paymentType.value === "diff" ? "diff" : "annuity";
+  const earlyMode = form.earlyMode.value === "on" ? "on" : "off";
+  const extraPayment = parseNumber(form.extra.value);
+  const extraMonth = Math.floor(parseNumber(form.extraMonth.value) || 0);
+  const earlyEffect = form.earlyEffect.value === "payment" ? "payment" : "term";
+  const fee = Math.max(0, parseNumber(form.fee.value));
+  const insurance = Math.max(0, parseNumber(form.insurance.value));
+
+  toggleFormFields(form, "early", earlyMode === "on");
+
+  const sim = simulateCredit({
+    amount,
+    months,
+    annualRate,
+    type,
+    earlyMode,
+    extraPayment,
+    extraMonth,
+    earlyEffect,
+  });
+
+  const extrasTotal = fee + insurance;
+  const grandTotal = sim.totalPayments + extrasTotal;
+  const paymentLabel =
+    type === "annuity"
+      ? formatRub(sim.basePayment)
+      : `${formatRub(sim.firstPayment)} → ${formatRub(sim.lastPayment)}`;
+
+  setText("credit-payment", paymentLabel);
+  setText("credit-overpay", formatRub(sim.totalInterest));
+  setText("credit-total", formatRub(grandTotal));
+  setText("credit-months", `${sim.monthCount} мес.`);
+  setText("credit-fee-total", extrasTotal > 0 ? formatRub(extrasTotal) : "—");
+
+  const steps = [
+    { label: "Сумма кредита", value: formatRub(amount) },
+    { label: "Ставка годовых (ваш ввод)", value: formatPercent(annualRate) },
+    { label: "Срок", value: `${months} мес.` },
+    {
+      label: "Схема",
+      value: type === "annuity" ? "Аннуитет" : "Дифференцированный",
+    },
+    {
+      label: type === "annuity" ? "Платёж в месяц" : "Платежи (первый → последний)",
+      value: paymentLabel,
+    },
+    { label: "Переплата по процентам", value: formatRub(sim.totalInterest) },
+    { label: "Выплаты банку по графику", value: formatRub(sim.totalPayments) },
+  ];
+
+  if (fee > 0) steps.push({ label: "Разовая комиссия (ваш ввод)", value: formatRub(fee) });
+  if (insurance > 0) {
+    steps.push({ label: "Страховка (ваш ввод)", value: formatRub(insurance) });
+  }
+  if (extrasTotal > 0) {
+    steps.push({ label: "Всего с комиссией и страховкой", value: formatRub(grandTotal) });
+  }
+
+  if (earlyMode === "on" && extraPayment > 0) {
+    steps.push({
+      label: "Досрочное погашение",
+      value: `${formatRub(extraPayment)} на ${extraMonth}-м мес. (${
+        earlyEffect === "payment" ? "уменьшить платёж" : "уменьшить срок"
+      })`,
+    });
+  }
+
+  setHtml("credit-steps", renderStepsTable(steps));
+  setHtml("credit-schedule", renderCreditSchedule(sim.schedule));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
   bindCalculator("compound-form", calcCompound);
   bindCalculator("sick-form", calcSick);
   bindCalculator("mortgage-form", calcMortgage);
+  bindCalculator("credit-form", calcCredit);
 });

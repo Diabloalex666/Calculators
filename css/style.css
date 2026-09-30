@@ -1612,3 +1612,9 @@ input[type="range"]::-moz-range-thumb {
   background: var(--accent-soft);
 }
 
+
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0.75rem 0 1.25rem;
+}
