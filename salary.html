@@ -81,11 +81,15 @@
             </div>
             <div class="form-row" data-field="gross">
               <label for="gross">Оклад до НДФЛ, ₽/мес</label>
-              <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" />
+              <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="120 000" />
             </div>
             <div class="form-row" data-field="net" hidden>
               <label for="net">Сумма на руки, ₽/мес</label>
-              <input id="net" name="net" type="number" value="87000" min="0" step="1000" />
+              <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
+            </div>
+            <div class="slider-wrap">
+              <input id="amount-slider" type="range" min="20000" max="500000" step="1000" value="120000" aria-label="Сумма, ползунок" />
+              <div class="scale"><span>20 000</span><span>500 000</span></div>
             </div>
             <div class="form-row">
               <label for="taxMode">НДФЛ</label>
@@ -105,14 +109,13 @@
               </select>
             </div>
             <div class="form-row">
-              <label for="children">Детей на стандартном вычете</label>
-              <select id="children" name="children">
-                <option value="0" selected>Нет</option>
-                <option value="1">1 ребёнок (1 400 ₽/мес)</option>
-                <option value="2">2 детей (2 800 ₽/мес)</option>
-                <option value="3">3 ребёнка (5 800 ₽/мес)</option>
-                <option value="4">4 ребёнка (8 800 ₽/мес)</option>
-              </select>
+              <span class="field-name" id="children-name">Детей на вычете</span>
+              <div class="stepper">
+                <button type="button" id="children-dec" aria-label="Меньше детей">−</button>
+                <span class="stepper-label" id="children-label">Нет</span>
+                <button type="button" id="children-inc" aria-label="Больше детей">+</button>
+              </div>
+              <input type="hidden" id="children" name="children" value="0" />
             </div>
             <button class="calc-submit" type="submit">Рассчитать</button>
           </form>
@@ -220,7 +223,7 @@
         <div class="faq-item">
           <h3>Учитывает ли калькулятор вычеты на детей?</h3>
           <p>
-            Да. Выберите число детей в форме — применится стандартный вычет: 1 400 ₽ на первого
+            Да. Кнопками «−» и «+» укажите число детей — применится стандартный вычет: 1 400 ₽ на первого
             и второго, 3 000 ₽ на третьего и каждого следующего. Социальные и имущественные
             вычеты не учитываются.
           </p>
@@ -228,7 +231,7 @@
         <div class="faq-item">
           <h3>Как посчитать, какой нужен оклад, чтобы получать 100 000 на руки?</h3>
           <p>
-            Выберите режим «Из суммы на руки → оклад в договоре», введите 100 000 — калькулятор покажет
+            Выберите режим «На руки», введите 100 000 — калькулятор покажет
             нужный оклад с учётом прогрессивного НДФЛ и вычетов.
           </p>
         </div>
@@ -331,10 +334,73 @@
       document.addEventListener("DOMContentLoaded", () => {
         const net = document.getElementById("salary-net");
         const dock = document.getElementById("dock-net");
-        if (!net || !dock) return;
-        const sync = () => { dock.textContent = net.textContent; };
-        new MutationObserver(sync).observe(net, { childList: true, characterData: true, subtree: true });
-        sync();
+        const form = document.getElementById("salary-form");
+        const slider = document.getElementById("amount-slider");
+        const childrenInput = document.getElementById("children");
+        const childrenLabel = document.getElementById("children-label");
+        const dec = document.getElementById("children-dec");
+        const inc = document.getElementById("children-inc");
+        const names = ["Нет", "1 ребёнок", "2 детей", "3 ребёнка", "4 ребёнка"];
+
+        const grouped = (value) =>
+          new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(Math.round(Number(value) || 0));
+
+        const activeAmount = () => (form.mode.value === "net" ? form.net : form.gross);
+
+        const pullSlider = () => {
+          const value = parseNumber(activeAmount().value);
+          const max = Number(slider.max);
+          const min = Number(slider.min);
+          slider.value = String(Math.min(max, Math.max(min, value || min)));
+          slider.setAttribute("aria-label", form.mode.value === "net" ? "Сумма на руки, ползунок" : "Оклад до НДФЛ, ползунок");
+        };
+
+        const paintChildren = () => {
+          const count = Math.max(0, Math.min(4, parseNumber(childrenInput.value)));
+          childrenInput.value = String(count);
+          childrenLabel.textContent = names[count];
+          dec.disabled = count <= 0;
+          inc.disabled = count >= 4;
+        };
+
+        const setChildren = (next) => {
+          childrenInput.value = String(next);
+          paintChildren();
+          childrenInput.dispatchEvent(new Event("input", { bubbles: true }));
+        };
+
+        if (net && dock) {
+          const sync = () => { dock.textContent = net.textContent; };
+          new MutationObserver(sync).observe(net, { childList: true, characterData: true, subtree: true });
+          sync();
+        }
+
+        form.addEventListener("input", (event) => {
+          if (event.target === slider) {
+            activeAmount().value = grouped(slider.value);
+          }
+        }, true);
+
+        form.addEventListener("input", (event) => {
+          if (event.target === form.gross || event.target === form.net || event.target.name === "mode") pullSlider();
+        });
+
+        form.addEventListener("focusout", (event) => {
+          if (event.target === form.gross || event.target === form.net) {
+            event.target.value = grouped(parseNumber(event.target.value));
+          }
+        });
+
+        form.addEventListener("submit", () => {
+          net.classList.remove("is-fresh");
+          void net.offsetWidth;
+          net.classList.add("is-fresh");
+        });
+
+        dec.addEventListener("click", () => setChildren(parseNumber(childrenInput.value) - 1));
+        inc.addEventListener("click", () => setChildren(parseNumber(childrenInput.value) + 1));
+        paintChildren();
+        pullSlider();
       });
     </script>
     <script src="js/config.js?v=4"></script>

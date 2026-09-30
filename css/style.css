@@ -74,8 +74,17 @@ header {
 }
 
 @media (max-width: 640px) {
+  .site-nav {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+
   .nav-links {
-    display: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+    font-size: 0.82rem;
   }
 }
 
@@ -1200,7 +1209,7 @@ select:focus-visible,
 textarea:focus-visible,
 button:focus-visible,
 .btn:focus-visible {
-  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -1275,7 +1284,7 @@ label {
 }
 
 .seg input:focus-visible + span {
-  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline: 2px solid var(--accent);
   outline-offset: -2px;
 }
 
@@ -1302,8 +1311,122 @@ label {
 }
 
 .calc-submit:focus-visible {
-  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+.slider-wrap { margin: -0.35rem 0 1rem; }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 16px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"]:focus { outline: none; }
+
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 2px;
+  background: var(--line);
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -6px;
+  border: none;
+  border-radius: 0;
+  background: var(--accent);
+}
+
+input[type="range"]::-moz-range-track {
+  height: 2px;
+  background: var(--line);
+  border: none;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: none;
+  border-radius: 0;
+  background: var(--accent);
+}
+
+.scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.field-name {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: var(--control-h) 1fr var(--control-h);
+  height: var(--control-h);
+  border: 1px solid var(--field);
+  background: var(--surface);
+}
+
+.stepper button {
+  border: none;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.stepper button:disabled {
+  color: var(--muted);
+  cursor: default;
+}
+
+.stepper-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--field);
+  border-right: 1px solid var(--field);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+#gross,
+#net {
+  font-variant-numeric: tabular-nums;
+}
+
+.result-hero.is-fresh {
+  animation: fresh 0.4s ease;
+}
+
+@keyframes fresh {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .result-hero.is-fresh { animation: none; }
 }
 
 .calc-workspace {
