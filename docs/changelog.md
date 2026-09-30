@@ -1,5 +1,6 @@
 # Журнал решений
 
+- 2026-09-30 — У отпускных и соседних страниц колонка снова 1080px: в разметке класс `wrap` был с лишними кавычками и ширина не применялась.
 - 2026-09-30 — На сайт выкатили выбранный макет: воздух, одна кнопка, расчёт зарплаты на виду. Ветка `beta-site-design` влита в `main`.
 - 2026-09-29 — Fix Pages leak: удалён `.nojekyll` (из‑за него exclude не работал), whitelist Actions deploy, Worker rate-limit только по CF-Connecting-IP.
 - 2026-09-29 — Security hardening: CSP/referrer meta, Worker rate-limit+CORS, `_config.yml` exclude seo-agent/scripts/worker с Pages, docs/SECURITY.md.
