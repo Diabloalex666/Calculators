@@ -27,7 +27,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=15-mono" />
+    <link rel="stylesheet" href="css/style.css?v=16-mono" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -62,76 +62,84 @@
         <p>Расчёт из оклада или желаемой суммы на руки с прогрессивным НДФЛ 2026 и вычетами на детей.</p>
       </section>
 
-      <div class="panel calc-shell">
-        <form id="salary-form">
-          <div class="form-row">
-            <label for="mode">Режим расчёта</label>
-            <select id="mode" name="mode">
-              <option value="gross" selected>Из оклада в договоре → на руки</option>
-              <option value="net">Из суммы на руки → оклад в договоре</option>
-            </select>
-          </div>
-          <div class="form-row" data-field="gross">
-            <label for="gross">Зарплата до НДФЛ (₽/мес)</label>
-            <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" />
-          </div>
-          <div class="form-row" data-field="net" hidden>
-            <label for="net">Желаемая сумма на руки (₽/мес)</label>
-            <input id="net" name="net" type="number" value="87000" min="0" step="1000" />
-          </div>
-          <div class="form-row">
-            <label for="taxMode">НДФЛ</label>
-            <select id="taxMode" name="taxMode">
-              <option value="auto" selected>Авто — прогрессивная шкала 2026</option>
-              <option value="manual">Фиксированная ставка</option>
-            </select>
-          </div>
-          <div class="form-row" data-field="manual-rate" hidden>
-            <label for="rate">Ставка НДФЛ</label>
-            <select id="rate" name="rate">
-              <option value="0.13" selected>13%</option>
-              <option value="0.15">15%</option>
-              <option value="0.18">18%</option>
-              <option value="0.2">20%</option>
-              <option value="0.22">22%</option>
-            </select>
-          </div>
-          <div class="form-row">
-            <label for="children">Детей на стандартном вычете</label>
-            <select id="children" name="children">
-              <option value="0" selected>Нет</option>
-              <option value="1">1 ребёнок (1 400 ₽/мес)</option>
-              <option value="2">2 детей (2 800 ₽/мес)</option>
-              <option value="3">3 ребёнка (5 800 ₽/мес)</option>
-              <option value="4">4 ребёнка (8 800 ₽/мес)</option>
-            </select>
-          </div>
-        </form>
-
-        <div class="result">
-          <div class="result-hero-label">На руки</div>
-          <div class="result-hero" id="salary-net">—</div>
-          <div class="result-grid">
-            <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
-            <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
-            <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
-            <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
-            <div class="result-row"><span>Годовой доход до НДФЛ</span><span id="salary-year">—</span></div>
-            <div class="result-row"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
-          </div>
+      <div class="calc-workspace">
+        <div class="panel calc-params">
+          <p class="block-label">Параметры</p>
+          <form id="salary-form">
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom:0.45rem">Считать</span>
+              <div class="segment" role="radiogroup" aria-label="Режим расчёта">
+                <label class="seg">
+                  <input type="radio" name="mode" value="gross" checked />
+                  <span>Из оклада</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="mode" value="net" />
+                  <span>На руки</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row" data-field="gross">
+              <label for="gross">Оклад до НДФЛ, ₽/мес</label>
+              <input id="gross" name="gross" type="number" value="120000" min="0" step="1000" />
+            </div>
+            <div class="form-row" data-field="net" hidden>
+              <label for="net">Сумма на руки, ₽/мес</label>
+              <input id="net" name="net" type="number" value="87000" min="0" step="1000" />
+            </div>
+            <div class="form-row">
+              <label for="taxMode">НДФЛ</label>
+              <select id="taxMode" name="taxMode">
+                <option value="auto" selected>Авто — прогрессивная шкала 2026</option>
+                <option value="manual">Фиксированная ставка</option>
+              </select>
+            </div>
+            <div class="form-row" data-field="manual-rate" hidden>
+              <label for="rate">Ставка НДФЛ</label>
+              <select id="rate" name="rate">
+                <option value="0.13" selected>13%</option>
+                <option value="0.15">15%</option>
+                <option value="0.18">18%</option>
+                <option value="0.2">20%</option>
+                <option value="0.22">22%</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="children">Детей на стандартном вычете</label>
+              <select id="children" name="children">
+                <option value="0" selected>Нет</option>
+                <option value="1">1 ребёнок (1 400 ₽/мес)</option>
+                <option value="2">2 детей (2 800 ₽/мес)</option>
+                <option value="3">3 ребёнка (5 800 ₽/мес)</option>
+                <option value="4">4 ребёнка (8 800 ₽/мес)</option>
+              </select>
+            </div>
+            <button class="calc-submit" type="submit">Рассчитать</button>
+          </form>
         </div>
 
-        <div class="calc-extras">
+        <aside class="result result-panel" id="result">
+          <p class="result-kicker">На руки в месяц</p>
+          <p class="result-hero" id="salary-net" aria-live="polite">—</p>
+          <p class="result-context">после НДФЛ · справочный расчёт</p>
+          <div class="result-row"><span>Оклад до НДФЛ</span><span id="salary-gross">—</span></div>
+          <div class="result-row"><span>НДФЛ в месяц</span><span id="salary-tax">—</span></div>
+          <div class="result-row"><span>Эффективная ставка</span><span id="salary-rate">—</span></div>
+          <div class="result-row"><span>Вычет на детей</span><span id="salary-deduction">—</span></div>
+          <div class="result-row quiet"><span>Год до НДФЛ</span><span id="salary-year">—</span></div>
+          <div class="result-row quiet"><span>Взносы работодателя (~30%)</span><span id="salary-employer">—</span></div>
+        </aside>
+      </div>
+
+      <section class="calc-ledger">
         <h2 class="calc-steps-title">Пошаговый расчёт</h2>
         <div id="salary-steps"></div>
-
         <p class="note">
           Прогрессивная шкала 2026: 13% до 2,4 млн ₽/год, 15% — 2,4–5 млн, 18% — 5–20 млн,
           20% — 20–50 млн, 22% — свыше 50 млн. Расчёт при равном доходе каждый месяц.
           Без социальных и имущественных вычетов, районных коэффициентов и северных надбавок.
         </p>
-        </div>
-      </div>
+      </section>
 
       <section class="seo-block article-block">
         <h2>Как посчитать зарплату на руки в 2026</h2>
@@ -315,6 +323,20 @@
     </div>
     <script src="js/common.js?v=3"></script>
     <script src="js/calculators.js?v=4"></script>
+    <div class="dock no-print" aria-live="polite">
+      <span>На руки</span>
+      <strong id="dock-net">—</strong>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const net = document.getElementById("salary-net");
+        const dock = document.getElementById("dock-net");
+        if (!net || !dock) return;
+        const sync = () => { dock.textContent = net.textContent; };
+        new MutationObserver(sync).observe(net, { childList: true, characterData: true, subtree: true });
+        sync();
+      });
+    </script>
     <script src="js/config.js?v=4"></script>
     <script src="js/analytics.js?v=4"></script>
     <script src="js/seo.js?v=4"></script>

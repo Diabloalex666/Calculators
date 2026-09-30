@@ -6,6 +6,8 @@
   --text: #121212;
   --muted: #6a6a66;
   --line: #e2e1dc;
+  --field: #c5c4be;
+  --control-h: 44px;
   --accent: #1f3d36;
   --accent-soft: #e8efec;
   --accent-2: #163029;
@@ -344,13 +346,26 @@ input:not([type="checkbox"]):not([type="radio"]),
 select,
 textarea {
   width: 100%;
-  padding: 0.75rem 0.9rem;
+  min-height: var(--control-h);
+  padding: 0 0.9rem;
   border-radius: 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--field);
   background: var(--surface);
   color: var(--text);
   font-size: 1rem;
   font-family: var(--font);
+  font-variant-numeric: tabular-nums;
+}
+
+textarea {
+  padding: 0.75rem 0.9rem;
+  min-height: 110px;
+}
+
+input[type="number"] {
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
 }
 
 input[type="checkbox"],
@@ -1193,3 +1208,261 @@ button:focus-visible,
   font-family: var(--font);
   font-weight: 400;
 }
+
+
+/* —— Calc UX pass (from utility lessons, Mono voice) —— */
+label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.block-label {
+  margin: 0 0 1rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: var(--control-h);
+  border: 1px solid var(--field);
+  background: var(--surface);
+}
+
+.seg {
+  position: relative;
+  margin: 0;
+}
+
+.seg input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.seg span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.seg + .seg span {
+  border-left: 1px solid var(--field);
+}
+
+.seg:has(input:checked) span {
+  background: var(--accent-soft);
+  color: var(--text);
+  font-weight: 600;
+}
+
+.seg input:focus-visible + span {
+  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline-offset: -2px;
+}
+
+.calc-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--control-h);
+  margin-top: 0.35rem;
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.calc-submit:hover {
+  background: var(--accent-2);
+}
+
+.calc-submit:focus-visible {
+  outline: 2px solid rgba(31, 61, 54, 0.45);
+  outline-offset: 2px;
+}
+
+.calc-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+  gap: 1.75rem;
+  align-items: start;
+  margin-bottom: 2rem;
+}
+
+.calc-params {
+  margin-bottom: 0;
+}
+
+.result-panel {
+  position: sticky;
+  top: 4.5rem;
+  margin: 0;
+  padding: 1.35rem 1.4rem 1.1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.result-kicker {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.result-panel .result-hero {
+  margin: 0.55rem 0 0.4rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.result-context {
+  margin: 0 0 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.result-panel .result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  min-height: 2.75rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+.result-panel .result-row span:first-child {
+  color: var(--muted);
+}
+
+.result-panel .result-row span:last-child {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  text-align: right;
+}
+
+.result-panel .result-row.quiet span:last-child {
+  font-weight: 500;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.calc-ledger {
+  margin: 0 0 2rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.calc-ledger h2,
+.calc-steps-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.dock {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  .calc-workspace {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .result-panel {
+    position: static;
+  }
+
+  .dock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 45;
+    min-height: 56px;
+    padding: 0.65rem 1rem calc(0.65rem + env(safe-area-inset-bottom));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+
+  .dock span {
+    color: var(--muted);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .dock strong {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  body {
+    padding-bottom: 4.5rem;
+  }
+}
+
+@media print {
+  .dock { display: none !important; }
+}
+
+/* Homepage: one clear primary CTA */
+.cta-row .btn-ghost {
+  border-color: transparent;
+  color: var(--muted);
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.cta-row .btn-ghost:hover {
+  color: var(--text);
+  border-color: transparent;
+}
+
+.card.card-featured {
+  background: var(--accent-soft);
+}
+
