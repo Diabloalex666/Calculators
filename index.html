@@ -25,7 +25,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
-    <link rel="stylesheet" href="css/style.css?v=13" />
+<link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=16-mono" />
     <link rel="canonical" href="https://finraz.ru/" />
     <script type="application/ld+json">
       {
@@ -44,67 +45,139 @@
     </script>
   </head>
   <body>
-    <div class="wrap">
-      <header>
+    <a class="skip-link" href="#calculators">К калькуляторам</a>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Основная навигация">
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
-      </header>
+        <ul class="nav-links">
+          <li><a href="#calculators">Калькуляторы</a></li>
+          <li><a href="articles/index.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrap">
 
       <section class="hero">
-        <h1>Калькуляторы зарплаты, отпускных и ипотеки онлайн</h1>
-        <p>
-          Бесплатные финансовые калькуляторы на 2026 год: зарплата на руки, отпускные,
-          больничный, ипотека, накопления и бюджет. Без регистрации, в браузере.
-        </p>
+        <div class="hero-layout">
+          <div>
+            <p class="hero-eyebrow">FinPulse · бесплатно · 2026</p>
+            <h1>Калькуляторы зарплаты, отпускных и ипотеки</h1>
+            <p>
+              Считайте деньги без шума: НДФЛ, отпускные, больничный, ипотека и накопления —
+              в браузере, без регистрации. По правилам РФ.
+            </p>
+            <div class="cta-row">
+              <a class="btn" href="salary.html">Рассчитать зарплату</a>
+              <a class="btn btn-ghost" href="#calculators">Все калькуляторы</a>
+            </div>
+          </div>
+          <aside class="hero-aside" aria-label="Кратко о сервисе">
+            <div class="stat">
+              <strong>6</strong>
+              <span>инструментов</span>
+            </div>
+            <div class="stat">
+              <strong>0 ₽</strong>
+              <span>без подписок</span>
+            </div>
+            <div class="stat">
+              <strong>Локально</strong>
+              <span>данные не уходят на сервер</span>
+            </div>
+          </aside>
+        </div>
       </section>
 
-      <div class="grid">
-        <article class="card">
-          <h2>Зарплата на руки</h2>
-          <p>Прогрессивный НДФЛ 2026, расчёт из оклада и «на руки», вычеты на детей.</p>
-          <a href="salary.html">Как посчитать зарплату на руки →</a>
-        </article>
-        <article class="card">
-          <h2>Отпускные</h2>
-          <p>Расчёт по стажу, НДФЛ и сумме на руки.</p>
-          <a href="vacation.html">Как посчитать отпускные в 2026 →</a>
-        </article>
-        <article class="card">
-          <h2>Больничный</h2>
-          <p>Пособие с лимитами СФР 2026 и стажем.</p>
-          <a href="sick.html">Калькулятор больничного онлайн →</a>
-        </article>
-        <article class="card">
-          <h2>Ипотека</h2>
-          <p>Платёж, переплата и досрочное погашение.</p>
-          <a href="mortgage.html">Ипотечный калькулятор онлайн →</a>
-        </article>
-        <article class="card">
-          <h2>Сложный процент</h2>
-          <p>Накопления при ежемесячных пополнениях.</p>
-          <a href="compound.html">Калькулятор накоплений →</a>
-        </article>
-        <article class="card">
-          <h2>Бюджет на месяц</h2>
-          <p>Учёт доходов и расходов, печать в PDF.</p>
-          <a href="budget.html">Бюджет на месяц →</a>
-        </article>
+      <div class="section-head" id="calculators">
+        <h2>Калькуляторы</h2>
+        <a href="articles/index.html">Статьи и разборы →</a>
       </div>
 
-      <section class="articles-preview panel">
-        <h2>Статьи и инструкции</h2>
-        <p class="note" style="margin-top:0">
-          Пошаговые расчёты с примерами — для поиска ответов на конкретные вопросы.
-        </p>
-        <ul class="articles-list">
-          <li><a href="articles/bolnichny-stazh-menshe-5-let.html">Больничный при стаже менее 5 лет</a></li>
-          <li><a href="articles/zarplata-100000-na-ruki.html">Как получать 100 000 ₽ на руки</a></li>
-          <li><a href="articles/otpusknye-28-dney.html">Отпускные за 28 дней</a></li>
-          <li><a href="articles/otpusknye-14-dney.html">Отпускные за 14 дней</a></li>
-          <li><a href="articles/ndfl-15-procentov-kogda.html">Когда НДФЛ 15% в 2026</a></li>
-          <li><a href="articles/ipoteka-dosrochnoe-pogashenie.html">Досрочное погашение ипотеки</a></li>
+            <div class="grid">
+        <a class="card card-featured" href="salary.html">
+          <span class="card-num">01</span>
+          <h2>Зарплата на руки</h2>
+          <p>Прогрессивный НДФЛ 2026, расчёт из оклада и «на руки», вычеты на детей.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+        <a class="card" href="vacation.html">
+          <span class="card-num">02</span>
+          <h2>Отпускные</h2>
+          <p>Расчёт по среднему заработку, НДФЛ и сумме на руки.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+        <a class="card" href="sick.html">
+          <span class="card-num">03</span>
+          <h2>Больничный</h2>
+          <p>Пособие с лимитами СФР 2026 и стажем.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+        <a class="card" href="mortgage.html">
+          <span class="card-num">04</span>
+          <h2>Ипотека</h2>
+          <p>Платёж, переплата и досрочное погашение.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+        <a class="card" href="compound.html">
+          <span class="card-num">05</span>
+          <h2>Сложный процент</h2>
+          <p>Накопления при ежемесячных пополнениях.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+        <a class="card" href="budget.html">
+          <span class="card-num">06</span>
+          <h2>Бюджет на месяц</h2>
+          <p>Учёт доходов и расходов, печать в PDF.</p>
+          <span class="go">Рассчитать →</span>
+        </a>
+      </div>
+
+      <section class="articles-layout">
+        <div class="articles-label">
+          <h2>Статьи</h2>
+          <p>Короткие разборы с примерами под конкретный запрос.</p>
+        </div>
+        <ul class="article-rows">
+          <li>
+            <a href="articles/ndfl-15-procentov-kogda.html">
+              <span>Когда применяется НДФЛ 15% в 2026</span>
+              <span class="tag">НДФЛ</span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/zarplata-100000-na-ruki.html">
+              <span>Как получать 100 000 ₽ на руки</span>
+              <span class="tag">Зарплата</span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/otpusknye-28-dney.html">
+              <span>Отпускные за 28 дней — пошаговый расчёт</span>
+              <span class="tag">Отпуск</span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/ipoteka-dosrochnoe-pogashenie.html">
+              <span>Досрочное погашение ипотеки</span>
+              <span class="tag">Ипотека</span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/bolnichny-stazh-menshe-5-let.html">
+              <span>Больничный при стаже менее 5 лет</span>
+              <span class="tag">Больничный</span>
+            </a>
+          </li>
+          <li>
+            <a href="articles/otpusknye-14-dney.html">
+              <span>Отпускные за 14 дней</span>
+              <span class="tag">Отпуск</span>
+            </a>
+          </li>
         </ul>
-        <p style="margin-top:1rem"><a href="articles/index.html">Все статьи →</a></p>
       </section>
+      <p style="margin:-1.5rem 0 2.5rem"><a href="articles/index.html">Все статьи →</a></p>
 
       <div class="ad-slot no-print" data-rsya-slot aria-hidden="true"></div>
 
@@ -113,7 +186,6 @@
         <p class="note" style="margin-top: 0.5rem">Если калькулятор помог — можно оставить чаевые.</p>
         <a
           class="donate-btn"
-          style="color:#fff;background:#0f766e"
           href="https://boosty.to/alexeyvasilev/donate"
           data-boosty-link
           target="_blank"

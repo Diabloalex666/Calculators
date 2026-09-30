@@ -25,7 +25,8 @@
     <meta property="og:url" content="https://finraz.ru/budget.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
-    <link rel="stylesheet" href="css/style.css?v=9" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=15-mono" />
     <style>
       .budget-table {
         width: 100%;
@@ -64,16 +65,22 @@
     </style>
   </head>
   <body>
-    <div class="wrap">
-      <header class="no-print">
+    <header class="site-header no-print">
+      <nav class="site-nav" aria-label="Основная навигация">
         <a class="logo" href="index.html">Fin<span>Pulse</span></a>
-      </header>
-
+        <ul class="nav-links">
+          <li><a href="index.html#calculators">Калькуляторы</a></li>
+          <li><a href="articles/index.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrap">
       <nav class="breadcrumb no-print" aria-label="Навигация">
         <a href="index.html">Главная</a> → <span aria-current="page">Бюджет</span>
       </nav>
 
-      <section class="hero">
+      <section class="hero page-hero">
         <h1>Бюджет на месяц</h1>
         <p>Заполните статьи — остаток считается сам. Данные хранятся только у вас в браузере.</p>
       </section>

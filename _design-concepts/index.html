@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>FinPulse · UI-концепты на согласование</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #111110;
+      --ink: #F2F1EC;
+      --muted: #9A9890;
+      --line: #2A2926;
+      --a: #1F3D36;
+      --b: #3F6F6A;
+      --c: #6F7D3E;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "IBM Plex Sans", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      padding: 3rem 6vw 5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    header { max-width: 720px; margin-bottom: 3rem; }
+    .eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    header p { color: var(--muted); max-width: 52ch; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      border: 1px solid var(--line);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 320px;
+      text-decoration: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .card:hover { border-color: #555; background: #181816; }
+    .swatch {
+      display: flex;
+      height: 36px;
+      margin-bottom: 1.25rem;
+      border: 1px solid var(--line);
+    }
+    .swatch i { flex: 1; display: block; }
+    .tag {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    .card h2 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.6rem;
+    }
+    .card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: auto;
+      padding-bottom: 1.25rem;
+    }
+    .card .open {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+    .card.a .open { color: #7EB5A8; }
+    .card.b .open { color: #8BB5B0; }
+    .card.c .open { color: #A8B86A; }
+
+    .specs {
+      max-width: 900px;
+      border-top: 1px solid var(--line);
+      padding-top: 2.5rem;
+    }
+    .specs h2 {
+      font-family: "Syne", sans-serif;
+      font-size: 1.1rem;
+      margin-bottom: 1.25rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.75rem 0.5rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th { color: var(--muted); font-weight: 500; width: 22%; }
+    code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.82em;
+      background: #1C1C1A;
+      padding: 0.1em 0.35em;
+    }
+    .note {
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+      max-width: 60ch;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="eyebrow">FinPulse · UI review · не для индексации</p>
+    <h1>Три концепта главной finraz.ru</h1>
+    <p>
+      Откройте каждый вариант в новой вкладке. После выбора одного направления
+      вынесем его в отдельную git-ветку с рабочим превью (не в main).
+    </p>
+  </header>
+
+  <div class="grid">
+    <a class="card a" href="a-mono/index.html" target="_blank" rel="noopener">
+      <div class="swatch">
+        <i style="background:#F6F5F2"></i>
+        <i style="background:#121212"></i>
+        <i style="background:#6A6A66"></i>
+        <i style="background:#1F3D36"></i>
+      </div>
+      <div class="tag">A · Minimalism</div>
+      <h2>Mono Minimal</h2>
+      <p>Глубокий монохром, воздух, тонкие линии. Эстетика Stripe / Apple Notes — спокойный инструмент.</p>
+      <span class="open">Открыть прототип →</span>
+    </a>
+
+    <a class="card b" href="b-pastel/index.html" target="_blank" rel="noopener">
+      <div class="swatch">
+        <i style="background:#EEF1F4"></i>
+        <i style="background:#1A2330"></i>
+        <i style="background:#E8DFE6"></i>
+        <i style="background:#3F6F6A"></i>
+      </div>
+      <div class="tag">B · Premium</div>
+      <h2>Soft Premium</h2>
+      <p>Холодная пастель, мягкий serif в бренде, центрированный hero. Ощущение «тихого» финансового сервиса.</p>
+      <span class="open">Открыть прототип →</span>
+    </a>
+
+    <a class="card c" href="c-earth/index.html" target="_blank" rel="noopener">
+      <div class="swatch">
+        <i style="background:#D9CFC0"></i>
+        <i style="background:#1C1612"></i>
+        <i style="background:#C4B5A0"></i>
+        <i style="background:#6F7D3E"></i>
+      </div>
+      <div class="tag">C · Brutalism</div>
+      <h2>Earth Brutal</h2>
+      <p>Земляные тона, жирные рамки, нулевой радиус, громкая типографика. Редакционный характер.</p>
+      <span class="open">Открыть прототип →</span>
+    </a>
+  </div>
+
+  <section class="specs">
+    <h2>Сводка палитр и шрифтов</h2>
+    <table>
+      <tr>
+        <th></th>
+        <th>A · Mono</th>
+        <th>B · Pastel</th>
+        <th>C · Earth</th>
+      </tr>
+      <tr>
+        <th>База</th>
+        <td><code>#F6F5F2</code> / <code>#121212</code></td>
+        <td><code>#EEF1F4</code> / <code>#1A2330</code></td>
+        <td><code>#D9CFC0</code> / <code>#1C1612</code></td>
+      </tr>
+      <tr>
+        <th>Muted / line</th>
+        <td><code>#6A6A66</code> / <code>#E2E1DC</code></td>
+        <td><code>#6E7A89</code> / <code>#D5DCE4</code></td>
+        <td><code>#5C534A</code> / ink 3px</td>
+      </tr>
+      <tr>
+        <th>Акцент</th>
+        <td><code>#1F3D36</code> лесной</td>
+        <td><code>#3F6F6A</code> шалфей</td>
+        <td><code>#6F7D3E</code> олива</td>
+      </tr>
+      <tr>
+        <th>Шрифты</th>
+        <td>Syne + IBM Plex Sans</td>
+        <td>Newsreader + Figtree</td>
+        <td>Schibsted Grotesk + IBM Plex Mono</td>
+      </tr>
+      <tr>
+        <th>Компоновка</th>
+        <td>Сетка с hairline-бордерами, stats справа</td>
+        <td>Центр-hero, band без теней, soft strip</td>
+        <td>Толстая рамка, асимметрия, uppercase</td>
+      </tr>
+    </table>
+    <p class="note">
+      Общая логика у всех трёх: бренд → один hero-месседж → 6 калькуляторов → статьи → футер.
+      Без неоновых градиентов, без карточек с тенями, без фиолетового.
+      Прототипы лежат в <code>_design-concepts/</code> и пока не затрагивают прод.
+    </p>
+  </section>
+</body>
+</html>

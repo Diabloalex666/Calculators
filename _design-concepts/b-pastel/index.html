@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Концепт B — Soft Premium · FinPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* Холодная пастель — без крема/терракоты */
+      --bg: #EEF1F4;
+      --bg-wash: #E4E9EE;
+      --surface: #F7F9FB;
+      --ink: #1A2330;
+      --muted: #6E7A89;
+      --line: #D5DCE4;
+      --accent: #3F6F6A; /* приглушённый шалфей */
+      --accent-soft: #D9E6E3;
+      --blush: #E8DFE6; /* едва заметный холодный розовый блок */
+      --font-display: "Newsreader", Georgia, serif;
+      --font-body: "Figtree", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      font-size: 16.5px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* Мягкий вертикальный градиент фона — не неон */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(180deg, #E8EDF2 0%, var(--bg) 28%, var(--bg) 100%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .page {
+      width: min(1040px, 90vw);
+      margin: 0 auto;
+      padding: 1.75rem 0 5rem;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+    }
+
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-cta {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--accent);
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-cta:hover { border-bottom-color: var(--accent); }
+
+    /* Hero: brand first, one composition */
+    .hero {
+      text-align: center;
+      padding: 2.5rem 0 3.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .brand-mark {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7vw, 4.2rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1.35rem;
+    }
+
+    .brand-mark span { color: var(--accent); }
+
+    .hero h1 {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+      color: var(--muted);
+      max-width: 36ch;
+      margin: 0 auto 1.75rem;
+      line-height: 1.45;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.8rem 1.35rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 999px; /* единственное место с «пилюлей» — CTA, не декор */
+      transition: opacity 0.15s, background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-soft {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    .btn-soft:hover { background: #fff; }
+
+    /* Band of tools — color separation, not cards */
+    .band {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 2px; /* почти flat, лёгкий радиус */
+      padding: 2.25rem 2rem 2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    @media (max-width: 640px) {
+      .band { padding: 1.5rem 1.15rem; }
+    }
+
+    .band-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.75rem;
+    }
+
+    .band-head h2 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .band-head span {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+    }
+
+    @media (max-width: 640px) {
+      .tools { grid-template-columns: 1fr; }
+    }
+
+    .tool {
+      padding: 1.35rem 1.1rem;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.35rem 1rem;
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    .tool:nth-child(odd) { padding-right: 1.5rem; }
+    .tool:nth-child(even) { padding-left: 1.5rem; border-left: 1px solid var(--line); }
+
+    @media (max-width: 640px) {
+      .tool:nth-child(odd),
+      .tool:nth-child(even) {
+        padding-left: 0;
+        padding-right: 0;
+        border-left: none;
+      }
+    }
+
+    .tool:hover { background: var(--accent-soft); }
+
+    .tool h3 {
+      font-size: 1.02rem;
+      font-weight: 600;
+      grid-column: 1;
+    }
+
+    .tool p {
+      grid-column: 1;
+      font-size: 0.88rem;
+      color: var(--muted);
+      max-width: 36ch;
+    }
+
+    .tool .arrow {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      opacity: 0.7;
+    }
+
+    /* Soft wash strip for articles */
+    .strip {
+      background: var(--blush);
+      border: 1px solid #DED4DC;
+      border-radius: 2px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .strip h2 {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+
+    .strip > p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .strip-list {
+      list-style: none;
+      display: grid;
+      gap: 0.15rem;
+    }
+
+    .strip-list a {
+      display: block;
+      padding: 0.65rem 0;
+      font-size: 0.98rem;
+      border-bottom: 1px solid rgba(26, 35, 48, 0.08);
+      transition: color 0.15s;
+    }
+
+    .strip-list a:last-child { border-bottom: none; }
+    .strip-list a:hover { color: var(--accent); }
+
+    .support {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 1.25rem 0;
+      margin-bottom: 2rem;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .support p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .support strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a:hover { color: var(--ink); }
+
+    .badge {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.45rem 0.7rem;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div class="badge">B · Soft Premium</div>
+  <div class="page">
+    <nav class="nav">
+      <a class="logo" href="#">Fin<span>Pulse</span></a>
+      <a class="nav-cta" href="#">Все статьи →</a>
+    </nav>
+
+    <section class="hero">
+      <p class="brand-mark">Fin<span>Pulse</span></p>
+      <h1>Спокойные калькуляторы для зарплаты, отпуска и ипотеки — без регистрации</h1>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#">Начать расчёт</a>
+        <a class="btn btn-soft" href="#">Смотреть статьи</a>
+      </div>
+    </section>
+
+    <section class="band">
+      <div class="band-head">
+        <h2>Инструменты</h2>
+        <span>Работают в браузере · 2026</span>
+      </div>
+      <div class="tools">
+        <a class="tool" href="#">
+          <h3>Зарплата на руки</h3>
+          <p>НДФЛ 2026, вычеты на детей, оклад и «на руки».</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="tool" href="#">
+          <h3>Отпускные</h3>
+          <p>Средний заработок, дни и сумма после налога.</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="tool" href="#">
+          <h3>Больничный</h3>
+          <p>Пособие по стажу и лимитам СФР.</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="tool" href="#">
+          <h3>Ипотека</h3>
+          <p>Платёж, переплата, досрочное погашение.</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="tool" href="#">
+          <h3>Сложный процент</h3>
+          <p>Накопления с ежемесячным пополнением.</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="tool" href="#">
+          <h3>Бюджет на месяц</h3>
+          <p>Доходы, расходы и печать в PDF.</p>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="strip">
+      <h2>Разборы и инструкции</h2>
+      <p>Ответы на точечные вопросы — с формулами и примерами.</p>
+      <ul class="strip-list">
+        <li><a href="#">Когда НДФЛ 15% в 2026 году</a></li>
+        <li><a href="#">Как получать 100 000 ₽ на руки</a></li>
+        <li><a href="#">Отпускные за 28 дней</a></li>
+        <li><a href="#">Досрочное погашение ипотеки</a></li>
+      </ul>
+    </section>
+
+    <div class="support">
+      <p>
+        <strong>Поддержать проект</strong>
+        Калькуляторы бесплатные. Если помогло — можно оставить чаевые.
+      </p>
+      <a class="btn btn-soft" href="#">На Boosty →</a>
+    </div>
+
+    <footer>
+      <span>© FinPulse · finraz.ru</span>
+      <span>
+        <a href="#">О проекте</a> ·
+        <a href="#">Конфиденциальность</a>
+      </span>
+    </footer>
+  </div>
+</body>
+</html>
