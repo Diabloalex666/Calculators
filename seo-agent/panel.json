@@ -1,22 +1,19 @@
 {
   "generated": "2026-09-30",
-  "verdict": "red",
-  "verdictText": "Красный.",
+  "verdict": "yellow",
+  "verdictText": "Жёлтый.",
   "reasons": [
-    "дыры в карте, живые 4xx или дубли интента"
+    "в очереди 30 planned",
+    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
     {
-      "title": "залиты из очереди: avans-i-ndfl.html",
-      "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
-    },
-    {
-      "title": "починить URL из monitor.bad",
+      "title": "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-i-ndfl.html, bolnichny-procent-ot-stazha-kak.html",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
-    "today": 1,
+    "today": 0,
     "yesterday": 0,
     "plan": 1,
     "latest": [
@@ -189,29 +186,24 @@
     "noindex": []
   },
   "health": {
-    "ok": 33,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/avans-i-ndfl.html",
-        "status": "404"
-      }
-    ],
+    "ok": 34,
+    "bad": [],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 34
   },
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 30 planned",
+      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: avans-i-ndfl.html",
-      "починить URL из monitor.bad"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-i-ndfl.html, bolnichny-procent-ot-stazha-kak.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

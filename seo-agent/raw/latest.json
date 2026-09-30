@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-30T11:11:45",
+  "generated": "2026-09-30T12:37:27",
   "semantics": {
     "counts": {
       "published": 28,
@@ -18,26 +18,19 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "очередь уже не пуста"
+      "дневной кап уже выбран"
     ]
   },
   "drip": {
     "enabled": true,
-    "published": [
-      "avans-i-ndfl.html"
-    ],
+    "published": [],
     "skipped": [
-      "annuitet-vs-differencirovannyy.html: нет первоисточника"
+      "дневной кап уже выбран"
     ]
   },
   "monitor": {
-    "ok": 33,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/avans-i-ndfl.html",
-        "status": "404"
-      }
-    ],
+    "ok": 34,
+    "bad": [],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 34
@@ -104,17 +97,17 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 30 planned",
+      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: avans-i-ndfl.html",
-      "починить URL из monitor.bad"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-i-ndfl.html, bolnichny-procent-ot-stazha-kak.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
