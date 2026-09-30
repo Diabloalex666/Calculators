@@ -1,9 +1,9 @@
 {
-  "generated": "2026-09-29T15:33:15",
+  "generated": "2026-09-30T11:11:45",
   "semantics": {
     "counts": {
-      "published": 27,
-      "planned": 31
+      "published": 28,
+      "planned": 30
     },
     "holes": [],
     "total": 58
@@ -18,22 +18,29 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "очередь уже не пуста"
     ]
   },
   "drip": {
     "enabled": true,
-    "published": [],
+    "published": [
+      "avans-i-ndfl.html"
+    ],
     "skipped": [
-      "дневной кап уже выбран"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника"
     ]
   },
   "monitor": {
     "ok": 33,
-    "bad": [],
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/avans-i-ndfl.html",
+        "status": "404"
+      }
+    ],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 33
+    "checked": 34
   },
   "audit": {
     "orphans": [],
@@ -66,7 +73,7 @@
     "files": []
   },
   "yandex": {
-    "updated": "2026-09-29",
+    "updated": "2026-09-30",
     "webmaster": {
       "connected": true,
       "error": null,
@@ -97,17 +104,17 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 31 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html"
+      "залиты из очереди: avans-i-ndfl.html",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

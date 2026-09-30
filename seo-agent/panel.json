@@ -1,29 +1,32 @@
 {
-  "generated": "2026-09-29",
-  "verdict": "yellow",
-  "verdictText": "Жёлтый.",
+  "generated": "2026-09-30",
+  "verdict": "red",
+  "verdictText": "Красный.",
   "reasons": [
-    "в очереди 31 planned",
-    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+    "дыры в карте, живые 4xx или дубли интента"
   ],
   "actions": [
     {
-      "title": "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html",
+      "title": "залиты из очереди: avans-i-ndfl.html",
+      "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+    },
+    {
+      "title": "починить URL из monitor.bad",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
-    "today": 0,
+    "today": 1,
     "yesterday": 0,
     "plan": 1,
     "latest": [
-      "avans-ot-oklada.html"
+      "avans-i-ndfl.html"
     ]
   },
   "topics": {
-    "planned": 31,
+    "planned": 30,
     "reserved": 0,
-    "published": 27,
+    "published": 28,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
@@ -187,23 +190,28 @@
   },
   "health": {
     "ok": 33,
-    "bad": [],
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/avans-i-ndfl.html",
+        "status": "404"
+      }
+    ],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 33
+    "checked": 34
   },
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 31 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, avans-i-ndfl.html, bolnichny-i-ndfl.html"
+      "залиты из очереди: avans-i-ndfl.html",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

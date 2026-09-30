@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
   "suggest_seeds_ok": 29,
   "webmaster_connected": true,
@@ -190,6 +190,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор отпускных онлайн",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest",
+        "seed"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
+      "status": "published"
+    },
+    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -272,20 +287,6 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных онлайн рассчитать",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -591,14 +592,13 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
+      "q": "расчёт отпускных в 2026 калькулятор онлайн",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
       "cluster": "otpusknye",
@@ -673,6 +673,20 @@
       ],
       "cluster": "bolnichny-stazh-5",
       "page": "/articles/bolnichny-stazh-menshe-5-let.html",
+      "status": "published"
+    },
+    {
+      "q": "если стаж 8 лет сколько процентов больничный",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "bolnichny-stazh-5-8",
+      "page": "/articles/bolnichny-stazh-5-8-let.html",
       "status": "published"
     },
     {
@@ -846,7 +860,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных в 2026",
+      "q": "калькулятор отпускных дней",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -860,7 +874,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор больничного листа в 2026 году",
+      "q": "калькулятор больничного листа",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -944,7 +958,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн 2026",
+      "q": "калькулятор отпускных онлайн рассчитать",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1015,21 +1029,7 @@
       "status": "published"
     },
     {
-      "q": "если стаж 8 лет сколько процентов больничный",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5-8",
-      "page": "/articles/bolnichny-stazh-5-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный в 2026",
+      "q": "максимальный больничный в 2026 году за день",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1057,7 +1057,7 @@
       "status": "published"
     },
     {
-      "q": "досрочное погашение ипотеки калькулятор сбербанка",
+      "q": "досрочное погашение ипотеки калькулятор онлайн рассчитать в сбербанке",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1341,6 +1341,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор отпускных онлайн",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest",
+        "seed"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
+      "status": "published"
+    },
+    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -1423,20 +1438,6 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных онлайн рассчитать",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
       "status": "published"
     },
     {

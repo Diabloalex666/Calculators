@@ -1,9 +1,8 @@
 {
-  "updated": "2026-09-29",
+  "updated": "2026-09-30",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
-    "avans-i-ndfl.html",
     "bolnichny-i-ndfl.html",
     "bolnichny-procent-ot-stazha-kak.html",
     "byudzhet-50-30-20.html",
@@ -46,7 +45,6 @@
     "oklad-300000-ndfl",
     "zarplata-za-neskolko-dney",
     "otpusknye-sredniy-zarabotok",
-    "avans-i-ndfl",
     "otpusk-i-uvolnenie-raznica",
     "bolnichny-procent-ot-stazha-kak",
     "ipoteka-srok-ili-platezh",
@@ -65,7 +63,7 @@
     "zarplata-za-pervuyu-nedelyu",
     "indexaciya-zarplaty-tk"
   ],
-  "planned": 31,
+  "planned": 30,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -74,5 +72,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=30, ready_packs=30"
+  "message": "На конвейере: queue=29, ready_packs=29"
 }
