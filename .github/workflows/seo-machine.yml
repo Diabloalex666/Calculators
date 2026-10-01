@@ -4,8 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "15 5 * * *"
-    - cron: "0 4 * * 6"
+    # 10:30 МСК (UTC+3) по будням. GitHub считает cron в UTC.
+    - cron: "30 7 * * 1-5"
   workflow_dispatch:
 
 permissions:
@@ -52,7 +52,7 @@ jobs:
       - name: Factory
         env:
           CI: "true"
-          FACTORY_DRIP: "1"
+          FACTORY_DRIP: ${{ (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch') && '1' || '0' }}
           FACTORY_WRITE: "1"
           YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
           YANDEX_WEBMASTER_HOST_ID: ${{ secrets.YANDEX_WEBMASTER_HOST_ID }}
