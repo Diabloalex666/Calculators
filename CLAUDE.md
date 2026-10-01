@@ -35,8 +35,8 @@
 Файл `.github/workflows/seo-machine.yml`:
 
 - пуш в `main` — гейт + IndexNow + пинг Яндекса; завод считает отчёт, статью не публикует;
-- будни в 10:30 МСК — то же плюс одна статья из очереди;
-- вручную: Actions → SEO machine → Run workflow (тоже публикует одну статью, если дневной кап свободен).
+- будни в 10:30 МСК — статья выходит с этого компьютера (`scripts/publish-weekday.ps1`, задание «FinPulse weekday article»). Очередь GitHub Actions для этого не используется: она стартовала на часы позже;
+- вручную: Actions → SEO machine → Run workflow (одна статья, если дневной кап свободен).
 
 Завод (свои цеха, не пакет Васина):
 
@@ -53,7 +53,7 @@
 11. консоли — CSV GSC/Вебмастер/Метрика/Wordstat → панель;
 12. спрос — Вебмастер API + подсказки Яндекса (+ Wordstat XMLRiver опционально); семена самообновляются; planned кап 2/сутки; retired без фактуры >45 дней.
 
-Кап: `dailyArticleCap` 1. Дрип по будням в 10:30 МСК и при ручном запуске: `publishQueue: true`, в Actions `FACTORY_DRIP=1`. Писатель на каждом прогоне: `tsekhWrite: true`, `FACTORY_WRITE=1`.
+Кап: `dailyArticleCap` 1. Дрип в 10:30 МСК запускает `scripts/publish-weekday.ps1` (`FACTORY_DRIP=1`). Ручной запуск Actions тоже с `FACTORY_DRIP=1`. Писатель на прогоне Actions: `tsekhWrite: true`, `FACTORY_WRITE=1`.
 Спрос: `demandSuggest: true`, `demandAddPlannedCap: 2`. Частотности Wordstat — только из API/CSV, иначе ранг по показам Вебмастера и подсказкам.
 
 Секреты Actions (не в репо): `YANDEX_WEBMASTER_TOKEN`, опционально `YANDEX_WEBMASTER_HOST_ID`, `XMLRIVER_USER`, `XMLRIVER_KEY`. Инструкция: `seo-agent/raw/YANDEX-API-SETUP.md`.
