@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-30T13:49:21",
+  "generated": "2026-10-01T07:59:13",
   "semantics": {
     "counts": {
       "published": 28,
@@ -18,14 +18,14 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "очередь уже не пуста"
     ]
   },
   "drip": {
-    "enabled": true,
+    "enabled": false,
     "published": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
@@ -66,7 +66,7 @@
     "files": []
   },
   "yandex": {
-    "updated": "2026-09-30",
+    "updated": "2026-10-01",
     "webmaster": {
       "connected": true,
       "error": null,

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
   "suggest_seeds_ok": 29,
   "webmaster_connected": true,
@@ -690,7 +690,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный 2026 в день",
+      "q": "максимальный больничный в 2026",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -874,7 +874,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор больничного листа",
+      "q": "калькулятор больничного листа в 2026 году",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -958,20 +958,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн рассчитать",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "отпускные за 14 дней",
       "score": 8.0,
       "clicks": 0.0,
@@ -1029,7 +1015,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный в 2026 году за день",
+      "q": "максимальный больничный 2026 в день",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1152,6 +1138,20 @@
       ],
       "cluster": "zarplata-na-ruki",
       "page": "/salary.html",
+      "status": "published"
+    },
+    {
+      "q": "как посчитать аванс от зарплаты",
+      "score": 7.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 7.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "avans-ot-oklada",
+      "page": "/articles/avans-ot-oklada.html",
       "status": "published"
     }
   ],
