@@ -30,7 +30,10 @@ jobs:
       - name: Wait for GitHub Pages
         if: github.event_name == 'push'
         run: sleep 150
-      - name: Health + IndexNow + Yandex ping
+      - name: Health + IndexNow + Yandex recrawl
+        env:
+          YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
+          YANDEX_WEBMASTER_HOST_ID: ${{ secrets.YANDEX_WEBMASTER_HOST_ID }}
         run: python scripts/machine.py
 
   factory:
