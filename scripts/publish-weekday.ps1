@@ -39,7 +39,7 @@ if ($LASTEXITCODE -eq 0) {
   exit 0
 }
 
-git -c user.name="finpulse-drip" -c user.email="finpulse-drip@users.noreply.github.com" commit -m "seo-factory: weekday article [skip ci]"
+git -c user.name="finpulse-drip" -c user.email="finpulse-drip@users.noreply.github.com" commit -m "seo-factory: weekday article"
 if ($LASTEXITCODE -ne 0) { Write-Log "commit failed"; exit 1 }
 git -c http.lowSpeedLimit=1000 -c http.lowSpeedTime=25 push origin HEAD:main
 if ($LASTEXITCODE -ne 0) { Write-Log "push failed"; exit 1 }

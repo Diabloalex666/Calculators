@@ -231,6 +231,48 @@ def fetch_wordstat_xmlriver(phrases: list[str], cap: int = 20) -> dict:
     return out
 
 
+def encode_host_id(host_id: str) -> str:
+    return urllib.parse.quote(host_id, safe=":")
+
+
+def webmaster_context() -> dict:
+    headers = webmaster_headers()
+    if not headers:
+        return {"headers": {}, "user_id": None, "host_id": None, "error": "нет YANDEX_WEBMASTER_TOKEN"}
+    user_id = get_user_id(headers)
+    if not user_id:
+        return {"headers": headers, "user_id": None, "host_id": None, "error": "не удалось получить user_id"}
+    host_id = pick_host_id(headers, user_id)
+    if not host_id:
+        return {"headers": headers, "user_id": user_id, "host_id": None, "error": "host_id не найден"}
+    return {"headers": headers, "user_id": user_id, "host_id": host_id, "error": None}
+
+
+def recrawl_quota(ctx: dict) -> dict:
+    host = encode_host_id(ctx["host_id"])
+    url = f"{API}/user/{ctx['user_id']}/hosts/{host}/recrawl/quota"
+    return http_json(url, ctx["headers"])
+
+
+def enqueue_recrawl(ctx: dict, page_url: str) -> dict:
+    host = encode_host_id(ctx["host_id"])
+    url = f"{API}/user/{ctx['user_id']}/hosts/{host}/recrawl/queue"
+    body = json.dumps({"url": page_url}).encode("utf-8")
+    headers = {**ctx["headers"], "Content-Type": "application/json"}
+    req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(req, timeout=40) as resp:
+            payload = json.loads(resp.read().decode("utf-8", "replace") or "{}")
+            return {"status": resp.status, "url": page_url, **payload}
+    except urllib.error.HTTPError as exc:
+        raw = exc.read().decode("utf-8", "replace")
+        try:
+            payload = json.loads(raw) if raw else {}
+        except json.JSONDecodeError:
+            payload = {"body": raw[:200]}
+        return {"status": exc.code, "url": page_url, "error": payload}
+
+
 def pull_all(seed_phrases: list[str] | None = None) -> dict:
     wm = fetch_webmaster_popular()
     seeds = seed_phrases or [

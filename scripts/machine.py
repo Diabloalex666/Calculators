@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 import indexnow  # noqa: E402
+import recrawl  # noqa: E402
 
 SITE = "https://finraz.ru/"
 SITEMAP = "https://finraz.ru/sitemap.xml"
@@ -63,6 +64,15 @@ def main() -> int:
         return 1
 
     print("yandex ping:", yandex_sitemap_ping())
+    try:
+        crawl = recrawl.run()
+        print(
+            "recrawl:",
+            f"sent={len(crawl.get('sent') or [])}",
+            crawl.get("error") or "",
+        )
+    except Exception as exc:
+        print(f"recrawl skip {exc}")
     urls = indexnow.urls_from_sitemap()
     failed = indexnow.ping(urls)
     summary = f"finraz.ru 200, IndexNow {len(urls)} URL, endpoint-fail={failed}"
