@@ -1,12 +1,12 @@
 {
-  "generated": "2026-10-05T12:36:37",
+  "generated": "2026-10-05T12:47:21",
   "semantics": {
     "counts": {
-      "published": 33,
+      "published": 35,
       "planned": 28
     },
     "holes": [],
-    "total": 61
+    "total": 63
   },
   "briefs": {
     "created": [],
@@ -29,11 +29,11 @@
     ]
   },
   "monitor": {
-    "ok": 39,
+    "ok": 41,
     "bad": [],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 39
+    "checked": 41
   },
   "audit": {
     "orphans": [],
@@ -79,7 +79,7 @@
     }
   },
   "demand": {
-    "suggest_ok": 29,
+    "suggest_ok": 31,
     "webmaster": true,
     "wordstat": false,
     "added": [],

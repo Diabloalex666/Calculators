@@ -23,7 +23,7 @@
   "topics": {
     "planned": 28,
     "reserved": 0,
-    "published": 33,
+    "published": 35,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
@@ -186,11 +186,11 @@
     "noindex": []
   },
   "health": {
-    "ok": 39,
+    "ok": 41,
     "bad": [],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 39
+    "checked": 41
   },
   "advisor": {
     "verdict": "yellow",

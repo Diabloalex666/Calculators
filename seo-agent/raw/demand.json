@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-05",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
-  "suggest_seeds_ok": 29,
+  "suggest_seeds_ok": 31,
   "webmaster_connected": true,
   "wordstat_connected": false,
   "queries": [
@@ -434,6 +434,36 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога ип",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-ip",
+      "page": "/nalog-ip.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор налога ооо",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-organizacii",
+      "page": "/nalog-organizacii.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор налога самозанятого",
       "score": 10.0,
       "clicks": 0.0,
@@ -743,6 +773,34 @@
       ],
       "cluster": "dismissal",
       "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор налога ип на усн 6 без работников 2026",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-ip",
+      "page": "/nalog-ip.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор налога ооо с ндс",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-organizacii",
+      "page": "/nalog-organizacii.html",
       "status": "published"
     },
     {
@@ -1095,62 +1153,6 @@
       ],
       "cluster": "dismissal",
       "page": "/dismissal.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога самозанятого онлайн калькулятор",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор сложного процента онлайн",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "compound",
-      "page": "/compound.html",
-      "status": "published"
-    },
-    {
-      "q": "бюджет семьи на месяц таблица",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "budget-semya",
-      "page": "/articles/byudzhet-semi-na-mesyats.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор зарплаты на руки за вычетом ндфл и взносов",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-na-ruki",
-      "page": "/salary.html",
       "status": "published"
     }
   ],
@@ -1584,6 +1586,36 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога ип",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-ip",
+      "page": "/nalog-ip.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор налога ооо",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-organizacii",
+      "page": "/nalog-organizacii.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор налога самозанятого",
       "score": 10.0,
       "clicks": 0.0,
@@ -1712,37 +1744,94 @@
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "planned"
-    },
-    {
-      "q": "80000 до вычета налогов это сколько на руки",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-80000",
-      "page": "/articles/zarplata-80000-na-ruki.html",
-      "status": "published"
-    },
-    {
-      "q": "сколько вычет на детей в 2025 году по ндфл",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-vychet-deti",
-      "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
     }
   ],
-  "unmatched": [],
+  "unmatched": [
+    {
+      "q": "калькулятор налогов",
+      "score": 7.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 7.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    },
+    {
+      "q": "калькулятор налогового вычета",
+      "score": 6.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 6.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    },
+    {
+      "q": "калькулятор налоговой нагрузки",
+      "score": 5.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 5.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    },
+    {
+      "q": "калькулятор налогового вычета при покупке квартиры",
+      "score": 4.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 4.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    },
+    {
+      "q": "калькулятор налогового вычета по ипотеке",
+      "score": 3.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 3.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    },
+    {
+      "q": "калькулятор налоговой нагрузки на сайте налоговой",
+      "score": 1.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 1.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": null,
+      "page": null,
+      "status": "new"
+    }
+  ],
   "added_planned": [],
   "retired": [],
   "cluster_rank": [
@@ -1844,6 +1933,14 @@
     },
     {
       "id": "dismissal",
+      "score": 10.0
+    },
+    {
+      "id": "nalog-ip",
+      "score": 10.0
+    },
+    {
+      "id": "nalog-organizacii",
       "score": 10.0
     },
     {

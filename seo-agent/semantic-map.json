@@ -406,7 +406,9 @@
       },
       "demand": {
         "score": 1.0,
-        "sources": ["seed"],
+        "sources": [
+          "yandex-suggest"
+        ],
         "updated": "2026-10-05"
       }
     },
@@ -420,8 +422,10 @@
         "vol": null
       },
       "demand": {
-        "score": 1.0,
-        "sources": ["seed"],
+        "score": 8.0,
+        "sources": [
+          "yandex-suggest"
+        ],
         "updated": "2026-10-05"
       }
     },
@@ -554,9 +558,9 @@
         "vol": 13
       },
       "demand": {
-        "score": 1.0,
+        "score": 130.0,
         "sources": [
-          "seed"
+          "wordstat-json"
         ],
         "updated": "2026-10-05"
       }
@@ -573,7 +577,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "seed"
+          "yandex-suggest"
         ],
         "updated": "2026-10-05"
       }
