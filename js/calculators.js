@@ -511,8 +511,6 @@ function calcCredit(form) {
   const fee = Math.max(0, parseNumber(form.fee.value));
   const insurance = Math.max(0, parseNumber(form.insurance.value));
 
-  toggleFormFields(form, "early", earlyMode === "on");
-
   const sim = simulateCredit({
     amount,
     months,
