@@ -15,12 +15,12 @@
     <title>Калькулятор налога ООО и АО — УСН и прибыль | FinPulse</title>
     <meta
       name="description"
-      content="Оценка налога ООО и АО: УСН 6% и 15% и налог на прибыль 25%. Переключатель реестра МСП не меняет эти ставки. Дивиденды считаются по 13%. Это не декларация."
+      content="Оценка налога ООО и АО: УСН 6% и 15% и налог на прибыль 25%. Дивиденды считаются по 13%."
     />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://finraz.ru/nalog-organizacii.html" />
     <meta property="og:title" content="Калькулятор налога ООО и АО — FinPulse" />
-    <meta property="og:description" content="Одна страница для ООО и АО: УСН и налог на прибыль. Ставки УСН в полях — федеральные." />
+    <meta property="og:description" content="УСН и налог на прибыль для ООО и АО. Ставки УСН в полях — федеральные." />
     <meta property="og:url" content="https://finraz.ru/nalog-organizacii.html" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
@@ -44,18 +44,9 @@
       </nav>
       <section class="hero page-hero">
         <h1>Калькулятор налога ООО и АО</h1>
-        <p>Одна страница для общества с ограниченной ответственностью и акционерного общества. Суммы вводите сами.</p>
       </section>
       <div class="panel">
         <form id="org-form">
-          <div class="form-row">
-            <label for="msp">Реестр МСП</label>
-            <select id="msp" name="msp">
-              <option value="no" selected>Не в реестре</option>
-              <option value="yes">В реестре МСП</option>
-            </select>
-            <p class="note">Положение в реестре выбираете вы. Порог выручки реестра калькулятор не подставляет.</p>
-          </div>
           <div class="form-row">
             <label for="mode">Режим</label>
             <select id="mode" name="mode">
@@ -110,28 +101,6 @@
           Дивиденды российской организации, которая не подпадает под ставку 0% подпункта 1 пункта 3,
           — 13% (пп. 2 п. 3 ст. 284). Особенности статьи 275 здесь не считаются.
         </p>
-        <h2>Чем реестр МСП отличается в открытом тексте</h2>
-        <p>
-          В ст. 346.20 и п. 1 ст. 284 отдельной ставки для организации из реестра МСП нет,
-          поэтому переключатель не меняет налог к уплате на этой странице.
-        </p>
-        <p>
-          Отличие, которое есть в
-          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/c5c16c86f95c5db63601047b1c0a5942bd77c824/">ст. 427 НК РФ</a>,
-          касается страховых взносов, а не УСН и не налога на прибыль.
-          Пункт 2.4: единый пониженный тариф 15% на часть выплат физлицу за месяц сверх полуторакратного МРОТ
-          — для плательщиков из подпунктов 10 и 17 пункта 1, кроме указанных в пункте 13.2.
-          Подпункт 17 требует соответствия пунктам 13.1, 13.2 или 13.3.
-          По пункту 13.3 основной вид деятельности должен быть в перечне Правительства, и не менее 70% доходов — от видов из этого перечня.
-          Для пункта 13.2 тариф на ту же часть выплат — 7,6% (п. 2.5).
-        </p>
-        <p>
-          Вне этих условий общий тариф
-          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/a3f603ffd57b1431ed51e1693ba710093347235d/">п. 3 ст. 425 НК РФ</a>:
-          30% в пределах единой предельной базы и 15,1% свыше неё.
-          Рублёвые МРОТ и предельную базу эти статьи не называют, перечень видов деятельности здесь не открыт,
-          поэтому взносы в сумму налога не пересчитаны.
-        </p>
       </section>
 
       <nav class="related-calc" aria-label="Другие калькуляторы">
@@ -167,7 +136,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=9"></script>
+    <script src="js/calculators.js?v=10"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

@@ -748,7 +748,6 @@ function calcNalogOrg(form) {
   const income = parseNumber(form.income.value);
   const expenses = parseNumber(form.expenses.value);
   const dividends = parseNumber(form.dividends.value);
-  const inRegistry = form.msp.value === "yes";
   const dividendTax = dividends * 0.13;
   const incomeMode = mode === "income";
   const diffMode = mode === "diff";
@@ -760,7 +759,6 @@ function calcNalogOrg(form) {
   let regimeTax = 0;
   const steps = [
     { label: "Доход", value: formatRub(income) },
-    { label: "Реестр МСП", value: inRegistry ? "в реестре" : "не в реестре" },
   ];
 
   if (incomeMode) {
@@ -805,10 +803,6 @@ function calcNalogOrg(form) {
   steps.push(
     { label: "Дивиденды", value: formatRub(dividends) },
     { label: "Налог с дивидендов 13%", value: formatRub(dividendTax) },
-    {
-      label: "УСН и налог на прибыль от реестра МСП",
-      value: "не меняются: отдельной ставки в открытых статьях нет",
-    },
     { label: "Налог к уплате", value: formatRub(tax) }
   );
   setText("org-tax", formatRub(tax));
