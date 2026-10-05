@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>Калькулятор налога ООО и АО — УСН и прибыль | FinPulse</title>
+    <meta
+      name="description"
+      content="Оценка налога ООО и АО: УСН 6% и 15% и налог на прибыль 25%. Переключатель реестра МСП не меняет эти ставки. Дивиденды считаются по 13%. Это не декларация."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/nalog-organizacii.html" />
+    <meta property="og:title" content="Калькулятор налога ООО и АО — FinPulse" />
+    <meta property="og:description" content="Одна страница для ООО и АО: УСН и налог на прибыль. Ставки УСН в полях — федеральные." />
+    <meta property="og:url" content="https://finraz.ru/nalog-organizacii.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=16-mono" />
+  </head>
+  <body>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+          <ul class="nav-links">
+            <li><a href="index.html#calculators">Калькуляторы</a></li>
+            <li><a href="articles/index.html">Статьи</a></li>
+            <li><a href="about.html">О проекте</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Налог ООО и АО</span>
+      </nav>
+      <section class="hero page-hero">
+        <h1>Калькулятор налога ООО и АО</h1>
+        <p>Одна страница для общества с ограниченной ответственностью и акционерного общества. Суммы вводите сами.</p>
+      </section>
+      <div class="panel">
+        <form id="org-form">
+          <div class="form-row">
+            <label for="msp">Реестр МСП</label>
+            <select id="msp" name="msp">
+              <option value="no" selected>Не в реестре</option>
+              <option value="yes">В реестре МСП</option>
+            </select>
+            <p class="note">Положение в реестре выбираете вы. Порог выручки реестра калькулятор не подставляет.</p>
+          </div>
+          <div class="form-row">
+            <label for="mode">Режим</label>
+            <select id="mode" name="mode">
+              <option value="income" selected>УСН «доходы»</option>
+              <option value="diff">УСН «доходы минус расходы»</option>
+              <option value="profit">Налог на прибыль</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="income">Доход (₽)</label>
+            <input id="income" name="income" type="number" value="1000000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="expenses" hidden>
+            <label for="expenses">Расходы (₽)</label>
+            <input id="expenses" name="expenses" type="number" value="400000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="rate-income">
+            <label for="rateIncome">Ставка УСН «доходы», %</label>
+            <input id="rateIncome" name="rateIncome" type="number" value="6" min="0" max="100" step="0.1" />
+            <p class="note">Число в поле — федеральная ставка из НК, не ставка конкретного региона.</p>
+          </div>
+          <div class="form-row" data-field="rate-diff" hidden>
+            <label for="rateDiff">Ставка УСН «доходы минус расходы», %</label>
+            <input id="rateDiff" name="rateDiff" type="number" value="15" min="0" max="100" step="0.1" />
+            <p class="note">Число в поле — федеральная ставка из НК, не ставка конкретного региона.</p>
+          </div>
+          <div class="form-row">
+            <label for="dividends">Дивиденды (₽)</label>
+            <input id="dividends" name="dividends" type="number" value="0" min="0" step="1000" />
+          </div>
+        </form>
+        <div class="result">
+          <div>Налог к уплате: <strong id="org-tax">—</strong></div>
+        </div>
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="org-steps"></div>
+        <p class="note">Оценка, не декларация.</p>
+      </div>
+      <section class="seo-block article-block">
+        <h2>Ставки УСН и налога на прибыль</h2>
+        <p>
+          УСН:
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/3908f157150b10882cccfbb7f359866338098767/">ст. 346.20 НК РФ</a>
+          — 6% с доходов и 15% с доходов минус расходы. Число в поле — федеральная ставка, не ставка региона.
+          Минимальный налог при «доходы минус расходы» — 1% доходов
+          (<a href="https://www.consultant.ru/document/cons_doc_LAW_28165/9d874d8c8dd9d1013df3c191849a0aab5f480ab8/">п. 6 ст. 346.18 НК РФ</a>).
+        </p>
+        <p>
+          Налог на прибыль:
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/eb9180fc785448d58fe76ef323fb67d1832b9363/">п. 1 ст. 284 НК РФ</a>
+          — 25%, если иное не установлено этой статьёй.
+          Дивиденды российской организации, которая не подпадает под ставку 0% подпункта 1 пункта 3,
+          — 13% (пп. 2 п. 3 ст. 284). Особенности статьи 275 здесь не считаются.
+        </p>
+        <h2>Чем реестр МСП отличается в открытом тексте</h2>
+        <p>
+          В ст. 346.20 и п. 1 ст. 284 отдельной ставки для организации из реестра МСП нет,
+          поэтому переключатель не меняет налог к уплате на этой странице.
+        </p>
+        <p>
+          Отличие, которое есть в
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/c5c16c86f95c5db63601047b1c0a5942bd77c824/">ст. 427 НК РФ</a>,
+          касается страховых взносов, а не УСН и не налога на прибыль.
+          Пункт 2.4: единый пониженный тариф 15% на часть выплат физлицу за месяц сверх полуторакратного МРОТ
+          — для плательщиков из подпунктов 10 и 17 пункта 1, кроме указанных в пункте 13.2.
+          Подпункт 17 требует соответствия пунктам 13.1, 13.2 или 13.3.
+          По пункту 13.3 основной вид деятельности должен быть в перечне Правительства, и не менее 70% доходов — от видов из этого перечня.
+          Для пункта 13.2 тариф на ту же часть выплат — 7,6% (п. 2.5).
+        </p>
+        <p>
+          Вне этих условий общий тариф
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/a3f603ffd57b1431ed51e1693ba710093347235d/">п. 3 ст. 425 НК РФ</a>:
+          30% в пределах единой предельной базы и 15,1% свыше неё.
+          Рублёвые МРОТ и предельную базу эти статьи не называют, перечень видов деятельности здесь не открыт,
+          поэтому взносы в сумму налога не пересчитаны.
+        </p>
+      </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="nalog-ip.html">Налог ИП</a></li>
+          <li><a href="samozanyaty.html">Налог самозанятого</a></li>
+        </ul>
+      </nav>
+
+      <div class="donate no-print">
+        <strong>Поддержать проект</strong>
+        <p class="note" style="margin-top: 0.5rem">Если калькулятор помог — можно оставить чаевые.</p>
+        <a
+          class="donate-btn"
+          href="https://boosty.to/alexeyvasilev/donate"
+          data-boosty-link
+          target="_blank"
+          rel="noopener"
+          >Поддержать на Boosty</a
+        >
+      </div>
+
+      <footer class="site-footer">
+        <p class="footer-links">
+          <a href="index.html">Главная</a>
+          · <a href="nalog-ip.html">Налог ИП</a>
+          · <a href="samozanyaty.html">Самозанятый</a>
+          · <a href="articles/index.html">Статьи</a>
+        </p>
+        <p class="footer-note">Справочные расчёты, не юридическая и не бухгалтерская консультация.</p>
+        <p class="footer-copy">© FinPulse</p>
+      </footer>
+    </div>
+    <script src="js/common.js?v=3"></script>
+    <script src="js/calculators.js?v=9"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
+    <script src="js/feedback.js?v=3"></script>
+  </body>
+</html>

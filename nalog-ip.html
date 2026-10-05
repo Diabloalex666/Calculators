@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>Калькулятор налога ИП — УСН | FinPulse</title>
+    <meta
+      name="description"
+      content="Оценка налога ИП на УСН: доходы 6% и доходы минус расходы 15%. Ставку в поле можно заменить на свою. Уплаченные взносы по умолчанию 0. Это не декларация."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/nalog-ip.html" />
+    <meta property="og:title" content="Калькулятор налога ИП — FinPulse" />
+    <meta property="og:description" content="УСН «доходы» и «доходы минус расходы». Ставки в полях — федеральные из НК." />
+    <meta property="og:url" content="https://finraz.ru/nalog-ip.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=16-mono" />
+  </head>
+  <body>
+      <header class="site-header">
+        <nav class="site-nav" aria-label="Основная навигация">
+          <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+          <ul class="nav-links">
+            <li><a href="index.html#calculators">Калькуляторы</a></li>
+            <li><a href="articles/index.html">Статьи</a></li>
+            <li><a href="about.html">О проекте</a></li>
+          </ul>
+        </nav>
+      </header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Налог ИП</span>
+      </nav>
+      <section class="hero page-hero">
+        <h1>Калькулятор налога ИП</h1>
+        <p>УСН «доходы» и УСН «доходы минус расходы». Суммы вводите сами.</p>
+      </section>
+      <div class="panel">
+        <form id="ip-form">
+          <div class="form-row">
+            <label for="mode">Режим</label>
+            <select id="mode" name="mode">
+              <option value="income" selected>УСН «доходы»</option>
+              <option value="diff">УСН «доходы минус расходы»</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="income">Доход (₽)</label>
+            <input id="income" name="income" type="number" value="1000000" min="0" step="1000" />
+          </div>
+          <div class="form-row">
+            <label for="expenses">Расходы (₽)</label>
+            <input id="expenses" name="expenses" type="number" value="400000" min="0" step="1000" />
+          </div>
+          <div class="form-row" data-field="rate-income">
+            <label for="rateIncome">Ставка УСН «доходы», %</label>
+            <input id="rateIncome" name="rateIncome" type="number" value="6" min="0" max="100" step="0.1" />
+            <p class="note">Число в поле — федеральная ставка из НК, не ставка конкретного региона.</p>
+          </div>
+          <div class="form-row" data-field="rate-diff" hidden>
+            <label for="rateDiff">Ставка УСН «доходы минус расходы», %</label>
+            <input id="rateDiff" name="rateDiff" type="number" value="15" min="0" max="100" step="0.1" />
+            <p class="note">Число в поле — федеральная ставка из НК, не ставка конкретного региона.</p>
+          </div>
+          <div class="form-row">
+            <label for="contributions">Уже уплаченные взносы, ₽</label>
+            <input id="contributions" name="contributions" type="number" value="0" min="0" step="100" />
+          </div>
+          <div class="form-row" data-field="employees">
+            <label for="hasEmployees">Выплаты физлицам</label>
+            <select id="hasEmployees" name="hasEmployees">
+              <option value="no" selected>Нет выплат физлицам</option>
+              <option value="yes">Есть выплаты физлицам</option>
+            </select>
+          </div>
+        </form>
+        <div class="result">
+          <div>Налог к уплате: <strong id="ip-tax">—</strong></div>
+        </div>
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="ip-steps"></div>
+        <p class="note">Оценка, не декларация.</p>
+      </div>
+      <section class="seo-block article-block">
+        <h2>Какие ставки в расчёте</h2>
+        <p>
+          Федеральные ставки из
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/3908f157150b10882cccfbb7f359866338098767/">ст. 346.20 НК РФ</a>:
+          6% при объекте «доходы» и 15% при объекте «доходы минус расходы».
+          Регион может установить другую ставку в пределах, названных в этой статье. В поле стоит федеральная ставка, её можно заменить.
+        </p>
+        <p>
+          При «доходы минус расходы» если налог в общем порядке меньше минимального, к уплате берётся минимальный налог:
+          1% доходов
+          (<a href="https://www.consultant.ru/document/cons_doc_LAW_28165/9d874d8c8dd9d1013df3c191849a0aab5f480ab8/">п. 6 ст. 346.18 НК РФ</a>).
+          Если расходы больше доходов, база для обычного налога равна нулю
+          (п. 2 ст. 346.18).
+        </p>
+        <h3>Уже уплаченные взносы</h3>
+        <p>
+          Фиксированный взнос за год сюда не подставлен: в поле 0, пока вы сами не впишете уплаченную сумму.
+          По
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_28165/22c21f60902851e312e9a7ebc582ba92ecea94a6/">п. 3.1 ст. 346.21 НК РФ</a>
+          налог при объекте «доходы» уменьшают на уплаченные страховые взносы, но не более чем на 50%.
+          ИП, которые не производят выплаты физлицам, уменьшают налог без этого ограничения.
+          При объекте «доходы минус расходы» это уменьшение не применяется: пункт 3.1 написан только для объекта «доходы».
+        </p>
+      </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="nalog-organizacii.html">Налог ООО и АО</a></li>
+          <li><a href="samozanyaty.html">Налог самозанятого</a></li>
+        </ul>
+      </nav>
+
+      <div class="donate no-print">
+        <strong>Поддержать проект</strong>
+        <p class="note" style="margin-top: 0.5rem">Если калькулятор помог — можно оставить чаевые.</p>
+        <a
+          class="donate-btn"
+          href="https://boosty.to/alexeyvasilev/donate"
+          data-boosty-link
+          target="_blank"
+          rel="noopener"
+          >Поддержать на Boosty</a
+        >
+      </div>
+
+      <footer class="site-footer">
+        <p class="footer-links">
+          <a href="index.html">Главная</a>
+          · <a href="samozanyaty.html">Самозанятый</a>
+          · <a href="nalog-organizacii.html">ООО и АО</a>
+          · <a href="articles/index.html">Статьи</a>
+        </p>
+        <p class="footer-note">Справочные расчёты, не юридическая и не бухгалтерская консультация.</p>
+        <p class="footer-copy">© FinPulse</p>
+      </footer>
+    </div>
+    <script src="js/common.js?v=3"></script>
+    <script src="js/calculators.js?v=9"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
+    <script src="js/feedback.js?v=3"></script>
+  </body>
+</html>

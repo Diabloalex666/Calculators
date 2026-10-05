@@ -173,6 +173,86 @@
       "used_by": [
         "samozanyaty"
       ]
+    },
+    {
+      "id": "usn-rate-income-346-20",
+      "value": "6 процентов, если объектом налогообложения являются доходы и иное не установлено пунктом 1 и пунктами 3, 3.1 и 4 статьи 346.20",
+      "law": "п. 1 ст. 346.20 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/3908f157150b10882cccfbb7f359866338098767/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-ip", "nalog-organizacii"]
+    },
+    {
+      "id": "usn-rate-diff-346-20",
+      "value": "15 процентов, если объектом налогообложения являются доходы, уменьшенные на величину расходов, и иное не установлено пунктом 2 и пунктами 3, 3.1 и 4 статьи 346.20",
+      "law": "п. 2 ст. 346.20 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/3908f157150b10882cccfbb7f359866338098767/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-ip", "nalog-organizacii"]
+    },
+    {
+      "id": "usn-min-tax-346-18",
+      "value": "минимальный налог за налоговый период — 1 процент налоговой базы, которой являются доходы по статье 346.15; уплачивается, если налог в общем порядке меньше минимального",
+      "law": "п. 6 ст. 346.18 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/9d874d8c8dd9d1013df3c191849a0aab5f480ab8/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-ip", "nalog-organizacii"]
+    },
+    {
+      "id": "usn-contrib-reduce-346-21",
+      "value": "при объекте «доходы» налог уменьшают на уплаченные страховые взносы, но не более чем на 50 процентов; ИП, не производящие выплаты физлицам, уменьшают налог без этого ограничения",
+      "law": "п. 3.1 ст. 346.21 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/22c21f60902851e312e9a7ebc582ba92ecea94a6/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-ip"]
+    },
+    {
+      "id": "profit-rate-284",
+      "value": "налоговая ставка устанавливается в размере 25 процентов, если иное не установлено статьёй 284",
+      "law": "п. 1 ст. 284 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/eb9180fc785448d58fe76ef323fb67d1832b9363/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-organizacii"]
+    },
+    {
+      "id": "dividend-rate-284",
+      "value": "13 процентов по доходам в виде дивидендов от российских и иностранных организаций, полученным российскими организациями, не указанными в подпункте 1 пункта 3 статьи 284",
+      "law": "пп. 2 п. 3 ст. 284 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/eb9180fc785448d58fe76ef323fb67d1832b9363/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-organizacii"]
+    },
+    {
+      "id": "contrib-general-425",
+      "value": "с 2023 года единый тариф страховых взносов: 30 процентов в пределах единой предельной величины базы и 15,1 процента свыше неё, если иное не предусмотрено главой 34",
+      "law": "п. 3 ст. 425 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/a3f603ffd57b1431ed51e1693ba710093347235d/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-organizacii"]
+    },
+    {
+      "id": "contrib-msp-427",
+      "value": "15,0 процента на часть выплат физлицу за календарный месяц сверх полуторакратного МРОТ — для плательщиков из подп. 10 и 17 п. 1 ст. 427, кроме указанных в п. 13.2; для п. 13.2 с 2025 года на ту же часть выплат тариф 7,6 процента. Подп. 17 требует соответствия п. 13.1, 13.2 или 13.3, в том числе доли доходов не менее 70 процентов по п. 13.3",
+      "law": "п. 2.4, п. 2.5, подп. 17 п. 1, п. 13.3 ст. 427 НК РФ",
+      "source": "https://www.consultant.ru/document/cons_doc_LAW_28165/c5c16c86f95c5db63601047b1c0a5942bd77c824/",
+      "status": "verified",
+      "checked": "2026-10-05",
+      "expires": "2027-01-01",
+      "used_by": ["nalog-organizacii"]
     }
   ]
 }

@@ -396,6 +396,36 @@
       }
     },
     {
+      "id": "nalog-ip",
+      "page": "/nalog-ip.html",
+      "status": "published",
+      "intent": "tool",
+      "main": {
+        "q": "калькулятор налога ип",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": ["seed"],
+        "updated": "2026-10-05"
+      }
+    },
+    {
+      "id": "nalog-organizacii",
+      "page": "/nalog-organizacii.html",
+      "status": "published",
+      "intent": "tool",
+      "main": {
+        "q": "калькулятор налога ооо",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": ["seed"],
+        "updated": "2026-10-05"
+      }
+    },
+    {
       "id": "samozanyaty",
       "page": "/samozanyaty.html",
       "status": "published",

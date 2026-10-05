@@ -664,6 +664,157 @@ function calcSamozanyaty(form) {
   setHtml("npd-steps", renderStepsTable(steps));
 }
 
+function calcUsnIncome(income, ratePercent, contributions, capAtHalf) {
+  const raw = income * (ratePercent / 100);
+  let used = Math.min(Math.max(0, contributions), raw);
+  if (capAtHalf) used = Math.min(used, raw * 0.5);
+  return { raw, used, tax: raw - used };
+}
+
+function calcUsnDiff(income, expenses, ratePercent) {
+  const base = Math.max(0, income - expenses);
+  const ordinary = base * (ratePercent / 100);
+  const minimum = income * 0.01;
+  return {
+    base,
+    ordinary,
+    minimum,
+    tax: Math.max(ordinary, minimum),
+    usedMinimum: minimum > ordinary,
+  };
+}
+
+function calcNalogIp(form) {
+  const mode = form.mode.value;
+  const income = parseNumber(form.income.value);
+  const expenses = parseNumber(form.expenses.value);
+  const contributions = parseNumber(form.contributions.value);
+  const hasEmployees = form.hasEmployees.value === "yes";
+  const incomeMode = mode === "income";
+
+  toggleFormFields(form, "rate-income", incomeMode);
+  toggleFormFields(form, "rate-diff", !incomeMode);
+  toggleFormFields(form, "employees", incomeMode);
+
+  const rate = incomeMode ? parseNumber(form.rateIncome.value) : parseNumber(form.rateDiff.value);
+  let tax = 0;
+  const steps = [
+    { label: "Доход", value: formatRub(income) },
+    { label: "Расходы", value: incomeMode ? "в этом режиме в налог не входят" : formatRub(expenses) },
+  ];
+
+  if (incomeMode) {
+    const part = calcUsnIncome(income, rate, contributions, hasEmployees);
+    tax = part.tax;
+    steps.push(
+      { label: "Ставка в поле", value: `${String(rate).replace(".", ",")}%` },
+      {
+        label: "Налог до взносов",
+        value: `${formatRub(income)} × ${String(rate).replace(".", ",")}% = ${formatRub(part.raw)}`,
+      },
+      { label: "Уже уплаченные взносы", value: formatRub(contributions) },
+      {
+        label: "Уменьшение налога",
+        value: hasEmployees
+          ? `не больше 50% налога: ${formatRub(part.used)}`
+          : `без ограничения 50%: ${formatRub(part.used)}`,
+      }
+    );
+  } else {
+    const part = calcUsnDiff(income, expenses, rate);
+    tax = part.tax;
+    steps.push(
+      { label: "База", value: formatRub(part.base) },
+      { label: "Ставка в поле", value: `${String(rate).replace(".", ",")}%` },
+      {
+        label: "Налог в общем порядке",
+        value: `${formatRub(part.base)} × ${String(rate).replace(".", ",")}% = ${formatRub(part.ordinary)}`,
+      },
+      { label: "Минимальный налог 1% дохода", value: formatRub(part.minimum) },
+      {
+        label: "К уплате",
+        value: part.usedMinimum ? `минимальный налог ${formatRub(part.tax)}` : formatRub(part.tax),
+      }
+    );
+  }
+
+  steps.push({ label: "Налог к уплате", value: formatRub(tax) });
+  setText("ip-tax", formatRub(tax));
+  setHtml("ip-steps", renderStepsTable(steps));
+}
+
+function calcNalogOrg(form) {
+  const mode = form.mode.value;
+  const income = parseNumber(form.income.value);
+  const expenses = parseNumber(form.expenses.value);
+  const dividends = parseNumber(form.dividends.value);
+  const inRegistry = form.msp.value === "yes";
+  const dividendTax = dividends * 0.13;
+  const incomeMode = mode === "income";
+  const diffMode = mode === "diff";
+
+  toggleFormFields(form, "rate-income", incomeMode);
+  toggleFormFields(form, "rate-diff", diffMode);
+  toggleFormFields(form, "expenses", !incomeMode);
+
+  let regimeTax = 0;
+  const steps = [
+    { label: "Доход", value: formatRub(income) },
+    { label: "Реестр МСП", value: inRegistry ? "в реестре" : "не в реестре" },
+  ];
+
+  if (incomeMode) {
+    const rate = parseNumber(form.rateIncome.value);
+    regimeTax = income * (rate / 100);
+    steps.push(
+      { label: "Ставка в поле", value: `${String(rate).replace(".", ",")}%` },
+      {
+        label: "УСН «доходы»",
+        value: `${formatRub(income)} × ${String(rate).replace(".", ",")}% = ${formatRub(regimeTax)}`,
+      }
+    );
+  } else if (diffMode) {
+    const rate = parseNumber(form.rateDiff.value);
+    const part = calcUsnDiff(income, expenses, rate);
+    regimeTax = part.tax;
+    steps.push(
+      { label: "Расходы", value: formatRub(expenses) },
+      { label: "База", value: formatRub(part.base) },
+      { label: "Ставка в поле", value: `${String(rate).replace(".", ",")}%` },
+      {
+        label: "Налог в общем порядке",
+        value: `${formatRub(part.base)} × ${String(rate).replace(".", ",")}% = ${formatRub(part.ordinary)}`,
+      },
+      { label: "Минимальный налог 1% дохода", value: formatRub(part.minimum) }
+    );
+  } else {
+    const base = Math.max(0, income - expenses);
+    regimeTax = base * 0.25;
+    steps.push(
+      { label: "Расходы", value: formatRub(expenses) },
+      { label: "База", value: formatRub(base) },
+      { label: "Ставка налога на прибыль", value: "25%" },
+      {
+        label: "Налог на прибыль",
+        value: `${formatRub(base)} × 25% = ${formatRub(regimeTax)}`,
+      }
+    );
+  }
+
+  const tax = regimeTax + dividendTax;
+  steps.push(
+    { label: "Дивиденды", value: formatRub(dividends) },
+    { label: "Налог с дивидендов 13%", value: formatRub(dividendTax) },
+    {
+      label: "УСН и налог на прибыль от реестра МСП",
+      value: "не меняются: отдельной ставки в открытых статьях нет",
+    },
+    { label: "Налог к уплате", value: formatRub(tax) }
+  );
+  setText("org-tax", formatRub(tax));
+  setHtml("org-steps", renderStepsTable(steps));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
@@ -673,4 +824,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("credit-form", calcCredit);
   bindCalculator("dismissal-form", calcDismissal);
   bindCalculator("npd-form", calcSamozanyaty);
+  bindCalculator("ip-form", calcNalogIp);
+  bindCalculator("org-form", calcNalogOrg);
 });
