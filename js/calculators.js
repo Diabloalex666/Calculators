@@ -634,6 +634,36 @@ function calcDismissal(form) {
   setHtml("dismissal-steps", renderStepsTable(steps));
 }
 
+const NPD_RATE_PERSONS = 0.04;
+const NPD_RATE_ORGS = 0.06;
+
+function calcSamozanyaty(form) {
+  const fromPersons = parseNumber(form.fromPersons.value);
+  const fromOrgs = parseNumber(form.fromOrgs.value);
+  const taxPersons = fromPersons * NPD_RATE_PERSONS;
+  const taxOrgs = fromOrgs * NPD_RATE_ORGS;
+  const total = taxPersons + taxOrgs;
+
+  setText("npd-total", formatRub(total));
+  setText("npd-persons", formatRub(taxPersons));
+  setText("npd-orgs", formatRub(taxOrgs));
+
+  const steps = [
+    { label: "Доход от физлиц", value: formatRub(fromPersons) },
+    {
+      label: "Налог с дохода от физлиц",
+      value: `${formatRub(fromPersons)} × ${formatPercent(NPD_RATE_PERSONS)} = ${formatRub(taxPersons)}`,
+    },
+    { label: "Доход от юрлиц и ИП", value: formatRub(fromOrgs) },
+    {
+      label: "Налог с дохода от юрлиц и ИП",
+      value: `${formatRub(fromOrgs)} × ${formatPercent(NPD_RATE_ORGS)} = ${formatRub(taxOrgs)}`,
+    },
+    { label: "Сумма налога", value: formatRub(total) },
+  ];
+  setHtml("npd-steps", renderStepsTable(steps));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
@@ -642,4 +672,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("mortgage-form", calcMortgage);
   bindCalculator("credit-form", calcCredit);
   bindCalculator("dismissal-form", calcDismissal);
+  bindCalculator("npd-form", calcSamozanyaty);
 });
