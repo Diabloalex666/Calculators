@@ -420,6 +420,20 @@
       "status": "published"
     },
     {
+      "q": "расчёт при увольнении сроки выплаты",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "dismissal",
+      "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -460,21 +474,6 @@
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
-    },
-    {
-      "q": "как работает вычет на детей по ндфл",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "vychet-na-detey-kak-rabotaet",
-      "page": "/articles/vychet-na-detey-kak-rabotaet.html",
       "status": "planned"
     },
     {
@@ -732,6 +731,20 @@
       "status": "published"
     },
     {
+      "q": "расчёт при увольнении сроки",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "dismissal",
+      "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента с пополнением",
       "score": 9.0,
       "clicks": 0.0,
@@ -786,20 +799,6 @@
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
-    },
-    {
-      "q": "вычет на детей в 2026 году по ндфл как получить",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "vychet-na-detey-kak-rabotaet",
-      "page": "/articles/vychet-na-detey-kak-rabotaet.html",
       "status": "planned"
     },
     {
@@ -1084,6 +1083,20 @@
       "status": "published"
     },
     {
+      "q": "расчёт при увольнении в 2025 калькулятор онлайн",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "dismissal",
+      "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента онлайн",
       "score": 8.0,
       "clicks": 0.0,
@@ -1123,20 +1136,6 @@
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
-    },
-    {
-      "q": "как получить вычет на детей в 2025 году по ндфл",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "vychet-na-detey-kak-rabotaet",
-      "page": "/articles/vychet-na-detey-kak-rabotaet.html",
       "status": "planned"
     },
     {
@@ -1570,6 +1569,20 @@
       "status": "published"
     },
     {
+      "q": "расчёт при увольнении сроки выплаты",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "dismissal",
+      "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -1610,21 +1623,6 @@
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
-    },
-    {
-      "q": "как работает вычет на детей по ндфл",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "vychet-na-detey-kak-rabotaet",
-      "page": "/articles/vychet-na-detey-kak-rabotaet.html",
       "status": "planned"
     },
     {
@@ -1843,6 +1841,10 @@
       "score": 10.0
     },
     {
+      "id": "dismissal",
+      "score": 10.0
+    },
+    {
       "id": "budget",
       "score": 10.0
     },
@@ -1851,12 +1853,12 @@
       "score": 10.0
     },
     {
-      "id": "vychet-na-detey-kak-rabotaet",
-      "score": 10.0
-    },
-    {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
       "score": 9.0
+    },
+    {
+      "id": "vychet-na-detey-kak-rabotaet",
+      "score": 5.0
     },
     {
       "id": "zarplata-120000",
