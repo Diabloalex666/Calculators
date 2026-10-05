@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -689,6 +690,29 @@ def merge_facts() -> dict[str, dict]:
     return by_id
 
 
+def related_label(hint: str) -> str | None:
+    """Russian h1 or crumb of the target article. Never a filename slug."""
+    name = Path(hint).name
+    if not name.endswith(".html"):
+        name += ".html"
+    h1 = ""
+    crumb = ""
+    pack_path = PACKS / f"{Path(name).stem}.json"
+    if pack_path.is_file():
+        pack = load_json(pack_path)
+        h1 = str(pack.get("h1") or "").strip()
+        crumb = str(pack.get("crumb") or "").strip()
+    else:
+        page = ROOT / "articles" / name
+        if page.is_file():
+            match = re.search(r"<h1>([^<]+)</h1>", page.read_text(encoding="utf-8"))
+            h1 = match.group(1).strip() if match else ""
+    for candidate in (h1, crumb):
+        if candidate and re.search(r"[А-Яа-яЁё]", candidate):
+            return candidate
+    return None
+
+
 def build_pack(t: dict, facts: dict[str, dict]) -> dict:
     fact = facts[t["fact"]]
     calc, label = CALC[t["calc"]]
@@ -715,7 +739,9 @@ def build_pack(t: dict, facts: dict[str, dict]) -> dict:
     related = []
     hint = t.get("related_hint")
     if hint:
-        related.append({"href": hint, "label": hint.replace(".html", "").replace("-", " ")})
+        label = related_label(hint)
+        if label:
+            related.append({"href": hint, "label": label})
     faqs = [{"q": a, "a": b} for a, b in t["faqs"]]
     return {
         "cluster_id": t["id"],
