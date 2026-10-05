@@ -407,7 +407,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "seed"
+          "yandex-suggest"
         ],
         "updated": "2026-10-05"
       }
@@ -560,7 +560,7 @@
       "demand": {
         "score": 1.0,
         "sources": [
-          "seed"
+          "yandex-suggest"
         ],
         "updated": "2026-10-05"
       }

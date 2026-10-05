@@ -434,6 +434,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога самозанятого",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "samozanyaty",
+      "page": "/samozanyaty.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -461,20 +476,6 @@
       "cluster": "budget-semya",
       "page": "/articles/byudzhet-semi-na-mesyats.html",
       "status": "published"
-    },
-    {
-      "q": "компенсация отпуска при увольнении как рассчитать",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
     },
     {
       "q": "калькулятор зарплаты на руки за вычетом ндфл",
@@ -745,6 +746,20 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога самозанятого онлайн калькулятор расчета",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "samozanyaty",
+      "page": "/samozanyaty.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента с пополнением",
       "score": 9.0,
       "clicks": 0.0,
@@ -786,20 +801,6 @@
       "cluster": "budget-semya",
       "page": "/articles/byudzhet-semi-na-mesyats.html",
       "status": "published"
-    },
-    {
-      "q": "как рассчитать за сколько дней отпуска положена компенсация при увольнении",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
     },
     {
       "q": "калькулятор зарплаты на руки 2026",
@@ -1097,6 +1098,20 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога самозанятого онлайн калькулятор",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "samozanyaty",
+      "page": "/samozanyaty.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента онлайн",
       "score": 8.0,
       "clicks": 0.0,
@@ -1123,20 +1138,6 @@
       "cluster": "budget-semya",
       "page": "/articles/byudzhet-semi-na-mesyats.html",
       "status": "published"
-    },
-    {
-      "q": "компенсация отпуска при увольнении после декрета как рассчитать",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
     },
     {
       "q": "калькулятор зарплаты на руки за вычетом ндфл и взносов",
@@ -1583,6 +1584,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор налога самозанятого",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "samozanyaty",
+      "page": "/samozanyaty.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -1610,20 +1626,6 @@
       "cluster": "budget-semya",
       "page": "/articles/byudzhet-semi-na-mesyats.html",
       "status": "published"
-    },
-    {
-      "q": "компенсация отпуска при увольнении как рассчитать",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "planned"
     },
     {
       "q": "калькулятор зарплаты на руки за вычетом ндфл",
@@ -1842,6 +1844,10 @@
     },
     {
       "id": "dismissal",
+      "score": 10.0
+    },
+    {
+      "id": "samozanyaty",
       "score": 10.0
     },
     {
