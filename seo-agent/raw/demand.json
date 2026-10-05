@@ -405,6 +405,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор потребительского кредита",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "credit",
+      "page": "/credit.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -460,20 +475,6 @@
       ],
       "cluster": "vychet-na-detey-kak-rabotaet",
       "page": "/articles/vychet-na-detey-kak-rabotaet.html",
-      "status": "planned"
-    },
-    {
-      "q": "сколько можно удерживать из зарплаты по исполнительным документам",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "uderzhaniya-iz-zarplaty-predel",
-      "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
       "status": "planned"
     },
     {
@@ -717,6 +718,20 @@
       "status": "published"
     },
     {
+      "q": "калькулятор потребительского кредита в сбербанке",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "credit",
+      "page": "/credit.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента с пополнением",
       "score": 9.0,
       "clicks": 0.0,
@@ -785,20 +800,6 @@
       ],
       "cluster": "vychet-na-detey-kak-rabotaet",
       "page": "/articles/vychet-na-detey-kak-rabotaet.html",
-      "status": "planned"
-    },
-    {
-      "q": "сколько можно удерживать из зарплаты работников",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "uderzhaniya-iz-zarplaty-predel",
-      "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
       "status": "planned"
     },
     {
@@ -1069,6 +1070,20 @@
       "status": "published"
     },
     {
+      "q": "калькулятор потребительского кредита в сбербанке на сегодня",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "credit",
+      "page": "/credit.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор сложного процента онлайн",
       "score": 8.0,
       "clicks": 0.0,
@@ -1122,21 +1137,6 @@
       ],
       "cluster": "vychet-na-detey-kak-rabotaet",
       "page": "/articles/vychet-na-detey-kak-rabotaet.html",
-      "status": "planned"
-    },
-    {
-      "q": "сколько можно удерживать из зарплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "uderzhaniya-iz-zarplaty-predel",
-      "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
       "status": "planned"
     },
     {
@@ -1555,6 +1555,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор потребительского кредита",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "credit",
+      "page": "/credit.html",
+      "status": "published"
+    },
+    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -1610,20 +1625,6 @@
       ],
       "cluster": "vychet-na-detey-kak-rabotaet",
       "page": "/articles/vychet-na-detey-kak-rabotaet.html",
-      "status": "planned"
-    },
-    {
-      "q": "сколько можно удерживать из зарплаты по исполнительным документам",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "uderzhaniya-iz-zarplaty-predel",
-      "page": "/articles/uderzhaniya-iz-zarplaty-predel.html",
       "status": "planned"
     },
     {
@@ -1838,6 +1839,10 @@
       "score": 10.0
     },
     {
+      "id": "credit",
+      "score": 10.0
+    },
+    {
       "id": "budget",
       "score": 10.0
     },
@@ -1847,10 +1852,6 @@
     },
     {
       "id": "vychet-na-detey-kak-rabotaet",
-      "score": 10.0
-    },
-    {
-      "id": "uderzhaniya-iz-zarplaty-predel",
       "score": 10.0
     },
     {
