@@ -572,6 +572,68 @@ function calcCredit(form) {
   setHtml("credit-schedule", renderCreditSchedule(sim.schedule));
 }
 
+function calcDismissal(form) {
+  const salary = parseNumber(form.salary.value);
+  const workDays = parseNumber(form.workDays.value);
+  const workedDays = parseNumber(form.workedDays.value);
+  const monthsWorked = Math.max(1, Math.min(12, parseNumber(form.months.value) || 12));
+  const income = parseNumber(form.income.value);
+  const unusedDays = parseNumber(form.unusedDays.value) || 0;
+
+  const daysGross = workDays > 0 ? (salary / workDays) * workedDays : 0;
+  const avgDaily = income / monthsWorked / 29.3;
+  const compGross = avgDaily * unusedDays;
+
+  const dayRate = salaryFromGross(salary, 0, null);
+  const daysNdfl = daysGross * dayRate.effectiveRate;
+  const impliedMonthly = income / monthsWorked;
+  const compRate = salaryFromGross(impliedMonthly, 0, null);
+  const compNdfl = compGross * compRate.effectiveRate;
+  const gross = daysGross + compGross;
+  const ndfl = daysNdfl + compNdfl;
+
+  setText("dismissal-days", formatRub(daysGross));
+  setText("dismissal-comp", formatRub(compGross));
+  setText("dismissal-gross", formatRub(gross));
+  setText("dismissal-ndfl", formatRub(ndfl));
+  setText("dismissal-net", formatRub(gross - ndfl));
+
+  const steps = [
+    { label: "Оклад за месяц", value: formatRub(salary) },
+    { label: "Рабочих дней в месяце", value: String(workDays) },
+    { label: "Отработано дней", value: String(workedDays) },
+    {
+      label: "Зарплата за отработанные дни до НДФЛ",
+      value:
+        workDays > 0
+          ? `${formatRub(salary)} ÷ ${workDays} × ${workedDays} = ${formatRub(daysGross)}`
+          : "укажите рабочие дни месяца",
+    },
+    { label: "Доход за расчётный период", value: formatRub(income) },
+    { label: "Месяцев в расчёте", value: String(monthsWorked) },
+    {
+      label: "Средний дневной заработок",
+      value: `${formatRub(income)} ÷ ${monthsWorked} ÷ 29,3 = ${formatRubPrecise(avgDaily)}`,
+    },
+    { label: "Неиспользованных дней отпуска", value: String(unusedDays) },
+    {
+      label: "Компенсация отпуска до НДФЛ",
+      value: `${formatRubPrecise(avgDaily)} × ${unusedDays} = ${formatRub(compGross)}`,
+    },
+    {
+      label: "НДФЛ с компенсации (ставка от среднего за месяц)",
+      value: `${formatRub(compGross)} × ${formatPercent(compRate.effectiveRate)} = ${formatRub(compNdfl)}`,
+    },
+    {
+      label: "НДФЛ с зарплаты за дни (ставка от оклада)",
+      value: `${formatRub(daysGross)} × ${formatPercent(dayRate.effectiveRate)} = ${formatRub(daysNdfl)}`,
+    },
+    { label: "Итого до НДФЛ", value: formatRub(gross) },
+    { label: "На руки", value: formatRub(gross - ndfl) },
+  ];
+  setHtml("dismissal-steps", renderStepsTable(steps));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
@@ -579,4 +641,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("sick-form", calcSick);
   bindCalculator("mortgage-form", calcMortgage);
   bindCalculator("credit-form", calcCredit);
+  bindCalculator("dismissal-form", calcDismissal);
 });
