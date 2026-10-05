@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-05T10:30:13",
+  "generated": "2026-10-05T08:58:25",
   "semantics": {
     "counts": {
       "published": 30,
@@ -18,26 +18,22 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "очередь уже не пуста"
+      "дневной кап уже выбран"
     ]
   },
   "drip": {
-    "enabled": true,
-    "published": [
-      "dve-raboty-ndfl.html"
-    ],
+    "enabled": false,
+    "published": [],
     "skipped": [
-      "annuitet-vs-differencirovannyy.html: нет первоисточника",
-      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
-      "byudzhet-50-30-20.html: нет первоисточника"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
-    "ok": 0,
+    "ok": 36,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 36
   },
   "audit": {
     "orphans": [],
@@ -69,9 +65,21 @@
     "connected": false,
     "files": []
   },
-  "yandex": {},
+  "yandex": {
+    "updated": "2026-10-05",
+    "webmaster": {
+      "connected": true,
+      "error": null,
+      "n": 0
+    },
+    "wordstat": {
+      "connected": false,
+      "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
+      "n": 0
+    }
+  },
   "demand": {
-    "suggest_ok": 0,
+    "suggest_ok": 29,
     "webmaster": true,
     "wordstat": false,
     "added": [],
@@ -92,15 +100,14 @@
     "verdict": "yellow",
     "reasons": [
       "в очереди 28 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: dve-raboty-ndfl.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
