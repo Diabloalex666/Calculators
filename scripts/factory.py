@@ -427,6 +427,53 @@ def sys9_refresh(days: int = 120) -> list[dict]:
     return out
 
 
+_MARK_NEW_HUB = '<span class="mark-new">New</span>'
+_MARK_NEW_PAGE = '<p class="mark-new">New</p>'
+_MARK_NEW_RE = re.compile(
+    r"[ \t]*<(?:span|p) class=\"mark-new\">New</(?:span|p)>\n?"
+)
+
+
+def strip_mark_new_html(html: str) -> str:
+    return _MARK_NEW_RE.sub("", html)
+
+
+def clear_mark_new() -> None:
+    articles = ROOT / "articles"
+    for path in articles.glob("*.html"):
+        html = path.read_text(encoding="utf-8")
+        cleaned = strip_mark_new_html(html)
+        if cleaned != html:
+            path.write_text(cleaned, encoding="utf-8", newline="\n")
+
+
+def stamp_mark_new(slug: str) -> None:
+    """Badge lives only on the article just dripped: page hero + hub link."""
+    clear_mark_new()
+    page = ROOT / "articles" / slug
+    if page.is_file() and page.name != "index.html":
+        html = page.read_text(encoding="utf-8")
+        stamped, n = re.subn(
+            r'(<section class="hero">\s*)(<h1>)',
+            rf"\1{_MARK_NEW_PAGE}\n        \2",
+            html,
+            count=1,
+        )
+        if n:
+            page.write_text(stamped, encoding="utf-8", newline="\n")
+    hub = ROOT / "articles" / "index.html"
+    if hub.is_file():
+        html = hub.read_text(encoding="utf-8")
+        stamped, n = re.subn(
+            rf'(<a href="{re.escape(slug)}">[^<]*</a>)',
+            rf"\1{_MARK_NEW_HUB}",
+            html,
+            count=1,
+        )
+        if n:
+            hub.write_text(stamped, encoding="utf-8", newline="\n")
+
+
 def ensure_hub_link(slug: str, title: str) -> None:
     hub = ROOT / "articles" / "index.html"
     html = hub.read_text(encoding="utf-8")
@@ -504,6 +551,7 @@ def sys6_drip(smap: dict) -> dict:
         result["published"].append(src.name)
         src.unlink()
     if result["published"]:
+        stamp_mark_new(result["published"][-1])
         build_sitemap.main()
         save_json(stamp_path, {"date": today, "files": published_today})
         urls = [f"{SITE}/articles/{name}" for name in result["published"]]
