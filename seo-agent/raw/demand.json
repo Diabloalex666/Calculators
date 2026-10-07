@@ -219,6 +219,21 @@
       "status": "planned"
     },
     {
+      "q": "калькулятор зарплаты за период",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published"
+    },
+    {
       "q": "если зарплата 100000 сколько на руки",
       "score": 10.0,
       "clicks": 0.0,
@@ -494,20 +509,6 @@
       "status": "published"
     },
     {
-      "q": "бюджет семьи на месяц таблица готовая",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "budget-semya",
-      "page": "/articles/byudzhet-semi-na-mesyats.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор зарплаты на руки за вычетом ндфл",
       "score": 9.0,
       "clicks": 0.0,
@@ -591,6 +592,20 @@
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "planned"
+    },
+    {
+      "q": "калькулятор зарплаты за месяц",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published"
     },
     {
       "q": "80000 до вычета налогов это сколько на руки",
@@ -845,21 +860,6 @@
       "status": "published"
     },
     {
-      "q": "бюджет семьи на месяц",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "budget-semya",
-      "page": "/articles/byudzhet-semi-na-mesyats.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор зарплаты на руки 2026",
       "score": 8.0,
       "clicks": 0.0,
@@ -970,6 +970,20 @@
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "planned"
+    },
+    {
+      "q": "калькулятор заработной платы за период",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published"
     },
     {
       "q": "80 000 на руки сколько с ндфл",
@@ -1139,20 +1153,6 @@
       ],
       "cluster": "credit",
       "page": "/credit.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт при увольнении сроки выплаты и перечисления",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "dismissal",
-      "page": "/dismissal.html",
       "status": "published"
     }
   ],
@@ -1369,6 +1369,21 @@
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "planned"
+    },
+    {
+      "q": "калькулятор зарплаты за период",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published"
     },
     {
       "q": "если зарплата 100000 сколько на руки",
@@ -1646,20 +1661,6 @@
       "status": "published"
     },
     {
-      "q": "бюджет семьи на месяц таблица готовая",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "budget-semya",
-      "page": "/articles/byudzhet-semi-na-mesyats.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор зарплаты на руки за вычетом ндфл",
       "score": 9.0,
       "clicks": 0.0,
@@ -1897,6 +1898,10 @@
       "score": 10.0
     },
     {
+      "id": "zarplata-za-period",
+      "score": 10.0
+    },
+    {
       "id": "zarplata-100000",
       "score": 10.0
     },
@@ -1962,10 +1967,6 @@
     },
     {
       "id": "budget",
-      "score": 10.0
-    },
-    {
-      "id": "budget-semya",
       "score": 10.0
     },
     {

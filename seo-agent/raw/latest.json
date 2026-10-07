@@ -1,12 +1,12 @@
 {
-  "generated": "2026-10-07T07:31:13",
+  "generated": "2026-10-07T14:25:45",
   "semantics": {
     "counts": {
-      "published": 37,
+      "published": 38,
       "planned": 26
     },
     "holes": [],
-    "total": 63
+    "total": 64
   },
   "briefs": {
     "created": [],
@@ -29,11 +29,11 @@
     ]
   },
   "monitor": {
-    "ok": 43,
+    "ok": 44,
     "bad": [],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 43
+    "checked": 44
   },
   "audit": {
     "orphans": [],
