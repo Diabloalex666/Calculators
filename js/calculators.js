@@ -894,33 +894,199 @@ function formatDotDate(y, m, d) {
   return `${String(d).padStart(2, "0")}.${String(m).padStart(2, "0")}.${y}`;
 }
 
-function formatDotTyping(raw) {
-  const digits = String(raw || "").replace(/\D/g, "").slice(0, 8);
-  if (digits.length <= 2) return digits;
-  if (digits.length <= 4) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
-  return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
+function isLeapYear(year) {
+  return year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0);
+}
+
+function daysInMonth(year, month) {
+  if (month === 2) return isLeapYear(year) ? 29 : 28;
+  if (month === 4 || month === 6 || month === 9 || month === 11) return 30;
+  return 31;
+}
+
+function browserToday() {
+  const now = new Date();
+  return { y: now.getFullYear(), m: now.getMonth() + 1, d: now.getDate() };
+}
+
+function maxDayForParts(monthText, yearText) {
+  if (monthText.length !== 2) return 31;
+  const month = Number(monthText);
+  if (month < 1 || month > 12) return 31;
+  if (month === 2 && yearText.length !== 4) return 29;
+  const year = yearText.length === 4 ? Number(yearText) : 2001;
+  return daysInMonth(year, month);
+}
+
+function clampDayPart(dayText, monthText, yearText) {
+  if (!dayText || dayText.length < 2) return dayText;
+  const day = Number(dayText);
+  if (day < 1) return "";
+  const max = maxDayForParts(monthText, yearText);
+  return String(Math.min(day, max)).padStart(2, "0");
+}
+
+function splitDotParts(value) {
+  const bits = String(value || "").split(".");
+  return {
+    d: (bits[0] || "").replace(/\D/g, "").slice(0, 2),
+    m: (bits[1] || "").replace(/\D/g, "").slice(0, 2),
+    y: (bits[2] || "").replace(/\D/g, "").slice(0, 4),
+  };
+}
+
+function renderDotParts(parts) {
+  return `${parts.d}.${parts.m}.${parts.y}`;
+}
+
+function partAt(pos, dayText, monthText) {
+  const monthStart = dayText.length + 1;
+  const yearStart = dayText.length + 1 + monthText.length + 1;
+  if (pos < monthStart) return "d";
+  if (pos < yearStart) return "m";
+  return "y";
+}
+
+function applyMonthDigit(soFar, digit) {
+  if (!soFar) {
+    if (digit >= "2" && digit <= "9") return { value: `0${digit}`, done: true };
+    if (digit === "0" || digit === "1") return { value: digit, done: false };
+    return null;
+  }
+  const month = Number(soFar + digit);
+  if (month < 1 || month > 12) return null;
+  return { value: String(month).padStart(2, "0"), done: true };
+}
+
+function applyDayDigit(soFar, digit, maxDay) {
+  if (!soFar) {
+    const n = Number(digit);
+    if (n >= 4 && n <= 9) {
+      if (n > maxDay) return null;
+      return { value: `0${digit}`, done: true };
+    }
+    if (n === 0) return { value: "0", done: false };
+    if (n >= 1 && n <= 3) {
+      if (n * 10 > maxDay) return null;
+      return { value: digit, done: false };
+    }
+    return null;
+  }
+  const day = Number(soFar + digit);
+  if (day < 1 || day > maxDay) return null;
+  return { value: String(day).padStart(2, "0"), done: true };
+}
+
+function applyYearDigit(soFar, digit) {
+  const start = soFar.length >= 4 ? "" : soFar;
+  const value = start + digit;
+  return { value, done: value.length === 4 };
+}
+
+function finalizeDotParts(parts) {
+  let month = parts.m;
+  let day = parts.d;
+  const year = parts.y;
+  if (month.length === 1) {
+    const n = Number(month);
+    month = n >= 1 && n <= 9 ? `0${month}` : "";
+  } else if (month.length === 2 && (Number(month) < 1 || Number(month) > 12)) {
+    month = "";
+  }
+  if (day.length === 1) {
+    const n = Number(day);
+    const max = maxDayForParts(month, year);
+    day = n >= 1 && n <= max ? `0${day}` : "";
+  }
+  day = clampDayPart(day, month, year);
+  return { d: day, m: month, y: year };
+}
+
+function caretAfterDotPart(parts, part, done) {
+  if (part === "d") return done ? parts.d.length + 1 : parts.d.length;
+  if (part === "m") {
+    const start = parts.d.length + 1;
+    return done ? start + parts.m.length + 1 : start + parts.m.length;
+  }
+  const start = parts.d.length + 1 + parts.m.length + 1;
+  return done ? renderDotParts(parts).length : start + parts.y.length;
+}
+
+function writeDotInput(input, parts, part, done) {
+  input.value = renderDotParts(parts);
+  const pos = caretAfterDotPart(parts, part, done);
+  try {
+    input.setSelectionRange(pos, pos);
+  } catch (error) {
+    /* поле без каретки */
+  }
+  input.dispatchEvent(new Event("input", { bubbles: true }));
+}
+
+function typeDotDigit(input, digit) {
+  const parts = splitDotParts(input.value);
+  const pos = input.selectionStart == null ? 0 : input.selectionStart;
+  const part = partAt(pos, parts.d, parts.m);
+  const current = parts[part];
+  const fresh = current.length >= (part === "y" ? 4 : 2);
+  let applied = null;
+  if (part === "m") applied = applyMonthDigit(fresh ? "" : current, digit);
+  else if (part === "d") applied = applyDayDigit(fresh ? "" : current, digit, maxDayForParts(parts.m, parts.y));
+  else applied = applyYearDigit(fresh ? "" : current, digit);
+  if (!applied) return;
+  parts[part] = applied.value;
+  if (part !== "d") parts.d = clampDayPart(parts.d, parts.m, parts.y);
+  writeDotInput(input, parts, part, applied.done);
+}
+
+function backspaceDotPart(input) {
+  const parts = splitDotParts(input.value);
+  const pos = input.selectionStart == null ? 0 : input.selectionStart;
+  const part = partAt(pos, parts.d, parts.m);
+  parts[part] = parts[part].slice(0, -1);
+  if (part !== "d") parts.d = clampDayPart(parts.d, parts.m, parts.y);
+  writeDotInput(input, parts, part, false);
 }
 
 function bindDotDateField(input) {
   if (!input || input.dataset.dotDate === "1") return;
   input.dataset.dotDate = "1";
   input.addEventListener(
-    "input",
-    () => {
-      const next = formatDotTyping(input.value);
-      if (next === input.value) return;
-      const caret = input.selectionStart || 0;
-      const delta = next.length - input.value.length;
-      input.value = next;
-      const pos = Math.max(0, Math.min(next.length, caret + delta));
-      try {
-        input.setSelectionRange(pos, pos);
-      } catch (error) {
-        /* поле без каретки */
+    "beforeinput",
+    (event) => {
+      if (event.inputType === "insertText") {
+        event.preventDefault();
+        if (event.data && /^\d$/.test(event.data)) typeDotDigit(input, event.data);
+        return;
+      }
+      if (event.inputType === "deleteContentBackward" || event.inputType === "deleteContentForward") {
+        event.preventDefault();
+        backspaceDotPart(input);
       }
     },
     true
   );
+  input.addEventListener("paste", (event) => {
+    const text = event.clipboardData ? event.clipboardData.getData("text") : "";
+    const match = String(text || "").trim().match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+    if (!match) return;
+    event.preventDefault();
+    const month = Number(match[2]);
+    if (month < 1 || month > 12) return;
+    const parts = finalizeDotParts({
+      d: match[1].padStart(2, "0"),
+      m: String(month).padStart(2, "0"),
+      y: match[3],
+    });
+    writeDotInput(input, parts, "y", true);
+  });
+  input.addEventListener("blur", () => {
+    const parts = finalizeDotParts(splitDotParts(input.value));
+    const next = renderDotParts(parts);
+    if (next === input.value) return;
+    input.value = next;
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+  });
 }
 
 function isoDate(y, m, d) {
@@ -1175,10 +1341,25 @@ function periodSignature(form) {
   return `${form.from.value}|${form.to.value}|${mode}|${periodYearOpen ? "year" : "month"}|${periodViewMonth}|${keys.map((key) => `${key}:${periodMarks[key]}`).join(",")}`;
 }
 
+function applyOpeningPeriod(form) {
+  if (!form || form.dataset.periodOpened === "1") return;
+  form.dataset.periodOpened = "1";
+  const today = browserToday();
+  const last = daysInMonth(today.y, today.m);
+  form.from.value = formatDotDate(today.y, today.m, 1);
+  form.to.value = formatDotDate(today.y, today.m, last);
+  if (today.y === PROD_2026.year) {
+    periodViewMonth = today.m;
+    periodSeenMonth = today.m;
+  }
+}
+
 function ensurePeriodViewMonth(form) {
   const parsed = parseIsoDate(form.from.value);
   const fromMonth = parsed && parsed.y === PROD_2026.year ? parsed.m : null;
-  if (periodViewMonth == null) periodViewMonth = fromMonth || 11;
+  const today = browserToday();
+  const todayMonth = today.y === PROD_2026.year ? today.m : null;
+  if (periodViewMonth == null) periodViewMonth = fromMonth || todayMonth || 1;
   if (fromMonth && fromMonth !== periodSeenMonth) {
     periodViewMonth = fromMonth;
     periodSeenMonth = fromMonth;
@@ -1472,11 +1653,13 @@ function fillNormMonthSelect(select) {
     option.textContent = `${PROD_MONTHS[month]} — ${PROD_2026.hours40[month]} ч`;
     select.appendChild(option);
   }
-  select.value = "11";
+  const today = browserToday();
+  select.value = today.y === PROD_2026.year ? String(today.m) : "1";
   select.dataset.ready = "1";
 }
 
 function calcPeriodSalary(form) {
+  applyOpeningPeriod(form);
   const byDays = form.countMode.value !== "hours";
   toggleFormFields(form, "gross", form.amountMode.value === "gross");
   toggleFormFields(form, "net", form.amountMode.value === "net");
@@ -1522,7 +1705,9 @@ function calcPeriodSalary(form) {
     overtimeHours: byDays ? parseNumber(form.overtime.value) : 0,
     overtimeMode: form.overtimeMode.value,
     workedHours: form.workedHours ? parseNumber(form.workedHours.value) : 0,
-    normMonth: form.normMonth ? form.normMonth.value : "11",
+    normMonth: form.normMonth && form.normMonth.value
+      ? form.normMonth.value
+      : (browserToday().y === PROD_2026.year ? String(browserToday().m) : "1"),
   });
 
   setText("period-net", result.ok ? formatRub(result.net) : "—");
