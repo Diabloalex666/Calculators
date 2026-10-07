@@ -855,6 +855,8 @@ let periodCalBound = false;
 let periodViewMonth = null;
 let periodYearOpen = false;
 let periodSeenMonth = null;
+let periodDrag = null;
+let periodIgnoreClick = false;
 
 function prodOff(month, day) {
   return PROD_2026.off[month].indexOf(day) !== -1;
@@ -1018,7 +1020,6 @@ function calcPeriodPay(input) {
   let cursor = Date.UTC(from.y, from.m - 1, from.d);
   const end = Date.UTC(to.y, to.m - 1, to.d);
   let sickDays = 0;
-  let offMarked = 0;
 
   while (cursor <= end) {
     const dt = new Date(cursor);
@@ -1027,16 +1028,15 @@ function calcPeriodPay(input) {
     const key = isoDate(PROD_2026.year, m, d);
     const mark = marks[key];
     if (!monthStats[m]) {
-      monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, offMarked: 0 };
+      monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, offHours: 0 };
     }
     const off = prodOff(m, d);
     if (mark === "sick" && !off) {
       monthStats[m].sick += 1;
       sickDays += 1;
     } else if (mark === "work" && off) {
-      monthStats[m].offMarked += 1;
-      offMarked += 1;
-    } else if (mark === "work") {
+      monthStats[m].offHours += PROD_2026.hoursPerDay;
+    } else if (!off) {
       monthStats[m].workedDays += 1;
       monthStats[m].workedHours += prodShort(m, d) ? PROD_2026.shortHours : PROD_2026.hoursPerDay;
     }
@@ -1075,6 +1075,28 @@ function calcPeriodPay(input) {
 
   let premiumLeft = overtimeMode === "tk" ? 2 : 0;
   let overtimePay = 0;
+  const coefText = overtimeMode === "tk" ? "первые 2 ч периода × 1,5, дальше × 2" : "× 1";
+
+  rows.forEach((row) => {
+    const hours = row.stat.offHours || 0;
+    if (hours <= 0) return;
+    const rate = row.normHours > 0 ? grossMonthly / row.normHours : 0;
+    let pay = 0;
+    if (overtimeMode === "tk") {
+      const premium = Math.min(premiumLeft, hours);
+      premiumLeft -= premium;
+      const rest = Math.max(0, hours - premium);
+      pay = rate * (premium * 1.5 + rest * 2);
+    } else {
+      pay = rate * hours;
+    }
+    overtimePay += pay;
+    steps.push({
+      label: `Выходные и праздники, ${PROD_MONTHS[row.m]}`,
+      value: `${formatRubPrecise(rate)}/ч × ${String(hours).replace(".", ",")} ч, ${coefText} = ${formatRub(pay)}`,
+    });
+  });
+
   const totalUnits = rows.reduce((sum, row) => sum + row.units, 0);
   let hoursLeft = overtimeHours;
 
@@ -1102,8 +1124,6 @@ function calcPeriodPay(input) {
     }
     overtimePay += pay;
     if (hours > 0) {
-      const coefText =
-        overtimeMode === "tk" ? "первые 2 ч периода × 1,5, дальше × 2" : "× 1";
       steps.push({
         label: `Переработка, ${PROD_MONTHS[row.m]}`,
         value: `${formatRubPrecise(rate)}/ч × ${String(hours).replace(".", ",")} ч, ${coefText} = ${formatRub(pay)}`,
@@ -1111,7 +1131,8 @@ function calcPeriodPay(input) {
     }
   });
 
-  if (overtimeHours > 0 && overtimeMode === "tk") {
+  const offHoursTotal = rows.reduce((sum, row) => sum + (row.stat.offHours || 0), 0);
+  if ((overtimeHours > 0 || offHoursTotal > 0) && overtimeMode === "tk") {
     steps.push({
       label: "Коэффициенты переработки",
       value: "ст. 152 ТК РФ: первые 2 часа не менее ×1,5, последующие не менее ×2. Со 121-го часа в году каждый час не менее ×2; годовой счётчик в поле не ведётся",
@@ -1122,12 +1143,6 @@ function calcPeriodPay(input) {
     steps.push({
       label: "Дни болезни",
       value: `${sickDays} — в эту сумму не входят`,
-    });
-  }
-  if (offMarked > 0) {
-    steps.push({
-      label: "Отмечено в выходные и праздники",
-      value: `${offMarked} — в оплату периода не входят, часы можно указать в переработке`,
     });
   }
 
@@ -1210,10 +1225,11 @@ function renderPeriodMonth(m, from, to, markMode) {
       if (off) button.classList.add("is-off");
       if (short) button.classList.add("is-short");
       if (inside) button.classList.add("is-in");
-      if (periodMarks[key] === "work") button.classList.add("is-work");
-      if (periodMarks[key] === "sick") button.classList.add("is-sick");
-      const state =
-        periodMarks[key] === "work" ? "отработан" : periodMarks[key] === "sick" ? "болезнь" : "не отмечен";
+      const mark = periodMarks[key];
+      const worked = mark === "work" || (inside && !off && mark !== "sick");
+      if (mark === "sick") button.classList.add("is-sick");
+      else if (worked) button.classList.add("is-work");
+      const state = mark === "sick" ? "болезнь" : worked ? "отработан" : "не отмечен";
       button.setAttribute(
         "aria-label",
         `${d} ${PROD_MONTHS[m]}, ${off ? "выходной или праздник" : short ? "сокращённый" : "рабочий"}, ${state}`
@@ -1279,7 +1295,97 @@ function renderPeriodCalendar(form) {
   host.appendChild(board);
 }
 
+function paintPeriodMark(form, key, mode) {
+  if (!key || periodMarks[key] === mode) return false;
+  periodMarks[key] = mode;
+  expandPeriodToDate(form, parseIsoDate(key));
+  return true;
+}
+
+function setPeriodDragRange(form, start, end) {
+  if (!start || !end) return;
+  const from = dateOrder(start, end) <= 0 ? start : end;
+  const to = dateOrder(start, end) <= 0 ? end : start;
+  form.from.value = formatDotDate(from.y, from.m, from.d);
+  form.to.value = formatDotDate(to.y, to.m, to.d);
+  periodAnchor = null;
+}
+
+function periodDayAt(x, y) {
+  const el = document.elementFromPoint(x, y);
+  const button = el && el.closest ? el.closest("button[data-date]") : null;
+  const host = document.getElementById("period-calendar");
+  if (!button || button.disabled || !host || !host.contains(button)) return null;
+  return button;
+}
+
+function onPeriodPointerDown(event) {
+  if (event.button !== 0) return;
+  if (event.target.closest("button[data-cal]")) return;
+  const button = event.target.closest("button[data-date]");
+  if (!button || button.disabled) return;
+  const form = document.getElementById("period-form");
+  const host = document.getElementById("period-calendar");
+  if (!form || !host) return;
+  periodIgnoreClick = false;
+  periodDrag = {
+    pointerId: event.pointerId,
+    mode: form.markMode.value,
+    startKey: button.dataset.date,
+    startDate: parseIsoDate(button.dataset.date),
+    lastKey: button.dataset.date,
+    moved: false,
+  };
+  try {
+    if (host.setPointerCapture) host.setPointerCapture(event.pointerId);
+  } catch (err) {
+    /* жест всё равно завершится по pointerup */
+  }
+}
+
+function onPeriodPointerMove(event) {
+  if (!periodDrag || event.pointerId !== periodDrag.pointerId) return;
+  if (event.buttons === 0) {
+    onPeriodPointerUp(event);
+    return;
+  }
+  const button = periodDayAt(event.clientX, event.clientY);
+  if (!button || button.dataset.date === periodDrag.lastKey) return;
+  const form = document.getElementById("period-form");
+  if (!form) return;
+  const key = button.dataset.date;
+  periodDrag.moved = true;
+  if (periodDrag.mode === "period") {
+    setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
+  } else {
+    paintPeriodMark(form, periodDrag.startKey, periodDrag.mode);
+    paintPeriodMark(form, key, periodDrag.mode);
+  }
+  periodDrag.lastKey = key;
+  periodCalSig = "";
+  calcPeriodSalary(form);
+}
+
+function onPeriodPointerUp(event) {
+  if (!periodDrag) return;
+  if (event && event.pointerId !== undefined && event.pointerId !== periodDrag.pointerId) return;
+  if (periodDrag.moved) periodIgnoreClick = true;
+  const host = document.getElementById("period-calendar");
+  try {
+    if (host && event && event.pointerId !== undefined && host.hasPointerCapture && host.hasPointerCapture(event.pointerId)) {
+      host.releasePointerCapture(event.pointerId);
+    }
+  } catch (err) {
+    /* кнопка уже отпущена */
+  }
+  periodDrag = null;
+}
+
 function onPeriodCalendarClick(event) {
+  if (periodIgnoreClick) {
+    periodIgnoreClick = false;
+    return;
+  }
   const form = document.getElementById("period-form");
   if (!form) return;
   const nav = event.target.closest("button[data-cal]");
@@ -1332,16 +1438,30 @@ function expandPeriodToDate(form, date) {
   form.to.value = formatDotDate(end.y, end.m, end.d);
 }
 
-function updatePeriodMarkCount() {
+function updatePeriodMarkCount(form) {
   const el = document.getElementById("period-mark-count");
   if (!el) return;
-  let work = 0;
-  let sick = 0;
+  const worked = new Set();
+  const sick = new Set();
+  const from = form ? parseIsoDate(form.from.value) : null;
+  const to = form ? parseIsoDate(form.to.value) : null;
+  if (from && to && from.y === PROD_2026.year && to.y === PROD_2026.year && dateOrder(from, to) <= 0) {
+    let cursor = Date.UTC(from.y, from.m - 1, from.d);
+    const end = Date.UTC(to.y, to.m - 1, to.d);
+    while (cursor <= end) {
+      const dt = new Date(cursor);
+      const m = dt.getUTCMonth() + 1;
+      const d = dt.getUTCDate();
+      const key = isoDate(PROD_2026.year, m, d);
+      if (!prodOff(m, d) && periodMarks[key] !== "sick") worked.add(key);
+      cursor += 86400000;
+    }
+  }
   Object.keys(periodMarks).forEach((key) => {
-    if (periodMarks[key] === "work") work += 1;
-    else if (periodMarks[key] === "sick") sick += 1;
+    if (periodMarks[key] === "work") worked.add(key);
+    else if (periodMarks[key] === "sick") sick.add(key);
   });
-  el.textContent = `Отработано: ${work} дн. · Больничных: ${sick} дн.`;
+  el.textContent = `Отработано: ${worked.size} дн. · Больничных: ${sick.size} дн.`;
 }
 
 function fillNormMonthSelect(select) {
@@ -1373,19 +1493,25 @@ function calcPeriodSalary(form) {
   const host = document.getElementById("period-calendar");
   if (host && !periodCalBound) {
     host.addEventListener("click", onPeriodCalendarClick);
+    host.addEventListener("pointerdown", onPeriodPointerDown);
+    host.addEventListener("pointermove", onPeriodPointerMove);
+    host.addEventListener("pointerup", onPeriodPointerUp);
+    host.addEventListener("pointercancel", onPeriodPointerUp);
     periodCalBound = true;
   }
 
   ensurePeriodViewMonth(form);
-  updatePeriodMarkCount();
+  updatePeriodMarkCount(form);
   const sig = periodSignature(form);
   if (sig !== periodCalSig) {
     periodCalSig = sig;
     renderPeriodCalendar(form);
   }
 
-  const amount =
+  const salaryEntered =
     form.amountMode.value === "net" ? parseNumber(form.net.value) : parseNumber(form.gross.value);
+  const allowance = form.allowance ? Math.max(0, parseNumber(form.allowance.value)) : 0;
+  const amount = Math.max(0, salaryEntered) + allowance;
   const result = calcPeriodPay({
     amount,
     amountMode: form.amountMode.value,

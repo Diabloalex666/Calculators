@@ -1625,6 +1625,7 @@ input[type="range"]::-moz-range-thumb {
 
 #period-calendar {
   margin: 0.25rem 0 1rem;
+  user-select: none;
 }
 
 .period-cal-bar {

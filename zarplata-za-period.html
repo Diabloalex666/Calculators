@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=20-fields" />
+    <link rel="stylesheet" href="css/style.css?v=21-drag" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -89,6 +89,10 @@
             <div class="form-row" data-field="net" hidden>
               <label for="net">Сумма на руки, ₽/мес</label>
               <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
+            </div>
+            <div class="form-row">
+              <label for="allowance">Персональная надбавка, ₽/мес</label>
+              <input id="allowance" name="allowance" type="text" inputmode="numeric" autocomplete="off" value="0" />
             </div>
             <div class="form-row">
               <span class="block-label" style="margin-bottom: 0.45rem">Считать</span>
@@ -276,7 +280,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=16"></script>
+    <script src="js/calculators.js?v=20"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
