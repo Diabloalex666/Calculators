@@ -103,15 +103,15 @@
                 </label>
               </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" data-field="by-days">
               <label for="from">Начало периода</label>
               <input id="from" name="from" type="date" min="2026-01-01" max="2026-12-31" value="2026-11-01" />
             </div>
-            <div class="form-row">
+            <div class="form-row" data-field="by-days">
               <label for="to">Конец периода</label>
               <input id="to" name="to" type="date" min="2026-01-01" max="2026-12-31" value="2026-11-30" />
             </div>
-            <div class="form-row">
+            <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
               <div class="segment segment-3" role="radiogroup" aria-label="Что отметить">
                 <label class="seg">
@@ -128,12 +128,20 @@
                 </label>
               </div>
             </div>
-            <div id="period-calendar" aria-label="Производственный календарь 2026"></div>
-            <div class="form-row">
+            <div id="period-calendar" data-field="by-days" aria-label="Производственный календарь 2026"></div>
+            <div class="form-row" data-field="by-hours" hidden>
+              <label for="worked-hours">Отработано часов</label>
+              <input id="worked-hours" name="workedHours" type="number" min="0" step="0.5" value="0" />
+            </div>
+            <div class="form-row" data-field="by-hours" hidden>
+              <label for="norm-month">Месяц нормы часов</label>
+              <select id="norm-month" name="normMonth"></select>
+            </div>
+            <div class="form-row" data-field="by-days">
               <label for="overtime">Переработка, часы</label>
               <input id="overtime" name="overtime" type="number" min="0" step="0.5" value="0" />
             </div>
-            <div class="form-row">
+            <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Оплата переработки</span>
               <div class="segment" role="radiogroup" aria-label="Коэффициент переработки">
                 <label class="seg">
@@ -157,7 +165,7 @@
           <div class="result-row"><span>До НДФЛ</span><span id="period-before">—</span></div>
           <div class="result-row"><span>НДФЛ</span><span id="period-ndfl">—</span></div>
           <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
-          <div class="result-row"><span>Переработка до НДФЛ</span><span id="period-overtime">—</span></div>
+          <div class="result-row" id="period-overtime-row"><span>Переработка до НДФЛ</span><span id="period-overtime">—</span></div>
         </aside>
       </div>
 
@@ -184,7 +192,7 @@
           <a href="https://www.consultant.ru/document/cons_doc_LAW_515170/">постановлении Правительства РФ от 24.09.2025 № 1466</a>:
           с субботы 3 января на пятницу 9 января и с воскресенья 4 января на четверг 31 декабря.
           Сокращённые на один час дни: 30 апреля, 8 мая, 11 июня и 3 ноября.
-          В режиме «по часам» обычный рабочий день — 8 часов, сокращённый — 7.
+          В режиме «по часам» введите отработанные часы и месяц: оклад делится на норму часов этого месяца из того же календаря.
         </p>
         <h3>НДФЛ и переработка</h3>
         <p>
@@ -265,7 +273,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=12"></script>
+    <script src="js/calculators.js?v=13"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

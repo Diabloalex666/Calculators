@@ -902,6 +902,49 @@ function calcPeriodPay(input) {
   const to = parseIsoDate(input.to);
   const marks = input.marks || {};
   const steps = [];
+  const grossMonthly = amountMode === "net" ? grossFromNet(amount, 0, null) : amount;
+
+  if (countMode === "hours") {
+    const month = Math.min(12, Math.max(1, Math.round(Number(input.normMonth) || 1)));
+    const normHours = PROD_2026.hours40[month];
+    const workedHours = Math.max(0, Number(input.workedHours) || 0);
+    const beforeTax = normHours > 0 ? (grossMonthly / normHours) * workedHours : 0;
+    const rated = salaryFromGross(grossMonthly, 0, null);
+    const ndfl = beforeTax * rated.effectiveRate;
+    steps.push({
+      label: amountMode === "net" ? "Введено на руки в месяц" : "Оклад в договоре до налога",
+      value: formatRub(amount),
+    });
+    if (amountMode === "net") {
+      steps.push({
+        label: "Оклад до налога",
+        value: `${formatRub(grossMonthly)} — тем же пересчётом, что в калькуляторе зарплаты`,
+      });
+    }
+    steps.push({
+      label: `${PROD_MONTHS[month]}, норма часов`,
+      value: `${normHours} ч при 40-часовой неделе`,
+    });
+    steps.push({
+      label: "До НДФЛ",
+      value: `${formatRub(grossMonthly)} ÷ ${normHours} ч × ${String(workedHours).replace(".", ",")} ч = ${formatRub(beforeTax)}`,
+    });
+    steps.push({
+      label: "НДФЛ",
+      value: `${formatRub(beforeTax)} × ${formatPercent(rated.effectiveRate)} = ${formatRub(ndfl)}`,
+    });
+    steps.push({ label: "На руки", value: formatRub(beforeTax - ndfl) });
+    return {
+      ok: true,
+      beforeTax,
+      ndfl,
+      net: beforeTax - ndfl,
+      grossMonthly,
+      overtimePay: 0,
+      rate: rated.effectiveRate,
+      steps,
+    };
+  }
 
   if (!from || !to || from.y !== PROD_2026.year || to.y !== PROD_2026.year || dateOrder(from, to) > 0) {
     return {
@@ -915,7 +958,6 @@ function calcPeriodPay(input) {
     };
   }
 
-  const grossMonthly = amountMode === "net" ? grossFromNet(amount, 0, null) : amount;
   steps.push({
     label: amountMode === "net" ? "Введено на руки в месяц" : "Оклад в договоре до налога",
     value: formatRub(amount),
@@ -1232,9 +1274,27 @@ function onPeriodCalendarClick(event) {
   calcPeriodSalary(form);
 }
 
+function fillNormMonthSelect(select) {
+  if (!select || select.dataset.ready === "1") return;
+  for (let month = 1; month <= 12; month += 1) {
+    const option = document.createElement("option");
+    option.value = String(month);
+    option.textContent = `${PROD_MONTHS[month]} — ${PROD_2026.hours40[month]} ч`;
+    select.appendChild(option);
+  }
+  select.value = "11";
+  select.dataset.ready = "1";
+}
+
 function calcPeriodSalary(form) {
+  const byDays = form.countMode.value !== "hours";
   toggleFormFields(form, "gross", form.amountMode.value === "gross");
   toggleFormFields(form, "net", form.amountMode.value === "net");
+  toggleFormFields(form, "by-days", byDays);
+  toggleFormFields(form, "by-hours", !byDays);
+  fillNormMonthSelect(form.normMonth);
+  const overtimeRow = document.getElementById("period-overtime-row");
+  if (overtimeRow) overtimeRow.hidden = !byDays;
 
   const host = document.getElementById("period-calendar");
   if (host && !periodCalBound) {
@@ -1258,8 +1318,10 @@ function calcPeriodSalary(form) {
     from: form.from.value,
     to: form.to.value,
     marks: periodMarks,
-    overtimeHours: parseNumber(form.overtime.value),
+    overtimeHours: byDays ? parseNumber(form.overtime.value) : 0,
     overtimeMode: form.overtimeMode.value,
+    workedHours: form.workedHours ? parseNumber(form.workedHours.value) : 0,
+    normMonth: form.normMonth ? form.normMonth.value : "11",
   });
 
   setText("period-net", result.ok ? formatRub(result.net) : "—");
