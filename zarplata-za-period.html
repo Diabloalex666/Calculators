@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data: https://mc.yandex.ru https://*.yandex.net https://*.yandex.ru; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://mc.yandex.ru https://yandex.ru https://*.yandex.ru; connect-src 'self' https://mc.yandex.ru https://*.yandex.ru https://finpulse-feedback.finraz.workers.dev; font-src 'self' data:; frame-src https://yandex.ru https://*.yandex.ru; upgrade-insecure-requests"
+    />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" type="image/png" sizes="120x120" href="icon-120.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <title>Калькулятор зарплаты за период 2026 | FinPulse</title>
+    <meta
+      name="description"
+      content="Зарплата за выбранный период 2026: оклад делится на норму месяца по производственному календарю и умножается на отмеченные дни или часы. Больничный не входит. Оценка, не расчётный листок."
+    />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://finraz.ru/zarplata-za-period.html" />
+    <meta property="og:title" content="Калькулятор зарплаты за период — FinPulse" />
+    <meta
+      property="og:description"
+      content="Оклад за отмеченные дни или часы по производственному календарю 2026. Это оценка, не расчётный листок."
+    />
+    <meta property="og:url" content="https://finraz.ru/zarplata-za-period.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css?v=18-month" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Калькулятор зарплаты за период",
+        "url": "https://finraz.ru/zarplata-za-period.html",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Any",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
+        "inLanguage": "ru-RU"
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="site-nav" aria-label="Основная навигация">
+        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html#calculators">Калькуляторы</a></li>
+          <li><a href="articles/index.html">Статьи</a></li>
+          <li><a href="about.html">О проекте</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Навигация">
+        <a href="index.html">Главная</a> → <span aria-current="page">Зарплата за период</span>
+      </nav>
+
+      <section class="hero page-hero">
+        <h1>Калькулятор зарплаты за выбранный период</h1>
+        <p>Оклад за отмеченные дни или часы. Норма каждого месяца — из производственного календаря на 2026 год.</p>
+      </section>
+
+      <div class="calc-workspace">
+        <div class="panel calc-params">
+          <p class="block-label">Параметры</p>
+          <form id="period-form">
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Зарплата</span>
+              <div class="segment" role="radiogroup" aria-label="Как задана зарплата">
+                <label class="seg">
+                  <input type="radio" name="amountMode" value="gross" checked />
+                  <span>До налога</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="amountMode" value="net" />
+                  <span>На руки</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row" data-field="gross">
+              <label for="gross">Оклад до налога, ₽/мес</label>
+              <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="100 000" />
+            </div>
+            <div class="form-row" data-field="net" hidden>
+              <label for="net">Сумма на руки, ₽/мес</label>
+              <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
+            </div>
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Считать</span>
+              <div class="segment" role="radiogroup" aria-label="Дни или часы">
+                <label class="seg">
+                  <input type="radio" name="countMode" value="days" checked />
+                  <span>По дням</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="countMode" value="hours" />
+                  <span>По часам</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row">
+              <label for="from">Начало периода</label>
+              <input id="from" name="from" type="date" min="2026-01-01" max="2026-12-31" value="2026-11-01" />
+            </div>
+            <div class="form-row">
+              <label for="to">Конец периода</label>
+              <input id="to" name="to" type="date" min="2026-01-01" max="2026-12-31" value="2026-11-30" />
+            </div>
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
+              <div class="segment segment-3" role="radiogroup" aria-label="Что отметить">
+                <label class="seg">
+                  <input type="radio" name="markMode" value="period" />
+                  <span>Период</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="markMode" value="work" checked />
+                  <span>Отработал</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="markMode" value="sick" />
+                  <span>Болел</span>
+                </label>
+              </div>
+            </div>
+            <div id="period-calendar" aria-label="Производственный календарь 2026"></div>
+            <div class="form-row">
+              <label for="overtime">Переработка, часы</label>
+              <input id="overtime" name="overtime" type="number" min="0" step="0.5" value="0" />
+            </div>
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Оплата переработки</span>
+              <div class="segment" role="radiogroup" aria-label="Коэффициент переработки">
+                <label class="seg">
+                  <input type="radio" name="overtimeMode" value="flat" />
+                  <span>1×</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="overtimeMode" value="tk" checked />
+                  <span>Как в ТК РФ</span>
+                </label>
+              </div>
+            </div>
+            <button class="calc-submit" type="submit">Рассчитать</button>
+          </form>
+        </div>
+
+        <aside class="result result-panel" id="result">
+          <p class="result-kicker">На руки</p>
+          <p class="result-hero" id="period-net" aria-live="polite">—</p>
+          <p class="result-context">Оценка, не расчётный листок</p>
+          <div class="result-row"><span>До НДФЛ</span><span id="period-before">—</span></div>
+          <div class="result-row"><span>НДФЛ</span><span id="period-ndfl">—</span></div>
+          <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
+          <div class="result-row"><span>Переработка до НДФЛ</span><span id="period-overtime">—</span></div>
+        </aside>
+      </div>
+
+      <section class="calc-ledger">
+        <h2 class="calc-steps-title">Пошаговый расчёт</h2>
+        <div id="period-steps"></div>
+        <p class="note">Это оценка, не расчётный листок.</p>
+      </section>
+
+      <section class="seo-block article-block">
+        <h2>Как считается оплата за период</h2>
+        <p>
+          По каждому месяцу отдельно: оклад до налога делится на норму этого месяца
+          и умножается на отработанные дни или часы.
+          День, отмеченный как болезнь, в сумму не входит.
+          Пособие по больничному считается в
+          <a href="sick.html">калькуляторе больничного</a>.
+        </p>
+        <p class="article-formula">Оклад ÷ норма месяца × отработанные дни или часы</p>
+        <p>
+          Норма дней и часов при 40-часовой неделе взята из
+          <a href="https://www.consultant.ru/law/ref/calendar/proizvodstvennye/2026/">производственного календаря на 2026 год</a>.
+          Перенос выходных — в
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_515170/">постановлении Правительства РФ от 24.09.2025 № 1466</a>:
+          с субботы 3 января на пятницу 9 января и с воскресенья 4 января на четверг 31 декабря.
+          Сокращённые на один час дни: 30 апреля, 8 мая, 11 июня и 3 ноября.
+          В режиме «по часам» обычный рабочий день — 8 часов, сокращённый — 7.
+        </p>
+        <h3>НДФЛ и переработка</h3>
+        <p>
+          Если введена сумма на руки, оклад до налога находится так же, как в
+          <a href="salary.html">калькуляторе зарплаты</a>, по прогрессивной шкале.
+          С суммы за период удерживается НДФЛ по ставке этого оклада.
+          Переработка «как в ТК РФ» — по
+          <a href="https://www.consultant.ru/document/cons_doc_LAW_34683/c6eeef5fbf30c0b7f380760295dd5d0b47730bdb/">ст. 152 ТК РФ</a>:
+          первые два часа не менее чем в полуторном размере, последующие — не менее чем в двойном.
+          Со 121-го часа в году каждый час не менее чем в двойном размере; отдельного годового счётчика на странице нет,
+          поэтому полуторный размер остаётся на первых двух часах введённой переработки.
+        </p>
+      </section>
+
+      <nav class="related-calc" aria-label="Другие калькуляторы">
+        <h2>Другие калькуляторы</h2>
+        <ul>
+          <li><a href="salary.html">Калькулятор зарплаты на руки</a></li>
+          <li><a href="sick.html">Калькулятор больничного</a></li>
+          <li><a href="dismissal.html">Расчёт при увольнении</a></li>
+        </ul>
+      </nav>
+
+      <div class="donate no-print">
+        <strong>Поддержать проект</strong>
+        <p class="note" style="margin-top: 0.5rem">Если калькулятор помог — можно оставить чаевые.</p>
+        <a
+          class="donate-btn"
+          href="https://boosty.to/alexeyvasilev/donate"
+          data-boosty-link
+          target="_blank"
+          rel="noopener"
+          >Поддержать на Boosty</a
+        >
+      </div>
+
+      <section class="feedback no-print" id="feedback">
+        <h2>Предложить калькулятор или идею</h2>
+        <p class="note">Расскажите, чего не хватает — мы читаем все сообщения.</p>
+        <form id="feedback-form" class="feedback-form" novalidate>
+          <div class="form-row">
+            <label for="feedback-message">Ваше сообщение</label>
+            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Например: калькулятор рефинансирования"></textarea>
+          </div>
+          <div class="form-row">
+            <label for="feedback-contact">Контакт для ответа (необязательно)</label>
+            <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
+          </div>
+          <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <label class="feedback-consent">
+            <input type="checkbox" name="consent" required />
+            <span>Согласен на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a></span>
+          </label>
+          <button type="submit" class="feedback-submit">Отправить</button>
+          <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <footer class="site-footer">
+        <p class="footer-links">
+          <a href="index.html">Главная</a>
+          · <a href="zarplata-za-period.html">Зарплата за период</a>
+          · <a href="salary.html">Зарплата</a>
+          · <a href="vacation.html">Отпускные</a>
+          · <a href="sick.html">Больничный</a>
+          · <a href="mortgage.html">Ипотека</a>
+          · <a href="credit.html">Кредит</a>
+          · <a href="dismissal.html">Увольнение</a>
+          · <a href="articles/index.html">Статьи</a>
+        </p>
+        <p class="footer-note">Справочные расчёты, не юридическая и не бухгалтерская консультация.</p>
+        <p class="footer-nav">
+          <a href="about.html">О проекте</a>
+          · <a href="privacy.html">Конфиденциальность</a>
+          · <a href="terms.html">Соглашение</a>
+        </p>
+        <p class="footer-copy">© FinPulse</p>
+      </footer>
+    </div>
+    <script src="js/common.js?v=3"></script>
+    <script src="js/calculators.js?v=12"></script>
+    <script src="js/config.js?v=2"></script>
+    <script src="js/analytics.js?v=2"></script>
+    <script src="js/seo.js?v=1"></script>
+    <script src="js/feedback.js?v=3"></script>
+  </body>
+</html>

@@ -21,6 +21,23 @@
       }
     },
     {
+      "id": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published",
+      "intent": "tool",
+      "main": {
+        "q": "калькулятор зарплаты за период",
+        "vol": null
+      },
+      "demand": {
+        "score": 1.0,
+        "sources": [
+          "seed"
+        ],
+        "updated": "2026-10-07"
+      }
+    },
+    {
       "id": "zarplata-100000",
       "page": "/articles/zarplata-100000-na-ruki.html",
       "status": "published",

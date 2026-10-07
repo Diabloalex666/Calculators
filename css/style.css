@@ -1618,3 +1618,135 @@ input[type="range"]::-moz-range-thumb {
   -webkit-overflow-scrolling: touch;
   margin: 0.75rem 0 1.25rem;
 }
+
+.segment.segment-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+#period-calendar {
+  margin: 0.25rem 0 1rem;
+}
+
+.period-cal-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.period-cal-caption {
+  flex: 1;
+  margin: 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.period-nav,
+.period-year-btn {
+  min-height: var(--control-h);
+  border: 1px solid var(--field);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.period-nav {
+  width: var(--control-h);
+}
+
+.period-year-btn {
+  padding: 0 0.9rem;
+}
+
+.period-nav:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.period-nav:focus-visible,
+.period-year-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.period-year {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem 0.75rem;
+}
+
+.period-month-view .period-day {
+  min-height: 40px;
+  font-size: 0.9rem;
+}
+
+.period-dow,
+.period-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.period-dow {
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
+.period-day {
+  min-height: 28px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.period-day.is-blank {
+  border-color: transparent;
+  background: transparent;
+}
+
+.period-day.is-off {
+  color: var(--muted);
+  background: var(--surface-2);
+}
+
+.period-day.is-short {
+  box-shadow: inset 0 -2px 0 var(--field);
+}
+
+.period-day.is-in {
+  border-color: var(--field);
+}
+
+.period-day.is-work {
+  background: var(--accent-soft);
+  font-weight: 700;
+}
+
+.period-day.is-sick {
+  color: var(--danger);
+  text-decoration: line-through;
+}
+
+.period-day:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.period-day:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+@media (max-width: 780px) {
+  .period-year {
+    grid-template-columns: 1fr;
+  }
+}

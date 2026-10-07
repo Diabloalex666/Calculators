@@ -3,6 +3,7 @@
 Бесплатные калькуляторы: зарплата на руки (НДФЛ 2026), отпускные, больничный, ипотека, сложный процент, бюджет.
 
 Главная: https://finraz.ru/
+Калькулятор зарплаты за период: https://finraz.ru/zarplata-za-period.html
 Калькулятор зарплаты: https://finraz.ru/salary.html
 Отпускные: https://finraz.ru/vacation.html
 Больничный: https://finraz.ru/sick.html

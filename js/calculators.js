@@ -809,6 +809,467 @@ function calcNalogOrg(form) {
   setHtml("org-steps", renderStepsTable(steps));
 }
 
+const PROD_2026 = {
+  year: 2026,
+  hoursPerDay: 8,
+  shortHours: 7,
+  workDays: { 1: 15, 2: 19, 3: 21, 4: 22, 5: 19, 6: 21, 7: 23, 8: 21, 9: 22, 10: 22, 11: 20, 12: 22 },
+  hours40: { 1: 120, 2: 152, 3: 168, 4: 175, 5: 151, 6: 167, 7: 184, 8: 168, 9: 176, 10: 176, 11: 159, 12: 176 },
+  off: {
+    1: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 17, 18, 24, 25, 31],
+    2: [1, 7, 8, 14, 15, 21, 22, 23, 28],
+    3: [1, 7, 8, 9, 14, 15, 21, 22, 28, 29],
+    4: [4, 5, 11, 12, 18, 19, 25, 26],
+    5: [1, 2, 3, 9, 10, 11, 16, 17, 23, 24, 30, 31],
+    6: [6, 7, 12, 13, 14, 20, 21, 27, 28],
+    7: [4, 5, 11, 12, 18, 19, 25, 26],
+    8: [1, 2, 8, 9, 15, 16, 22, 23, 29, 30],
+    9: [5, 6, 12, 13, 19, 20, 26, 27],
+    10: [3, 4, 10, 11, 17, 18, 24, 25, 31],
+    11: [1, 4, 7, 8, 14, 15, 21, 22, 28, 29],
+    12: [5, 6, 12, 13, 19, 20, 26, 27, 31],
+  },
+  short: { 4: [30], 5: [8], 6: [11], 11: [3] },
+};
+
+const PROD_MONTHS = [
+  "",
+  "Январь",
+  "Февраль",
+  "Март",
+  "Апрель",
+  "Май",
+  "Июнь",
+  "Июль",
+  "Август",
+  "Сентябрь",
+  "Октябрь",
+  "Ноябрь",
+  "Декабрь",
+];
+
+const periodMarks = {};
+let periodAnchor = null;
+let periodCalSig = "";
+let periodCalBound = false;
+let periodViewMonth = null;
+let periodYearOpen = false;
+let periodSeenFrom = "";
+
+function prodOff(month, day) {
+  return PROD_2026.off[month].indexOf(day) !== -1;
+}
+
+function prodShort(month, day) {
+  const list = PROD_2026.short[month];
+  return Boolean(list && list.indexOf(day) !== -1);
+}
+
+function parseIsoDate(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
+  if (!match) return null;
+  const y = Number(match[1]);
+  const m = Number(match[2]);
+  const d = Number(match[3]);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return null;
+  return { y, m, d };
+}
+
+function isoDate(y, m, d) {
+  return `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+}
+
+function dateOrder(a, b) {
+  if (a.y !== b.y) return a.y - b.y;
+  if (a.m !== b.m) return a.m - b.m;
+  return a.d - b.d;
+}
+
+function inDateRange(y, m, d, from, to) {
+  if (!from || !to) return false;
+  const cur = { y, m, d };
+  return dateOrder(from, cur) <= 0 && dateOrder(cur, to) <= 0;
+}
+
+function calcPeriodPay(input) {
+  const amount = Math.max(0, Number(input.amount) || 0);
+  const amountMode = input.amountMode === "net" ? "net" : "gross";
+  const countMode = input.countMode === "hours" ? "hours" : "days";
+  const overtimeHours = Math.max(0, Number(input.overtimeHours) || 0);
+  const overtimeMode = input.overtimeMode === "tk" ? "tk" : "flat";
+  const from = parseIsoDate(input.from);
+  const to = parseIsoDate(input.to);
+  const marks = input.marks || {};
+  const steps = [];
+
+  if (!from || !to || from.y !== PROD_2026.year || to.y !== PROD_2026.year || dateOrder(from, to) > 0) {
+    return {
+      ok: false,
+      beforeTax: 0,
+      ndfl: 0,
+      net: 0,
+      grossMonthly: 0,
+      overtimePay: 0,
+      steps: [{ label: "Период", value: "выберите даты внутри 2026 года" }],
+    };
+  }
+
+  const grossMonthly = amountMode === "net" ? grossFromNet(amount, 0, null) : amount;
+  steps.push({
+    label: amountMode === "net" ? "Введено на руки в месяц" : "Оклад в договоре до налога",
+    value: formatRub(amount),
+  });
+  if (amountMode === "net") {
+    steps.push({
+      label: "Оклад до налога",
+      value: `${formatRub(grossMonthly)} — тем же пересчётом, что в калькуляторе зарплаты`,
+    });
+  }
+
+  const monthStats = {};
+  let cursor = Date.UTC(from.y, from.m - 1, from.d);
+  const end = Date.UTC(to.y, to.m - 1, to.d);
+  let sickDays = 0;
+  let offMarked = 0;
+
+  while (cursor <= end) {
+    const dt = new Date(cursor);
+    const m = dt.getUTCMonth() + 1;
+    const d = dt.getUTCDate();
+    const key = isoDate(PROD_2026.year, m, d);
+    const mark = marks[key];
+    if (!monthStats[m]) {
+      monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, offMarked: 0 };
+    }
+    const off = prodOff(m, d);
+    if (mark === "sick" && !off) {
+      monthStats[m].sick += 1;
+      sickDays += 1;
+    } else if (mark === "work" && off) {
+      monthStats[m].offMarked += 1;
+      offMarked += 1;
+    } else if (mark === "work") {
+      monthStats[m].workedDays += 1;
+      monthStats[m].workedHours += prodShort(m, d) ? PROD_2026.shortHours : PROD_2026.hoursPerDay;
+    }
+    cursor += 86400000;
+  }
+
+  const monthIds = Object.keys(monthStats)
+    .map(Number)
+    .sort((a, b) => a - b);
+  let base = 0;
+  const rows = [];
+
+  monthIds.forEach((m) => {
+    const stat = monthStats[m];
+    const normDays = PROD_2026.workDays[m];
+    const normHours = PROD_2026.hours40[m];
+    const units = countMode === "hours" ? stat.workedHours : stat.workedDays;
+    const norm = countMode === "hours" ? normHours : normDays;
+    const part = norm > 0 ? (grossMonthly / norm) * units : 0;
+    base += part;
+    rows.push({ m, stat, normDays, normHours, units, part });
+    const normLabel = countMode === "hours" ? `${normHours} ч` : `${normDays} дн.`;
+    const workedLabel = countMode === "hours" ? `${stat.workedHours} ч` : String(stat.workedDays);
+    steps.push({
+      label: `${PROD_MONTHS[m]}, норма месяца`,
+      value: countMode === "hours" ? `${normHours} ч при 40-часовой неделе` : `${normDays} рабочих дней`,
+    });
+    steps.push({
+      label: `${PROD_MONTHS[m]} до НДФЛ`,
+      value:
+        norm > 0
+          ? `${formatRub(grossMonthly)} ÷ ${normLabel} × ${workedLabel} = ${formatRub(part)}`
+          : "нет нормы месяца",
+    });
+  });
+
+  let premiumLeft = overtimeMode === "tk" ? 2 : 0;
+  let overtimePay = 0;
+  const totalUnits = rows.reduce((sum, row) => sum + row.units, 0);
+  let hoursLeft = overtimeHours;
+
+  rows.forEach((row, index) => {
+    let hours = 0;
+    if (overtimeHours > 0) {
+      if (totalUnits <= 0) {
+        hours = index === 0 ? overtimeHours : 0;
+      } else if (index === rows.length - 1) {
+        hours = hoursLeft;
+      } else {
+        hours = overtimeHours * (row.units / totalUnits);
+        hoursLeft -= hours;
+      }
+    }
+    const rate = row.normHours > 0 ? grossMonthly / row.normHours : 0;
+    let pay = 0;
+    if (overtimeMode === "tk") {
+      const premium = Math.min(premiumLeft, hours);
+      premiumLeft -= premium;
+      const rest = Math.max(0, hours - premium);
+      pay = rate * (premium * 1.5 + rest * 2);
+    } else {
+      pay = rate * hours;
+    }
+    overtimePay += pay;
+    if (hours > 0) {
+      const coefText =
+        overtimeMode === "tk" ? "первые 2 ч периода × 1,5, дальше × 2" : "× 1";
+      steps.push({
+        label: `Переработка, ${PROD_MONTHS[row.m]}`,
+        value: `${formatRubPrecise(rate)}/ч × ${String(hours).replace(".", ",")} ч, ${coefText} = ${formatRub(pay)}`,
+      });
+    }
+  });
+
+  if (overtimeHours > 0 && overtimeMode === "tk") {
+    steps.push({
+      label: "Коэффициенты переработки",
+      value: "ст. 152 ТК РФ: первые 2 часа не менее ×1,5, последующие не менее ×2. Со 121-го часа в году каждый час не менее ×2; годовой счётчик в поле не ведётся",
+    });
+  }
+
+  if (sickDays > 0) {
+    steps.push({
+      label: "Дни болезни",
+      value: `${sickDays} — в эту сумму не входят`,
+    });
+  }
+  if (offMarked > 0) {
+    steps.push({
+      label: "Отмечено в выходные и праздники",
+      value: `${offMarked} — в оплату периода не входят, часы можно указать в переработке`,
+    });
+  }
+
+  const beforeTax = base + overtimePay;
+  const rated = salaryFromGross(grossMonthly, 0, null);
+  const ndfl = beforeTax * rated.effectiveRate;
+  const net = beforeTax - ndfl;
+  steps.push({ label: "До НДФЛ", value: formatRub(beforeTax) });
+  steps.push({
+    label: "НДФЛ",
+    value: `${formatRub(beforeTax)} × ${formatPercent(rated.effectiveRate)} = ${formatRub(ndfl)}`,
+  });
+  steps.push({ label: "На руки", value: formatRub(net) });
+
+  return {
+    ok: true,
+    beforeTax,
+    ndfl,
+    net,
+    grossMonthly,
+    overtimePay,
+    rate: rated.effectiveRate,
+    steps,
+  };
+}
+
+function periodSignature(form) {
+  const keys = Object.keys(periodMarks).sort();
+  const mode = form.markMode ? form.markMode.value : "";
+  return `${form.from.value}|${form.to.value}|${mode}|${periodYearOpen ? "year" : "month"}|${periodViewMonth}|${keys.map((key) => `${key}:${periodMarks[key]}`).join(",")}`;
+}
+
+function ensurePeriodViewMonth(form) {
+  const from = form.from.value || "";
+  const parsed = parseIsoDate(from);
+  const fromMonth = parsed ? parsed.m : 11;
+  const seenMonth = periodSeenFrom.length >= 7 ? Number(periodSeenFrom.slice(5, 7)) : null;
+  if (periodViewMonth == null || seenMonth !== fromMonth) periodViewMonth = fromMonth;
+  periodSeenFrom = from;
+}
+
+function renderPeriodMonth(m, from, to, markMode) {
+  const month = document.createElement("div");
+  month.className = "period-month";
+  const title = document.createElement("p");
+  title.className = "block-label";
+  title.textContent = `${PROD_MONTHS[m]} · ${PROD_2026.workDays[m]} дн. · ${PROD_2026.hours40[m]} ч`;
+  month.appendChild(title);
+
+    const dow = document.createElement("div");
+    dow.className = "period-dow";
+    ["пн", "вт", "ср", "чт", "пт", "сб", "вс"].forEach((name) => {
+      const cell = document.createElement("span");
+      cell.textContent = name;
+      dow.appendChild(cell);
+    });
+    month.appendChild(dow);
+
+    const grid = document.createElement("div");
+    grid.className = "period-grid";
+    const first = new Date(Date.UTC(PROD_2026.year, m - 1, 1));
+    const lead = (first.getUTCDay() + 6) % 7;
+    for (let i = 0; i < lead; i += 1) {
+      const blank = document.createElement("span");
+      blank.className = "period-day is-blank";
+      grid.appendChild(blank);
+    }
+    const dim = new Date(Date.UTC(PROD_2026.year, m, 0)).getUTCDate();
+    for (let d = 1; d <= dim; d += 1) {
+      const key = isoDate(PROD_2026.year, m, d);
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "period-day";
+      button.dataset.date = key;
+      button.textContent = String(d);
+      const off = prodOff(m, d);
+      const short = prodShort(m, d);
+      const inside = inDateRange(PROD_2026.year, m, d, from, to);
+      if (off) button.classList.add("is-off");
+      if (short) button.classList.add("is-short");
+      if (inside) button.classList.add("is-in");
+      if (periodMarks[key] === "work") button.classList.add("is-work");
+      if (periodMarks[key] === "sick") button.classList.add("is-sick");
+      if (markMode !== "period" && !inside) button.disabled = true;
+      const state =
+        periodMarks[key] === "work" ? "отработан" : periodMarks[key] === "sick" ? "болезнь" : "не отмечен";
+      button.setAttribute(
+        "aria-label",
+        `${d} ${PROD_MONTHS[m]}, ${off ? "выходной или праздник" : short ? "сокращённый" : "рабочий"}, ${state}`
+      );
+      grid.appendChild(button);
+    }
+    month.appendChild(grid);
+  return month;
+}
+
+function renderPeriodCalendar(form) {
+  const host = document.getElementById("period-calendar");
+  if (!host) return;
+  ensurePeriodViewMonth(form);
+  const from = parseIsoDate(form.from.value);
+  const to = parseIsoDate(form.to.value);
+  const markMode = form.markMode ? form.markMode.value : "period";
+  host.replaceChildren();
+
+  const bar = document.createElement("div");
+  bar.className = "period-cal-bar";
+
+  if (!periodYearOpen) {
+    const prev = document.createElement("button");
+    prev.type = "button";
+    prev.className = "period-nav";
+    prev.dataset.cal = "prev";
+    prev.textContent = "←";
+    prev.setAttribute("aria-label", "Предыдущий месяц");
+    prev.disabled = periodViewMonth <= 1;
+    bar.appendChild(prev);
+
+    const caption = document.createElement("p");
+    caption.className = "period-cal-caption";
+    caption.textContent = `${PROD_MONTHS[periodViewMonth]} ${PROD_2026.year}`;
+    bar.appendChild(caption);
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "period-nav";
+    next.dataset.cal = "next";
+    next.textContent = "→";
+    next.setAttribute("aria-label", "Следующий месяц");
+    next.disabled = periodViewMonth >= 12;
+    bar.appendChild(next);
+  }
+
+  const yearBtn = document.createElement("button");
+  yearBtn.type = "button";
+  yearBtn.className = "period-year-btn";
+  yearBtn.dataset.cal = "year";
+  yearBtn.textContent = periodYearOpen ? "Свернуть год" : "Весь год";
+  yearBtn.setAttribute("aria-expanded", periodYearOpen ? "true" : "false");
+  bar.appendChild(yearBtn);
+  host.appendChild(bar);
+
+  const board = document.createElement("div");
+  board.className = periodYearOpen ? "period-year" : "period-month-view";
+  const months = periodYearOpen
+    ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    : [periodViewMonth];
+  months.forEach((m) => board.appendChild(renderPeriodMonth(m, from, to, markMode)));
+  host.appendChild(board);
+}
+
+function onPeriodCalendarClick(event) {
+  const form = document.getElementById("period-form");
+  if (!form) return;
+  const nav = event.target.closest("button[data-cal]");
+  if (nav && !nav.disabled) {
+    if (nav.dataset.cal === "prev") periodViewMonth = Math.max(1, periodViewMonth - 1);
+    if (nav.dataset.cal === "next") periodViewMonth = Math.min(12, periodViewMonth + 1);
+    if (nav.dataset.cal === "year") periodYearOpen = !periodYearOpen;
+    periodCalSig = "";
+    calcPeriodSalary(form);
+    return;
+  }
+  const button = event.target.closest("button[data-date]");
+  if (!button || button.disabled) return;
+  const date = parseIsoDate(button.dataset.date);
+  const mode = form.markMode.value;
+  if (mode === "period") {
+    if (!periodAnchor) {
+      periodAnchor = date;
+      form.from.value = button.dataset.date;
+      form.to.value = button.dataset.date;
+    } else {
+      const start = dateOrder(periodAnchor, date) <= 0 ? periodAnchor : date;
+      const end = dateOrder(periodAnchor, date) <= 0 ? date : periodAnchor;
+      form.from.value = isoDate(start.y, start.m, start.d);
+      form.to.value = isoDate(end.y, end.m, end.d);
+      periodAnchor = null;
+    }
+  } else {
+    const key = button.dataset.date;
+    const from = parseIsoDate(form.from.value);
+    const to = parseIsoDate(form.to.value);
+    if (!inDateRange(date.y, date.m, date.d, from, to)) return;
+    if (periodMarks[key] === mode) delete periodMarks[key];
+    else periodMarks[key] = mode;
+  }
+  periodCalSig = "";
+  calcPeriodSalary(form);
+}
+
+function calcPeriodSalary(form) {
+  toggleFormFields(form, "gross", form.amountMode.value === "gross");
+  toggleFormFields(form, "net", form.amountMode.value === "net");
+
+  const host = document.getElementById("period-calendar");
+  if (host && !periodCalBound) {
+    host.addEventListener("click", onPeriodCalendarClick);
+    periodCalBound = true;
+  }
+
+  ensurePeriodViewMonth(form);
+  const sig = periodSignature(form);
+  if (sig !== periodCalSig) {
+    periodCalSig = sig;
+    renderPeriodCalendar(form);
+  }
+
+  const amount =
+    form.amountMode.value === "net" ? parseNumber(form.net.value) : parseNumber(form.gross.value);
+  const result = calcPeriodPay({
+    amount,
+    amountMode: form.amountMode.value,
+    countMode: form.countMode.value,
+    from: form.from.value,
+    to: form.to.value,
+    marks: periodMarks,
+    overtimeHours: parseNumber(form.overtime.value),
+    overtimeMode: form.overtimeMode.value,
+  });
+
+  setText("period-net", result.ok ? formatRub(result.net) : "—");
+  setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");
+  setText("period-ndfl", result.ok ? formatRub(result.ndfl) : "—");
+  setText("period-salary", result.ok ? formatRub(result.grossMonthly) : "—");
+  setText("period-overtime", result.ok ? formatRub(result.overtimePay) : "—");
+  setHtml("period-steps", renderStepsTable(result.steps));
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
@@ -820,4 +1281,5 @@ document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("npd-form", calcSamozanyaty);
   bindCalculator("ip-form", calcNalogIp);
   bindCalculator("org-form", calcNalogOrg);
+  bindCalculator("period-form", calcPeriodSalary);
 });
