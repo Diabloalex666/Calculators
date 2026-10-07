@@ -1341,6 +1341,8 @@ function calcPeriodSalary(form) {
   fillNormMonthSelect(form.normMonth);
   bindDotDateField(form.from);
   bindDotDateField(form.to);
+  const calendar = document.getElementById("period-calendar");
+  if (calendar) calendar.hidden = !byDays;
   const overtimeRow = document.getElementById("period-overtime-row");
   if (overtimeRow) overtimeRow.hidden = !byDays;
 

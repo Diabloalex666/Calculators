@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=18-month" />
+    <link rel="stylesheet" href="css/style.css?v=19-sticky" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -128,7 +128,6 @@
                 </label>
               </div>
             </div>
-            <div id="period-calendar" data-field="by-days" aria-label="Производственный календарь 2026"></div>
             <div class="form-row" data-field="by-hours" hidden>
               <label for="worked-hours">Отработано часов</label>
               <input id="worked-hours" name="workedHours" type="number" min="0" step="0.5" value="0" />
@@ -158,6 +157,8 @@
           </form>
         </div>
 
+        <div class="period-sticky">
+          <div id="period-calendar" data-field="by-days" aria-label="Производственный календарь 2026"></div>
         <aside class="result result-panel" id="result">
           <p class="result-kicker">На руки</p>
           <p class="result-hero" id="period-net" aria-live="polite">—</p>
@@ -167,6 +168,7 @@
           <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
           <div class="result-row" id="period-overtime-row"><span>Переработка до НДФЛ</span><span id="period-overtime">—</span></div>
         </aside>
+        </div>
       </div>
 
       <section class="calc-ledger">
@@ -273,7 +275,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=14"></script>
+    <script src="js/calculators.js?v=15"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
