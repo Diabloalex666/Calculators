@@ -1780,7 +1780,47 @@ input[type="range"]::-moz-range-thumb {
 }
 
 .period-day.is-in {
-  border-color: var(--field);
+  border-color: var(--text);
+  background: var(--accent-soft);
+}
+
+.period-day.is-in.is-off {
+  color: var(--text);
+}
+
+.pay-sum-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.pay-fold-btn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.pay-fold-panel {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.pay-fold-panel[hidden] {
+  display: none !important;
+}
+
+.period-mark-hint {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 .period-day.is-work {

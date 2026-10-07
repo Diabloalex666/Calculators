@@ -857,6 +857,10 @@ let periodYearOpen = false;
 let periodSeenMonth = null;
 let periodDrag = null;
 let periodIgnoreClick = false;
+let periodAwaitingEnd = false;
+let periodRangeLocked = false;
+let periodPaySource = "parts";
+let periodPayLock = false;
 
 function prodOff(month, day) {
   return PROD_2026.off[month].indexOf(day) !== -1;
@@ -1490,6 +1494,21 @@ function setPeriodDragRange(form, start, end) {
   form.from.value = formatDotDate(from.y, from.m, from.d);
   form.to.value = formatDotDate(to.y, to.m, to.d);
   periodAnchor = null;
+  periodAwaitingEnd = false;
+  periodRangeLocked = true;
+}
+
+function periodDateInside(form, date) {
+  const from = parseIsoDate(form.from.value);
+  const to = parseIsoDate(form.to.value);
+  if (!date || !from || !to) return false;
+  return inDateRange(date.y, date.m, date.d, from, to);
+}
+
+function togglePeriodMark(key, mode) {
+  if (!key || (mode !== "work" && mode !== "sick")) return;
+  if (periodMarks[key] === mode) delete periodMarks[key];
+  else periodMarks[key] = mode;
 }
 
 function periodDayAt(x, y) {
@@ -1536,12 +1555,7 @@ function onPeriodPointerMove(event) {
   if (!form) return;
   const key = button.dataset.date;
   periodDrag.moved = true;
-  if (periodDrag.mode === "period") {
-    setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
-  } else {
-    paintPeriodMark(form, periodDrag.startKey, periodDrag.mode);
-    paintPeriodMark(form, key, periodDrag.mode);
-  }
+  setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
   periodDrag.lastKey = key;
   periodCalSig = "";
   calcPeriodSalary(form);
@@ -1581,26 +1595,24 @@ function onPeriodCalendarClick(event) {
   const button = event.target.closest("button[data-date]");
   if (!button || button.disabled) return;
   const date = parseIsoDate(button.dataset.date);
-  const mode = form.markMode.value;
-  if (mode === "period") {
-    if (!periodAnchor) {
-      periodAnchor = date;
-      form.from.value = formatDotDate(date.y, date.m, date.d);
-      form.to.value = formatDotDate(date.y, date.m, date.d);
-    } else {
-      const start = dateOrder(periodAnchor, date) <= 0 ? periodAnchor : date;
-      const end = dateOrder(periodAnchor, date) <= 0 ? date : periodAnchor;
-      form.from.value = formatDotDate(start.y, start.m, start.d);
-      form.to.value = formatDotDate(end.y, end.m, end.d);
-      periodAnchor = null;
-    }
+  if (!date) return;
+  if (event.shiftKey) {
+    const mode = form.markMode && form.markMode.value === "sick" ? "sick" : "work";
+    togglePeriodMark(button.dataset.date, mode);
+    periodCalSig = "";
+    calcPeriodSalary(form);
+    return;
+  }
+  if (periodAwaitingEnd && periodAnchor) {
+    setPeriodDragRange(form, periodAnchor, date);
+  } else if (periodRangeLocked && periodDateInside(form, date)) {
+    return;
   } else {
-    const key = button.dataset.date;
-    if (periodMarks[key] === mode) delete periodMarks[key];
-    else {
-      periodMarks[key] = mode;
-      expandPeriodToDate(form, date);
-    }
+    form.from.value = formatDotDate(date.y, date.m, date.d);
+    form.to.value = formatDotDate(date.y, date.m, date.d);
+    periodAnchor = date;
+    periodAwaitingEnd = true;
+    periodRangeLocked = false;
   }
   periodCalSig = "";
   calcPeriodSalary(form);
@@ -1658,11 +1670,43 @@ function fillNormMonthSelect(select) {
   select.dataset.ready = "1";
 }
 
+function formatPayInput(value) {
+  return new Intl.NumberFormat("ru-RU", { maximumFractionDigits: 0 }).format(Math.round(value));
+}
+
+function bindPeriodPayFold(form) {
+  if (!form || form.dataset.payFold === "1") return;
+  const button = document.getElementById("pay-fold");
+  const panel = document.getElementById("pay-fold-panel");
+  if (!button || !panel) return;
+  form.dataset.payFold = "1";
+  button.addEventListener("click", () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+}
+
+function syncPeriodPayFields(form) {
+  if (!form || !form.gross || !form.net || periodPayLock) return;
+  periodPayLock = true;
+  if (periodPaySource === "net") {
+    const net = Math.max(0, parseNumber(form.net.value));
+    if (form.allowance) form.allowance.value = "0";
+    form.gross.value = formatPayInput(grossFromNet(net, 0, null));
+  } else {
+    const gross = Math.max(0, parseNumber(form.gross.value));
+    const allowance = form.allowance ? Math.max(0, parseNumber(form.allowance.value)) : 0;
+    form.net.value = formatPayInput(salaryFromGross(gross + allowance, 0, null).net);
+  }
+  periodPayLock = false;
+}
+
 function calcPeriodSalary(form) {
   applyOpeningPeriod(form);
+  bindPeriodPayFold(form);
+  syncPeriodPayFields(form);
   const byDays = form.countMode.value !== "hours";
-  toggleFormFields(form, "gross", form.amountMode.value === "gross");
-  toggleFormFields(form, "net", form.amountMode.value === "net");
   toggleFormFields(form, "by-days", byDays);
   toggleFormFields(form, "by-hours", !byDays);
   fillNormMonthSelect(form.normMonth);
@@ -1691,13 +1735,12 @@ function calcPeriodSalary(form) {
     renderPeriodCalendar(form);
   }
 
-  const salaryEntered =
-    form.amountMode.value === "net" ? parseNumber(form.net.value) : parseNumber(form.gross.value);
+  const gross = Math.max(0, parseNumber(form.gross.value));
   const allowance = form.allowance ? Math.max(0, parseNumber(form.allowance.value)) : 0;
-  const amount = Math.max(0, salaryEntered) + allowance;
+  const amount = gross + allowance;
   const result = calcPeriodPay({
     amount,
-    amountMode: form.amountMode.value,
+    amountMode: "gross",
     countMode: form.countMode.value,
     from: form.from.value,
     to: form.to.value,
@@ -1719,6 +1762,18 @@ function calcPeriodSalary(form) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const periodForm = document.getElementById("period-form");
+  if (periodForm) {
+    periodForm.addEventListener(
+      "input",
+      (event) => {
+        const id = event.target && event.target.id;
+        if (id === "net") periodPaySource = "net";
+        if (id === "gross" || id === "allowance") periodPaySource = "parts";
+      },
+      true
+    );
+  }
   bindCalculator("salary-form", calcSalary);
   bindCalculator("vacation-form", calcVacation);
   bindCalculator("compound-form", calcCompound);

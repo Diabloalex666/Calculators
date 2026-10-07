@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=21-drag" />
+    <link rel="stylesheet" href="css/style.css?v=22-range" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -70,29 +70,17 @@
           <p class="block-label">Параметры</p>
           <form id="period-form">
             <div class="form-row">
-              <span class="block-label" style="margin-bottom: 0.45rem">Зарплата</span>
-              <div class="segment" role="radiogroup" aria-label="Как задана зарплата">
-                <label class="seg">
-                  <input type="radio" name="amountMode" value="gross" checked />
-                  <span>До налога</span>
-                </label>
-                <label class="seg">
-                  <input type="radio" name="amountMode" value="net" />
-                  <span>На руки</span>
-                </label>
+              <div class="pay-sum-label">
+                <label for="net">Сумма на руки, ₽/мес</label>
+                <button type="button" class="pay-fold-btn" id="pay-fold" aria-expanded="false" aria-controls="pay-fold-panel">Оклад и надбавка</button>
               </div>
-            </div>
-            <div class="form-row" data-field="gross">
-              <label for="gross">Оклад до налога, ₽/мес</label>
-              <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="100 000" />
-            </div>
-            <div class="form-row" data-field="net" hidden>
-              <label for="net">Сумма на руки, ₽/мес</label>
               <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
-            </div>
-            <div class="form-row">
-              <label for="allowance">Персональная надбавка, ₽/мес</label>
-              <input id="allowance" name="allowance" type="text" inputmode="numeric" autocomplete="off" value="0" />
+              <div id="pay-fold-panel" class="pay-fold-panel" hidden>
+                <label for="gross">Оклад до налога, ₽/мес</label>
+                <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="100 000" />
+                <label for="allowance">Персональная надбавка, ₽/мес</label>
+                <input id="allowance" name="allowance" type="text" inputmode="numeric" autocomplete="off" value="0" />
+              </div>
             </div>
             <div class="form-row">
               <span class="block-label" style="margin-bottom: 0.45rem">Считать</span>
@@ -117,11 +105,7 @@
             </div>
             <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
-              <div class="segment segment-3" role="radiogroup" aria-label="Что отметить">
-                <label class="seg">
-                  <input type="radio" name="markMode" value="period" />
-                  <span>Период</span>
-                </label>
+              <div class="segment" role="radiogroup" aria-label="Что отметить">
                 <label class="seg">
                   <input type="radio" name="markMode" value="work" checked />
                   <span>Отработал</span>
@@ -131,6 +115,7 @@
                   <span>Болел</span>
                 </label>
               </div>
+              <p class="period-mark-hint">Клик ставит начало, следующий — конец. Болезнь и работу в выходной отмечайте с Shift: период от этого не меняется.</p>
               <p class="period-mark-count" id="period-mark-count">Отработано: 0 дн. · Больничных: 0 дн.</p>
             </div>
             <div class="form-row" data-field="by-hours" hidden>
@@ -270,7 +255,7 @@
           · <a href="dismissal.html">Увольнение</a>
           · <a href="articles/index.html">Статьи</a>
         </p>
-        <p class="footer-note">Справочные расчёты, не юридическая и не бухгалтерская консультация.</p>
+        <p class="footer-note">Калькулятор предоставляет справочные расчёты. Калькулятор не является юридической или бухгалтерской консультацией.</p>
         <p class="footer-nav">
           <a href="about.html">О проекте</a>
           · <a href="privacy.html">Конфиденциальность</a>
@@ -280,7 +265,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=21"></script>
+    <script src="js/calculators.js?v=22"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
