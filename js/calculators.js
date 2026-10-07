@@ -854,7 +854,7 @@ let periodCalSig = "";
 let periodCalBound = false;
 let periodViewMonth = null;
 let periodYearOpen = false;
-let periodSeenFrom = "";
+let periodSeenMonth = null;
 
 function prodOff(month, day) {
   return PROD_2026.off[month].indexOf(day) !== -1;
@@ -866,14 +866,59 @@ function prodShort(month, day) {
 }
 
 function parseIsoDate(value) {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(value || ""));
-  if (!match) return null;
-  const y = Number(match[1]);
-  const m = Number(match[2]);
-  const d = Number(match[3]);
+  const text = String(value || "").trim();
+  const dotted = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(text);
+  const iso = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  let y;
+  let m;
+  let d;
+  if (dotted) {
+    d = Number(dotted[1]);
+    m = Number(dotted[2]);
+    y = Number(dotted[3]);
+  } else if (iso) {
+    y = Number(iso[1]);
+    m = Number(iso[2]);
+    d = Number(iso[3]);
+  } else {
+    return null;
+  }
   const dt = new Date(Date.UTC(y, m - 1, d));
   if (dt.getUTCFullYear() !== y || dt.getUTCMonth() !== m - 1 || dt.getUTCDate() !== d) return null;
   return { y, m, d };
+}
+
+function formatDotDate(y, m, d) {
+  return `${String(d).padStart(2, "0")}.${String(m).padStart(2, "0")}.${y}`;
+}
+
+function formatDotTyping(raw) {
+  const digits = String(raw || "").replace(/\D/g, "").slice(0, 8);
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 4) return `${digits.slice(0, 2)}.${digits.slice(2)}`;
+  return `${digits.slice(0, 2)}.${digits.slice(2, 4)}.${digits.slice(4)}`;
+}
+
+function bindDotDateField(input) {
+  if (!input || input.dataset.dotDate === "1") return;
+  input.dataset.dotDate = "1";
+  input.addEventListener(
+    "input",
+    () => {
+      const next = formatDotTyping(input.value);
+      if (next === input.value) return;
+      const caret = input.selectionStart || 0;
+      const delta = next.length - input.value.length;
+      input.value = next;
+      const pos = Math.max(0, Math.min(next.length, caret + delta));
+      try {
+        input.setSelectionRange(pos, pos);
+      } catch (error) {
+        /* поле без каретки */
+      }
+    },
+    true
+  );
 }
 
 function isoDate(y, m, d) {
@@ -1116,12 +1161,13 @@ function periodSignature(form) {
 }
 
 function ensurePeriodViewMonth(form) {
-  const from = form.from.value || "";
-  const parsed = parseIsoDate(from);
-  const fromMonth = parsed ? parsed.m : 11;
-  const seenMonth = periodSeenFrom.length >= 7 ? Number(periodSeenFrom.slice(5, 7)) : null;
-  if (periodViewMonth == null || seenMonth !== fromMonth) periodViewMonth = fromMonth;
-  periodSeenFrom = from;
+  const parsed = parseIsoDate(form.from.value);
+  const fromMonth = parsed && parsed.y === PROD_2026.year ? parsed.m : null;
+  if (periodViewMonth == null) periodViewMonth = fromMonth || 11;
+  if (fromMonth && fromMonth !== periodSeenMonth) {
+    periodViewMonth = fromMonth;
+    periodSeenMonth = fromMonth;
+  }
 }
 
 function renderPeriodMonth(m, from, to, markMode) {
@@ -1253,13 +1299,13 @@ function onPeriodCalendarClick(event) {
   if (mode === "period") {
     if (!periodAnchor) {
       periodAnchor = date;
-      form.from.value = button.dataset.date;
-      form.to.value = button.dataset.date;
+      form.from.value = formatDotDate(date.y, date.m, date.d);
+      form.to.value = formatDotDate(date.y, date.m, date.d);
     } else {
       const start = dateOrder(periodAnchor, date) <= 0 ? periodAnchor : date;
       const end = dateOrder(periodAnchor, date) <= 0 ? date : periodAnchor;
-      form.from.value = isoDate(start.y, start.m, start.d);
-      form.to.value = isoDate(end.y, end.m, end.d);
+      form.from.value = formatDotDate(start.y, start.m, start.d);
+      form.to.value = formatDotDate(end.y, end.m, end.d);
       periodAnchor = null;
     }
   } else {
@@ -1293,6 +1339,8 @@ function calcPeriodSalary(form) {
   toggleFormFields(form, "by-days", byDays);
   toggleFormFields(form, "by-hours", !byDays);
   fillNormMonthSelect(form.normMonth);
+  bindDotDateField(form.from);
+  bindDotDateField(form.to);
   const overtimeRow = document.getElementById("period-overtime-row");
   if (overtimeRow) overtimeRow.hidden = !byDays;
 
