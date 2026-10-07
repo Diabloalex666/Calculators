@@ -1212,7 +1212,6 @@ function renderPeriodMonth(m, from, to, markMode) {
       if (inside) button.classList.add("is-in");
       if (periodMarks[key] === "work") button.classList.add("is-work");
       if (periodMarks[key] === "sick") button.classList.add("is-sick");
-      if (markMode !== "period" && !inside) button.disabled = true;
       const state =
         periodMarks[key] === "work" ? "отработан" : periodMarks[key] === "sick" ? "болезнь" : "не отмечен";
       button.setAttribute(
@@ -1310,14 +1309,39 @@ function onPeriodCalendarClick(event) {
     }
   } else {
     const key = button.dataset.date;
-    const from = parseIsoDate(form.from.value);
-    const to = parseIsoDate(form.to.value);
-    if (!inDateRange(date.y, date.m, date.d, from, to)) return;
     if (periodMarks[key] === mode) delete periodMarks[key];
-    else periodMarks[key] = mode;
+    else {
+      periodMarks[key] = mode;
+      expandPeriodToDate(form, date);
+    }
   }
   periodCalSig = "";
   calcPeriodSalary(form);
+}
+
+function expandPeriodToDate(form, date) {
+  if (!date || date.y !== PROD_2026.year) return;
+  const from = parseIsoDate(form.from.value);
+  const to = parseIsoDate(form.to.value);
+  let start = from && from.y === PROD_2026.year ? from : date;
+  let end = to && to.y === PROD_2026.year ? to : date;
+  if (dateOrder(date, start) < 0) start = date;
+  if (dateOrder(date, end) > 0) end = date;
+  if (dateOrder(start, end) > 0) end = start;
+  form.from.value = formatDotDate(start.y, start.m, start.d);
+  form.to.value = formatDotDate(end.y, end.m, end.d);
+}
+
+function updatePeriodMarkCount() {
+  const el = document.getElementById("period-mark-count");
+  if (!el) return;
+  let work = 0;
+  let sick = 0;
+  Object.keys(periodMarks).forEach((key) => {
+    if (periodMarks[key] === "work") work += 1;
+    else if (periodMarks[key] === "sick") sick += 1;
+  });
+  el.textContent = `Отработано: ${work} дн. · Больничных: ${sick} дн.`;
 }
 
 function fillNormMonthSelect(select) {
@@ -1353,6 +1377,7 @@ function calcPeriodSalary(form) {
   }
 
   ensurePeriodViewMonth(form);
+  updatePeriodMarkCount();
   const sig = periodSignature(form);
   if (sig !== periodCalSig) {
     periodCalSig = sig;

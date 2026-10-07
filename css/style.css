@@ -1671,25 +1671,61 @@ input[type="range"]::-moz-range-thumb {
   outline-offset: 2px;
 }
 
+.period-mark-count {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
 .period-sticky {
   position: sticky;
-  top: 1rem;
+  top: 4.5rem;
   align-self: start;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  max-height: calc(100vh - 1.5rem);
+  max-height: calc(100vh - 5.25rem);
   min-height: 0;
 }
 
 .period-sticky #period-calendar {
-  overflow: auto;
+  margin: 0;
+  flex: 0 1 auto;
   min-height: 0;
+  overflow: auto;
 }
 
 .period-sticky .result-panel {
   position: static;
   flex: 0 0 auto;
+}
+
+@media (max-height: 780px) {
+  .period-sticky .period-month-view .period-day {
+    min-height: 32px;
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-height: 730px) {
+  .period-sticky .period-month-view .period-day {
+    min-height: 26px;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-height: 690px) {
+  .period-sticky .period-month-view .period-day {
+    min-height: 22px;
+  }
+}
+
+@media (max-width: 800px) {
+  .period-sticky {
+    position: static;
+    max-height: none;
+  }
 }
 
 .period-year {
