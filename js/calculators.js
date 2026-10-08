@@ -1811,15 +1811,20 @@ function periodFactAmount(form) {
 function showPeriodFactDiff(fact, net) {
   const el = document.getElementById("period-fact-diff");
   if (!el) return;
+  el.classList.remove("is-over", "is-short");
   if (fact === null || typeof net !== "number" || !Number.isFinite(net)) {
     el.hidden = true;
     el.textContent = "";
     return;
   }
   const diff = Math.round(fact) - Math.round(net);
-  if (diff > 0) el.textContent = `Переплата ${formatRub(diff)}`;
-  else if (diff < 0) el.textContent = `Недоплата ${formatRub(-diff)}`;
-  else el.textContent = "Без разницы";
+  if (diff > 0) {
+    el.textContent = `Переплата ${formatRub(diff)}`;
+    el.classList.add("is-over");
+  } else if (diff < 0) {
+    el.textContent = `Недоплата ${formatRub(-diff)}`;
+    el.classList.add("is-short");
+  } else el.textContent = "Без разницы";
   el.hidden = false;
 }
 

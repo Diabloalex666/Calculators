@@ -12,6 +12,7 @@
   --accent-soft: #e8efec;
   --accent-2: #163029;
   --danger: #b33a3a;
+  --ok: #1b7a45;
   --radius: 0;
   --font: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
   --font-display: "Manrope", "IBM Plex Sans", system-ui, sans-serif;
@@ -1826,6 +1827,14 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.92rem;
   font-weight: 600;
   font-variant-numeric: tabular-nums;
+}
+
+.period-fact-diff.is-over {
+  color: var(--ok);
+}
+
+.period-fact-diff.is-short {
+  color: var(--danger);
 }
 
 .period-mark-hint {
