@@ -3,46 +3,44 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 26 planned",
-    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+    "в очереди 25 planned",
+    "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
     {
-      "title": "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "title": "залиты из очереди: kompensaciya-otpuska-pri-uvolnenii.html",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
-    "today": 0,
+    "today": 1,
     "yesterday": 0,
     "plan": 1,
     "latest": [
-      "indexaciya-zarplaty-tk.html"
+      "kompensaciya-otpuska-pri-uvolnenii.html"
     ]
   },
   "topics": {
-    "planned": 26,
+    "planned": 25,
     "reserved": 0,
-    "published": 38,
+    "published": 39,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "Вебмастер API: 0 запросов"
+    "status": "файлов нет — положи CSV в seo-agent/raw/"
   },
   "positions": {
     "status": "спрос самообновляется",
     "top": [
       {
         "q": "ипотечный калькулятор",
-        "score": 2923650.0,
+        "score": 2923640.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 292364.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "ipoteka",
         "page": "/mortgage.html",
@@ -50,15 +48,13 @@
       },
       {
         "q": "калькулятор отпускных",
-        "score": 655230.0,
+        "score": 655220.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 65522.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "otpusknye",
         "page": "/vacation.html",
@@ -66,15 +62,13 @@
       },
       {
         "q": "калькулятор сложного процента",
-        "score": 387480.0,
+        "score": 387470.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 38747.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "compound",
         "page": "/compound.html",
@@ -82,14 +76,13 @@
       },
       {
         "q": "калькулятор больничного листа в 2026 году онлайн",
-        "score": 146490.0,
+        "score": 146480.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 14648.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -97,15 +90,13 @@
       },
       {
         "q": "калькулятор зарплаты на руки",
-        "score": 6480.0,
+        "score": 6470.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 647.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "zarplata-na-ruki",
         "page": "/salary.html",
@@ -113,14 +104,13 @@
       },
       {
         "q": "вычет на детей ндфл сколько",
-        "score": 5071.0,
+        "score": 5070.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 507.0,
-        "suggest": 1.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed"
+          "wordstat-json"
         ],
         "cluster": "ndfl-vychet-deti",
         "page": "/articles/ndfl-vychet-na-detey.html",
@@ -128,15 +118,13 @@
       },
       {
         "q": "когда ндфл 15 процентов",
-        "score": 4370.0,
+        "score": 4360.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 436.0,
-        "suggest": 10.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "ndfl-15-kogda",
         "page": "/articles/ndfl-15-procentov-kogda.html",
@@ -144,15 +132,13 @@
       },
       {
         "q": "как посчитать аванс от оклада",
-        "score": 799.0,
+        "score": 790.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 79.0,
-        "suggest": 9.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "cluster": "avans-ot-oklada",
         "page": "/articles/avans-ot-oklada.html",
@@ -186,24 +172,25 @@
     "noindex": []
   },
   "health": {
-    "ok": 44,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 44
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 26 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 25 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "залиты из очереди: kompensaciya-otpuska-pri-uvolnenii.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

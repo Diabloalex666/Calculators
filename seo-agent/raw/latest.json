@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-08T07:27:54",
+  "generated": "2026-10-08T10:30:09",
   "semantics": {
     "counts": {
-      "published": 38,
-      "planned": 26
+      "published": 39,
+      "planned": 25
     },
     "holes": [],
     "total": 64
@@ -22,18 +22,23 @@
     ]
   },
   "drip": {
-    "enabled": false,
-    "published": [],
+    "enabled": true,
+    "published": [
+      "kompensaciya-otpuska-pri-uvolnenii.html"
+    ],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 44,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 44
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -65,21 +70,9 @@
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-10-08",
-    "webmaster": {
-      "connected": true,
-      "error": null,
-      "n": 0
-    },
-    "wordstat": {
-      "connected": false,
-      "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
-      "n": 0
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 31,
+    "suggest_ok": 0,
     "webmaster": true,
     "wordstat": false,
     "added": [],
@@ -99,15 +92,16 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 26 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 25 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/), Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)",
       "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "залиты из очереди: kompensaciya-otpuska-pri-uvolnenii.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
