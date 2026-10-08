@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-08T08:37:38",
+  "generated": "2026-10-08T08:49:07",
   "semantics": {
     "counts": {
       "published": 39,
@@ -79,7 +79,7 @@
     }
   },
   "demand": {
-    "suggest_ok": 30,
+    "suggest_ok": 31,
     "webmaster": true,
     "wordstat": false,
     "added": [],
