@@ -13,6 +13,8 @@ const SICK_LIMITS_2026 = {
   minDaily: 890.73,
 };
 
+const CALENDAR_MONTH_DAYS = 29.3;
+
 const EMPLOYER_CONTRIB_RATE = 0.3;
 
 function childDeductionMonthly(children) {
@@ -152,6 +154,25 @@ function calcSalary(form) {
   setHtml("salary-steps", renderStepsTable(result.breakdown));
 }
 
+function vacationBenefit(income, monthsWorked, days) {
+  const months = Math.max(1, Math.min(12, monthsWorked || 12));
+  const avgDaily = income / months / CALENDAR_MONTH_DAYS;
+  const grossPay = avgDaily * days;
+  const impliedMonthly = income / months;
+  const salaryContext = salaryFromGross(impliedMonthly, 0, null);
+  const ndfl = grossPay * salaryContext.effectiveRate;
+  const netPay = grossPay - ndfl;
+  return {
+    months,
+    avgDaily,
+    grossPay,
+    impliedMonthly,
+    rate: salaryContext.effectiveRate,
+    ndfl,
+    netPay,
+  };
+}
+
 function calcVacation(form) {
   const useMonthly = form.incomeMode.value === "monthly";
   toggleFormFields(form, "yearly-income", !useMonthly);
@@ -167,27 +188,22 @@ function calcVacation(form) {
     income = parseNumber(form.income.value);
   }
 
-  const avgDaily = income / monthsWorked / 29.3;
-  const grossPay = avgDaily * days;
-  const impliedMonthly = income / monthsWorked;
-  const salaryContext = salaryFromGross(impliedMonthly, 0, null);
-  const ndfl = grossPay * salaryContext.effectiveRate;
-  const netPay = grossPay - ndfl;
+  const benefit = vacationBenefit(income, monthsWorked, days);
 
   const steps = [
     { label: "Доход за расчётный период", value: formatRub(income) },
-    { label: "Месяцев в расчёте", value: String(monthsWorked) },
-    { label: "Средний дневной заработок", value: `${formatRub(income)} ÷ ${monthsWorked} ÷ 29,3 = ${formatRubPrecise(avgDaily)}` },
+    { label: "Месяцев в расчёте", value: String(benefit.months) },
+    { label: "Средний дневной заработок", value: `${formatRub(income)} ÷ ${benefit.months} ÷ 29,3 = ${formatRubPrecise(benefit.avgDaily)}` },
     { label: "Дней отпуска", value: String(days) },
-    { label: "Отпускные до НДФЛ", value: `${formatRubPrecise(avgDaily)} × ${days} = ${formatRub(grossPay)}` },
-    { label: "НДФЛ (по ставке от средней зарплаты)", value: `${formatRub(grossPay)} × ${formatPercent(salaryContext.effectiveRate)} = ${formatRub(ndfl)}` },
-    { label: "На руки", value: formatRub(netPay) },
+    { label: "Отпускные до НДФЛ", value: `${formatRubPrecise(benefit.avgDaily)} × ${days} = ${formatRub(benefit.grossPay)}` },
+    { label: "НДФЛ (по ставке от средней зарплаты)", value: `${formatRub(benefit.grossPay)} × ${formatPercent(benefit.rate)} = ${formatRub(benefit.ndfl)}` },
+    { label: "На руки", value: formatRub(benefit.netPay) },
   ];
 
-  setText("vacation-daily", formatRubPrecise(avgDaily));
-  setText("vacation-total", formatRub(grossPay));
-  setText("vacation-net", formatRub(netPay));
-  setText("vacation-ndfl", formatRub(ndfl));
+  setText("vacation-daily", formatRubPrecise(benefit.avgDaily));
+  setText("vacation-total", formatRub(benefit.grossPay));
+  setText("vacation-net", formatRub(benefit.netPay));
+  setText("vacation-ndfl", formatRub(benefit.ndfl));
   setHtml("vacation-steps", renderStepsTable(steps));
 }
 
@@ -210,39 +226,37 @@ function calcCompound(form) {
   setText("compound-profit", formatRub(profit));
 }
 
+function capSickSplit(year2024, year2025) {
+  const capped2024 = Math.min(year2024, SICK_LIMITS_2026.income2024);
+  const capped2025 = Math.min(year2025, SICK_LIMITS_2026.income2025);
+  return {
+    total: capped2024 + capped2025,
+    capped2024,
+    capped2025,
+    wasCapped: year2024 > SICK_LIMITS_2026.income2024 || year2025 > SICK_LIMITS_2026.income2025,
+  };
+}
+
+function capSickTotal(raw) {
+  const cap = SICK_LIMITS_2026.income2024 + SICK_LIMITS_2026.income2025;
+  const total = Math.min(raw, cap);
+  return { total, capped2024: null, capped2025: null, wasCapped: raw > total };
+}
+
 function cappedSickIncome(form) {
   const splitYears = form.incomeMode.value === "split";
 
   toggleFormFields(form, "total-income", !splitYears);
   toggleFormFields(form, "split-income", splitYears);
 
-  if (splitYears) {
-    const y2024 = Math.min(parseNumber(form.income2024.value), SICK_LIMITS_2026.income2024);
-    const y2025 = Math.min(parseNumber(form.income2025.value), SICK_LIMITS_2026.income2025);
-    return {
-      total: y2024 + y2025,
-      capped2024: y2024,
-      capped2025: y2025,
-      wasCapped:
-        parseNumber(form.income2024.value) > SICK_LIMITS_2026.income2024 ||
-        parseNumber(form.income2025.value) > SICK_LIMITS_2026.income2025,
-    };
-  }
-
-  const raw = parseNumber(form.income2y.value);
-  const total = Math.min(raw, SICK_LIMITS_2026.income2024 + SICK_LIMITS_2026.income2025);
-  return { total, capped2024: null, capped2025: null, wasCapped: raw > total };
+  if (splitYears) return capSickSplit(parseNumber(form.income2024.value), parseNumber(form.income2025.value));
+  return capSickTotal(parseNumber(form.income2y.value));
 }
 
-function calcSick(form) {
-  const days = parseNumber(form.days.value) || 0;
-  const rate = Number(form.rate.value);
-  const income = cappedSickIncome(form);
-
-  let avgDaily = income.total / 730;
+function sickBenefit(total, seniority, days) {
+  let avgDaily = total / 730;
   const rawDaily = avgDaily;
   let limitedBy = "";
-
   if (avgDaily > SICK_LIMITS_2026.maxDaily) {
     avgDaily = SICK_LIMITS_2026.maxDaily;
     limitedBy = "max";
@@ -250,9 +264,35 @@ function calcSick(form) {
     avgDaily = SICK_LIMITS_2026.minDaily;
     limitedBy = "min";
   }
+  const dailyPay = avgDaily * seniority;
+  const grossPay = dailyPay * days;
+  const monthly = total / 24;
+  const salaryContext = salaryFromGross(monthly, 0, null);
+  const ndfl = grossPay * salaryContext.effectiveRate;
+  const netPay = grossPay - ndfl;
+  return {
+    avgDaily,
+    rawDaily,
+    limitedBy,
+    dailyPay,
+    grossPay,
+    monthly,
+    rate: salaryContext.effectiveRate,
+    ndfl,
+    netPay,
+  };
+}
 
-  const dailyPay = avgDaily * rate;
-  const pay = dailyPay * days;
+function calcSick(form) {
+  const days = parseNumber(form.days.value) || 0;
+  const rate = Number(form.rate.value);
+  const income = cappedSickIncome(form);
+  const benefit = sickBenefit(income.total, rate, days);
+  const avgDaily = benefit.avgDaily;
+  const rawDaily = benefit.rawDaily;
+  const limitedBy = benefit.limitedBy;
+  const dailyPay = benefit.dailyPay;
+  const pay = benefit.grossPay;
 
   const steps = [
     { label: "Доход за 2 года (с учётом лимитов)", value: formatRub(income.total) },
@@ -285,11 +325,14 @@ function calcSick(form) {
     { label: "Процент по стажу", value: formatPercent(rate) },
     { label: "Дневная выплата", value: `${formatRubPrecise(avgDaily)} × ${formatPercent(rate)} = ${formatRubPrecise(dailyPay)}` },
     { label: "Дней больничного", value: String(days) },
-    { label: "Итого больничный", value: formatRub(pay) }
+    { label: "Итого больничный", value: formatRub(pay) },
+    { label: "НДФЛ", value: `${formatRub(pay)} × ${formatPercent(benefit.rate)} = ${formatRub(benefit.ndfl)}` },
+    { label: "На руки", value: formatRub(benefit.netPay) }
   );
 
   setText("sick-daily", formatRubPrecise(dailyPay));
   setText("sick-total", formatRub(pay));
+  setText("sick-net", formatRub(benefit.netPay));
   setText("sick-base", formatRubPrecise(avgDaily));
   setText(
     "sick-limit-note",
@@ -581,7 +624,7 @@ function calcDismissal(form) {
   const unusedDays = parseNumber(form.unusedDays.value) || 0;
 
   const daysGross = workDays > 0 ? (salary / workDays) * workedDays : 0;
-  const avgDaily = income / monthsWorked / 29.3;
+  const avgDaily = income / monthsWorked / CALENDAR_MONTH_DAYS;
   const compGross = avgDaily * unusedDays;
 
   const dayRate = salaryFromGross(salary, 0, null);
@@ -1192,6 +1235,7 @@ function calcPeriodPay(input) {
   let cursor = Date.UTC(from.y, from.m - 1, from.d);
   const end = Date.UTC(to.y, to.m - 1, to.d);
   let sickDays = 0;
+  let vacationDays = 0;
 
   while (cursor <= end) {
     const dt = new Date(cursor);
@@ -1200,12 +1244,14 @@ function calcPeriodPay(input) {
     const key = isoDate(PROD_2026.year, m, d);
     const mark = marks[key];
     if (!monthStats[m]) {
-      monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, offHours: 0 };
+      monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, vacation: 0, offHours: 0 };
     }
     const off = prodOff(m, d);
     if (mark === "sick" && !off) {
       monthStats[m].sick += 1;
       sickDays += 1;
+    } else if (mark === "vacation") {
+      if (!off) monthStats[m].vacation = (monthStats[m].vacation || 0) + 1;
     } else if (mark === "work" && off) {
       monthStats[m].offHours += PROD_2026.hoursPerDay;
     } else if (!off) {
@@ -1311,10 +1357,20 @@ function calcPeriodPay(input) {
     });
   }
 
+  rows.forEach((row) => {
+    vacationDays += row.stat.vacation || 0;
+  });
+
   if (sickDays > 0) {
     steps.push({
       label: "Дни болезни",
       value: `${sickDays} — в эту сумму не входят`,
+    });
+  }
+  if (vacationDays > 0) {
+    steps.push({
+      label: "Дни отпуска",
+      value: `${vacationDays} — в эту сумму не входят`,
     });
   }
 
@@ -1452,12 +1508,13 @@ function renderPeriodMonth(m, from, to, advanceKey, salaryKey) {
       if (short) button.classList.add("is-short");
       if (inside && !off) button.classList.add("is-in");
       const mark = periodMarks[key];
-      const worked = mark === "work" || (inside && !off && mark !== "sick");
+      const worked = mark === "work" || (inside && !off && mark !== "sick" && mark !== "vacation");
       if (mark === "sick") button.classList.add("is-sick");
+      else if (mark === "vacation") button.classList.add("is-vacation");
       else if (worked) button.classList.add("is-work");
       if (key === advanceKey) button.classList.add("is-advance");
       if (key === salaryKey) button.classList.add("is-salary");
-      const state = mark === "sick" ? "болезнь" : worked ? "отработан" : "не отмечен";
+      const state = mark === "sick" ? "болезнь" : mark === "vacation" ? "отпуск" : worked ? "отработан" : "не отмечен";
       const payNote = [
         key === advanceKey ? "день аванса" : "",
         key === salaryKey ? "день зарплаты" : "",
@@ -1546,7 +1603,7 @@ function setPeriodDragRange(form, start, end) {
 }
 
 function markPeriodSpan(start, end, mode) {
-  if (!start || !end || (mode !== "work" && mode !== "sick")) return;
+  if (!start || !end || (mode !== "work" && mode !== "sick" && mode !== "vacation")) return;
   const from = dateOrder(start, end) <= 0 ? start : end;
   const to = dateOrder(start, end) <= 0 ? end : start;
   let cursor = Date.UTC(from.y, from.m - 1, from.d);
@@ -1559,13 +1616,13 @@ function markPeriodSpan(start, end, mode) {
 }
 
 function togglePeriodMark(key, mode) {
-  if (!key || (mode !== "work" && mode !== "sick")) return;
+  if (!key || (mode !== "work" && mode !== "sick" && mode !== "vacation")) return;
   if (periodMarks[key] === mode) delete periodMarks[key];
   else periodMarks[key] = mode;
 }
 
 function dayHasExplicitMark(form, key) {
-  if (periodMarks[key] === "work" || periodMarks[key] === "sick") return true;
+  if (periodMarks[key] === "work" || periodMarks[key] === "sick" || periodMarks[key] === "vacation") return true;
   const advance = payDayKey(form && form.advanceDay ? form.advanceDay.value : "");
   const salary = payDayKey(form && form.salaryDay ? form.salaryDay.value : "");
   return key === advance || key === salary;
@@ -1582,7 +1639,7 @@ function applyPeriodDayClick(form, date, key, shift) {
   if (shift) {
     const mode = markModeValue(form);
     if (mode === "advance" || mode === "salary") setPayDay(form, mode, date);
-    else togglePeriodMark(key, mode === "sick" ? "sick" : "work");
+    else togglePeriodMark(key, mode === "sick" ? "sick" : mode === "vacation" ? "vacation" : "work");
   } else if (dayHasExplicitMark(form, key)) {
     clearDayMarks(form, key);
   } else if (periodAwaitingEnd && periodAnchor && dateOrder(periodAnchor, date) !== 0) {
@@ -1731,7 +1788,6 @@ function periodMarkDateCaption(value) {
 
 function updatePeriodMarkCount(form) {
   const worked = new Set();
-  const sick = new Set();
   const from = form ? parseIsoDate(form.from.value) : null;
   const to = form ? parseIsoDate(form.to.value) : null;
   if (from && to && from.y === PROD_2026.year && to.y === PROD_2026.year && dateOrder(from, to) <= 0) {
@@ -1742,16 +1798,16 @@ function updatePeriodMarkCount(form) {
       const m = dt.getUTCMonth() + 1;
       const d = dt.getUTCDate();
       const key = isoDate(PROD_2026.year, m, d);
-      if (!prodOff(m, d) && periodMarks[key] !== "sick") worked.add(key);
+      if (!prodOff(m, d) && periodMarks[key] !== "sick" && periodMarks[key] !== "vacation") worked.add(key);
       cursor += 86400000;
     }
   }
   Object.keys(periodMarks).forEach((key) => {
     if (periodMarks[key] === "work") worked.add(key);
-    else if (periodMarks[key] === "sick") sick.add(key);
   });
   setText("mark-work-count", `${worked.size} дн.`);
-  setText("mark-sick-count", `${sick.size} дн.`);
+  setText("mark-sick-count", `${periodMarkedDays(form, "sick")} дн.`);
+  setText("mark-vacation-count", `${periodMarkedDays(form, "vacation")} дн.`);
   setText("mark-advance-date", periodMarkDateCaption(form && form.advanceDay ? form.advanceDay.value : ""));
   setText("mark-salary-date", periodMarkDateCaption(form && form.salaryDay ? form.salaryDay.value : ""));
 }
@@ -1866,7 +1922,7 @@ function periodAdvanceWorkedDays(month, fromValue, toValue) {
     if (prodOff(month, day)) continue;
     if (!inDateRange(PROD_2026.year, month, day, from, to)) continue;
     const key = isoDate(PROD_2026.year, month, day);
-    if (periodMarks[key] === "sick") continue;
+    if (periodMarks[key] === "sick" || periodMarks[key] === "vacation") continue;
     worked += 1;
   }
   return worked;
@@ -1888,91 +1944,114 @@ function periodEnteredAmount(value) {
   return Math.max(0, amount);
 }
 
-function periodSickCalendarDays(form) {
-  const from = parseIsoDate(form.from.value);
-  const to = parseIsoDate(form.to.value);
+function periodMarkedDays(form, mode) {
+  const from = parseIsoDate(form && form.from ? form.from.value : "");
+  const to = parseIsoDate(form && form.to ? form.to.value : "");
   if (!from || !to || from.y !== PROD_2026.year || to.y !== PROD_2026.year || dateOrder(from, to) > 0) return 0;
   let days = 0;
-  let cursor = Date.UTC(from.y, from.m - 1, from.d);
-  const end = Date.UTC(to.y, to.m - 1, to.d);
-  while (cursor <= end) {
-    const dt = new Date(cursor);
-    const key = isoDate(PROD_2026.year, dt.getUTCMonth() + 1, dt.getUTCDate());
-    if (periodMarks[key] === "sick") days += 1;
-    cursor += 86400000;
-  }
+  Object.keys(periodMarks).forEach((key) => {
+    if (periodMarks[key] !== mode) return;
+    const parsed = parseIsoDate(key);
+    if (!parsed) return;
+    if (dateOrder(from, parsed) <= 0 && dateOrder(parsed, to) <= 0) days += 1;
+  });
   return days;
 }
 
-function bindPeriodSickFold(form) {
-  if (!form || form.dataset.sickFold === "1") return;
-  const button = document.getElementById("sick-fold");
-  const panel = document.getElementById("sick-fold-panel");
-  if (!button || !panel) return;
-  form.dataset.sickFold = "1";
-  button.addEventListener("click", () => {
-    const open = panel.hidden;
-    panel.hidden = !open;
-    button.setAttribute("aria-expanded", open ? "true" : "false");
-  });
+function periodSeniority(value) {
+  const text = String(value == null ? "" : value);
+  if (text === "0.6" || text === "0.8" || text === "1") return Number(text);
+  return 1;
 }
 
-function periodSickBenefit(form, ndflRate, byDays) {
-  if (!byDays) return { text: "—", steps: [] };
-  const days = periodSickCalendarDays(form);
-  if (days <= 0) return { text: "—", steps: [] };
-  const income2024 = periodEnteredAmount(form.sickIncome2024 ? form.sickIncome2024.value : "");
-  const income2025 = periodEnteredAmount(form.sickIncome2025 ? form.sickIncome2025.value : "");
-  if (income2024 == null || income2025 == null) return { text: "—", steps: [] };
-
-  const capped2024 = Math.min(income2024, SICK_LIMITS_2026.income2024);
-  const capped2025 = Math.min(income2025, SICK_LIMITS_2026.income2025);
-  const total = capped2024 + capped2025;
-  let avgDaily = total / 730;
-  const rawDaily = avgDaily;
-  let limitedBy = "";
-  if (avgDaily > SICK_LIMITS_2026.maxDaily) {
-    avgDaily = SICK_LIMITS_2026.maxDaily;
-    limitedBy = "max";
-  } else if (avgDaily < SICK_LIMITS_2026.minDaily) {
-    avgDaily = SICK_LIMITS_2026.minDaily;
-    limitedBy = "min";
+function syncPeriodMarkPanels(form) {
+  const mode = markModeValue(form);
+  const sickPanel = document.getElementById("period-sick-fields");
+  const vacationPanel = document.getElementById("period-vacation-fields");
+  if (sickPanel) sickPanel.hidden = mode !== "sick";
+  if (vacationPanel) vacationPanel.hidden = mode !== "vacation";
+  if (form.sickIncomeMode) {
+    const split = form.sickIncomeMode.value === "split";
+    toggleFormFields(form, "period-sick-total", !split);
+    toggleFormFields(form, "period-sick-split", split);
   }
-  const picked = Number(form.sickRate ? form.sickRate.value : 1);
-  const seniority = picked === 0.6 || picked === 0.8 || picked === 1 ? picked : 1;
-  const beforeRounded = Math.round(avgDaily * seniority * days);
-  const taxRate = typeof ndflRate === "number" ? ndflRate : 0;
-  const ndfl = Math.round(beforeRounded * taxRate);
-  const net = beforeRounded - ndfl;
+  if (form.vacationIncomeMode) {
+    const monthly = form.vacationIncomeMode.value === "monthly";
+    toggleFormFields(form, "period-vacation-year", !monthly);
+    toggleFormFields(form, "period-vacation-month", monthly);
+  }
+}
+
+function periodSickPart(form) {
+  const days = periodMarkedDays(form, "sick");
+  if (days <= 0) return { text: formatRub(0), add: 0, steps: [] };
+  const split = form.sickIncomeMode && form.sickIncomeMode.value === "split";
+  let income = null;
+  if (split) {
+    const year2024 = periodEnteredAmount(form.sickIncome2024 ? form.sickIncome2024.value : "");
+    const year2025 = periodEnteredAmount(form.sickIncome2025 ? form.sickIncome2025.value : "");
+    if (year2024 == null || year2025 == null) return { text: "—", add: 0, steps: [] };
+    income = capSickSplit(year2024, year2025);
+  } else {
+    const raw = periodEnteredAmount(form.sickIncome2y ? form.sickIncome2y.value : "");
+    if (raw == null) return { text: "—", add: 0, steps: [] };
+    income = capSickTotal(raw);
+  }
+  const seniority = periodSeniority(form.sickRate ? form.sickRate.value : "1");
+  const benefit = sickBenefit(income.total, seniority, days);
   const steps = [
-    { label: "Дней больничного", value: String(days) },
-    { label: "Средний день", value: `${formatRub(total)} ÷ 730 = ${formatRubPrecise(rawDaily)}` },
+    { label: "Больничный, дней", value: String(days) },
+    { label: "Больничный, средний день", value: `${formatRub(income.total)} ÷ 730 = ${formatRubPrecise(benefit.rawDaily)}` },
   ];
-  if (limitedBy === "max") {
+  if (benefit.limitedBy === "max") {
     steps.push({
-      label: "Лимит дня",
+      label: "Больничный, лимит",
       value: `Применён максимум ${formatRubPrecise(SICK_LIMITS_2026.maxDaily)} / день`,
     });
-  } else if (limitedBy === "min") {
+  } else if (benefit.limitedBy === "min") {
     steps.push({
-      label: "Лимит дня",
+      label: "Больничный, лимит",
       value: `Применён минимум ${formatRubPrecise(SICK_LIMITS_2026.minDaily)} / день`,
     });
   }
   steps.push(
-    { label: "Процент стажа", value: formatPercent(seniority) },
-    { label: "Больничный до НДФЛ", value: `${formatRubPrecise(avgDaily)} × ${formatPercent(seniority)} × ${days} = ${formatRub(beforeRounded)}` },
-    { label: "НДФЛ с больничного", value: `${formatRub(beforeRounded)} × ${formatPercent(taxRate)} = ${formatRub(ndfl)}` },
-    { label: "Больничный на руки", value: formatRub(net) }
+    { label: "Больничный, стаж", value: formatPercent(seniority) },
+    { label: "Больничный до НДФЛ", value: formatRub(benefit.grossPay) },
+    { label: "НДФЛ с больничного", value: `${formatRub(benefit.grossPay)} × ${formatPercent(benefit.rate)} = ${formatRub(benefit.ndfl)}` },
+    { label: "Больничный на руки", value: formatRub(benefit.netPay) }
   );
-  return { text: formatRub(net), beforeRounded, net, steps };
+  return { text: formatRub(benefit.netPay), add: benefit.netPay, steps };
+}
+
+function periodVacationPart(form) {
+  const days = periodMarkedDays(form, "vacation");
+  if (days <= 0) return { text: formatRub(0), add: 0, steps: [] };
+  const monthlyMode = form.vacationIncomeMode && form.vacationIncomeMode.value === "monthly";
+  const months = Math.max(1, Math.min(12, parseNumber(form.vacationMonths ? form.vacationMonths.value : 12) || 12));
+  const entered = periodEnteredAmount(monthlyMode
+    ? (form.vacationMonthly ? form.vacationMonthly.value : "")
+    : (form.vacationIncome ? form.vacationIncome.value : ""));
+  if (entered == null) return { text: "—", add: 0, steps: [] };
+  const income = monthlyMode ? entered * months : entered;
+  const benefit = vacationBenefit(income, months, days);
+  return {
+    text: formatRub(benefit.netPay),
+    add: benefit.netPay,
+    steps: [
+      { label: "Отпуск, дней", value: String(days) },
+      { label: "Отпуск, средний день", value: `${formatRub(income)} ÷ ${benefit.months} ÷ 29,3 = ${formatRubPrecise(benefit.avgDaily)}` },
+      { label: "Отпускные до НДФЛ", value: `${formatRubPrecise(benefit.avgDaily)} × ${days} = ${formatRub(benefit.grossPay)}` },
+      { label: "НДФЛ с отпускных", value: `${formatRub(benefit.grossPay)} × ${formatPercent(benefit.rate)} = ${formatRub(benefit.ndfl)}` },
+      { label: "Отпускные на руки", value: formatRub(benefit.netPay) },
+    ],
+  };
 }
 
 function calcPeriodSalary(form) {
   applyOpeningPeriod(form);
   bindPeriodPayFold(form);
-  bindPeriodSickFold(form);
   bindPeriodFactFold(form);
+  syncPeriodMarkPanels(form);
   syncPeriodPayFields(form);
   const byDays = form.countMode.value !== "hours";
   toggleFormFields(form, "by-days", byDays);
@@ -2053,13 +2132,17 @@ function calcPeriodSalary(form) {
       value: formatRub(advancePay),
     });
   }
-  setText("period-net", result.ok ? formatRub(result.net) : "—");
-  showPeriodFactDiff(periodFactAmount(form), result.ok ? result.net : null);
+  const sickPart = byDays ? periodSickPart(form) : { text: "—", add: 0, steps: [] };
+  const vacationPart = byDays ? periodVacationPart(form) : { text: "—", add: 0, steps: [] };
+  const hero = result.ok ? result.net + sickPart.add + vacationPart.add : null;
+  setText("period-net", hero == null ? "—" : formatRub(hero));
+  showPeriodFactDiff(periodFactAmount(form), hero);
   setText("period-advance", formatRub(advancePay));
-  setText("period-rest", result.ok ? formatRub(result.net - advancePay) : "—");
-  const sickBenefit = periodSickBenefit(form, rate, byDays);
-  sickBenefit.steps.forEach((step) => result.steps.push(step));
-  setText("period-sick-net", sickBenefit.text);
+  setText("period-rest", hero == null ? "—" : formatRub(hero - advancePay));
+  sickPart.steps.forEach((step) => result.steps.push(step));
+  vacationPart.steps.forEach((step) => result.steps.push(step));
+  setText("period-sick-net", sickPart.text);
+  setText("period-vacation-net", vacationPart.text);
   setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");
   setText("period-ndfl", result.ok ? formatRub(result.ndfl) : "—");
   setText("period-salary", result.ok ? formatRub(result.grossMonthly) : "—");

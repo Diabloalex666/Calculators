@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=27-sick-benefit" />
+    <link rel="stylesheet" href="css/style.css?v=29-pay-grid" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -79,7 +79,7 @@
               <div id="pay-fold-panel" class="pay-fold-panel" hidden>
                 <label for="gross">Оклад до налога, ₽/мес</label>
                 <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="100 000" />
-                <label for="allowance">Персональная надбавка, ₽/мес</label>
+                <label for="allowance">Персональная надбавка до НДФЛ, ₽/мес</label>
                 <input id="allowance" name="allowance" type="text" inputmode="numeric" autocomplete="off" value="0" />
               </div>
             </div>
@@ -107,12 +107,28 @@
               <p class="period-mark-hint">Даты можно вписать или выбрать на календаре: первый клик — начало, второй — конец. Выходные и праздники сами в оплату не входят.</p>
             </div>
             <div class="form-row" data-field="by-days">
-              <label for="advance-day">День аванса</label>
-              <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              <div class="segment" role="radiogroup" aria-label="День аванса или зарплаты">
+                <label class="seg">
+                  <input type="radio" name="markMode" value="advance" />
+                  <span>Аванс</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="markMode" value="salary" />
+                  <span>Зарплата</span>
+                </label>
+              </div>
+              <div class="mark-caption-row">
+                <p class="period-mark-hint" id="mark-advance-date">не выбран</p>
+                <p class="period-mark-hint" id="mark-salary-date">не выбран</p>
+              </div>
             </div>
             <div class="form-row" data-field="by-days">
-              <label for="salary-day">День зарплаты</label>
-              <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              <div class="pay-day-grid">
+                <label for="advance-day">День аванса</label>
+                <label for="salary-day">День зарплаты</label>
+                <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+                <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              </div>
               <p class="period-mark-hint">Впишите дату или отметьте день на календаре: режим «Аванс» или «Зарплата», затем Shift и клик.</p>
             </div>
             <div class="form-row">
@@ -136,7 +152,7 @@
             <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
               <div role="radiogroup" aria-label="Что отметить">
-                <div class="segment">
+                <div class="segment segment-3">
                   <label class="seg">
                     <input type="radio" name="markMode" value="work" checked />
                     <span>Отработал</span>
@@ -145,24 +161,57 @@
                     <input type="radio" name="markMode" value="sick" />
                     <span>Болел</span>
                   </label>
+                  <label class="seg">
+                    <input type="radio" name="markMode" value="vacation" />
+                    <span>Отпуск</span>
+                  </label>
                 </div>
-                <div class="mark-caption-row">
+                <div class="mark-caption-row mark-caption-3">
                   <p class="period-mark-hint" id="mark-work-count">0 дн.</p>
                   <p class="period-mark-hint" id="mark-sick-count">0 дн.</p>
+                  <p class="period-mark-hint" id="mark-vacation-count">0 дн.</p>
                 </div>
-                <div class="segment segment-follow">
-                  <label class="seg">
-                    <input type="radio" name="markMode" value="advance" />
-                    <span>Аванс</span>
-                  </label>
-                  <label class="seg">
-                    <input type="radio" name="markMode" value="salary" />
-                    <span>Зарплата</span>
-                  </label>
+                <div id="period-sick-fields" hidden>
+                  <p class="period-mark-hint">Кнопка «Болел» открывает доход за два года и стаж. Дни берутся с календаря.</p>
+                  <label for="period-sick-mode">Доход за 2 года</label>
+                  <select id="period-sick-mode" name="sickIncomeMode">
+                    <option value="total" selected>Общая сумма</option>
+                    <option value="split">Отдельно 2024 и 2025</option>
+                  </select>
+                  <div data-field="period-sick-total">
+                    <label for="period-sick-income">Доход за 2 года (₽, с НДФЛ)</label>
+                    <input id="period-sick-income" name="sickIncome2y" type="text" inputmode="numeric" autocomplete="off" />
+                  </div>
+                  <div data-field="period-sick-split" hidden>
+                    <label for="period-sick-2024">Доход за 2024 год (₽)</label>
+                    <input id="period-sick-2024" name="sickIncome2024" type="text" inputmode="numeric" autocomplete="off" />
+                    <label for="period-sick-2025">Доход за 2025 год (₽)</label>
+                    <input id="period-sick-2025" name="sickIncome2025" type="text" inputmode="numeric" autocomplete="off" />
+                  </div>
+                  <label for="period-sick-rate">Процент от среднего (стаж)</label>
+                  <select id="period-sick-rate" name="sickRate">
+                    <option value="0.6">60% — стаж менее 5 лет</option>
+                    <option value="0.8">80% — стаж 5–8 лет</option>
+                    <option value="1" selected>100% — стаж 8+ лет</option>
+                  </select>
                 </div>
-                <div class="mark-caption-row">
-                  <p class="period-mark-hint" id="mark-advance-date">не выбран</p>
-                  <p class="period-mark-hint" id="mark-salary-date">не выбран</p>
+                <div id="period-vacation-fields" hidden>
+                  <p class="period-mark-hint">Кнопка «Отпуск» открывает доход за расчётный период. Дни берутся с календаря.</p>
+                  <label for="period-vacation-mode">Способ ввода дохода</label>
+                  <select id="period-vacation-mode" name="vacationIncomeMode">
+                    <option value="yearly" selected>Доход за 12 месяцев</option>
+                    <option value="monthly">Средняя зарплата в месяц</option>
+                  </select>
+                  <div data-field="period-vacation-year">
+                    <label for="period-vacation-income">Доход за 12 месяцев (₽)</label>
+                    <input id="period-vacation-income" name="vacationIncome" type="text" inputmode="numeric" autocomplete="off" />
+                  </div>
+                  <div data-field="period-vacation-month" hidden>
+                    <label for="period-vacation-monthly">Средняя зарплата в месяц (₽)</label>
+                    <input id="period-vacation-monthly" name="vacationMonthly" type="text" inputmode="numeric" autocomplete="off" />
+                  </div>
+                  <label for="period-vacation-months">Месяцев в расчётном периоде</label>
+                  <input id="period-vacation-months" name="vacationMonths" type="number" value="12" min="1" max="12" />
                 </div>
               </div>
               <p class="period-mark-hint">Обычный клик выбирает период. Shift ставит выбранную пометку. Повторный клик по пометке снимает её.</p>
@@ -194,22 +243,6 @@
               <p class="period-mark-hint">1× — та же оплата за час. Как в ТК РФ — повышенная оплата сверхурочных.</p>
             </div>
             <div class="form-row">
-              <button type="button" class="pay-fold-btn" id="sick-fold" aria-expanded="false" aria-controls="sick-fold-panel">Доход и стаж для больничного</button>
-              <p class="period-mark-hint">Дни болезни отмечены на календаре. Кнопка «Доход и стаж для больничного» задаёт доход за 2024–2025 и процент стажа.</p>
-              <div id="sick-fold-panel" class="pay-fold-panel" hidden>
-                <label for="sick-income-2024">Доход за 2024 год, ₽</label>
-                <input id="sick-income-2024" name="sickIncome2024" type="text" inputmode="numeric" autocomplete="off" />
-                <label for="sick-income-2025">Доход за 2025 год, ₽</label>
-                <input id="sick-income-2025" name="sickIncome2025" type="text" inputmode="numeric" autocomplete="off" />
-                <label for="sick-rate">Процент от среднего (стаж)</label>
-                <select id="sick-rate" name="sickRate">
-                  <option value="0.6">60% — стаж менее 5 лет</option>
-                  <option value="0.8">80% — стаж 5–8 лет</option>
-                  <option value="1" selected>100% — стаж 8+ лет</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
               <button type="button" class="pay-fold-btn" id="paid-fold" aria-expanded="false" aria-controls="paid-fold-panel">Выплачено по факту</button>
               <div id="paid-fold-panel" class="pay-fold-panel" hidden>
                 <label for="paid-fact">Выплачено по факту, ₽</label>
@@ -230,6 +263,7 @@
           <div class="result-row"><span>Выплата в день аванса</span><span id="period-advance">—</span></div>
           <div class="result-row"><span>Остаток в день зарплаты</span><span id="period-rest">—</span></div>
           <div class="result-row"><span>Больничный на руки</span><span id="period-sick-net">—</span></div>
+          <div class="result-row"><span>Отпускные на руки</span><span id="period-vacation-net">—</span></div>
           <div class="result-row"><span>До НДФЛ</span><span id="period-before">—</span></div>
           <div class="result-row"><span>НДФЛ</span><span id="period-ndfl">—</span></div>
           <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
@@ -249,9 +283,10 @@
         <p>
           По каждому месяцу отдельно: оклад до налога делится на норму этого месяца
           и умножается на отработанные дни или часы.
-          День, отмеченный как болезнь, в сумму не входит.
-          Строка «Больничный на руки» считается той же формулой, что
-          <a href="sick.html">калькулятор больничного</a>.
+          День болезни или отпуска в оплату по окладу не входит.
+          Итог складывает отработку, больничный и отпуск теми же формулами, что
+          <a href="sick.html">калькулятор больничного</a> и
+          <a href="vacation.html">калькулятор отпускных</a>.
         </p>
         <p class="article-formula">Оклад ÷ норма месяца × отработанные дни или часы</p>
         <p>
@@ -342,7 +377,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=34"></script>
+    <script src="js/calculators.js?v=35"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
