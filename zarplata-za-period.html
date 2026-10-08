@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=24-captions" />
+    <link rel="stylesheet" href="css/style.css?v=25-paid-fact" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -193,6 +193,13 @@
               </div>
               <p class="period-mark-hint">1× — та же оплата за час. Как в ТК РФ — повышенная оплата сверхурочных.</p>
             </div>
+            <div class="form-row">
+              <button type="button" class="pay-fold-btn" id="paid-fold" aria-expanded="false" aria-controls="paid-fold-panel">Выплачено по факту</button>
+              <div id="paid-fold-panel" class="pay-fold-panel" hidden>
+                <label for="paid-fact">Выплачено по факту, ₽</label>
+                <input id="paid-fact" name="paidFact" type="text" inputmode="numeric" autocomplete="off" />
+              </div>
+            </div>
           </form>
         </div>
 
@@ -202,6 +209,7 @@
         <aside class="result result-panel" id="result">
           <p class="result-kicker">На руки</p>
           <p class="result-hero" id="period-net" aria-live="polite">—</p>
+          <p class="period-fact-diff" id="period-fact-diff" hidden></p>
           <p class="result-context">Оценка, не расчётный листок</p>
           <div class="result-row"><span>Выплата в день аванса</span><span id="period-advance">—</span></div>
           <div class="result-row"><span>Остаток в день зарплаты</span><span id="period-rest">—</span></div>
@@ -317,7 +325,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=31"></script>
+    <script src="js/calculators.js?v=32"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

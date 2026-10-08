@@ -1786,6 +1786,43 @@ function bindPeriodPayFold(form) {
   });
 }
 
+function bindPeriodFactFold(form) {
+  if (!form || form.dataset.factFold === "1") return;
+  const button = document.getElementById("paid-fold");
+  const panel = document.getElementById("paid-fold-panel");
+  if (!button || !panel) return;
+  form.dataset.factFold = "1";
+  button.addEventListener("click", () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+}
+
+function periodFactAmount(form) {
+  const field = form.elements.namedItem("paidFact");
+  if (!field) return null;
+  const raw = String(field.value).replace(/\s/g, "").replace(",", ".");
+  if (raw === "") return null;
+  const value = Number(raw);
+  return Number.isFinite(value) ? value : null;
+}
+
+function showPeriodFactDiff(fact, net) {
+  const el = document.getElementById("period-fact-diff");
+  if (!el) return;
+  if (fact === null || typeof net !== "number" || !Number.isFinite(net)) {
+    el.hidden = true;
+    el.textContent = "";
+    return;
+  }
+  const diff = Math.round(fact) - Math.round(net);
+  if (diff > 0) el.textContent = `Переплата ${formatRub(diff)}`;
+  else if (diff < 0) el.textContent = `Недоплата ${formatRub(-diff)}`;
+  else el.textContent = "Без разницы";
+  el.hidden = false;
+}
+
 function syncPeriodPayFields(form) {
   if (!form || !form.gross || !form.net || periodPayLock) return;
   periodPayLock = true;
@@ -1841,6 +1878,7 @@ function periodAdvanceHalf(form, gross) {
 function calcPeriodSalary(form) {
   applyOpeningPeriod(form);
   bindPeriodPayFold(form);
+  bindPeriodFactFold(form);
   syncPeriodPayFields(form);
   const byDays = form.countMode.value !== "hours";
   toggleFormFields(form, "by-days", byDays);
@@ -1922,6 +1960,7 @@ function calcPeriodSalary(form) {
     });
   }
   setText("period-net", result.ok ? formatRub(result.net) : "—");
+  showPeriodFactDiff(periodFactAmount(form), result.ok ? result.net : null);
   setText("period-advance", formatRub(advancePay));
   setText("period-rest", result.ok ? formatRub(result.net - advancePay) : "—");
   setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");

@@ -1817,6 +1817,17 @@ input[type="range"]::-moz-range-thumb {
   display: none !important;
 }
 
+#paid-fold {
+  justify-self: start;
+}
+
+.period-fact-diff {
+  margin: 0.35rem 0 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
 .period-mark-hint {
   margin: 0.45rem 0 0;
   color: var(--muted);
