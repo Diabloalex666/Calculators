@@ -1793,6 +1793,37 @@ function syncPeriodPayFields(form) {
   periodPayLock = false;
 }
 
+function periodAdvanceMonth(form) {
+  const pay = parseIsoDate(form.advanceDay ? form.advanceDay.value : "");
+  if (pay && pay.y === PROD_2026.year) return pay.m;
+  const from = parseIsoDate(form.from ? form.from.value : "");
+  if (from && from.y === PROD_2026.year) return from.m;
+  return 0;
+}
+
+function periodAdvanceWorkedDays(month, fromValue, toValue) {
+  if (!month || !PROD_2026.off[month]) return 0;
+  const from = parseIsoDate(fromValue);
+  const to = parseIsoDate(toValue);
+  let worked = 0;
+  for (let day = 1; day <= 15; day += 1) {
+    if (prodOff(month, day)) continue;
+    if (!inDateRange(PROD_2026.year, month, day, from, to)) continue;
+    const key = isoDate(PROD_2026.year, month, day);
+    if (periodMarks[key] === "sick") continue;
+    worked += 1;
+  }
+  return worked;
+}
+
+function periodAdvanceHalf(form, gross) {
+  const month = periodAdvanceMonth(form);
+  const norm = month ? PROD_2026.workDays[month] : 0;
+  const worked = periodAdvanceWorkedDays(month, form.from.value, form.to.value);
+  const amount = norm > 0 ? (gross / norm) * worked : 0;
+  return { month, norm, worked, amount };
+}
+
 function calcPeriodSalary(form) {
   applyOpeningPeriod(form);
   bindPeriodPayFold(form);
@@ -1849,9 +1880,17 @@ function calcPeriodSalary(form) {
   });
 
   const grossOnly = Math.max(0, parseNumber(form.gross.value));
-  const advance = form.advanceMode && form.advanceMode.value === "custom"
+  const customAdvance = form.advanceMode && form.advanceMode.value === "custom";
+  const half = periodAdvanceHalf(form, grossOnly);
+  const advance = customAdvance
     ? Math.max(0, parseNumber(form.advanceAmount ? form.advanceAmount.value : 0))
-    : grossOnly * 0.5;
+    : half.amount;
+  if (!customAdvance && half.month && half.norm > 0) {
+    result.steps.push({
+      label: "Аванс",
+      value: `${formatRub(grossOnly)} ÷ ${half.norm} дн. × ${half.worked} с 1 по 15 = ${formatRub(advance)}`,
+    });
+  }
   setText("period-net", result.ok ? formatRub(result.net) : "—");
   setText("period-advance", formatRub(advance));
   setText("period-rest", result.ok ? formatRub(result.net - advance) : "—");
