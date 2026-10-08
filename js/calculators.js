@@ -858,7 +858,6 @@ let periodSeenMonth = null;
 let periodDrag = null;
 let periodIgnoreClick = false;
 let periodAwaitingEnd = false;
-let periodRangeLocked = false;
 let periodPaySource = "parts";
 let periodPayLock = false;
 
@@ -1495,14 +1494,19 @@ function setPeriodDragRange(form, start, end) {
   form.to.value = formatDotDate(to.y, to.m, to.d);
   periodAnchor = null;
   periodAwaitingEnd = false;
-  periodRangeLocked = true;
 }
 
-function periodDateInside(form, date) {
-  const from = parseIsoDate(form.from.value);
-  const to = parseIsoDate(form.to.value);
-  if (!date || !from || !to) return false;
-  return inDateRange(date.y, date.m, date.d, from, to);
+function markPeriodSpan(start, end, mode) {
+  if (!start || !end || (mode !== "work" && mode !== "sick")) return;
+  const from = dateOrder(start, end) <= 0 ? start : end;
+  const to = dateOrder(start, end) <= 0 ? end : start;
+  let cursor = Date.UTC(from.y, from.m - 1, from.d);
+  const last = Date.UTC(to.y, to.m - 1, to.d);
+  while (cursor <= last) {
+    const dt = new Date(cursor);
+    periodMarks[isoDate(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate())] = mode;
+    cursor += 86400000;
+  }
 }
 
 function togglePeriodMark(key, mode) {
@@ -1530,7 +1534,8 @@ function onPeriodPointerDown(event) {
   periodIgnoreClick = false;
   periodDrag = {
     pointerId: event.pointerId,
-    mode: form.markMode.value,
+    marking: event.shiftKey,
+    mode: form.markMode && form.markMode.value === "sick" ? "sick" : "work",
     startKey: button.dataset.date,
     startDate: parseIsoDate(button.dataset.date),
     lastKey: button.dataset.date,
@@ -1555,7 +1560,11 @@ function onPeriodPointerMove(event) {
   if (!form) return;
   const key = button.dataset.date;
   periodDrag.moved = true;
-  setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
+  if (periodDrag.marking) {
+    markPeriodSpan(periodDrag.startDate, parseIsoDate(key), periodDrag.mode);
+  } else {
+    setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
+  }
   periodDrag.lastKey = key;
   periodCalSig = "";
   calcPeriodSalary(form);
@@ -1605,14 +1614,11 @@ function onPeriodCalendarClick(event) {
   }
   if (periodAwaitingEnd && periodAnchor) {
     setPeriodDragRange(form, periodAnchor, date);
-  } else if (periodRangeLocked && periodDateInside(form, date)) {
-    return;
   } else {
     form.from.value = formatDotDate(date.y, date.m, date.d);
     form.to.value = formatDotDate(date.y, date.m, date.d);
     periodAnchor = date;
     periodAwaitingEnd = true;
-    periodRangeLocked = false;
   }
   periodCalSig = "";
   calcPeriodSalary(form);
