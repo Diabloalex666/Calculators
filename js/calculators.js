@@ -860,6 +860,7 @@ let periodIgnoreClick = false;
 let periodReleaseHandled = false;
 let periodAwaitingEnd = false;
 let periodPaySource = "parts";
+let periodGrossTouched = false;
 let periodPayLock = false;
 let periodPayDaySeen = "";
 
@@ -1783,8 +1784,14 @@ function syncPeriodPayFields(form) {
   periodPayLock = true;
   if (periodPaySource === "net") {
     const net = Math.max(0, parseNumber(form.net.value));
-    if (form.allowance) form.allowance.value = "0";
-    form.gross.value = formatPayInput(grossFromNet(net, 0, null));
+    const needed = grossFromNet(net, 0, null);
+    if (!periodGrossTouched) {
+      form.gross.value = formatPayInput(needed);
+      if (form.allowance) form.allowance.value = formatPayInput(0);
+    } else if (form.allowance) {
+      const gross = Math.max(0, parseNumber(form.gross.value));
+      form.allowance.value = formatPayInput(Math.max(0, needed - gross));
+    }
   } else {
     const gross = Math.max(0, parseNumber(form.gross.value));
     const allowance = form.allowance ? Math.max(0, parseNumber(form.allowance.value)) : 0;
@@ -1911,7 +1918,11 @@ document.addEventListener("DOMContentLoaded", () => {
       (event) => {
         const id = event.target && event.target.id;
         if (id === "net") periodPaySource = "net";
-        if (id === "gross" || id === "allowance") periodPaySource = "parts";
+        if (id === "gross") {
+          periodGrossTouched = true;
+          if (periodPaySource !== "net") periodPaySource = "parts";
+        }
+        if (id === "allowance") periodPaySource = "parts";
       },
       true
     );
