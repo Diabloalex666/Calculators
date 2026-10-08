@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=22-range" />
+    <link rel="stylesheet" href="css/style.css?v=23-paydays" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -104,18 +104,55 @@
               <input id="to" name="to" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
             </div>
             <div class="form-row" data-field="by-days">
-              <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
-              <div class="segment" role="radiogroup" aria-label="Что отметить">
+              <label for="advance-day">День аванса</label>
+              <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+            </div>
+            <div class="form-row" data-field="by-days">
+              <label for="salary-day">День зарплаты</label>
+              <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+            </div>
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
+              <div class="segment" role="radiogroup" aria-label="Как задан аванс">
                 <label class="seg">
-                  <input type="radio" name="markMode" value="work" checked />
-                  <span>Отработал</span>
+                  <input type="radio" name="advanceMode" value="half" checked />
+                  <span>50% оклада</span>
                 </label>
                 <label class="seg">
-                  <input type="radio" name="markMode" value="sick" />
-                  <span>Болел</span>
+                  <input type="radio" name="advanceMode" value="custom" />
+                  <span>Своя сумма</span>
                 </label>
               </div>
-              <p class="period-mark-hint">Клик ставит начало, следующий — конец. Болезнь и работу в выходной отмечайте с Shift: период от этого не меняется.</p>
+            </div>
+            <div class="form-row" data-field="advance-custom" hidden>
+              <label for="advance-amount">Своя сумма аванса, ₽</label>
+              <input id="advance-amount" name="advanceAmount" type="text" inputmode="numeric" autocomplete="off" value="0" />
+            </div>
+            <div class="form-row" data-field="by-days">
+              <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
+              <div role="radiogroup" aria-label="Что отметить">
+                <div class="segment">
+                  <label class="seg">
+                    <input type="radio" name="markMode" value="work" checked />
+                    <span>Отработал</span>
+                  </label>
+                  <label class="seg">
+                    <input type="radio" name="markMode" value="sick" />
+                    <span>Болел</span>
+                  </label>
+                </div>
+                <div class="segment segment-follow">
+                  <label class="seg">
+                    <input type="radio" name="markMode" value="advance" />
+                    <span>Аванс</span>
+                  </label>
+                  <label class="seg">
+                    <input type="radio" name="markMode" value="salary" />
+                    <span>Зарплата</span>
+                  </label>
+                </div>
+              </div>
+              <p class="period-mark-hint">Клик ставит начало, следующий — конец. С Shift: «Отработал» и «Болел» меняют отметку, «Аванс» и «Зарплата» пишут дату в своё поле. Период от этого не меняется.</p>
               <p class="period-mark-count" id="period-mark-count">Отработано: 0 дн. · Больничных: 0 дн.</p>
             </div>
             <div class="form-row" data-field="by-hours" hidden>
@@ -153,6 +190,8 @@
           <p class="result-kicker">На руки</p>
           <p class="result-hero" id="period-net" aria-live="polite">—</p>
           <p class="result-context">Оценка, не расчётный листок</p>
+          <div class="result-row"><span>Выплата в день аванса</span><span id="period-advance">—</span></div>
+          <div class="result-row"><span>Остаток в день зарплаты</span><span id="period-rest">—</span></div>
           <div class="result-row"><span>До НДФЛ</span><span id="period-before">—</span></div>
           <div class="result-row"><span>НДФЛ</span><span id="period-ndfl">—</span></div>
           <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
@@ -265,7 +304,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=23"></script>
+    <script src="js/calculators.js?v=24"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>

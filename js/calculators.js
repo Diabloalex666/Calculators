@@ -860,6 +860,7 @@ let periodIgnoreClick = false;
 let periodAwaitingEnd = false;
 let periodPaySource = "parts";
 let periodPayLock = false;
+let periodPayDaySeen = "";
 
 function prodOff(month, day) {
   return PROD_2026.off[month].indexOf(day) !== -1;
@@ -1341,7 +1342,46 @@ function calcPeriodPay(input) {
 function periodSignature(form) {
   const keys = Object.keys(periodMarks).sort();
   const mode = form.markMode ? form.markMode.value : "";
-  return `${form.from.value}|${form.to.value}|${mode}|${periodYearOpen ? "year" : "month"}|${periodViewMonth}|${keys.map((key) => `${key}:${periodMarks[key]}`).join(",")}`;
+  const advance = form.advanceDay ? form.advanceDay.value : "";
+  const salary = form.salaryDay ? form.salaryDay.value : "";
+  return `${form.from.value}|${form.to.value}|${advance}|${salary}|${mode}|${periodYearOpen ? "year" : "month"}|${periodViewMonth}|${keys.map((key) => `${key}:${periodMarks[key]}`).join(",")}`;
+}
+
+function payDayKey(value) {
+  const parsed = parseIsoDate(value);
+  if (!parsed || parsed.y !== PROD_2026.year) return "";
+  return isoDate(parsed.y, parsed.m, parsed.d);
+}
+
+function markModeValue(form) {
+  return form && form.markMode ? form.markMode.value : "work";
+}
+
+function followTypedPayDay(form) {
+  if (!form) return;
+  const nextA = form.advanceDay ? form.advanceDay.value : "";
+  const nextS = form.salaryDay ? form.salaryDay.value : "";
+  const sig = `${nextA}|${nextS}`;
+  if (sig === periodPayDaySeen) return;
+  const prev = periodPayDaySeen;
+  periodPayDaySeen = sig;
+  if (!prev) return;
+  const [prevA, prevS] = prev.split("|");
+  const changed = nextA !== prevA ? nextA : nextS;
+  const parsed = parseIsoDate(changed);
+  if (parsed && parsed.y === PROD_2026.year) {
+    periodViewMonth = parsed.m;
+    periodSeenMonth = parsed.m;
+  }
+}
+
+function setPayDay(form, mode, date) {
+  if (!form || !date || date.y !== PROD_2026.year) return;
+  const text = formatDotDate(date.y, date.m, date.d);
+  if (mode === "advance" && form.advanceDay) form.advanceDay.value = text;
+  if (mode === "salary" && form.salaryDay) form.salaryDay.value = text;
+  periodViewMonth = date.m;
+  periodSeenMonth = date.m;
 }
 
 function applyOpeningPeriod(form) {
@@ -1369,7 +1409,7 @@ function ensurePeriodViewMonth(form) {
   }
 }
 
-function renderPeriodMonth(m, from, to, markMode) {
+function renderPeriodMonth(m, from, to, advanceKey, salaryKey) {
   const month = document.createElement("div");
   month.className = "period-month";
   const title = document.createElement("p");
@@ -1413,10 +1453,16 @@ function renderPeriodMonth(m, from, to, markMode) {
       const worked = mark === "work" || (inside && !off && mark !== "sick");
       if (mark === "sick") button.classList.add("is-sick");
       else if (worked) button.classList.add("is-work");
+      if (key === advanceKey) button.classList.add("is-advance");
+      if (key === salaryKey) button.classList.add("is-salary");
       const state = mark === "sick" ? "болезнь" : worked ? "отработан" : "не отмечен";
+      const payNote = [
+        key === advanceKey ? "день аванса" : "",
+        key === salaryKey ? "день зарплаты" : "",
+      ].filter(Boolean).join(", ");
       button.setAttribute(
         "aria-label",
-        `${d} ${PROD_MONTHS[m]}, ${off ? "выходной или праздник" : short ? "сокращённый" : "рабочий"}, ${state}`
+        `${d} ${PROD_MONTHS[m]}, ${off ? "выходной или праздник" : short ? "сокращённый" : "рабочий"}, ${state}${payNote ? `, ${payNote}` : ""}`
       );
       grid.appendChild(button);
     }
@@ -1430,7 +1476,8 @@ function renderPeriodCalendar(form) {
   ensurePeriodViewMonth(form);
   const from = parseIsoDate(form.from.value);
   const to = parseIsoDate(form.to.value);
-  const markMode = form.markMode ? form.markMode.value : "period";
+  const advanceKey = payDayKey(form.advanceDay && form.advanceDay.value);
+  const salaryKey = payDayKey(form.salaryDay && form.salaryDay.value);
   host.replaceChildren();
 
   const bar = document.createElement("div");
@@ -1475,7 +1522,7 @@ function renderPeriodCalendar(form) {
   const months = periodYearOpen
     ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     : [periodViewMonth];
-  months.forEach((m) => board.appendChild(renderPeriodMonth(m, from, to, markMode)));
+  months.forEach((m) => board.appendChild(renderPeriodMonth(m, from, to, advanceKey, salaryKey)));
   host.appendChild(board);
 }
 
@@ -1535,7 +1582,7 @@ function onPeriodPointerDown(event) {
   periodDrag = {
     pointerId: event.pointerId,
     marking: event.shiftKey,
-    mode: form.markMode && form.markMode.value === "sick" ? "sick" : "work",
+    mode: markModeValue(form),
     startKey: button.dataset.date,
     startDate: parseIsoDate(button.dataset.date),
     lastKey: button.dataset.date,
@@ -1561,7 +1608,11 @@ function onPeriodPointerMove(event) {
   const key = button.dataset.date;
   periodDrag.moved = true;
   if (periodDrag.marking) {
-    markPeriodSpan(periodDrag.startDate, parseIsoDate(key), periodDrag.mode);
+    if (periodDrag.mode === "advance" || periodDrag.mode === "salary") {
+      setPayDay(form, periodDrag.mode, parseIsoDate(key));
+    } else {
+      markPeriodSpan(periodDrag.startDate, parseIsoDate(key), periodDrag.mode);
+    }
   } else {
     setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
   }
@@ -1606,8 +1657,9 @@ function onPeriodCalendarClick(event) {
   const date = parseIsoDate(button.dataset.date);
   if (!date) return;
   if (event.shiftKey) {
-    const mode = form.markMode && form.markMode.value === "sick" ? "sick" : "work";
-    togglePeriodMark(button.dataset.date, mode);
+    const mode = markModeValue(form);
+    if (mode === "advance" || mode === "salary") setPayDay(form, mode, date);
+    else togglePeriodMark(button.dataset.date, mode === "sick" ? "sick" : "work");
     periodCalSig = "";
     calcPeriodSalary(form);
     return;
@@ -1715,9 +1767,12 @@ function calcPeriodSalary(form) {
   const byDays = form.countMode.value !== "hours";
   toggleFormFields(form, "by-days", byDays);
   toggleFormFields(form, "by-hours", !byDays);
+  toggleFormFields(form, "advance-custom", form.advanceMode && form.advanceMode.value === "custom");
   fillNormMonthSelect(form.normMonth);
   bindDotDateField(form.from);
   bindDotDateField(form.to);
+  bindDotDateField(form.advanceDay);
+  bindDotDateField(form.salaryDay);
   const calendar = document.getElementById("period-calendar");
   if (calendar) calendar.hidden = !byDays;
   const overtimeRow = document.getElementById("period-overtime-row");
@@ -1734,6 +1789,7 @@ function calcPeriodSalary(form) {
   }
 
   ensurePeriodViewMonth(form);
+  followTypedPayDay(form);
   updatePeriodMarkCount(form);
   const sig = periodSignature(form);
   if (sig !== periodCalSig) {
@@ -1759,7 +1815,13 @@ function calcPeriodSalary(form) {
       : (browserToday().y === PROD_2026.year ? String(browserToday().m) : "1"),
   });
 
+  const grossOnly = Math.max(0, parseNumber(form.gross.value));
+  const advance = form.advanceMode && form.advanceMode.value === "custom"
+    ? Math.max(0, parseNumber(form.advanceAmount ? form.advanceAmount.value : 0))
+    : grossOnly * 0.5;
   setText("period-net", result.ok ? formatRub(result.net) : "—");
+  setText("period-advance", formatRub(advance));
+  setText("period-rest", result.ok ? formatRub(result.net - advance) : "—");
   setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");
   setText("period-ndfl", result.ok ? formatRub(result.ndfl) : "—");
   setText("period-salary", result.ok ? formatRub(result.grossMonthly) : "—");

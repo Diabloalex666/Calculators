@@ -1823,6 +1823,10 @@ input[type="range"]::-moz-range-thumb {
   font-size: 0.82rem;
 }
 
+.segment-follow {
+  margin-top: 0.45rem;
+}
+
 .period-day.is-work {
   background: var(--accent-soft);
   font-weight: 700;
@@ -1831,6 +1835,18 @@ input[type="range"]::-moz-range-thumb {
 .period-day.is-sick {
   color: var(--danger);
   text-decoration: line-through;
+}
+
+.period-day.is-advance {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.period-day.is-salary {
+  box-shadow: inset -3px 0 0 var(--danger);
+}
+
+.period-day.is-advance.is-salary {
+  box-shadow: inset 3px 0 0 var(--accent), inset -3px 0 0 var(--danger);
 }
 
 .period-day:disabled {
