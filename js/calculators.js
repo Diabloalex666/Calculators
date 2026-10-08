@@ -1891,18 +1891,32 @@ function calcPeriodSalary(form) {
   const grossOnly = Math.max(0, parseNumber(form.gross.value));
   const customAdvance = form.advanceMode && form.advanceMode.value === "custom";
   const half = periodAdvanceHalf(form, grossOnly);
-  const advance = customAdvance
-    ? Math.max(0, parseNumber(form.advanceAmount ? form.advanceAmount.value : 0))
-    : half.amount;
+  const accrual = half.amount;
+  const rate = typeof result.rate === "number"
+    ? result.rate
+    : salaryFromGross(amount, 0, null).effectiveRate;
+  const accrualRounded = Math.round(accrual);
+  const advanceNdfl = Math.round(accrual * rate);
+  const advancePay = customAdvance
+    ? Math.max(0, Math.round(parseNumber(form.advanceAmount ? form.advanceAmount.value : 0)))
+    : accrualRounded - advanceNdfl;
   if (!customAdvance && half.month && half.norm > 0) {
     result.steps.push({
-      label: "Аванс",
-      value: `${formatRub(grossOnly)} ÷ ${half.norm} дн. × ${half.worked} с 1 по 15 = ${formatRub(advance)}`,
+      label: "Аванс до налога",
+      value: `${formatRub(grossOnly)} ÷ ${half.norm} дн. × ${half.worked} с 1 по 15 = ${formatRub(accrualRounded)}`,
+    });
+    result.steps.push({
+      label: "НДФЛ с аванса",
+      value: `${formatRub(accrualRounded)} × ${formatPercent(rate)} = ${formatRub(advanceNdfl)}`,
+    });
+    result.steps.push({
+      label: "К выплате в день аванса",
+      value: formatRub(advancePay),
     });
   }
   setText("period-net", result.ok ? formatRub(result.net) : "—");
-  setText("period-advance", formatRub(advance));
-  setText("period-rest", result.ok ? formatRub(result.net - advance) : "—");
+  setText("period-advance", formatRub(advancePay));
+  setText("period-rest", result.ok ? formatRub(result.net - advancePay) : "—");
   setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");
   setText("period-ndfl", result.ok ? formatRub(result.ndfl) : "—");
   setText("period-salary", result.ok ? formatRub(result.grossMonthly) : "—");
