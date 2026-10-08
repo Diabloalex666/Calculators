@@ -276,14 +276,13 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
+      "q": "калькулятор отпускных онлайн рассчитать",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
       "cluster": "otpusknye",
@@ -581,13 +580,14 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении калькулятор",
+      "q": "компенсация отпуска при увольнении",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
@@ -637,7 +637,7 @@
       "status": "published"
     },
     {
-      "q": "расчёт отпускных в 2026 калькулятор онлайн",
+      "q": "калькулятор отпускных онлайн 2026",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -721,7 +721,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный в 2026",
+      "q": "максимальный больничный 2026 в день",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -959,7 +959,7 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении в 2025 году калькулятор онлайн",
+      "q": "компенсация отпуска при увольнении калькулятор",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1015,13 +1015,14 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн рассчитать",
+      "q": "калькулятор отпускных онлайн",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 8.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
       "cluster": "otpusknye",
@@ -1100,7 +1101,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный 2026 в день",
+      "q": "максимальный больничный в 2026",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1128,7 +1129,7 @@
       "status": "published"
     },
     {
-      "q": "досрочное погашение ипотеки калькулятор онлайн рассчитать в сбербанке",
+      "q": "досрочное погашение ипотеки калькулятор сбербанка",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1428,14 +1429,13 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
+      "q": "калькулятор отпускных онлайн рассчитать",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
       "cluster": "otpusknye",
@@ -1733,13 +1733,14 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении калькулятор",
+      "q": "компенсация отпуска при увольнении",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
