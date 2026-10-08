@@ -176,21 +176,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest",
-        "seed"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -287,6 +272,21 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных онлайн",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -435,7 +435,7 @@
       "status": "published"
     },
     {
-      "q": "расчёт при увольнении сроки выплаты",
+      "q": "расчёт при увольнении сроки",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -581,13 +581,14 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении калькулятор",
+      "q": "компенсация отпуска при увольнении",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
@@ -777,7 +778,7 @@
       "status": "published"
     },
     {
-      "q": "расчёт при увольнении сроки выплаты и перечисления",
+      "q": "расчёт при увольнении в 2025 калькулятор онлайн",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -903,7 +904,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных дней",
+      "q": "калькулятор отпускных в 2026",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -959,7 +960,7 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении в 2025 году калькулятор онлайн",
+      "q": "компенсация отпуска при увольнении калькулятор",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1128,7 +1129,7 @@
       "status": "published"
     },
     {
-      "q": "досрочное погашение ипотеки калькулятор онлайн рассчитать в сбербанке",
+      "q": "досрочное погашение ипотеки калькулятор сбербанка",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1142,7 +1143,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор потребительского кредита в альфа банке 2026",
+      "q": "калькулятор потребительского кредита в сбербанке на сегодня",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1328,21 +1329,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest",
-        "seed"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -1439,6 +1425,21 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных онлайн",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -1587,7 +1588,7 @@
       "status": "published"
     },
     {
-      "q": "расчёт при увольнении сроки выплаты",
+      "q": "расчёт при увольнении сроки",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1733,13 +1734,14 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении калькулятор",
+      "q": "компенсация отпуска при увольнении",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
@@ -1749,7 +1751,7 @@
   ],
   "unmatched": [
     {
-      "q": "калькулятор налогового вычета",
+      "q": "калькулятор налогов",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1763,7 +1765,7 @@
       "status": "new"
     },
     {
-      "q": "калькулятор налогов",
+      "q": "калькулятор налогового вычета",
       "score": 7.0,
       "clicks": 0.0,
       "impressions": 0.0,
