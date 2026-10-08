@@ -75,6 +75,7 @@
                 <button type="button" class="pay-fold-btn" id="pay-fold" aria-expanded="false" aria-controls="pay-fold-panel">Оклад и надбавка</button>
               </div>
               <input id="net" name="net" type="text" inputmode="numeric" autocomplete="off" value="87 000" />
+              <p class="period-mark-hint">Сумма за полный месяц. Кнопка показывает оклад и надбавку, из которых она сложилась.</p>
               <div id="pay-fold-panel" class="pay-fold-panel" hidden>
                 <label for="gross">Оклад до налога, ₽/мес</label>
                 <input id="gross" name="gross" type="text" inputmode="numeric" autocomplete="off" value="100 000" />
@@ -94,6 +95,7 @@
                   <span>По часам</span>
                 </label>
               </div>
+              <p class="period-mark-hint">По дням считает календарь. По часам — только число часов, календарь скрыт.</p>
             </div>
             <div class="form-row" data-field="by-days">
               <label for="from">Начало периода</label>
@@ -102,6 +104,7 @@
             <div class="form-row" data-field="by-days">
               <label for="to">Конец периода</label>
               <input id="to" name="to" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              <p class="period-mark-hint">Даты можно вписать или выбрать на календаре: первый клик — начало, второй — конец. Выходные и праздники сами в оплату не входят.</p>
             </div>
             <div class="form-row" data-field="by-days">
               <label for="advance-day">День аванса</label>
@@ -110,6 +113,7 @@
             <div class="form-row" data-field="by-days">
               <label for="salary-day">День зарплаты</label>
               <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              <p class="period-mark-hint">Впишите дату или отметьте день на календаре: режим «Аванс» или «Зарплата», затем Shift и клик.</p>
             </div>
             <div class="form-row">
               <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
@@ -123,6 +127,7 @@
                   <span>Своя сумма</span>
                 </label>
               </div>
+              <p class="period-mark-hint">50% считается по отработанным дням с 1 по 15. Своя сумма — если аванс другой.</p>
             </div>
             <div class="form-row" data-field="advance-custom" hidden>
               <label for="advance-amount">Своя сумма аванса, ₽</label>
@@ -152,7 +157,7 @@
                   </label>
                 </div>
               </div>
-              <p class="period-mark-hint">Клик по дню без пометки ставит начало, следующий — конец. Клик по пометке снимает её. С Shift ставится пометка выбранного режима, период не меняется.</p>
+              <p class="period-mark-hint">Обычный клик выбирает период. Shift ставит выбранную пометку. Повторный клик по пометке снимает её.</p>
               <p class="period-mark-count" id="period-mark-count">Отработано: 0 дн. · Больничных: 0 дн.</p>
             </div>
             <div class="form-row" data-field="by-hours" hidden>
@@ -179,6 +184,7 @@
                   <span>Как в ТК РФ</span>
                 </label>
               </div>
+              <p class="period-mark-hint">1× — та же оплата за час. Как в ТК РФ — повышенная оплата сверхурочных.</p>
             </div>
             <button class="calc-submit" type="submit">Рассчитать</button>
           </form>
@@ -186,6 +192,7 @@
 
         <div class="period-sticky">
           <div id="period-calendar" data-field="by-days" aria-label="Производственный календарь 2026"></div>
+          <p class="period-mark-hint" id="period-cal-hint">Серые дни — выходные и праздники. В расчёт они попадут, только если отметить работу.</p>
         <aside class="result result-panel" id="result">
           <p class="result-kicker">На руки</p>
           <p class="result-hero" id="period-net" aria-live="polite">—</p>
@@ -304,7 +311,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=27"></script>
+    <script src="js/calculators.js?v=28"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
