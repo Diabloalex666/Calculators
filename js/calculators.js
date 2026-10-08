@@ -1449,7 +1449,7 @@ function renderPeriodMonth(m, from, to, advanceKey, salaryKey) {
       const inside = inDateRange(PROD_2026.year, m, d, from, to);
       if (off) button.classList.add("is-off");
       if (short) button.classList.add("is-short");
-      if (inside) button.classList.add("is-in");
+      if (inside && !off) button.classList.add("is-in");
       const mark = periodMarks[key];
       const worked = mark === "work" || (inside && !off && mark !== "sick");
       if (mark === "sick") button.classList.add("is-sick");
