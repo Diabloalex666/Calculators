@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-08",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
-  "suggest_seeds_ok": 31,
+  "suggest_seeds_ok": 30,
   "webmaster_connected": true,
   "wordstat_connected": false,
   "queries": [
@@ -176,21 +176,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest",
-        "seed"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -205,17 +190,18 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении сроки выплаты",
+      "q": "зарплата при увольнении",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "cluster": "zarplata-pri-uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "planned"
     },
     {
@@ -287,6 +273,20 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных онлайн рассчитать",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -479,21 +479,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор налога самозанятого",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -566,29 +551,27 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении",
+      "q": "зарплата при увольнении сроки выплаты",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении",
+      "q": "компенсация отпуска при увольнении калькулятор",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
@@ -638,7 +621,7 @@
       "status": "published"
     },
     {
-      "q": "расчёт отпускных в 2026 калькулятор онлайн",
+      "q": "калькулятор отпускных онлайн 2026",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -722,7 +705,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный в 2026",
+      "q": "максимальный больничный 2026 в день",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -820,20 +803,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор налога самозанятого онлайн калькулятор расчета",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор сложного процента с пополнением",
       "score": 9.0,
       "clicks": 0.0,
@@ -918,6 +887,21 @@
       "status": "published"
     },
     {
+      "q": "калькулятор отпускных онлайн",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest",
+        "seed"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
+      "status": "published"
+    },
+    {
       "q": "калькулятор больничного листа",
       "score": 8.0,
       "clicks": 0.0,
@@ -960,7 +944,7 @@
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении калькулятор",
+      "q": "компенсация отпуска при увольнении в 2025 году калькулятор онлайн",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1013,20 +997,6 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных онлайн рассчитать",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -1101,7 +1071,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный 2026 в день",
+      "q": "максимальный больничный в 2026",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1129,7 +1099,7 @@
       "status": "published"
     },
     {
-      "q": "досрочное погашение ипотеки калькулятор онлайн рассчитать в сбербанке",
+      "q": "досрочное погашение ипотеки калькулятор сбербанка",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1143,7 +1113,7 @@
       "status": "published"
     },
     {
-      "q": "калькулятор потребительского кредита в сбербанке на сегодня",
+      "q": "калькулятор потребительского кредита в альфа банке 2026",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1154,6 +1124,34 @@
       ],
       "cluster": "credit",
       "page": "/credit.html",
+      "status": "published"
+    },
+    {
+      "q": "расчёт при увольнении сроки",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "dismissal",
+      "page": "/dismissal.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор налога ип упрощенка 2025",
+      "score": 8.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 8.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "nalog-ip",
+      "page": "/nalog-ip.html",
       "status": "published"
     }
   ],
@@ -1329,21 +1327,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest",
-        "seed"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "когда ндфл 15 процентов в 2026",
       "score": 10.0,
       "clicks": 0.0,
@@ -1358,17 +1341,18 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении сроки выплаты",
+      "q": "зарплата при увольнении",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "cluster": "zarplata-pri-uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "planned"
     },
     {
@@ -1440,6 +1424,20 @@
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных онлайн рассчитать",
+      "score": 10.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 10.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -1632,21 +1630,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор налога самозанятого",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
       "q": "бюджет на месяц шаблон",
       "score": 10.0,
       "clicks": 0.0,
@@ -1719,39 +1702,51 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении",
+      "q": "зарплата при увольнении сроки выплаты",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
-      "q": "компенсация отпуска при увольнении",
+      "q": "компенсация отпуска при увольнении калькулятор",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
       "cluster": "kompensaciya-otpuska-pri-uvolnenii",
       "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
       "status": "published"
+    },
+    {
+      "q": "калькулятор зарплаты за месяц",
+      "score": 9.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 0.0,
+      "suggest": 9.0,
+      "sources": [
+        "yandex-suggest"
+      ],
+      "cluster": "zarplata-za-period",
+      "page": "/zarplata-za-period.html",
+      "status": "published"
     }
   ],
   "unmatched": [
     {
-      "q": "калькулятор налогов",
+      "q": "калькулятор налогового вычета",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1765,7 +1760,7 @@
       "status": "new"
     },
     {
-      "q": "калькулятор налогового вычета",
+      "q": "калькулятор налогов",
       "score": 7.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1893,7 +1888,7 @@
       "score": 130.0
     },
     {
-      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "id": "zarplata-pri-uvolnenii",
       "score": 10.0
     },
     {
@@ -1965,15 +1960,11 @@
       "score": 10.0
     },
     {
-      "id": "samozanyaty",
-      "score": 10.0
-    },
-    {
       "id": "budget",
       "score": 10.0
     },
     {
-      "id": "zarplata-pri-uvolnenii",
+      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
       "score": 9.0
     },
     {
@@ -1994,6 +1985,10 @@
     },
     {
       "id": "ipoteka-6mln",
+      "score": 1.0
+    },
+    {
+      "id": "samozanyaty",
       "score": 1.0
     },
     {
