@@ -857,6 +857,7 @@ let periodYearOpen = false;
 let periodSeenMonth = null;
 let periodDrag = null;
 let periodIgnoreClick = false;
+let periodReleaseHandled = false;
 let periodAwaitingEnd = false;
 let periodPaySource = "parts";
 let periodPayLock = false;
@@ -1562,6 +1563,39 @@ function togglePeriodMark(key, mode) {
   else periodMarks[key] = mode;
 }
 
+function dayHasExplicitMark(form, key) {
+  if (periodMarks[key] === "work" || periodMarks[key] === "sick") return true;
+  const advance = payDayKey(form && form.advanceDay ? form.advanceDay.value : "");
+  const salary = payDayKey(form && form.salaryDay ? form.salaryDay.value : "");
+  return key === advance || key === salary;
+}
+
+function clearDayMarks(form, key) {
+  if (periodMarks[key]) delete periodMarks[key];
+  if (form.advanceDay && payDayKey(form.advanceDay.value) === key) form.advanceDay.value = "";
+  if (form.salaryDay && payDayKey(form.salaryDay.value) === key) form.salaryDay.value = "";
+}
+
+function applyPeriodDayClick(form, date, key, shift) {
+  if (!form || !date || !key) return;
+  if (shift) {
+    const mode = markModeValue(form);
+    if (mode === "advance" || mode === "salary") setPayDay(form, mode, date);
+    else togglePeriodMark(key, mode === "sick" ? "sick" : "work");
+  } else if (dayHasExplicitMark(form, key)) {
+    clearDayMarks(form, key);
+  } else if (periodAwaitingEnd && periodAnchor && dateOrder(periodAnchor, date) !== 0) {
+    setPeriodDragRange(form, periodAnchor, date);
+  } else {
+    form.from.value = formatDotDate(date.y, date.m, date.d);
+    form.to.value = formatDotDate(date.y, date.m, date.d);
+    periodAnchor = date;
+    periodAwaitingEnd = true;
+  }
+  periodCalSig = "";
+  calcPeriodSalary(form);
+}
+
 function periodDayAt(x, y) {
   const el = document.elementFromPoint(x, y);
   const button = el && el.closest ? el.closest("button[data-date]") : null;
@@ -1579,6 +1613,7 @@ function onPeriodPointerDown(event) {
   const host = document.getElementById("period-calendar");
   if (!form || !host) return;
   periodIgnoreClick = false;
+  periodReleaseHandled = false;
   periodDrag = {
     pointerId: event.pointerId,
     marking: event.shiftKey,
@@ -1624,7 +1659,7 @@ function onPeriodPointerMove(event) {
 function onPeriodPointerUp(event) {
   if (!periodDrag) return;
   if (event && event.pointerId !== undefined && event.pointerId !== periodDrag.pointerId) return;
-  if (periodDrag.moved) periodIgnoreClick = true;
+  const drag = periodDrag;
   const host = document.getElementById("period-calendar");
   try {
     if (host && event && event.pointerId !== undefined && host.hasPointerCapture && host.hasPointerCapture(event.pointerId)) {
@@ -1634,9 +1669,24 @@ function onPeriodPointerUp(event) {
     /* кнопка уже отпущена */
   }
   periodDrag = null;
+  const form = document.getElementById("period-form");
+  if (drag.moved) {
+    periodIgnoreClick = true;
+    return;
+  }
+  if (!form || !drag.startDate) return;
+  const under = event ? periodDayAt(event.clientX, event.clientY) : null;
+  const key = under && under.dataset.date ? under.dataset.date : drag.startKey;
+  if (key !== drag.startKey) return;
+  periodReleaseHandled = true;
+  applyPeriodDayClick(form, drag.startDate, key, Boolean(event && event.shiftKey));
 }
 
 function onPeriodCalendarClick(event) {
+  if (periodReleaseHandled) {
+    periodReleaseHandled = false;
+    return;
+  }
   if (periodIgnoreClick) {
     periodIgnoreClick = false;
     return;
@@ -1656,24 +1706,7 @@ function onPeriodCalendarClick(event) {
   if (!button || button.disabled) return;
   const date = parseIsoDate(button.dataset.date);
   if (!date) return;
-  if (event.shiftKey) {
-    const mode = markModeValue(form);
-    if (mode === "advance" || mode === "salary") setPayDay(form, mode, date);
-    else togglePeriodMark(button.dataset.date, mode === "sick" ? "sick" : "work");
-    periodCalSig = "";
-    calcPeriodSalary(form);
-    return;
-  }
-  if (periodAwaitingEnd && periodAnchor) {
-    setPeriodDragRange(form, periodAnchor, date);
-  } else {
-    form.from.value = formatDotDate(date.y, date.m, date.d);
-    form.to.value = formatDotDate(date.y, date.m, date.d);
-    periodAnchor = date;
-    periodAwaitingEnd = true;
-  }
-  periodCalSig = "";
-  calcPeriodSalary(form);
+  applyPeriodDayClick(form, date, button.dataset.date, event.shiftKey);
 }
 
 function expandPeriodToDate(form, date) {
