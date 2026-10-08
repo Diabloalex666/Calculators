@@ -1780,12 +1780,6 @@ function expandPeriodToDate(form, date) {
   form.to.value = formatDotDate(end.y, end.m, end.d);
 }
 
-function periodMarkDateCaption(value) {
-  const parsed = parseIsoDate(value);
-  if (!parsed) return "не выбран";
-  return formatDotDate(parsed.y, parsed.m, parsed.d);
-}
-
 function updatePeriodMarkCount(form) {
   const worked = new Set();
   const from = form ? parseIsoDate(form.from.value) : null;
@@ -1808,8 +1802,6 @@ function updatePeriodMarkCount(form) {
   setText("mark-work-count", `${worked.size} дн.`);
   setText("mark-sick-count", `${periodMarkedDays(form, "sick")} дн.`);
   setText("mark-vacation-count", `${periodMarkedDays(form, "vacation")} дн.`);
-  setText("mark-advance-date", periodMarkDateCaption(form && form.advanceDay ? form.advanceDay.value : ""));
-  setText("mark-salary-date", periodMarkDateCaption(form && form.salaryDay ? form.salaryDay.value : ""));
 }
 
 function fillNormMonthSelect(select) {

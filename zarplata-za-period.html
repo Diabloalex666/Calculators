@@ -107,49 +107,6 @@
               <p class="period-mark-hint">Даты можно вписать или выбрать на календаре: первый клик — начало, второй — конец. Выходные и праздники сами в оплату не входят.</p>
             </div>
             <div class="form-row" data-field="by-days">
-              <div class="segment" role="radiogroup" aria-label="День аванса или зарплаты">
-                <label class="seg">
-                  <input type="radio" name="markMode" value="advance" />
-                  <span>Аванс</span>
-                </label>
-                <label class="seg">
-                  <input type="radio" name="markMode" value="salary" />
-                  <span>Зарплата</span>
-                </label>
-              </div>
-              <div class="mark-caption-row">
-                <p class="period-mark-hint" id="mark-advance-date">не выбран</p>
-                <p class="period-mark-hint" id="mark-salary-date">не выбран</p>
-              </div>
-            </div>
-            <div class="form-row" data-field="by-days">
-              <div class="pay-day-grid">
-                <label for="advance-day">День аванса</label>
-                <label for="salary-day">День зарплаты</label>
-                <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
-                <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
-              </div>
-              <p class="period-mark-hint">Впишите дату или отметьте день на календаре: режим «Аванс» или «Зарплата», затем Shift и клик.</p>
-            </div>
-            <div class="form-row">
-              <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
-              <div class="segment" role="radiogroup" aria-label="Как задан аванс">
-                <label class="seg">
-                  <input type="radio" name="advanceMode" value="half" checked />
-                  <span>50% оклада</span>
-                </label>
-                <label class="seg">
-                  <input type="radio" name="advanceMode" value="custom" />
-                  <span>Своя сумма</span>
-                </label>
-              </div>
-              <p class="period-mark-hint">50% считается по отработанным дням с 1 по 15. Своя сумма — если аванс другой.</p>
-            </div>
-            <div class="form-row" data-field="advance-custom" hidden>
-              <label for="advance-amount">Своя сумма аванса, ₽</label>
-              <input id="advance-amount" name="advanceAmount" type="text" inputmode="numeric" autocomplete="off" value="0" />
-            </div>
-            <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
               <div role="radiogroup" aria-label="Что отметить">
                 <div class="segment segment-3">
@@ -215,6 +172,45 @@
                 </div>
               </div>
               <p class="period-mark-hint">Обычный клик выбирает период. Shift ставит выбранную пометку. Повторный клик по пометке снимает её.</p>
+            </div>
+            <div class="form-row" data-field="by-days">
+              <div class="segment" role="radiogroup" aria-label="День аванса или зарплаты">
+                <label class="seg">
+                  <input type="radio" name="markMode" value="advance" />
+                  <span>Аванс</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="markMode" value="salary" />
+                  <span>Зарплата</span>
+                </label>
+              </div>
+            </div>
+            <div class="form-row" data-field="by-days">
+              <div class="pay-day-grid">
+                <label for="advance-day">День аванса</label>
+                <label for="salary-day">День зарплаты</label>
+                <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+                <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
+              </div>
+              <p class="period-mark-hint">Впишите дату или отметьте день на календаре: режим «Аванс» или «Зарплата», затем Shift и клик.</p>
+            </div>
+            <div class="form-row">
+              <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
+              <div class="segment" role="radiogroup" aria-label="Как задан аванс">
+                <label class="seg">
+                  <input type="radio" name="advanceMode" value="half" checked />
+                  <span>50% оклада</span>
+                </label>
+                <label class="seg">
+                  <input type="radio" name="advanceMode" value="custom" />
+                  <span>Своя сумма</span>
+                </label>
+              </div>
+              <p class="period-mark-hint">50% считается по отработанным дням с 1 по 15. Своя сумма — если аванс другой.</p>
+            </div>
+            <div class="form-row" data-field="advance-custom" hidden>
+              <label for="advance-amount">Своя сумма аванса, ₽</label>
+              <input id="advance-amount" name="advanceAmount" type="text" inputmode="numeric" autocomplete="off" value="0" />
             </div>
             <div class="form-row" data-field="by-hours" hidden>
               <label for="worked-hours">Отработано часов</label>
@@ -377,7 +373,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=35"></script>
+    <script src="js/calculators.js?v=36"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
