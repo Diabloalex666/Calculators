@@ -190,17 +190,18 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении сроки выплаты",
+      "q": "зарплата при увольнении",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "cluster": "zarplata-pri-uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "planned"
     },
     {
@@ -566,18 +567,17 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении",
+      "q": "зарплата при увольнении сроки выплаты",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
@@ -722,7 +722,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный в 2026",
+      "q": "максимальный больничный 2026 в день",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1101,7 +1101,7 @@
       "status": "published"
     },
     {
-      "q": "максимальный больничный 2026 в день",
+      "q": "максимальный больничный в 2026",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1343,17 +1343,18 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении сроки выплаты",
+      "q": "зарплата при увольнении",
       "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 10.0,
       "sources": [
+        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
+      "cluster": "zarplata-pri-uvolnenii",
+      "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "planned"
     },
     {
@@ -1719,18 +1720,17 @@
       "status": "published"
     },
     {
-      "q": "зарплата при увольнении",
+      "q": "зарплата при увольнении сроки выплаты",
       "score": 9.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 0.0,
       "suggest": 9.0,
       "sources": [
-        "seed",
         "yandex-suggest"
       ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
+      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
       "status": "planned"
     },
     {
@@ -1751,7 +1751,7 @@
   ],
   "unmatched": [
     {
-      "q": "калькулятор налогов",
+      "q": "калькулятор налогового вычета",
       "score": 8.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1765,7 +1765,7 @@
       "status": "new"
     },
     {
-      "q": "калькулятор налогового вычета",
+      "q": "калькулятор налогов",
       "score": 7.0,
       "clicks": 0.0,
       "impressions": 0.0,
@@ -1893,7 +1893,7 @@
       "score": 130.0
     },
     {
-      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
+      "id": "zarplata-pri-uvolnenii",
       "score": 10.0
     },
     {
@@ -1973,7 +1973,7 @@
       "score": 10.0
     },
     {
-      "id": "zarplata-pri-uvolnenii",
+      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
       "score": 9.0
     },
     {
