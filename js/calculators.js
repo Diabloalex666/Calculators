@@ -1880,9 +1880,98 @@ function periodAdvanceHalf(form, gross) {
   return { month, norm, worked, amount };
 }
 
+function periodEnteredAmount(value) {
+  const raw = String(value == null ? "" : value).replace(/\s/g, "").replace(",", ".").trim();
+  if (raw === "") return null;
+  const amount = Number(raw);
+  if (!Number.isFinite(amount)) return null;
+  return Math.max(0, amount);
+}
+
+function periodSickCalendarDays(form) {
+  const from = parseIsoDate(form.from.value);
+  const to = parseIsoDate(form.to.value);
+  if (!from || !to || from.y !== PROD_2026.year || to.y !== PROD_2026.year || dateOrder(from, to) > 0) return 0;
+  let days = 0;
+  let cursor = Date.UTC(from.y, from.m - 1, from.d);
+  const end = Date.UTC(to.y, to.m - 1, to.d);
+  while (cursor <= end) {
+    const dt = new Date(cursor);
+    const key = isoDate(PROD_2026.year, dt.getUTCMonth() + 1, dt.getUTCDate());
+    if (periodMarks[key] === "sick") days += 1;
+    cursor += 86400000;
+  }
+  return days;
+}
+
+function bindPeriodSickFold(form) {
+  if (!form || form.dataset.sickFold === "1") return;
+  const button = document.getElementById("sick-fold");
+  const panel = document.getElementById("sick-fold-panel");
+  if (!button || !panel) return;
+  form.dataset.sickFold = "1";
+  button.addEventListener("click", () => {
+    const open = panel.hidden;
+    panel.hidden = !open;
+    button.setAttribute("aria-expanded", open ? "true" : "false");
+  });
+}
+
+function periodSickBenefit(form, ndflRate, byDays) {
+  if (!byDays) return { text: "—", steps: [] };
+  const days = periodSickCalendarDays(form);
+  if (days <= 0) return { text: "—", steps: [] };
+  const income2024 = periodEnteredAmount(form.sickIncome2024 ? form.sickIncome2024.value : "");
+  const income2025 = periodEnteredAmount(form.sickIncome2025 ? form.sickIncome2025.value : "");
+  if (income2024 == null || income2025 == null) return { text: "—", steps: [] };
+
+  const capped2024 = Math.min(income2024, SICK_LIMITS_2026.income2024);
+  const capped2025 = Math.min(income2025, SICK_LIMITS_2026.income2025);
+  const total = capped2024 + capped2025;
+  let avgDaily = total / 730;
+  const rawDaily = avgDaily;
+  let limitedBy = "";
+  if (avgDaily > SICK_LIMITS_2026.maxDaily) {
+    avgDaily = SICK_LIMITS_2026.maxDaily;
+    limitedBy = "max";
+  } else if (avgDaily < SICK_LIMITS_2026.minDaily) {
+    avgDaily = SICK_LIMITS_2026.minDaily;
+    limitedBy = "min";
+  }
+  const picked = Number(form.sickRate ? form.sickRate.value : 1);
+  const seniority = picked === 0.6 || picked === 0.8 || picked === 1 ? picked : 1;
+  const beforeRounded = Math.round(avgDaily * seniority * days);
+  const taxRate = typeof ndflRate === "number" ? ndflRate : 0;
+  const ndfl = Math.round(beforeRounded * taxRate);
+  const net = beforeRounded - ndfl;
+  const steps = [
+    { label: "Дней больничного", value: String(days) },
+    { label: "Средний день", value: `${formatRub(total)} ÷ 730 = ${formatRubPrecise(rawDaily)}` },
+  ];
+  if (limitedBy === "max") {
+    steps.push({
+      label: "Лимит дня",
+      value: `Применён максимум ${formatRubPrecise(SICK_LIMITS_2026.maxDaily)} / день`,
+    });
+  } else if (limitedBy === "min") {
+    steps.push({
+      label: "Лимит дня",
+      value: `Применён минимум ${formatRubPrecise(SICK_LIMITS_2026.minDaily)} / день`,
+    });
+  }
+  steps.push(
+    { label: "Процент стажа", value: formatPercent(seniority) },
+    { label: "Больничный до НДФЛ", value: `${formatRubPrecise(avgDaily)} × ${formatPercent(seniority)} × ${days} = ${formatRub(beforeRounded)}` },
+    { label: "НДФЛ с больничного", value: `${formatRub(beforeRounded)} × ${formatPercent(taxRate)} = ${formatRub(ndfl)}` },
+    { label: "Больничный на руки", value: formatRub(net) }
+  );
+  return { text: formatRub(net), beforeRounded, net, steps };
+}
+
 function calcPeriodSalary(form) {
   applyOpeningPeriod(form);
   bindPeriodPayFold(form);
+  bindPeriodSickFold(form);
   bindPeriodFactFold(form);
   syncPeriodPayFields(form);
   const byDays = form.countMode.value !== "hours";
@@ -1968,6 +2057,9 @@ function calcPeriodSalary(form) {
   showPeriodFactDiff(periodFactAmount(form), result.ok ? result.net : null);
   setText("period-advance", formatRub(advancePay));
   setText("period-rest", result.ok ? formatRub(result.net - advancePay) : "—");
+  const sickBenefit = periodSickBenefit(form, rate, byDays);
+  sickBenefit.steps.forEach((step) => result.steps.push(step));
+  setText("period-sick-net", sickBenefit.text);
   setText("period-before", result.ok ? formatRub(result.beforeTax) : "—");
   setText("period-ndfl", result.ok ? formatRub(result.ndfl) : "—");
   setText("period-salary", result.ok ? formatRub(result.grossMonthly) : "—");

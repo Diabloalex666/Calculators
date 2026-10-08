@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=26-fact-color" />
+    <link rel="stylesheet" href="css/style.css?v=27-sick-benefit" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -194,6 +194,22 @@
               <p class="period-mark-hint">1× — та же оплата за час. Как в ТК РФ — повышенная оплата сверхурочных.</p>
             </div>
             <div class="form-row">
+              <button type="button" class="pay-fold-btn" id="sick-fold" aria-expanded="false" aria-controls="sick-fold-panel">Доход и стаж для больничного</button>
+              <p class="period-mark-hint">Дни болезни отмечены на календаре. Кнопка «Доход и стаж для больничного» задаёт доход за 2024–2025 и процент стажа.</p>
+              <div id="sick-fold-panel" class="pay-fold-panel" hidden>
+                <label for="sick-income-2024">Доход за 2024 год, ₽</label>
+                <input id="sick-income-2024" name="sickIncome2024" type="text" inputmode="numeric" autocomplete="off" />
+                <label for="sick-income-2025">Доход за 2025 год, ₽</label>
+                <input id="sick-income-2025" name="sickIncome2025" type="text" inputmode="numeric" autocomplete="off" />
+                <label for="sick-rate">Процент от среднего (стаж)</label>
+                <select id="sick-rate" name="sickRate">
+                  <option value="0.6">60% — стаж менее 5 лет</option>
+                  <option value="0.8">80% — стаж 5–8 лет</option>
+                  <option value="1" selected>100% — стаж 8+ лет</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
               <button type="button" class="pay-fold-btn" id="paid-fold" aria-expanded="false" aria-controls="paid-fold-panel">Выплачено по факту</button>
               <div id="paid-fold-panel" class="pay-fold-panel" hidden>
                 <label for="paid-fact">Выплачено по факту, ₽</label>
@@ -213,6 +229,7 @@
           <p class="result-context">Оценка, не расчётный листок</p>
           <div class="result-row"><span>Выплата в день аванса</span><span id="period-advance">—</span></div>
           <div class="result-row"><span>Остаток в день зарплаты</span><span id="period-rest">—</span></div>
+          <div class="result-row"><span>Больничный на руки</span><span id="period-sick-net">—</span></div>
           <div class="result-row"><span>До НДФЛ</span><span id="period-before">—</span></div>
           <div class="result-row"><span>НДФЛ</span><span id="period-ndfl">—</span></div>
           <div class="result-row"><span>Оклад до налога</span><span id="period-salary">—</span></div>
@@ -233,8 +250,8 @@
           По каждому месяцу отдельно: оклад до налога делится на норму этого месяца
           и умножается на отработанные дни или часы.
           День, отмеченный как болезнь, в сумму не входит.
-          Пособие по больничному считается в
-          <a href="sick.html">калькуляторе больничного</a>.
+          Строка «Больничный на руки» считается той же формулой, что
+          <a href="sick.html">калькулятор больничного</a>.
         </p>
         <p class="article-formula">Оклад ÷ норма месяца × отработанные дни или часы</p>
         <p>
@@ -325,7 +342,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=33"></script>
+    <script src="js/calculators.js?v=34"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
