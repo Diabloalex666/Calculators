@@ -51,11 +51,23 @@
     "oklad-220000-ndfl-15",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 24,
+  "planned": 26,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
       "stem": "zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu",
+      "has_pack": false,
+      "reason": "нет пакета в seo-agent/packs/"
+    },
+    {
+      "id": "nalogovyy-vychet",
+      "stem": "nalogovyy-vychet",
+      "has_pack": false,
+      "reason": "нет пакета в seo-agent/packs/"
+    },
+    {
+      "id": "nalogovaya-nagruzka",
+      "stem": "nalogovaya-nagruzka",
       "has_pack": false,
       "reason": "нет пакета в seo-agent/packs/"
     }

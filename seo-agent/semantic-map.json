@@ -1091,6 +1091,42 @@
         ],
         "updated": "2026-10-09"
       }
+    },
+    {
+      "id": "nalogovyy-vychet",
+      "page": "/nalogovyy-vychet.html",
+      "status": "planned",
+      "intent": "tool",
+      "main": {
+        "q": "калькулятор налогового вычета",
+        "vol": null
+      },
+      "demand": {
+        "score": 7.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "added": "2026-10-09",
+        "updated": "2026-10-09"
+      }
+    },
+    {
+      "id": "nalogovaya-nagruzka",
+      "page": "/nalogovaya-nagruzka.html",
+      "status": "planned",
+      "intent": "tool",
+      "main": {
+        "q": "калькулятор налоговой нагрузки",
+        "vol": null
+      },
+      "demand": {
+        "score": 6.0,
+        "sources": [
+          "yandex-suggest"
+        ],
+        "added": "2026-10-09",
+        "updated": "2026-10-09"
+      }
     }
   ]
 }

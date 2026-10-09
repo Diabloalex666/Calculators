@@ -7,7 +7,7 @@
   },
   "wordstat": {
     "connected": false,
-    "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
+    "error": "HTTPError 403",
     "n": 0
   }
 }

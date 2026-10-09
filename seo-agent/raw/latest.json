@@ -1,15 +1,18 @@
 {
-  "generated": "2026-10-09T07:31:20",
+  "generated": "2026-10-09T09:53:16",
   "semantics": {
     "counts": {
       "published": 40,
-      "planned": 24
+      "planned": 26
     },
     "holes": [],
-    "total": 64
+    "total": 66
   },
   "briefs": {
-    "created": [],
+    "created": [
+      "nalogovyy-vychet",
+      "nalogovaya-nagruzka"
+    ],
     "missing": []
   },
   "briefs_missing": [],
@@ -74,15 +77,27 @@
     },
     "wordstat": {
       "connected": false,
-      "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
+      "error": "HTTPError 403",
       "n": 0
     }
   },
   "demand": {
     "suggest_ok": 31,
+    "suggest_error": "",
     "webmaster": true,
     "wordstat": false,
-    "added": [],
+    "added": [
+      {
+        "id": "nalogovyy-vychet",
+        "q": "калькулятор налогового вычета",
+        "slug": "nalogovyy-vychet"
+      },
+      {
+        "id": "nalogovaya-nagruzka",
+        "q": "калькулятор налоговой нагрузки",
+        "slug": "nalogovaya-nagruzka"
+      }
+    ],
     "retired": [],
     "top": [
       "ипотечный калькулятор",
@@ -99,7 +114,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 24 planned",
+      "в очереди 26 planned",
       "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [

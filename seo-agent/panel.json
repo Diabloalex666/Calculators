@@ -3,7 +3,7 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 24 planned",
+    "в очереди 26 planned",
     "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
   ],
   "actions": [
@@ -21,16 +21,16 @@
     ]
   },
   "topics": {
-    "planned": 24,
+    "planned": 26,
     "reserved": 0,
     "published": 40,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "Вебмастер API: 0 запросов"
+    "status": "Показов в Вебмастере: 0. Это ноль, не подтверждение спроса."
   },
   "positions": {
-    "status": "спрос самообновляется",
+    "status": "частота только из CSV, дата — поле updated у seo-agent/raw/wordstat.json",
     "top": [
       {
         "q": "ипотечный калькулятор",
@@ -195,7 +195,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 24 planned",
+      "в очереди 26 planned",
       "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
     ],
     "missing": [

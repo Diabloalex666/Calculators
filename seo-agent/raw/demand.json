@@ -1762,7 +1762,8 @@
       ],
       "cluster": null,
       "page": null,
-      "status": "new"
+      "status": "new",
+      "note": "страница не создана, потому что калькуляторы налога ИП, организации и самозанятого уже есть"
     },
     {
       "q": "калькулятор налогового вычета",
@@ -1774,9 +1775,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovyy-vychet",
+      "page": "/nalogovyy-vychet.html",
+      "status": "planned"
     },
     {
       "q": "калькулятор налоговой нагрузки",
@@ -1788,9 +1789,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovaya-nagruzka",
+      "page": "/nalogovaya-nagruzka.html",
+      "status": "planned"
     },
     {
       "q": "калькулятор налогового вычета при покупке квартиры",
@@ -1802,9 +1803,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovyy-vychet",
+      "page": "/nalogovyy-vychet.html",
+      "status": "planned"
     },
     {
       "q": "калькулятор налогового вычета по ипотеке",
@@ -1816,9 +1817,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovyy-vychet",
+      "page": "/nalogovyy-vychet.html",
+      "status": "planned"
     },
     {
       "q": "калькулятор налоговой нагрузки на сайте налоговой",
@@ -1830,9 +1831,9 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovaya-nagruzka",
+      "page": "/nalogovaya-nagruzka.html",
+      "status": "planned"
     },
     {
       "q": "калькулятор налогового вычета за лечение",
@@ -1844,12 +1845,23 @@
       "sources": [
         "yandex-suggest"
       ],
-      "cluster": null,
-      "page": null,
-      "status": "new"
+      "cluster": "nalogovyy-vychet",
+      "page": "/nalogovyy-vychet.html",
+      "status": "planned"
     }
   ],
-  "added_planned": [],
+  "added_planned": [
+    {
+      "id": "nalogovyy-vychet",
+      "q": "калькулятор налогового вычета",
+      "slug": "nalogovyy-vychet"
+    },
+    {
+      "id": "nalogovaya-nagruzka",
+      "q": "калькулятор налоговой нагрузки",
+      "slug": "nalogovaya-nagruzka"
+    }
+  ],
   "retired": [],
   "cluster_rank": [
     {
@@ -1975,6 +1987,14 @@
     {
       "id": "zarplata-pri-uvolnenii",
       "score": 9.0
+    },
+    {
+      "id": "nalogovyy-vychet",
+      "score": 7.0
+    },
+    {
+      "id": "nalogovaya-nagruzka",
+      "score": 6.0
     },
     {
       "id": "vychet-na-detey-kak-rabotaet",

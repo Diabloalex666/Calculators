@@ -1,7 +1,7 @@
 {
   "updated": "2026-10-09",
   "connected": false,
-  "source": "xmlriver-wordstat",
+  "source": "wordstat-api",
   "queries": [],
-  "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем"
+  "error": "HTTPError 403"
 }
