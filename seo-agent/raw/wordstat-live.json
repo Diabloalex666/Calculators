@@ -3,5 +3,5 @@
   "connected": false,
   "source": "wordstat-api",
   "queries": [],
-  "error": "HTTPError 400"
+  "error": "HTTP 400: rpc error: code = InvalidArgument desc = Validation error: folder_id: Length must be less than or equal to 50"
 }
