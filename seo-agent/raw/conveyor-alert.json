@@ -1,12 +1,11 @@
 {
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
     "bolnichny-procent-ot-stazha-kak.html",
     "byudzhet-50-30-20.html",
     "ipoteka-srok-ili-platezh.html",
-    "ndfl-18-20-22-procenta.html",
     "ndfl-s-kakoy-summy-schitaetsya.html",
     "ndfl-s-premii.html",
     "oklad-150000-na-ruki.html",
@@ -28,7 +27,6 @@
     "zarplata-za-pervuyu-nedelyu.html"
   ],
   "ready_packs": [
-    "ndfl-18-20-22-procenta",
     "zarplata-pri-uvolnenii",
     "vychet-na-detey-kak-rabotaet",
     "uderzhaniya-iz-zarplaty-predel",
@@ -53,7 +51,7 @@
     "oklad-220000-ndfl-15",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 25,
+  "planned": 24,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -62,5 +60,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=24, ready_packs=24"
+  "message": "На конвейере: queue=23, ready_packs=23"
 }

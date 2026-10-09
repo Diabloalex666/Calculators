@@ -1,6 +1,6 @@
 {
   "site": "https://finraz.ru",
-  "updated": "2026-10-08",
+  "updated": "2026-10-09",
   "note": "Частотности — гипотеза до выгрузки Wordstat/консолей. Не использовать как факт в статьях.",
   "clusters": [
     {
@@ -13,11 +13,11 @@
         "vol": 647
       },
       "demand": {
-        "score": 1.0,
+        "score": 6470.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -115,11 +115,11 @@
         "vol": 436
       },
       "demand": {
-        "score": 1.0,
+        "score": 4360.0,
         "sources": [
-          "seed"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -132,11 +132,11 @@
         "vol": 507
       },
       "demand": {
-        "score": 6.0,
+        "score": 5070.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -149,11 +149,11 @@
         "vol": 65522
       },
       "demand": {
-        "score": 1.0,
+        "score": 655220.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -234,11 +234,11 @@
         "vol": 14648
       },
       "demand": {
-        "score": 1.0,
+        "score": 146480.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -337,11 +337,11 @@
         "vol": 292364
       },
       "demand": {
-        "score": 1.0,
+        "score": 2923640.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -473,11 +473,11 @@
         "vol": 38747
       },
       "demand": {
-        "score": 1.0,
+        "score": 387470.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -541,11 +541,11 @@
         "vol": 49
       },
       "demand": {
-        "score": 1.0,
+        "score": 490.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
@@ -558,17 +558,17 @@
         "vol": 79
       },
       "demand": {
-        "score": 1.0,
+        "score": 790.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
       "id": "ndfl-18-20-22",
       "page": "/articles/ndfl-18-20-22-procenta.html",
-      "status": "planned",
+      "status": "published",
       "intent": "info",
       "main": {
         "q": "ндфл 18 20 22 процента с какой суммы",
@@ -579,7 +579,7 @@
         "sources": [
           "wordstat-json"
         ],
-        "updated": "2026-10-08"
+        "updated": "2026-10-09"
       }
     },
     {
