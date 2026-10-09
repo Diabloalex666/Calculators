@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-09T09:58:05",
+  "generated": "2026-10-09T10:51:44",
   "semantics": {
     "counts": {
       "published": 40,
@@ -22,10 +22,10 @@
     ]
   },
   "drip": {
-    "enabled": true,
+    "enabled": false,
     "published": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
@@ -73,39 +73,36 @@
       "n": 0
     },
     "wordstat": {
-      "connected": false,
-      "error": "HTTPError 400",
-      "n": 0
+      "connected": true,
+      "error": "пустой ответ",
+      "n": 14
     }
   },
   "demand": {
     "suggest_ok": 31,
     "suggest_error": "",
     "webmaster": true,
-    "wordstat": false,
+    "wordstat": true,
     "added": [],
     "retired": [],
     "top": [
       "ипотечный калькулятор",
       "калькулятор отпускных",
+      "калькулятор больничного",
+      "вычет на детей ндфл",
       "калькулятор сложного процента",
       "калькулятор больничного листа в 2026 году онлайн",
-      "калькулятор зарплаты на руки",
-      "вычет на детей ндфл сколько",
-      "когда ндфл 15 процентов",
-      "как посчитать аванс от оклада"
+      "калькулятор налогового вычета",
+      "калькулятор налоговой нагрузки"
     ]
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 26 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 26 planned"
     ],
-    "missing": [
-      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
-    ],
+    "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
       "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"

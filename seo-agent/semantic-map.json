@@ -27,7 +27,7 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор зарплаты за период",
-        "vol": null
+        "vol": 35
       },
       "demand": {
         "score": 4.0,
@@ -44,12 +44,12 @@
       "intent": "info",
       "main": {
         "q": "100000 на руки какой оклад",
-        "vol": null
+        "vol": 4
       },
       "demand": {
-        "score": 1.0,
+        "score": 10.0,
         "sources": [
-          "seed"
+          "yandex-suggest"
         ],
         "updated": "2026-10-09"
       }
@@ -61,12 +61,12 @@
       "intent": "info",
       "main": {
         "q": "80000 на руки сколько до ндфл",
-        "vol": null
+        "vol": 1
       },
       "demand": {
-        "score": 1.0,
+        "score": 8.0,
         "sources": [
-          "seed"
+          "yandex-suggest"
         ],
         "updated": "2026-10-09"
       }
@@ -78,11 +78,12 @@
       "intent": "info",
       "main": {
         "q": "120000 до ндфл сколько на руки",
-        "vol": null
+        "vol": 1
       },
       "demand": {
-        "score": 1.0,
+        "score": 11.0,
         "sources": [
+          "wordstat-api",
           "seed"
         ],
         "updated": "2026-10-09"
@@ -112,7 +113,7 @@
       "intent": "info",
       "main": {
         "q": "когда ндфл 15 процентов 2026",
-        "vol": 436
+        "vol": 648
       },
       "demand": {
         "score": 1.0,
@@ -334,7 +335,7 @@
       "intent": "tool",
       "main": {
         "q": "ипотечный калькулятор",
-        "vol": 292364
+        "vol": 327477
       },
       "demand": {
         "score": 1.0,
@@ -555,7 +556,7 @@
       "intent": "info",
       "main": {
         "q": "как посчитать аванс от оклада",
-        "vol": 79
+        "vol": 100
       },
       "demand": {
         "score": 1.0,
@@ -1099,7 +1100,7 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор налогового вычета",
-        "vol": null
+        "vol": 5166
       },
       "demand": {
         "score": 1.0,
@@ -1116,7 +1117,7 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор налоговой нагрузки",
-        "vol": null
+        "vol": 863
       },
       "demand": {
         "score": 2.0,

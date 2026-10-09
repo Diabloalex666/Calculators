@@ -6,8 +6,8 @@
     "n": 0
   },
   "wordstat": {
-    "connected": false,
-    "error": "HTTPError 400",
-    "n": 0
+    "connected": true,
+    "error": "пустой ответ",
+    "n": 14
   }
 }

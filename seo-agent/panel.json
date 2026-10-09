@@ -3,8 +3,7 @@
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 26 planned",
-    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+    "в очереди 26 planned"
   ],
   "actions": [
     {
@@ -30,17 +29,18 @@
     "status": "Показов в Вебмастере: 0. Это ноль, не подтверждение спроса."
   },
   "positions": {
-    "status": "частота только из CSV, дата — поле updated у seo-agent/raw/wordstat.json",
+    "status": "спрос самообновляется",
     "top": [
       {
         "q": "ипотечный калькулятор",
-        "score": 2923650.0,
+        "score": 3274780.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 292364.0,
+        "freq": 327477.0,
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
@@ -57,11 +57,42 @@
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
         "cluster": "otpusknye",
         "page": "/vacation.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор больничного",
+        "score": 559759.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 55975.0,
+        "suggest": 9.0,
+        "sources": [
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "bolnichny",
+        "page": "/sick.html",
+        "status": "published"
+      },
+      {
+        "q": "вычет на детей ндфл",
+        "score": 484710.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 48471.0,
+        "suggest": 0.0,
+        "sources": [
+          "wordstat-api"
+        ],
+        "cluster": "ndfl-vychet-deti",
+        "page": "/articles/ndfl-vychet-na-detey.html",
         "status": "published"
       },
       {
@@ -73,6 +104,7 @@
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
@@ -96,67 +128,34 @@
         "status": "published"
       },
       {
-        "q": "калькулятор зарплаты на руки",
-        "score": 6480.0,
+        "q": "калькулятор налогового вычета",
+        "score": 51667.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 647.0,
-        "suggest": 10.0,
+        "freq": 5166.0,
+        "suggest": 7.0,
         "sources": [
-          "wordstat-json",
-          "seed",
+          "wordstat-api",
           "yandex-suggest"
         ],
-        "cluster": "zarplata-na-ruki",
-        "page": "/salary.html",
-        "status": "published"
+        "cluster": "nalogovyy-vychet",
+        "page": "/nalogovyy-vychet.html",
+        "status": "planned"
       },
       {
-        "q": "вычет на детей ндфл сколько",
-        "score": 5071.0,
+        "q": "калькулятор налоговой нагрузки",
+        "score": 8636.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 507.0,
-        "suggest": 1.0,
+        "freq": 863.0,
+        "suggest": 6.0,
         "sources": [
-          "wordstat-json",
-          "seed"
-        ],
-        "cluster": "ndfl-vychet-deti",
-        "page": "/articles/ndfl-vychet-na-detey.html",
-        "status": "published"
-      },
-      {
-        "q": "когда ндфл 15 процентов",
-        "score": 4370.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 436.0,
-        "suggest": 10.0,
-        "sources": [
-          "wordstat-json",
-          "seed",
+          "wordstat-api",
           "yandex-suggest"
         ],
-        "cluster": "ndfl-15-kogda",
-        "page": "/articles/ndfl-15-procentov-kogda.html",
-        "status": "published"
-      },
-      {
-        "q": "как посчитать аванс от оклада",
-        "score": 799.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 79.0,
-        "suggest": 9.0,
-        "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
-        ],
-        "cluster": "avans-ot-oklada",
-        "page": "/articles/avans-ot-oklada.html",
-        "status": "published"
+        "cluster": "nalogovaya-nagruzka",
+        "page": "/nalogovaya-nagruzka.html",
+        "status": "planned"
       }
     ]
   },
@@ -195,12 +194,9 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 26 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 26 planned"
     ],
-    "missing": [
-      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
-    ],
+    "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
       "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"

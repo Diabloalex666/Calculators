@@ -52,7 +52,27 @@
       "query": "калькулятор налоговой нагрузки",
       "freq": 863,
       "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор зарплаты за период",
+      "freq": 35,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "100000 на руки какой оклад",
+      "freq": 4,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "80000 на руки сколько до ндфл",
+      "freq": 1,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "120000 до ндфл сколько на руки",
+      "freq": 1,
+      "source": "wordstat-api"
     }
   ],
-  "error": null
+  "error": "пустой ответ"
 }
