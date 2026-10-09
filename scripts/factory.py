@@ -871,7 +871,7 @@ def main() -> int:
     console = ingest_console.ingest()
     yandex_pull = {"summary": {}}
     if live:
-        seeds = []
+        seeds = list(yandex_api.WORDSTAT_CHECK_PHRASES)
         for c in semantic_map().get("clusters", []):
             q = ((c.get("main") or {}).get("q") or "").strip()
             if q:

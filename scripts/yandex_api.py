@@ -423,9 +423,11 @@ def pull_all(seed_phrases: list[str] | None = None) -> dict:
         "аванс от оклада",
         "ндфл 15 процентов",
     ]
-    # Prefer top webmaster queries as Wordstat seeds when connected
+    # Prefer top webmaster queries as Wordstat seeds when connected.
+    # Checked phrases stay first so the 20-cap does not drop the live set.
     if wm.get("connected") and wm.get("queries"):
         seeds = [q["query"] for q in wm["queries"][:12]] + seeds
+    seeds = list(WORDSTAT_CHECK_PHRASES) + list(seeds)
     # unique keep order
     seen = set()
     uniq = []
