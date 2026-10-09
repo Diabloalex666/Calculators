@@ -3,5 +3,5 @@
   "connected": false,
   "source": "wordstat-api",
   "queries": [],
-  "error": "HTTP 400: rpc error: code = InvalidArgument desc = Validation error: folder_id: Length must be less than or equal to 50"
+  "error": "HTTP 403: rpc error: code = PermissionDenied desc = Permission to [resource-manager.folder , resource-manager.cloud b1gqe8i2oc1furcrqgok, organization-manager.organization bpflrlcdh0ugirba0j9i] denied"
 }
