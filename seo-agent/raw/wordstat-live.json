@@ -1,7 +1,58 @@
 {
   "updated": "2026-10-09",
-  "connected": false,
+  "connected": true,
   "source": "wordstat-api",
-  "queries": [],
-  "error": "HTTP 403: rpc error: code = PermissionDenied desc = Permission to [resource-manager.folder , resource-manager.cloud b1gqe8i2oc1furcrqgok, organization-manager.organization bpflrlcdh0ugirba0j9i] denied"
+  "queries": [
+    {
+      "query": "ипотечный калькулятор",
+      "freq": 327477,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор отпускных",
+      "freq": 55836,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор сложного процента",
+      "freq": 38597,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор больничного",
+      "freq": 55975,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор зарплаты на руки",
+      "freq": 620,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "вычет на детей ндфл",
+      "freq": 48471,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "когда ндфл 15 процентов",
+      "freq": 648,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "как посчитать аванс от оклада",
+      "freq": 100,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор налогового вычета",
+      "freq": 5166,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор налоговой нагрузки",
+      "freq": 863,
+      "source": "wordstat-api"
+    }
+  ],
+  "error": null
 }
