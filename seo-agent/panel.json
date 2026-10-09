@@ -49,23 +49,6 @@
         "status": "published"
       },
       {
-        "q": "калькулятор отпускных",
-        "score": 655230.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 65522.0,
-        "suggest": 10.0,
-        "sources": [
-          "wordstat-json",
-          "wordstat-api",
-          "seed",
-          "yandex-suggest"
-        ],
-        "cluster": "otpusknye",
-        "page": "/vacation.html",
-        "status": "published"
-      },
-      {
         "q": "калькулятор больничного",
         "score": 559759.0,
         "clicks": 0.0,
@@ -79,6 +62,23 @@
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор отпускных",
+        "score": 558370.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 55836.0,
+        "suggest": 10.0,
+        "sources": [
+          "wordstat-json",
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "otpusknye",
+        "page": "/vacation.html",
         "status": "published"
       },
       {
@@ -97,10 +97,10 @@
       },
       {
         "q": "калькулятор сложного процента",
-        "score": 387480.0,
+        "score": 385980.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 38747.0,
+        "freq": 38597.0,
         "suggest": 10.0,
         "sources": [
           "wordstat-json",

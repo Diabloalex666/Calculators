@@ -23,23 +23,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных",
-      "score": 655230.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 65522.0,
-      "suggest": 10.0,
-      "sources": [
-        "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор больничного",
       "score": 559759.0,
       "clicks": 0.0,
@@ -53,6 +36,23 @@
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных",
+      "score": 558370.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 55836.0,
+      "suggest": 10.0,
+      "sources": [
+        "wordstat-json",
+        "wordstat-api",
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -71,10 +71,10 @@
     },
     {
       "q": "калькулятор сложного процента",
-      "score": 387480.0,
+      "score": 385980.0,
       "clicks": 0.0,
       "impressions": 0.0,
-      "freq": 38747.0,
+      "freq": 38597.0,
       "suggest": 10.0,
       "sources": [
         "wordstat-json",
@@ -150,10 +150,10 @@
     },
     {
       "q": "калькулятор зарплаты на руки",
-      "score": 6480.0,
+      "score": 6210.0,
       "clicks": 0.0,
       "impressions": 0.0,
-      "freq": 647.0,
+      "freq": 620.0,
       "suggest": 10.0,
       "sources": [
         "wordstat-json",
@@ -1189,23 +1189,6 @@
       "status": "published"
     },
     {
-      "q": "калькулятор отпускных",
-      "score": 655230.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 65522.0,
-      "suggest": 10.0,
-      "sources": [
-        "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
       "q": "калькулятор больничного",
       "score": 559759.0,
       "clicks": 0.0,
@@ -1219,6 +1202,23 @@
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
+      "status": "published"
+    },
+    {
+      "q": "калькулятор отпускных",
+      "score": 558370.0,
+      "clicks": 0.0,
+      "impressions": 0.0,
+      "freq": 55836.0,
+      "suggest": 10.0,
+      "sources": [
+        "wordstat-json",
+        "wordstat-api",
+        "seed",
+        "yandex-suggest"
+      ],
+      "cluster": "otpusknye",
+      "page": "/vacation.html",
       "status": "published"
     },
     {
@@ -1237,10 +1237,10 @@
     },
     {
       "q": "калькулятор сложного процента",
-      "score": 387480.0,
+      "score": 385980.0,
       "clicks": 0.0,
       "impressions": 0.0,
-      "freq": 38747.0,
+      "freq": 38597.0,
       "suggest": 10.0,
       "sources": [
         "wordstat-json",
@@ -1316,10 +1316,10 @@
     },
     {
       "q": "калькулятор зарплаты на руки",
-      "score": 6480.0,
+      "score": 6210.0,
       "clicks": 0.0,
       "impressions": 0.0,
-      "freq": 647.0,
+      "freq": 620.0,
       "suggest": 10.0,
       "sources": [
         "wordstat-json",
@@ -1781,12 +1781,12 @@
       "score": 3274780.0
     },
     {
-      "id": "otpusknye",
-      "score": 655230.0
-    },
-    {
       "id": "bolnichny",
       "score": 559759.0
+    },
+    {
+      "id": "otpusknye",
+      "score": 558370.0
     },
     {
       "id": "ndfl-vychet-deti",
@@ -1794,7 +1794,7 @@
     },
     {
       "id": "compound",
-      "score": 387480.0
+      "score": 385980.0
     },
     {
       "id": "nalogovyy-vychet",
@@ -1810,7 +1810,7 @@
     },
     {
       "id": "zarplata-na-ruki",
-      "score": 6480.0
+      "score": 6210.0
     },
     {
       "id": "avans-ot-oklada",
