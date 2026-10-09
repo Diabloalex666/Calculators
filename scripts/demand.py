@@ -371,10 +371,24 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
         key = nrm(q)
         if len(key) < 8:
             return
-        cur = bag.get(key) or {"q": q, "clicks": 0, "impressions": 0, "freq": 0, "suggest": 0, "sources": []}
-        for field in ("clicks", "impressions", "freq", "suggest"):
-            cur[field] = max(float(cur.get(field) or 0), float(kw.get(field) or 0))
+        cur = bag.get(key) or {
+            "q": q,
+            "clicks": 0,
+            "impressions": 0,
+            "freq": 0,
+            "suggest": 0,
+            "sources": [],
+            "live_freq": False,
+        }
         src = kw.get("source")
+        for field in ("clicks", "impressions", "suggest"):
+            cur[field] = max(float(cur.get(field) or 0), float(kw.get(field) or 0))
+        incoming = float(kw.get("freq") or 0)
+        if src in {"wordstat-api", "wordstat-live"}:
+            cur["freq"] = incoming
+            cur["live_freq"] = True
+        elif not cur.get("live_freq"):
+            cur["freq"] = max(float(cur.get("freq") or 0), incoming)
         if src and src not in cur["sources"]:
             cur["sources"].append(src)
         bag[key] = cur
