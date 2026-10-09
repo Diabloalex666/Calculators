@@ -1749,119 +1749,8 @@
       "status": "published"
     }
   ],
-  "unmatched": [
-    {
-      "q": "калькулятор налогов",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": null,
-      "page": null,
-      "status": "new",
-      "note": "страница не создана, потому что калькуляторы налога ИП, организации и самозанятого уже есть"
-    },
-    {
-      "q": "калькулятор налогового вычета",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovyy-vychet",
-      "page": "/nalogovyy-vychet.html",
-      "status": "planned"
-    },
-    {
-      "q": "калькулятор налоговой нагрузки",
-      "score": 6.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 6.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovaya-nagruzka",
-      "page": "/nalogovaya-nagruzka.html",
-      "status": "planned"
-    },
-    {
-      "q": "калькулятор налогового вычета при покупке квартиры",
-      "score": 5.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 5.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovyy-vychet",
-      "page": "/nalogovyy-vychet.html",
-      "status": "planned"
-    },
-    {
-      "q": "калькулятор налогового вычета по ипотеке",
-      "score": 4.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 4.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovyy-vychet",
-      "page": "/nalogovyy-vychet.html",
-      "status": "planned"
-    },
-    {
-      "q": "калькулятор налоговой нагрузки на сайте налоговой",
-      "score": 2.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 2.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovaya-nagruzka",
-      "page": "/nalogovaya-nagruzka.html",
-      "status": "planned"
-    },
-    {
-      "q": "калькулятор налогового вычета за лечение",
-      "score": 1.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 1.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalogovyy-vychet",
-      "page": "/nalogovyy-vychet.html",
-      "status": "planned"
-    }
-  ],
-  "added_planned": [
-    {
-      "id": "nalogovyy-vychet",
-      "q": "калькулятор налогового вычета",
-      "slug": "nalogovyy-vychet"
-    },
-    {
-      "id": "nalogovaya-nagruzka",
-      "q": "калькулятор налоговой нагрузки",
-      "slug": "nalogovaya-nagruzka"
-    }
-  ],
+  "unmatched": [],
+  "added_planned": [],
   "retired": [],
   "cluster_rank": [
     {
@@ -1990,7 +1879,7 @@
     },
     {
       "id": "nalogovyy-vychet",
-      "score": 7.0
+      "score": 8.0
     },
     {
       "id": "nalogovaya-nagruzka",

@@ -7,7 +7,7 @@
   },
   "wordstat": {
     "connected": false,
-    "error": "HTTPError 403",
+    "error": "HTTPError 400",
     "n": 0
   }
 }

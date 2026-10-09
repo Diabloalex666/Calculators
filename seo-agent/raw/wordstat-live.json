@@ -3,5 +3,5 @@
   "connected": false,
   "source": "wordstat-api",
   "queries": [],
-  "error": "HTTPError 403"
+  "error": "HTTPError 400"
 }
