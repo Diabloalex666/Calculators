@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import json
 import re
+import socket
 import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import date
@@ -24,10 +26,22 @@ CYR = {
     "я": "ya",
 }
 STOP_NEW = (
-    "калькулятор",
     "скачать",
     "бесплатно excel",
     "бланк",
+)
+TOOL_VYCHET = {
+    "id": "nalogovyy-vychet",
+    "page": "/nalogovyy-vychet.html",
+    "q": "калькулятор налогового вычета",
+}
+TOOL_NAGRUZKA = {
+    "id": "nalogovaya-nagruzka",
+    "page": "/nalogovaya-nagruzka.html",
+    "q": "калькулятор налоговой нагрузки",
+}
+BARE_TAX_NOTE = (
+    "страница не создана, потому что калькуляторы налога ИП, организации и самозанятого уже есть"
 )
 FACT_HINTS = (
     (("аванс",), "advance-not-fixed-50"),
@@ -111,7 +125,20 @@ def save_json(path: Path, data) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def suggest(part: str) -> list[str]:
+def suggest_error_text(exc: BaseException) -> str:
+    """Тип, HTTP-код или timeout. Без тела ответа и без секретов."""
+    if isinstance(exc, urllib.error.HTTPError):
+        return f"HTTPError {exc.code}"
+    reason = getattr(exc, "reason", None)
+    timed_out = isinstance(exc, (TimeoutError, socket.timeout)) or isinstance(reason, (TimeoutError, socket.timeout))
+    if not timed_out and isinstance(reason, OSError) and "timed out" in str(reason).lower():
+        timed_out = True
+    if timed_out:
+        return f"{type(exc).__name__} timeout"
+    return type(exc).__name__
+
+
+def suggest(part: str) -> tuple[list[str], str]:
     url = "https://suggest.yandex.ru/suggest-ya.cgi?" + urllib.parse.urlencode(
         {"v": "4", "part": part, "uil": "ru", "lr": "213"}
     )
@@ -120,11 +147,48 @@ def suggest(part: str) -> list[str]:
         with urllib.request.urlopen(req, timeout=12) as resp:
             raw = resp.read().decode("utf-8", "replace")
         data = json.loads(raw)
-    except Exception:
-        return []
+    except Exception as exc:
+        return [], suggest_error_text(exc)
     if isinstance(data, list) and len(data) > 1 and isinstance(data[1], list):
-        return [str(x) for x in data[1] if isinstance(x, str)]
-    return []
+        return [str(x) for x in data[1] if isinstance(x, str)], ""
+    return [], ""
+
+
+def summarize_suggest_errors(errors: list[str]) -> str:
+    uniq: list[str] = []
+    for err in errors:
+        if err and err not in uniq:
+            uniq.append(err)
+    if not uniq:
+        return "нет подсказок"
+    return "; ".join(uniq[:3])
+
+
+def report_has_suggest(report: dict) -> bool:
+    for row in report.get("queries") or []:
+        if "yandex-suggest" in (row.get("sources") or []):
+            return True
+    return False
+
+
+def calculator_tool_spec(q: str) -> dict | None:
+    n = nrm(q)
+    if "калькулятор" not in n:
+        return None
+    if "вычет" in n:
+        return TOOL_VYCHET
+    if "нагрузк" in n:
+        return TOOL_NAGRUZKA
+    return None
+
+
+def bare_tax_calculator(q: str) -> bool:
+    n = nrm(q)
+    if "калькулятор" not in n or "налог" not in n:
+        return False
+    if "вычет" in n or "нагрузк" in n:
+        return False
+    return True
 
 
 def live_queries() -> list[dict]:
@@ -151,7 +215,7 @@ def live_queries() -> list[dict]:
                     "clicks": 0,
                     "impressions": 0,
                     "freq": item.get("freq") or 0,
-                    "source": "wordstat-live",
+                    "source": item.get("source") if item.get("source") in {"wordstat-api", "wordstat-live"} else "wordstat-live",
                 }
             )
     return rows
@@ -319,15 +383,28 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
         add(row["q"], clicks=row["clicks"], impressions=row["impressions"], freq=row["freq"], source=row["source"])
 
     suggest_ok = 0
+    suggest_errors: list[str] = []
     if live:
         for seed in uniq_seeds[:36]:
-            hints = suggest(seed)
+            hints, err = suggest(seed)
+            if err:
+                suggest_errors.append(err)
             if hints:
                 suggest_ok += 1
             add(seed, suggest=1, source="seed")
             for i, hint in enumerate(hints[:10]):
                 add(hint, suggest=10 - i, source="yandex-suggest")
             time.sleep(0.12)
+
+    suggest_error = summarize_suggest_errors(suggest_errors) if live and suggest_ok == 0 else ""
+    if suggest_error:
+        prev = load_json(OUT, {})
+        if report_has_suggest(prev):
+            prev["suggest_seeds_ok"] = 0
+            prev["suggest_error"] = suggest_error
+            prev["suggest_kept_previous"] = True
+            save_json(OUT, prev)
+            return prev
 
     queries = sorted(bag.values(), key=score, reverse=True)
     ranked = []
@@ -390,13 +467,50 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
     existing_pages = {c.get("page") for c in clusters}
     existing_ids = {c.get("id") for c in clusters}
     for item in unmatched:
-        if len(added) >= cap:
-            break
         q = item["q"]
         low = nrm(q)
-        if any(s in low for s in STOP_NEW):
+        spec = calculator_tool_spec(q)
+        if spec:
+            existing = next(
+                (c for c in clusters if c.get("id") == spec["id"] or c.get("page") == spec["page"]),
+                None,
+            )
+            if existing:
+                item["cluster"] = existing.get("id")
+                item["page"] = existing.get("page")
+                item["status"] = existing.get("status")
+                continue
+            if len(added) >= cap:
+                break
+            cluster = {
+                "id": spec["id"],
+                "page": spec["page"],
+                "status": "planned",
+                "intent": "tool",
+                "main": {"q": spec["q"], "vol": item.get("freq") or None},
+                "demand": {
+                    "score": item["score"],
+                    "sources": item["sources"],
+                    "added": date.today().isoformat(),
+                    "updated": date.today().isoformat(),
+                },
+            }
+            clusters.append(cluster)
+            existing_pages.add(spec["page"])
+            existing_ids.add(spec["id"])
+            added.append({"id": spec["id"], "q": spec["q"], "slug": Path(spec["page"]).stem})
+            item["cluster"] = spec["id"]
+            item["page"] = spec["page"]
+            item["status"] = "planned"
             continue
-        if is_tool_query(q):
+        if bare_tax_calculator(q):
+            item["note"] = BARE_TAX_NOTE
+            continue
+        if is_tool_query(q) or "калькулятор" in low:
+            continue
+        if len(added) >= cap:
+            break
+        if any(s in low for s in STOP_NEW):
             continue
         if nrm(q).startswith("если "):
             continue
@@ -477,6 +591,8 @@ def collect(smap: dict | None = None, live: bool = True) -> dict:
         "retired": retired,
         "cluster_rank": [{"id": i, "score": s} for i, s in cluster_rank],
     }
+    if suggest_error:
+        report["suggest_error"] = suggest_error
     save_json(OUT, report)
     return report
 

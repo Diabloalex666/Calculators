@@ -219,8 +219,22 @@ def sys2_briefs(smap: dict) -> dict:
         if path.exists():
             continue
         cid = c.get("id") or slug
-        ok, reason = facts_ok(cid)
         q = ((c.get("main") or {}).get("q") or slug).strip()
+        if c.get("intent") == "tool":
+            path.write_text(
+                (
+                    f"# Бриф: {q}\n\n"
+                    f"- id: `{cid}`\n"
+                    f"- slug: `{Path(c['page']).name}`\n"
+                    f"- интент: tool\n\n"
+                    f"Это калькулятор, не статья. Пакет не собирать.\n"
+                ),
+                encoding="utf-8",
+                newline="\n",
+            )
+            created.append(slug)
+            continue
+        ok, reason = facts_ok(cid)
         owner = owner_for(c)
         path.write_text(
             (
@@ -274,7 +288,7 @@ def sys3_write(smap: dict) -> dict:
     packs_dir = ROOT / "seo-agent" / "packs"
     packs_dir.mkdir(parents=True, exist_ok=True)
     for c in smap.get("clusters", []):
-        if c.get("status") != "planned":
+        if c.get("status") != "planned" or c.get("intent") == "tool":
             continue
         rec = fact_record(c.get("id") or "")
         if rec:
@@ -307,6 +321,10 @@ def sys3_write(smap: dict) -> dict:
             (c["id"] for c in smap.get("clusters", []) if (c.get("page") or "").endswith(slug)),
             "",
         )
+        cluster = next((c for c in smap.get("clusters", []) if c.get("id") == cluster_id), None)
+        if cluster and cluster.get("intent") == "tool":
+            result["skipped"].append(f"{slug}: калькулятор, не статья")
+            continue
         ok, reason = facts_ok(cluster_id) if cluster_id else (False, "кластер не найден")
         if not ok:
             result["skipped"].append(f"{slug}: {reason}")
@@ -498,6 +516,14 @@ def mark_published(smap: dict, page: str) -> None:
     save_json(ROOT / "seo-agent" / "semantic-map.json", smap)
 
 
+def drip_rank_key(score, name: str) -> tuple[float, str]:
+    try:
+        value = float(score or 0)
+    except (TypeError, ValueError):
+        value = 0.0
+    return (-value, name)
+
+
 def sys6_drip(smap: dict) -> dict:
     conf = cfg()
     cap = int(conf.get("dailyArticleCap") or 1)
@@ -518,17 +544,20 @@ def sys6_drip(smap: dict) -> dict:
         result["skipped"].append("нет папки queue")
         return result
     published_today = list(stamp.get("files") or []) if stamp.get("date") == today else []
-    for src in sorted(queue_dir.glob("*.html")):
-        if len(published_today) >= cap:
-            break
+    ready: list[tuple[tuple[float, str], Path]] = []
+    for src in queue_dir.glob("*.html"):
         dest = ROOT / "articles" / src.name
         if dest.exists():
             result["skipped"].append(f"{src.name} уже в articles/")
             continue
-        cluster_id = next(
-            (c["id"] for c in smap.get("clusters", []) if c.get("page", "").endswith(src.name)),
-            "",
+        cluster = next(
+            (c for c in smap.get("clusters", []) if str(c.get("page") or "").endswith(src.name)),
+            None,
         )
+        if cluster and cluster.get("intent") == "tool":
+            result["skipped"].append(f"{src.name}: калькулятор, не статья")
+            continue
+        cluster_id = cluster.get("id") if cluster else ""
         ok, reason = facts_ok(cluster_id) if cluster_id else (False, "кластер не найден")
         if not ok:
             result["skipped"].append(f"{src.name}: {reason}")
@@ -542,6 +571,13 @@ def sys6_drip(smap: dict) -> dict:
         if errs:
             result["skipped"].append(f"{src.name}: {'; '.join(errs)}")
             continue
+        raw_score = ((cluster or {}).get("demand") or {}).get("score")
+        ready.append((drip_rank_key(raw_score, src.name), src))
+    ready.sort(key=lambda item: item[0])
+    for _key, src in ready:
+        if len(published_today) >= cap:
+            break
+        dest = ROOT / "articles" / src.name
         shutil.copyfile(src, dest)
         p = parse_html(dest)
         title = p.h1[0] if p.h1 else src.stem
@@ -605,6 +641,9 @@ def sys10_advisor(report: dict) -> dict:
             reasons.append("есть сироты перелинковки")
     else:
         reasons.append("здоровье сайта и карта сходятся")
+    suggest_error = str((report.get("demand") or {}).get("suggest_error") or "").strip()
+    if suggest_error:
+        reasons.insert(0, suggest_error)
     return {
         "verdict": verdict,
         "reasons": reasons,
@@ -803,6 +842,30 @@ def telegram(text: str) -> None:
         print(f"telegram skip {exc}")
 
 
+def positions_status(demand_rep: dict) -> str:
+    if demand_rep.get("wordstat_connected"):
+        if demand_rep.get("queries"):
+            return "спрос самообновляется"
+        return "ждём Вебмастер/подсказки"
+    return "частота только из CSV, дата — поле updated у seo-agent/raw/wordstat.json"
+
+
+def webmaster_traffic_status(yandex_summary: dict, console: dict) -> str:
+    wm = (yandex_summary or {}).get("webmaster") or {}
+    if wm.get("connected"):
+        try:
+            n = int(wm.get("n") or 0)
+        except (TypeError, ValueError):
+            n = 0
+        if n == 0:
+            return "Показов в Вебмастере: 0. Это ноль, не подтверждение спроса."
+        return f"Вебмастер API: {n} запросов"
+    traffic = console.get("traffic")
+    if isinstance(traffic, dict):
+        return traffic.get("status")
+    return traffic or "положи токен Вебмастера"
+
+
 def main() -> int:
     live = "--offline" not in sys.argv
     console = ingest_console.ingest()
@@ -840,6 +903,7 @@ def main() -> int:
         "yandex": yandex_pull.get("summary") or {},
         "demand": {
             "suggest_ok": demand_rep.get("suggest_seeds_ok"),
+            "suggest_error": demand_rep.get("suggest_error") or "",
             "webmaster": demand_rep.get("webmaster_connected"),
             "wordstat": demand_rep.get("wordstat_connected"),
             "added": demand_rep.get("added_planned") or [],
@@ -869,23 +933,9 @@ def main() -> int:
             "published": semantics["counts"].get("published", 0),
             "daysLeft": (demand_rep.get("note") or "спрос: подсказки Яндекса"),
         },
-        "traffic": {
-            "status": (
-                f"Вебмастер API: {((yandex_pull.get('summary') or {}).get('webmaster') or {}).get('n', 0)} запросов"
-                if ((yandex_pull.get("summary") or {}).get("webmaster") or {}).get("connected")
-                else (
-                    (console.get("traffic") or {}).get("status")
-                    if isinstance(console.get("traffic"), dict)
-                    else (console.get("traffic") or "положи токен Вебмастера")
-                )
-            )
-        },
+        "traffic": {"status": webmaster_traffic_status(yandex_pull.get("summary") or {}, console)},
         "positions": {
-            "status": (
-                "спрос самообновляется"
-                if demand_rep.get("queries")
-                else "ждём Вебмастер/подсказки"
-            ),
+            "status": positions_status(demand_rep),
             "top": (demand_rep.get("queries") or [])[:8],
         },
         "audit": audit,

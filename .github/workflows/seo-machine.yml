@@ -58,6 +58,8 @@ jobs:
           YANDEX_WEBMASTER_HOST_ID: ${{ secrets.YANDEX_WEBMASTER_HOST_ID }}
           XMLRIVER_USER: ${{ secrets.XMLRIVER_USER }}
           XMLRIVER_KEY: ${{ secrets.XMLRIVER_KEY }}
+          YANDEX_CLOUD_API_KEY: ${{ secrets.YANDEX_CLOUD_API_KEY }}
+          YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         run: python scripts/factory.py
       - name: Alert if conveyor empty
         env:
