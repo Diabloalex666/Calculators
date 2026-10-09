@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      wordstat_only:
+        description: Только живой Wordstat, без статей
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -49,7 +55,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Wordstat only
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.wordstat_only == 'true'
+        env:
+          YANDEX_WEBMASTER_TOKEN: ${{ secrets.YANDEX_WEBMASTER_TOKEN }}
+          YANDEX_WEBMASTER_HOST_ID: ${{ secrets.YANDEX_WEBMASTER_HOST_ID }}
+          XMLRIVER_USER: ${{ secrets.XMLRIVER_USER }}
+          XMLRIVER_KEY: ${{ secrets.XMLRIVER_KEY }}
+          YANDEX_CLOUD_API_KEY: ${{ secrets.YANDEX_CLOUD_API_KEY }}
+          YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+        run: python scripts/yandex_api.py --wordstat
       - name: Factory
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.wordstat_only != 'true'
         env:
           CI: "true"
           FACTORY_DRIP: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
@@ -62,10 +79,21 @@ jobs:
           YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
         run: python scripts/factory.py
       - name: Alert if conveyor empty
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.wordstat_only != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/conveyor-alert.py
+      - name: Commit wordstat check
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.wordstat_only == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add seo-agent/raw/wordstat-live.json
+          git diff --cached --quiet && echo "no wordstat changes" && exit 0
+          git commit -m "seo-factory: wordstat check [skip ci]"
+          git push
       - name: Commit report
+        if: github.event_name != 'workflow_dispatch' || github.event.inputs.wordstat_only != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

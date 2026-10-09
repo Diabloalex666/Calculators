@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
 import time
 import urllib.error
 import urllib.parse
@@ -180,6 +181,18 @@ def fetch_webmaster_popular(limit: int = 500) -> dict:
 
 WORDSTAT_URL = "https://searchapi.api.cloud.yandex.net/v2/wordstat/topRequests"
 WORDSTAT_CAP = 20
+WORDSTAT_CHECK_PHRASES = (
+    "ипотечный калькулятор",
+    "калькулятор отпускных",
+    "калькулятор сложного процента",
+    "калькулятор больничного",
+    "калькулятор зарплаты на руки",
+    "вычет на детей ндфл",
+    "когда ндфл 15 процентов",
+    "как посчитать аванс от оклада",
+    "калькулятор налогового вычета",
+    "калькулятор налоговой нагрузки",
+)
 
 
 def cloud_wordstat_credentials() -> tuple[str, str]:
@@ -187,6 +200,43 @@ def cloud_wordstat_credentials() -> tuple[str, str]:
     key = (os.environ.get("YANDEX_CLOUD_API_KEY") or "").strip()
     folder = (os.environ.get("YC_FOLDER_ID") or "").strip()
     return key, folder
+
+
+def redact_wordstat_text(text: str, key: str, folder: str) -> str:
+    cleaned = text or ""
+    for secret in (key, folder):
+        if secret and len(secret) >= 6:
+            cleaned = cleaned.replace(secret, "")
+    cleaned = re.sub(r"Api-Key\s+\S+", "Api-Key", cleaned, flags=re.I)
+    return re.sub(r"\s+", " ", cleaned).strip()
+
+
+def yandex_http_error(exc: urllib.error.HTTPError, key: str, folder: str) -> str:
+    raw = ""
+    try:
+        raw = exc.read().decode("utf-8", "replace")
+    except Exception:
+        raw = ""
+    message = ""
+    try:
+        payload = json.loads(raw) if raw else {}
+    except json.JSONDecodeError:
+        payload = None
+    if isinstance(payload, dict):
+        err = payload.get("error")
+        if isinstance(err, dict):
+            message = str(err.get("message") or "")
+        else:
+            message = str(payload.get("message") or "")
+    if not message:
+        message = raw.strip()
+    if message:
+        text = f"HTTP {exc.code}: {message}"
+    elif exc.code == 429:
+        text = "квота"
+    else:
+        text = f"HTTP {exc.code}"
+    return redact_wordstat_text(text, key, folder)[:300]
 
 
 def fetch_wordstat_cloud(phrases: list[str], cap: int = WORDSTAT_CAP) -> dict:
@@ -223,10 +273,9 @@ def fetch_wordstat_cloud(phrases: list[str], cap: int = WORDSTAT_CAP) -> dict:
             with urllib.request.urlopen(req, timeout=40) as resp:
                 payload = json.loads(resp.read().decode("utf-8", "replace") or "{}")
         except urllib.error.HTTPError as exc:
-            if exc.code == 429:
-                error = "квота"
+            error = yandex_http_error(exc, key, folder)
+            if exc.code in (400, 429):
                 break
-            error = f"HTTPError {exc.code}"
             continue
         except Exception as exc:
             error = f"{type(exc).__name__} timeout" if isinstance(exc, TimeoutError) else type(exc).__name__
@@ -405,6 +454,18 @@ def pull_all(seed_phrases: list[str] | None = None) -> dict:
 
 
 def main() -> int:
+    if "--wordstat" in sys.argv:
+        rep = fetch_wordstat(list(WORDSTAT_CHECK_PHRASES))
+        safe = {
+            "connected": bool(rep.get("connected")),
+            "error": rep.get("error"),
+            "queries": [
+                {"query": row.get("query"), "freq": row.get("freq")}
+                for row in (rep.get("queries") or [])
+            ],
+        }
+        print(json.dumps(safe, ensure_ascii=False))
+        return 0
     rep = pull_all()
     print(json.dumps(rep["summary"], ensure_ascii=False))
     return 0
