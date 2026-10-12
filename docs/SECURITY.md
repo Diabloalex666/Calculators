@@ -19,7 +19,7 @@
 
 ## Что сделано в репо
 
-1. `worker/telegram-feedback.js` — allowlist Origin, лимит тела, sanitize, rate-limit 5/мин по `CF-Connecting-IP`, безопасные ответы.
+1. `worker/telegram-feedback.js` — allowlist Origin, лимит тела, sanitize, безопасные ответы. Адрес посетителя не читается и не сохраняется.
 2. Удалён `.nojekyll` — иначе GitHub Pages отдаёт **весь** git-tree и игнорирует `_config.yml`.
 3. `_config.yml` — Jekyll exclude: `seo-agent`, `scripts`, `worker`, `docs`, markdown-инструкции.
 4. `.github/workflows/pages.yml` — whitelist-сборка `_site` (страховка; Source лучше = GitHub Actions).
@@ -53,7 +53,7 @@ npx wrangler deploy
 - [ ] curl -sI https://finraz.ru/ | findstr /i "content-security\|strict-transport\|x-frame"
 - [ ] seo-agent и scripts отдают 404
 - [ ] POST на Worker с чужого Origin → 403
-- [ ] 6+ POST с одного IP за минуту → 429
+- [ ] Ответ формы и текст в Telegram не содержат адрес посетителя
 - [ ] Нет `.env` / токенов в git history свежих коммитов
 
 ## Вне скоупа (и не чиним «эксплойтом»)

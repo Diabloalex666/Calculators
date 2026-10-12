@@ -1,15 +1,14 @@
 // Cloudflare Worker: FinPulse feedback → Telegram
-// Hardening: CORS allowlist, body limits, sanitize, IP rate-limit (Cache API)
+// Hardening: CORS allowlist, body limits, sanitize.
+// The visitor address is not read, stored, or sent.
 
 const ALLOWED_ORIGINS = ["https://finraz.ru", "https://www.finraz.ru"];
 const MAX_MESSAGE = 4000;
 const MAX_CONTACT = 100;
 const MAX_BODY_BYTES = 32_000;
-const RATE_WINDOW_MS = 60_000;
-const RATE_MAX = 5;
 
 export default {
-  async fetch(request, env, ctx) {
+  async fetch(request, env) {
     const origin = request.headers.get("Origin") || "";
     const corsOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : null;
 
@@ -40,17 +39,6 @@ export default {
     // POST without allowed Origin (or non-browser) — reject
     if (!corsOrigin) {
       return json({ ok: false, error: "forbidden origin" }, 403, corsHeaders);
-    }
-
-    // Only CF-Connecting-IP — X-Forwarded-For is client-spoofable.
-    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
-
-    const limited = await isRateLimited(ip);
-    if (limited) {
-      return json({ ok: false, error: "rate limit" }, 429, {
-        ...corsHeaders,
-        "Retry-After": "60",
-      });
     }
 
     const len = Number(request.headers.get("Content-Length") || 0);
@@ -89,7 +77,6 @@ export default {
         return json({ ok: false, error: "upstream error" }, 502, corsHeaders);
       }
 
-      ctx.waitUntil(bumpRate(ip));
       return json({ ok: true }, 200, corsHeaders);
     } catch {
       return json({ ok: false, error: "bad request" }, 400, corsHeaders);
@@ -139,39 +126,6 @@ async function sendTelegram(env, text) {
     if (!telegram.ok) return false;
   }
   return true;
-}
-
-async function isRateLimited(ip) {
-  try {
-    const key = new Request(`https://finpulse-rl.invalid/${encodeURIComponent(ip)}`);
-    const hit = await caches.default.match(key);
-    if (!hit) return false;
-    const data = await hit.json();
-    return (data.count || 0) >= RATE_MAX;
-  } catch {
-    return false;
-  }
-}
-
-async function bumpRate(ip) {
-  try {
-    const key = new Request(`https://finpulse-rl.invalid/${encodeURIComponent(ip)}`);
-    const hit = await caches.default.match(key);
-    let count = 1;
-    if (hit) {
-      const data = await hit.json();
-      count = (data.count || 0) + 1;
-    }
-    const res = new Response(JSON.stringify({ count, t: Date.now() }), {
-      headers: {
-        "Content-Type": "application/json",
-        "Cache-Control": `max-age=${Math.ceil(RATE_WINDOW_MS / 1000)}`,
-      },
-    });
-    await caches.default.put(key, res);
-  } catch {
-    /* ignore cache errors */
-  }
 }
 
 function json(data, status, headers) {
