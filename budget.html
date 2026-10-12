@@ -114,27 +114,30 @@
       }
 
       .budget-drag {
-        width: 1.7rem;
-        height: var(--control-h);
+        width: 2.5rem;
+        height: 2.5rem;
         padding: 0;
+        flex: 0 0 auto;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        border: 1px solid var(--line);
+        border: 0;
+        border-radius: 50%;
         background: transparent;
-        color: var(--muted);
+        color: #5f6368;
         cursor: grab;
         touch-action: none;
       }
 
-      .budget-drag:hover,
-      tr.is-dragging .budget-drag {
-        color: var(--text);
-        border-color: var(--text);
+      .budget-drag:hover {
+        background: rgba(60, 64, 67, 0.08);
+        color: #202124;
       }
 
       tr.is-dragging .budget-drag {
         cursor: grabbing;
+        background: rgba(60, 64, 67, 0.12);
+        color: #202124;
       }
 
       tr.is-dragging {
@@ -286,7 +289,7 @@
             <span class="budget-swatch budget-swatch--expense" aria-hidden="true"></span>
             Расход
           </span>
-          <span class="budget-legend__hint">Нажмите метку, чтобы переключить. Потяните точки слева, чтобы подвинуть строку.</span>
+          <span class="budget-legend__hint">Нажмите метку, чтобы переключить. Потяните полоски слева, чтобы подвинуть строку.</span>
         </div>
 
         <table class="budget-table" id="budget-table">
@@ -367,7 +370,7 @@
         </ul>
         <p>
           Нажмите «+ Статья» под таблицей, чтобы добавить категорию, и минус в строке, чтобы удалить.
-          Точки слева от метки двигают строку выше или ниже. Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
+          Полоски слева от метки двигают строку выше или ниже. Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
         </p>
 
         <h3>Зачем вести бюджет</h3>
@@ -572,17 +575,20 @@
 
       function gripIcon() {
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("viewBox", "0 0 10 16");
-        svg.setAttribute("width", "10");
-        svg.setAttribute("height", "16");
+        svg.setAttribute("viewBox", "0 0 24 24");
+        svg.setAttribute("width", "22");
+        svg.setAttribute("height", "22");
         svg.setAttribute("aria-hidden", "true");
-        [[2.5, 3], [7.5, 3], [2.5, 8], [7.5, 8], [2.5, 13], [7.5, 13]].forEach(([cx, cy]) => {
-          const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-          dot.setAttribute("cx", String(cx));
-          dot.setAttribute("cy", String(cy));
-          dot.setAttribute("r", "1.15");
-          dot.setAttribute("fill", "currentColor");
-          svg.appendChild(dot);
+        [7, 12, 17].forEach((y) => {
+          const bar = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          bar.setAttribute("x1", "4");
+          bar.setAttribute("x2", "20");
+          bar.setAttribute("y1", String(y));
+          bar.setAttribute("y2", String(y));
+          bar.setAttribute("stroke", "currentColor");
+          bar.setAttribute("stroke-width", "2");
+          bar.setAttribute("stroke-linecap", "round");
+          svg.appendChild(bar);
         });
         return svg;
       }
