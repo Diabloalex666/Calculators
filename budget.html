@@ -45,6 +45,10 @@
         padding: 0.5rem;
       }
 
+      .budget-add {
+        margin-top: 0.75rem;
+      }
+
       .summary {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -92,11 +96,11 @@
       .budget-swatch--income,
       .budget-type--income,
       tr[data-type="income"] input[data-field="name"] {
-        background: #d9f3e3;
+        background: #b7e4c7;
       }
 
       tr[data-type="income"] input[data-field="name"] {
-        border-color: #8fceb0;
+        border-color: #8ecfaa;
       }
 
       .budget-swatch--expense,
@@ -133,8 +137,16 @@
       }
 
       .budget-remove {
+        width: var(--control-h);
+        height: var(--control-h);
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         background: transparent;
         color: var(--muted);
+        font-size: 1.35rem;
+        line-height: 1;
       }
 
       .budget-remove:hover {
@@ -190,6 +202,7 @@
         .budget-table td.budget-actions {
           width: auto;
           white-space: normal;
+          text-align: right;
         }
       }
 
@@ -257,6 +270,10 @@
           <tbody id="budget-body"></tbody>
         </table>
 
+        <div class="budget-add no-print">
+          <button class="btn btn-secondary" type="button" id="add-row">+ Статья</button>
+        </div>
+
         <div class="summary">
           <div class="card">
             <div class="note">Доход (факт)</div>
@@ -273,7 +290,6 @@
         </div>
 
         <div class="actions no-print">
-          <button class="btn btn-secondary" type="button" id="add-row">+ Статья</button>
           <button class="btn btn-secondary" type="button" id="reset-budget">Сбросить</button>
           <button class="btn" type="button" onclick="window.print()">Распечатать / PDF</button>
         </div>
@@ -319,7 +335,7 @@
           <li>расходы: аренда или ипотека, продукты, транспорт, подписки, накопления.</li>
         </ul>
         <p>
-          Нажмите «+ Статья», чтобы добавить категорию, и «Убрать» в строке, чтобы удалить.
+          Нажмите «+ Статья» под таблицей, чтобы добавить категорию, и минус в строке, чтобы удалить.
           Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
         </p>
 
@@ -561,7 +577,7 @@
         const removeBtn = document.createElement("button");
         removeBtn.type = "button";
         removeBtn.className = "budget-remove";
-        removeBtn.textContent = "Убрать";
+        removeBtn.textContent = "−";
         removeBtn.setAttribute("aria-label", "Убрать статью " + (index + 1));
         removeBtn.addEventListener("click", () => {
           const state = readStateFromDom();
