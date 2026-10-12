@@ -29,6 +29,9 @@
   if (messageField) attachCounter(messageField, MAX_MESSAGE);
   if (contactField) attachCounter(contactField, MAX_CONTACT);
 
+  const config = window.FINPULSE_CONFIG || {};
+  const endpoint = config.feedbackEndpoint;
+
   /** Убирает HTML, управляющие символы и опасные фрагменты */
   function sanitizeText(input, maxLen) {
     return String(input || "")
@@ -42,19 +45,31 @@
       .slice(0, maxLen);
   }
 
+  function sanitizePage(path) {
+    const p = String(path || "/").slice(0, 200);
+    return /^\/[\w\-./]*$/.test(p) ? p : "/";
+  }
+
   function setStatus(text, type) {
     status.textContent = text;
     status.className = `feedback-status${type ? ` feedback-status--${type}` : ""}`;
   }
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    if (!endpoint) {
+      setStatus("Форма скоро заработает. Попробуйте позже.", "error");
+      return;
+    }
 
     const honeypot = form.querySelector('[name="website"]');
     if (honeypot && honeypot.value.trim()) return;
 
     const rawMessage = form.querySelector('[name="message"]').value;
+    const rawContact = form.querySelector('[name="contact"]').value;
     const message = sanitizeText(rawMessage, 4000);
+    const contact = sanitizeText(rawContact, 100);
 
     if (message.length < 5) {
       setStatus("Напишите чуть подробнее (минимум 5 символов).", "error");
@@ -72,6 +87,31 @@
       return;
     }
 
-    setStatus("Форма скоро заработает. Попробуйте позже.", "error");
+    const submitBtn = form.querySelector('[type="submit"]');
+    submitBtn.disabled = true;
+    setStatus("Отправляем…", "");
+
+    const page = sanitizePage(window.location.pathname);
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        mode: "cors",
+        credentials: "omit",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, contact, page }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok !== true) {
+        throw new Error("send failed");
+      }
+
+      form.reset();
+      setStatus("Спасибо! Сообщение отправлено.", "success");
+    } catch {
+      setStatus("Не удалось отправить. Попробуйте позже.", "error");
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 })();
