@@ -78,6 +78,11 @@ export default {
         return json({ ok: false, error: "misconfigured" }, 500, corsHeaders);
       }
 
+      const mailed = await sendMail(env, textMsg, contact);
+      if (!mailed.ok) {
+        return json({ ok: false, error: "upstream error" }, 502, corsHeaders);
+      }
+
       const delivered = await sendTelegram(env, textMsg);
       if (!delivered) {
         return json({ ok: false, error: "upstream error" }, 502, corsHeaders);
@@ -128,6 +133,27 @@ function sanitize(input, maxLen) {
 function sanitizePage(path) {
   const p = String(path || "/").slice(0, 200);
   return /^\/[\w\-./]*$/.test(p) ? p : "/";
+}
+
+const MAIL_TO = "diabloalex666@mail.ru";
+
+async function sendMail(env, text, contact) {
+  if (!env.EMAIL || typeof env.EMAIL.send !== "function") {
+    return { ok: false };
+  }
+  const message = {
+    to: MAIL_TO,
+    from: { email: "feedback@finraz.ru", name: "FinPulse" },
+    subject: "FinPulse — обратная связь",
+    text,
+  };
+  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contact)) message.replyTo = contact;
+  try {
+    await env.EMAIL.send(message);
+    return { ok: true };
+  } catch {
+    return { ok: false };
+  }
 }
 
 const TELEGRAM_TEXT_LIMIT = 4096;
