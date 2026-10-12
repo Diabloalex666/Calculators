@@ -3,7 +3,7 @@
 
 const ALLOWED_ORIGINS = ["https://finraz.ru", "https://www.finraz.ru"];
 const MAX_MESSAGE = 4000;
-const MAX_CONTACT = 1000;
+const MAX_CONTACT = 100;
 const MAX_BODY_BYTES = 32_000;
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 5;

@@ -4,7 +4,7 @@
   if (!form || !status) return;
 
   const MAX_MESSAGE = 4000;
-  const MAX_CONTACT = 1000;
+  const MAX_CONTACT = 100;
 
   function attachCounter(field, max) {
     field.maxLength = max;
@@ -69,7 +69,7 @@
     const rawMessage = form.querySelector('[name="message"]').value;
     const rawContact = form.querySelector('[name="contact"]').value;
     const message = sanitizeText(rawMessage, 4000);
-    const contact = sanitizeText(rawContact, 1000);
+    const contact = sanitizeText(rawContact, 100);
 
     if (message.length < 5) {
       setStatus("Напишите чуть подробнее (минимум 5 символов).", "error");
