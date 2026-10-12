@@ -535,7 +535,7 @@ function renderCreditSchedule(schedule) {
   const rows = schedule
     .map(
       (row) =>
-        `<tr><td>${row.month}</td><td>${formatRubPrecise(row.payment)}</td><td>${formatRubPrecise(row.interest)}</td><td>${formatRubPrecise(row.principal)}</td><td>${formatRubPrecise(row.balance)}</td></tr>`
+        `<tr><td>${escapeHtml(row.month)}</td><td>${escapeHtml(formatRubPrecise(row.payment))}</td><td>${escapeHtml(formatRubPrecise(row.interest))}</td><td>${escapeHtml(formatRubPrecise(row.principal))}</td><td>${escapeHtml(formatRubPrecise(row.balance))}</td></tr>`
     )
     .join("");
 

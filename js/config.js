@@ -2,8 +2,10 @@
   var host = location.hostname;
   if (host !== "diabloalex666.github.io" && host !== "www.finraz.ru") return;
   var path = location.pathname.replace(/^\/Calculators\/?/, "/");
-  if (!path) path = "/";
-  location.replace("https://finraz.ru" + path + location.search + location.hash);
+  if (path.charAt(0) !== "/" || /[\\@]/.test(path) || path.indexOf("//") !== -1) path = "/";
+  var search = /^\?[\w\-.=&%+]*$/.test(location.search) ? location.search : "";
+  var hash = /^#[\w\-./%]*$/.test(location.hash) ? location.hash : "";
+  location.replace("https://finraz.ru" + path + search + hash);
 })();
 
 // Настройки сайта FinPulse — https://finraz.ru/

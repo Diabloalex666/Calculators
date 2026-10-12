@@ -1,61 +1,37 @@
 # Security — FinPulse (finraz.ru)
 
-Дата аудита: 2026-09-29  
+Дата аудита: 2026-10-12  
 Стек: статический GitHub Pages + Cloudflare Worker (форма).  
-Ориентир: применимые домены из [Anthropic-Cybersecurity-Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) (web / XSS / secrets / rate-limit / CSP) — не «все 817 скиллов», а то, что бьёт в наш контур.
+Ориентир: применимые домены из [Anthropic-Cybersecurity-Skills](https://github.com/mukul975/Anthropic-Cybersecurity-Skills) (web / XSS / secrets / CSP) — не весь каталог и не атакующие скиллы.
 
 ## Вердикт
 
-Сайт **низкого серверного риска** (нет БД, калькуляторы в браузере), но были реальные слабости:
+Сайт без своей базы. Калькуляторы считаются в браузере. Повторный прогон 2026-10-12 закрыл дыры в нашем коде. HTTP-заголовки HSTS, `X-Frame-Options` и `nosniff` по-прежнему нельзя выставить: GitHub Pages их не отдаёт, а DNS зоны оставлен серым облаком специально, чтобы трафик посетителей не шёл через Cloudflare.
 
 | Находка | Риск | Статус |
 |---------|------|--------|
-| Нет CSP / referrer meta | XSS / утечка URL | закрыто meta CSP + referrer |
-| Нет HSTS / X-Frame-Options как HTTP-заголовков | MITM / clickjacking | **нужен Cloudflare/прокси** (GH Pages не даёт) |
-| `seo-agent/`, `scripts/`, `worker/` отдавались с Pages | утечка панели/фактов/кода | закрыто: убран `.nojekyll` + `_config.yml` exclude + Actions whitelist |
-| Feedback Worker без rate-limit и soft CORS | спам в Telegram / abuse | worker hardened |
-| IndexNow key в репо | ожидаемо публичный | ок по протоколу IndexNow |
-| Секреты в git | высокий | `.env` в gitignore; токены только Secrets |
+| Имя статьи бюджета попадало в HTML из localStorage | XSS в своём браузере | закрыто: поля собираются через DOM, имя не вставляется в разметку |
+| Вебвизор записывал ввод в калькуляторы и форму | утечка сумм и текста обращения в Метрику | закрыто: `webvisor: false`, поля помечены `ym-disable-keys` |
+| Worker верил заголовку Content-Length | слишком большое тело доходило до разбора | закрыто: чтение обрывается на 32 КБ |
+| Редирект с github.io собирал адрес из пути как есть | увод на другой сайт при кривом пути | закрыто: путь, query и hash проверяются |
+| Нет CSP / referrer meta | XSS / утечка URL | закрыто meta CSP + referrer (ещё 2026-09-29) |
+| Нет HSTS / X-Frame-Options / nosniff как HTTP-заголовков | clickjacking, подмена типа | открыто, пока страницы не за прокси |
+| `frame-ancestors` в meta-CSP браузер игнорирует | то же, что без заголовка | открыто вместе с прокси |
+| `seo-agent/`, `scripts/`, `worker/` на Pages | утечка панели | закрыто, 2026-10-12 снова 404 |
+| Секреты в git | высокий | токенов в публичных файлах нет; IndexNow-ключ публичный по протоколу |
 
-## Что сделано в репо
+## Повторный прогон 2026-10-12
 
-1. `worker/telegram-feedback.js` — allowlist Origin, лимит тела, sanitize, безопасные ответы. Адрес посетителя не читается и не сохраняется.
-2. Удалён `.nojekyll` — иначе GitHub Pages отдаёт **весь** git-tree и игнорирует `_config.yml`.
-3. `_config.yml` — Jekyll exclude: `seo-agent`, `scripts`, `worker`, `docs`, markdown-инструкции.
-4. `.github/workflows/pages.yml` — whitelist-сборка `_site` (страховка; Source лучше = GitHub Actions).
-5. CSP + referrer на публичных HTML (`scripts/stamp-security-meta.py` + `assemble.py`).
-6. `robots.txt` Disallow на внутреннее; панель с `noindex`.
-7. Этот файл — чеклист для повторного прогона.
+Проверено снаружи:
 
-## Что сделать тебе (разово)
+- `https://finraz.ru/seo-agent/panel.html`, `facts.json`, `worker/telegram-feedback.js`, `docs/SECURITY.md`, `scripts/quality-gate.py`, `.env`, `.git/HEAD` — 404.
+- Те же закрытые пути на `diabloalex666.github.io/Calculators/` — 404.
+- Ответ `https://finraz.ru/` без CSP, HSTS, `X-Frame-Options`, `nosniff`. CSP остаётся в meta страницы.
+- Форма шлёт только `message`, `contact`, `page`. Адрес посетителя не читается.
+- Чужой `Origin` на Worker — 403.
 
-```powershell
-# 1) Задеплоить укреплённый Worker
-cd F:\AI\side-income\worker
-npx wrangler deploy
-# секреты уже должны быть: BOT_TOKEN, CHAT_ID
+Оранжевое облако не включалось.
 
-# 2) После пуша main — проверить, что закрылось:
-# https://finraz.ru/seo-agent/panel.html  → 404
-# https://finraz.ru/seo-agent/facts.json → 404
-```
+## Что сделать тебе
 
-3. **Рекомендация:** DNS finraz.ru через Cloudflare (Proxied) и Transform Rule:
-   - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
-   - `X-Frame-Options: DENY`
-   - `X-Content-Type-Options: nosniff`
-   - `Permissions-Policy: geolocation=(), microphone=(), camera=()`
-
-Без прокси GitHub Pages / Fastly эти заголовки **не выставить**.
-
-## Повторный аудит (минимум)
-
-- [ ] curl -sI https://finraz.ru/ | findstr /i "content-security\|strict-transport\|x-frame"
-- [ ] seo-agent и scripts отдают 404
-- [ ] POST на Worker с чужого Origin → 403
-- [ ] Ответ формы и текст в Telegram не содержат адрес посетителя
-- [ ] Нет `.env` / токенов в git history свежих коммитов
-
-## Вне скоупа (и не чиним «эксплойтом»)
-
-Пентест чужих систем, обход капчи Яндекса, генерация malware, атаки на Telegram API — не делаем. Только hardening своего контура.
+Ничего по этому прогону. Прокси и платный Workers не нужны для закрытых пунктов. Почта формы по-прежнему ждёт, пока реестр .ru отдаст DNS Cloudflare; это не дыра безопасности.

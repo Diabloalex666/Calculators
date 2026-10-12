@@ -26,8 +26,15 @@
 
   const messageField = form.querySelector('[name="message"]');
   const contactField = form.querySelector('[name="contact"]');
-  if (messageField) attachCounter(messageField, MAX_MESSAGE);
-  if (contactField) attachCounter(contactField, MAX_CONTACT);
+  form.classList.add("ym-hide-content");
+  if (messageField) {
+    messageField.classList.add("ym-disable-keys", "ym-hide-content");
+    attachCounter(messageField, MAX_MESSAGE);
+  }
+  if (contactField) {
+    contactField.classList.add("ym-disable-keys", "ym-hide-content");
+    attachCounter(contactField, MAX_CONTACT);
+  }
 
   const config = window.FINPULSE_CONFIG || {};
   const endpoint = config.feedbackEndpoint;

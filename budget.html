@@ -280,7 +280,7 @@
       </footer>
     </div>
 
-    <script src="js/common.js?v=4"></script>
+    <script src="js/common.js?v=5"></script>
     <script>
       const STORAGE_KEY = "finpulse-budget-v1";
       const DEFAULT_ROWS = [
@@ -295,12 +295,29 @@
 
       const body = document.getElementById("budget-body");
       const monthInput = document.getElementById("month-name");
+      monthInput.maxLength = 40;
+
+      function clampMoney(value) {
+        const n = Number(value);
+        if (!Number.isFinite(n) || n < 0) return 0;
+        return Math.min(n, 999999999999);
+      }
 
       function loadState() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw) return { month: "", rows: structuredClone(DEFAULT_ROWS) };
-          return JSON.parse(raw);
+          if (!raw || raw.length > 20000) return { month: "", rows: structuredClone(DEFAULT_ROWS) };
+          const data = JSON.parse(raw);
+          const source = Array.isArray(data.rows) ? data.rows.slice(0, 40) : DEFAULT_ROWS;
+          return {
+            month: String((data && data.month) || "").slice(0, 40),
+            rows: source.map((row) => ({
+              name: String((row && row.name) || "").replace(/[\u0000-\u001F\u007F]/g, "").slice(0, 80),
+              type: row && row.type === "income" ? "income" : "expense",
+              plan: clampMoney(row && row.plan),
+              fact: clampMoney(row && row.fact),
+            })),
+          };
         } catch {
           return { month: "", rows: structuredClone(DEFAULT_ROWS) };
         }
@@ -320,14 +337,33 @@
         return { month: monthInput.value, rows };
       }
 
+      function moneyInput(field, value) {
+        const td = document.createElement("td");
+        const input = document.createElement("input");
+        input.dataset.field = field;
+        input.type = "number";
+        input.min = "0";
+        input.step = "100";
+        input.max = "999999999999";
+        input.value = String(clampMoney(value));
+        input.classList.add("ym-disable-keys", "ym-hide-content");
+        td.appendChild(input);
+        return td;
+      }
+
       function renderRow(row, index) {
         const tr = document.createElement("tr");
-        tr.dataset.type = row.type;
-        tr.innerHTML = `
-          <td><input data-field="name" type="text" value="${row.name}" aria-label="Статья ${index + 1}" /></td>
-          <td><input data-field="plan" type="number" value="${row.plan}" min="0" step="100" max="999999999999" /></td>
-          <td><input data-field="fact" type="number" value="${row.fact}" min="0" step="100" max="999999999999" /></td>
-        `;
+        tr.dataset.type = row.type === "income" ? "income" : "expense";
+        const nameCell = document.createElement("td");
+        const nameInput = document.createElement("input");
+        nameInput.dataset.field = "name";
+        nameInput.type = "text";
+        nameInput.maxLength = 80;
+        nameInput.value = String(row.name || "").slice(0, 80);
+        nameInput.setAttribute("aria-label", "Статья " + (index + 1));
+        nameInput.classList.add("ym-disable-keys", "ym-hide-content");
+        nameCell.appendChild(nameInput);
+        tr.append(nameCell, moneyInput("plan", row.plan), moneyInput("fact", row.fact));
         body.appendChild(tr);
       }
 
@@ -370,9 +406,9 @@
 
       render(loadState());
     </script>
-    <script src="js/config.js?v=2"></script>
-    <script src="js/analytics.js?v=2"></script>
+    <script src="js/config.js?v=5"></script>
+    <script src="js/analytics.js?v=5"></script>
     <script src="js/seo.js?v=5"></script>
-    <script src="js/feedback.js?v=8"></script>
+    <script src="js/feedback.js?v=9"></script>
   </body>
 </html>

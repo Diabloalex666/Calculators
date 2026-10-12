@@ -69,6 +69,9 @@ function capControl(input) {
 function bindCalculator(formId, handler) {
   const form = document.getElementById(formId);
   if (!form) return;
+  form.querySelectorAll("input, textarea, select").forEach((el) => {
+    el.classList.add("ym-disable-keys", "ym-hide-content");
+  });
 
   const run = () => {
     form.querySelectorAll("input").forEach(capControl);
@@ -81,6 +84,14 @@ function bindCalculator(formId, handler) {
     run();
   });
   run();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function setText(id, text) {
@@ -108,7 +119,7 @@ function renderStepsTable(steps) {
   const rows = steps
     .map(
       (step) =>
-        `<tr><td>${step.label}</td><td>${step.value}</td></tr>`
+        `<tr><td>${escapeHtml(step.label)}</td><td>${escapeHtml(step.value)}</td></tr>`
     )
     .join("");
 

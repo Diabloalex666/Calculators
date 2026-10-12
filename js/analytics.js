@@ -10,7 +10,9 @@
   }
 
   document.querySelectorAll("[data-boosty-link]").forEach((node) => {
-    if (config.boostyUrl) node.href = config.boostyUrl;
+    if (typeof config.boostyUrl === "string" && config.boostyUrl.startsWith("https://")) {
+      node.href = config.boostyUrl;
+    }
   });
 
   if (config.googleSearchConsoleVerification) {
@@ -41,7 +43,8 @@
   }
 
   function initTracking() {
-    if (config.yandexMetrikaId) {
+    const metrikaId = String(config.yandexMetrikaId || "").replace(/[^\d]/g, "");
+    if (metrikaId) {
       (function (m, e, t, r, i, k, a) {
         m[i] =
           m[i] ||
@@ -56,15 +59,15 @@
         a.parentNode.insertBefore(k, a);
       })(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-      window.ym(config.yandexMetrikaId, "init", {
+      window.ym(metrikaId, "init", {
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,
-        webvisor: true,
+        webvisor: false,
       });
 
       const noscript = document.createElement("noscript");
-      noscript.innerHTML = `<div><img src="https://mc.yandex.ru/watch/${config.yandexMetrikaId}" style="position:absolute;left:-9999px" alt="" /></div>`;
+      noscript.innerHTML = `<div><img src="https://mc.yandex.ru/watch/${metrikaId}" style="position:absolute;left:-9999px" alt="" /></div>`;
       document.body.appendChild(noscript);
     }
 
@@ -81,9 +84,12 @@
     const slots = document.querySelectorAll("[data-rsya-slot]");
     if (!slots.length) return;
 
+    const blockId = String(config.rsyaBlockId).replace(/[^A-Za-z0-9_-]/g, "");
     slots.forEach((slot) => {
-      const renderId = `yandex_rtb_${config.rsyaBlockId.replace(/-/g, "_")}`;
-      slot.innerHTML = `<div id="${renderId}"></div>`;
+      const renderId = `yandex_rtb_${blockId.replace(/-/g, "_")}`;
+      const holder = document.createElement("div");
+      holder.id = renderId;
+      slot.replaceChildren(holder);
       window.yaContextCb = window.yaContextCb || [];
       window.yaContextCb.push(() => {
         window.Ya.Context.AdvManager.render({

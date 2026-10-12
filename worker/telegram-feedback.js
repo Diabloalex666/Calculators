@@ -41,13 +41,19 @@ export default {
       return json({ ok: false, error: "forbidden origin" }, 403, corsHeaders);
     }
 
-    const len = Number(request.headers.get("Content-Length") || 0);
-    if (len > MAX_BODY_BYTES) {
+    const raw = await readLimited(request, MAX_BODY_BYTES);
+    if (raw === null) {
       return json({ ok: false, error: "payload too large" }, 413, corsHeaders);
     }
 
     try {
-      const body = await request.json();
+      const body = JSON.parse(raw);
+      if (!body || typeof body !== "object" || Array.isArray(body)) {
+        return json({ ok: false, error: "bad request" }, 400, corsHeaders);
+      }
+      if (typeof body.message !== "string") {
+        return json({ ok: false, error: "bad request" }, 400, corsHeaders);
+      }
       const message = sanitize(body.message, MAX_MESSAGE);
       const contact = sanitize(body.contact, MAX_CONTACT);
       const page = sanitizePage(body.page);
@@ -83,6 +89,30 @@ export default {
     }
   },
 };
+
+async function readLimited(request, max) {
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > max) {
+      await reader.cancel();
+      return null;
+    }
+    chunks.push(value);
+  }
+  const buf = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    buf.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(buf);
+}
 
 function sanitize(input, maxLen) {
   return String(input || "")
