@@ -126,6 +126,14 @@ def article_files() -> list[Path]:
     )
 
 
+def money_linked(html: str, hrefs: list[str] | None = None) -> bool:
+    blob = html if not hrefs else html + "\n" + "\n".join(hrefs)
+    for stem in ("salary", "vacation", "sick", "mortgage", "compound", "budget"):
+        if f"/{stem}" in blob or f"{stem}.html" in blob:
+            return True
+    return False
+
+
 def owner_for(cluster: dict) -> str:
     page = cluster.get("page") or ""
     cid = cluster.get("id") or ""
@@ -334,7 +342,7 @@ def sys3_write(smap: dict) -> dict:
         errs = quality_gate.check(dest)
         if not any(s in html for s in SOURCES):
             errs.append("нет первоисточника")
-        if not any(Path(m).name in html for m in MONEY):
+        if not money_linked(html):
             errs.append("нет ссылки на калькулятор")
         if errs:
             dest.unlink(missing_ok=True)
@@ -403,7 +411,17 @@ def sys8_audit() -> dict:
     hub = ROOT / "articles" / "index.html"
     if hub.exists():
         for href in parse_html(hub).hrefs:
-            dest = Path(href.split("#")[0]).name
+            dest = href.split("#")[0].split("?")[0].strip()
+            if dest.startswith("http"):
+                if "finraz.ru" not in dest:
+                    continue
+                dest = dest.split("finraz.ru", 1)[-1]
+            dest = dest.lstrip("/")
+            if dest.endswith("/"):
+                dest += "index.html"
+            elif dest and "." not in Path(dest).name:
+                dest += ".html"
+            dest = Path(dest).name
             if dest in names:
                 inbound[dest] += 1
     for path in pages:
@@ -413,13 +431,20 @@ def sys8_audit() -> dict:
             noindex.append(path.name)
         if not any(src in html for src in SOURCES):
             no_source.append(path.name)
-        money_hit = any(
-            m.split("/")[-1] in " ".join(p.hrefs) or m in html for m in MONEY
-        )
+        money_hit = money_linked(html, p.hrefs)
         if not money_hit:
             no_money.append(path.name)
         for href in p.hrefs:
-            dest = href.split("#")[0].split("?")[0]
+            dest = href.split("#")[0].split("?")[0].strip()
+            if dest.startswith("http"):
+                if "finraz.ru" not in dest:
+                    continue
+                dest = dest.split("finraz.ru", 1)[-1]
+            dest = dest.lstrip("/")
+            if dest.endswith("/"):
+                dest += "index.html"
+            elif dest and "." not in Path(dest).name:
+                dest += ".html"
             dest = Path(dest).name
             if dest in names and dest != path.name:
                 inbound[dest] += 1
@@ -482,8 +507,9 @@ def stamp_mark_new(slug: str) -> None:
     hub = ROOT / "articles" / "index.html"
     if hub.is_file():
         html = hub.read_text(encoding="utf-8")
+        stem = slug[:-5] if slug.endswith(".html") else slug
         stamped, n = re.subn(
-            rf'(<a href="{re.escape(slug)}">[^<]*</a>)',
+            rf'(<a href="(?:/articles/{re.escape(stem)}|{re.escape(slug)})">[^<]*</a>)',
             rf"\1{_MARK_NEW_HUB}",
             html,
             count=1,
@@ -495,9 +521,11 @@ def stamp_mark_new(slug: str) -> None:
 def ensure_hub_link(slug: str, title: str) -> None:
     hub = ROOT / "articles" / "index.html"
     html = hub.read_text(encoding="utf-8")
-    if slug in html:
+    stem = slug[:-5] if slug.endswith(".html") else slug
+    public = f"/articles/{stem}"
+    if slug in html or public in html:
         return
-    item = f'            <li><a href="{slug}">{title}</a></li>\n'
+    item = f'            <li><a href="{public}">{title}</a></li>\n'
     marker = "<h2>Зарплата</h2>"
     pos = html.find(marker)
     if pos == -1:
@@ -566,7 +594,7 @@ def sys6_drip(smap: dict) -> dict:
         html = src.read_text(encoding="utf-8")
         if not any(s in html for s in SOURCES):
             errs.append("нет первоисточника")
-        if not any(Path(m).name in html for m in MONEY):
+        if not money_linked(html):
             errs.append("нет ссылки на калькулятор")
         if errs:
             result["skipped"].append(f"{src.name}: {'; '.join(errs)}")

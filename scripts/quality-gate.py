@@ -79,8 +79,8 @@ def strict_extra(path: Path, html: str) -> list[str]:
     sources = ("consultant.ru", "pravo.gov.ru", "nalog.gov.ru", "sfr.gov.ru")
     if not any(s in html for s in sources):
         extra.append("нет ссылки на первоисточник")
-    money = ("salary.html", "vacation.html", "sick.html", "mortgage.html", "compound.html", "budget.html")
-    if not any(m in html for m in money):
+    money = ("/salary", "/vacation", "/sick", "/mortgage", "/compound", "/budget")
+    if not any(m in html or f"{m.split('/')[-1]}.html" in html for m in money):
         extra.append("нет ссылки на калькулятор")
     return extra
 

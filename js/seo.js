@@ -1,7 +1,19 @@
 (function injectSeoSchema() {
+  if (location.pathname.endsWith(".html")) {
+    var clean = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    if (clean === "/index") clean = "/";
+    if (clean !== location.pathname) {
+      history.replaceState(null, "", clean + location.search + location.hash);
+    }
+  }
   const SITE = "https://finraz.ru";
-  const path = window.location.pathname.replace(/\/$/, "") || "/";
-  const page = path.endsWith(".html") ? path : path === "" ? "/" : path;
+  let path = window.location.pathname;
+  if (path.endsWith(".html")) {
+    path = path.replace(/\.html$/, "").replace(/\/index$/, "/");
+    if (path === "/index") path = "/";
+  }
+  if (path.length > 1) path = path.replace(/\/$/, "");
+  const page = path || "/";
 
   function addJsonLd(data) {
     const script = document.createElement("script");

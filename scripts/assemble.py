@@ -55,7 +55,12 @@ def related_html(related: list[dict]) -> str:
         "        <ul>",
     ]
     for item in related:
-        bits.append(f'          <li><a href="{item["href"]}">{item["label"]}</a></li>')
+        href = item["href"]
+        leaf = href.split("#")[0].split("?")[0].split("/")[-1]
+        if leaf.endswith(".html"):
+            stem = leaf[:-5]
+            href = "/articles/" if stem == "index" else f"/articles/{stem}"
+        bits.append(f'          <li><a href="{href}">{item["label"]}</a></li>')
     bits.append("        </ul>")
     bits.append("      </nav>")
     return "\n".join(bits)
@@ -66,8 +71,10 @@ def render(pack: dict) -> str:
     if not slug.endswith(".html"):
         slug += ".html"
     today = pack.get("date") or date.today().isoformat()
-    url = f"{SITE}/articles/{slug}"
-    calc = pack.get("calc") or "../salary.html"
+    url = f"{SITE}/articles/{slug[:-5] if slug.endswith('.html') else slug}"
+    calc = pack.get("calc") or "/salary"
+    if calc.endswith(".html"):
+        calc = "/" + calc.split("/")[-1][:-5]
     calc_label = pack.get("calcLabel") or "Калькулятор зарплаты"
     css_v = pack.get("cssV") or "14"
     og_title = pack.get("ogTitle") or pack["h1"]
@@ -113,7 +120,7 @@ def render(pack: dict) -> str:
         "datePublished": "{today}",
         "dateModified": "{today}",
         "inLanguage": "ru-RU",
-        "author": {{ "@type": "Person", "name": "Алексей В.", "url": "https://finraz.ru/about.html" }},
+        "author": {{ "@type": "Person", "name": "Алексей В.", "url": "https://finraz.ru/about" }},
         "publisher": {{ "@type": "Organization", "name": "FinPulse", "url": "https://finraz.ru/" }},
         "mainEntityOfPage": "{url}"
       }}
@@ -122,12 +129,12 @@ def render(pack: dict) -> str:
   <body>
     <div class="wrap">
       <header>
-        <a class="logo" href="../index.html">Fin<span>Pulse</span></a>
+        <a class="logo" href="/">Fin<span>Pulse</span></a>
       </header>
 
       <nav class="breadcrumb" aria-label="Навигация">
-        <a href="../index.html">Главная</a> →
-        <a href="index.html">Статьи</a> →
+        <a href="/">Главная</a> →
+        <a href="/articles/">Статьи</a> →
         <span aria-current="page">{crumb}</span>
       </nav>
 
@@ -139,7 +146,7 @@ def render(pack: dict) -> str:
       </section>
 
       <p class="byline">
-        <a href="../about.html">Алексей В.</a>, редактор калькуляторов FinPulse
+        <a href="/about">Алексей В.</a>, редактор калькуляторов FinPulse
         · <span>Обновлено: {today}</span>
       </p>
 
@@ -163,12 +170,12 @@ def render(pack: dict) -> str:
 
       <footer class="site-footer">
         <p class="footer-nav">
-          <a href="../index.html">← Все калькуляторы</a>
-          · <a href="index.html">Все статьи</a>
+          <a href="/">← Все калькуляторы</a>
+          · <a href="/articles/">Все статьи</a>
         </p>
         <p class="footer-nav">
-          <a href="../about.html">О проекте</a>
-          · <a href="../privacy.html">Конфиденциальность</a>
+          <a href="/about">О проекте</a>
+          · <a href="/privacy">Конфиденциальность</a>
         </p>
         <p class="footer-copy">© FinPulse. Справочные расчёты.</p>
       </footer>

@@ -40,19 +40,22 @@ def loc_for(path: Path) -> str:
         return f"{SITE}/"
     if rel.endswith("/index.html"):
         return f"{SITE}/{rel[:-10]}"
+    if rel.endswith(".html"):
+        return f"{SITE}/{rel[:-5]}"
     return f"{SITE}/{rel}"
 
 
 def priority_for(loc: str) -> str:
     if loc == f"{SITE}/":
         return "1.0"
-    if loc.endswith(("/salary.html", "/vacation.html", "/sick.html", "/mortgage.html")):
+    stem = loc.rstrip("/")
+    if stem.endswith(("/salary", "/vacation", "/sick", "/mortgage")):
         return "0.9"
     if "/articles/" in loc and loc.endswith("/articles/"):
         return "0.85"
     if "/articles/" in loc:
         return "0.75"
-    if loc.endswith(("/about.html", "/privacy.html", "/terms.html")):
+    if stem.endswith(("/about", "/privacy", "/terms")):
         return "0.3"
     return "0.6"
 
@@ -74,7 +77,7 @@ def main() -> None:
         if loc in seen:
             continue
         seen.add(loc)
-        last = prev.get(loc, today)
+        last = prev.get(loc) or prev.get(loc + ".html") or prev.get(loc + "index.html") or today
         urls.append((loc, last, priority_for(loc)))
 
     urls.sort(key=lambda row: (0 if row[0] == f"{SITE}/" else 1, row[0]))

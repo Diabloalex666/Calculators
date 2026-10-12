@@ -19,13 +19,13 @@
       content="Зарплата за выбранный период 2026: оклад делится на норму месяца по производственному календарю и умножается на отмеченные дни или часы. Больничный не входит. Оценка, не расчётный листок."
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://finraz.ru/zarplata-za-period.html" />
+    <link rel="canonical" href="https://finraz.ru/zarplata-za-period" />
     <meta property="og:title" content="Калькулятор зарплаты за период — FinPulse" />
     <meta
       property="og:description"
       content="Оклад за отмеченные дни или часы по производственному календарю 2026. Это оценка, не расчётный листок."
     />
-    <meta property="og:url" content="https://finraz.ru/zarplata-za-period.html" />
+    <meta property="og:url" content="https://finraz.ru/zarplata-za-period" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
@@ -36,7 +36,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Калькулятор зарплаты за период",
-        "url": "https://finraz.ru/zarplata-za-period.html",
+        "url": "https://finraz.ru/zarplata-za-period",
         "applicationCategory": "FinanceApplication",
         "operatingSystem": "Any",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "RUB" },
@@ -47,17 +47,17 @@
   <body>
     <header class="site-header">
       <nav class="site-nav" aria-label="Основная навигация">
-        <a class="logo" href="index.html">Fin<span>Pulse</span></a>
+        <a class="logo" href="/">Fin<span>Pulse</span></a>
         <ul class="nav-links">
-          <li><a href="index.html#calculators">Калькуляторы</a></li>
-          <li><a href="articles/index.html">Статьи</a></li>
-          <li><a href="about.html">О проекте</a></li>
+          <li><a href="/#calculators">Калькуляторы</a></li>
+          <li><a href="/articles/">Статьи</a></li>
+          <li><a href="/about">О проекте</a></li>
         </ul>
       </nav>
     </header>
     <div class="wrap">
       <nav class="breadcrumb" aria-label="Навигация">
-        <a href="index.html">Главная</a> → <span aria-current="page">Зарплата за период</span>
+        <a href="/">Главная</a> → <span aria-current="page">Зарплата за период</span>
       </nav>
 
       <section class="hero page-hero">
@@ -104,7 +104,6 @@
                 <input id="from" name="from" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
                 <input id="to" name="to" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
               </div>
-              <p class="period-mark-hint">Даты периода вписываются в поля. Клетка красится выбранным цветом. Протягивание или второй клик красит сразу несколько дней и не закрашивает клетки другого цвета. Для работы выходные и праздники пропускаются, для болезни и отпуска — нет.</p>
             </div>
             <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
@@ -192,7 +191,6 @@
                 <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
                 <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
               </div>
-              <p class="period-mark-hint">Впишите дату или выберите «Аванс» или «Зарплата» и кликните день на календаре.</p>
             </div>
             <div class="form-row">
               <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
@@ -298,8 +296,8 @@
           и умножается на отработанные дни или часы.
           День болезни или отпуска в оплату по окладу не входит.
           Итог складывает отработку, больничный и отпуск теми же формулами, что
-          <a href="sick.html">калькулятор больничного</a> и
-          <a href="vacation.html">калькулятор отпускных</a>.
+          <a href="/sick">калькулятор больничного</a> и
+          <a href="/vacation">калькулятор отпускных</a>.
         </p>
         <p class="article-formula">Оклад ÷ норма месяца × отработанные дни или часы</p>
         <p>
@@ -314,7 +312,7 @@
         <h3>НДФЛ и переработка</h3>
         <p>
           Если введена сумма на руки, оклад до налога находится так же, как в
-          <a href="salary.html">калькуляторе зарплаты</a>, по прогрессивной шкале.
+          <a href="/salary">калькуляторе зарплаты</a>, по прогрессивной шкале.
           С суммы за период удерживается НДФЛ по ставке этого оклада.
           Переработка «как в ТК РФ» — по
           <a href="https://www.consultant.ru/document/cons_doc_LAW_34683/c6eeef5fbf30c0b7f380760295dd5d0b47730bdb/">ст. 152 ТК РФ</a>:
@@ -327,9 +325,9 @@
       <nav class="related-calc" aria-label="Другие калькуляторы">
         <h2>Другие калькуляторы</h2>
         <ul>
-          <li><a href="salary.html">Калькулятор зарплаты на руки</a></li>
-          <li><a href="sick.html">Калькулятор больничного</a></li>
-          <li><a href="dismissal.html">Расчёт при увольнении</a></li>
+          <li><a href="/salary">Калькулятор зарплаты на руки</a></li>
+          <li><a href="/sick">Калькулятор больничного</a></li>
+          <li><a href="/dismissal">Расчёт при увольнении</a></li>
         </ul>
       </nav>
 
@@ -361,7 +359,7 @@
           <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <label class="feedback-consent">
             <input type="checkbox" name="consent" required />
-            <span>Согласен на <a href="privacy.html" target="_blank" rel="noopener">обработку персональных данных</a></span>
+            <span>Согласен на <a href="/privacy" target="_blank" rel="noopener">обработку персональных данных</a></span>
           </label>
           <button type="submit" class="feedback-submit">Отправить</button>
           <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
@@ -370,21 +368,21 @@
 
       <footer class="site-footer">
         <p class="footer-links">
-          <a href="index.html">Главная</a>
-          · <a href="zarplata-za-period.html">Зарплата за период</a>
-          · <a href="salary.html">Зарплата</a>
-          · <a href="vacation.html">Отпускные</a>
-          · <a href="sick.html">Больничный</a>
-          · <a href="mortgage.html">Ипотека</a>
-          · <a href="credit.html">Кредит</a>
-          · <a href="dismissal.html">Увольнение</a>
-          · <a href="articles/index.html">Статьи</a>
+          <a href="/">Главная</a>
+          · <a href="/zarplata-za-period">Зарплата за период</a>
+          · <a href="/salary">Зарплата</a>
+          · <a href="/vacation">Отпускные</a>
+          · <a href="/sick">Больничный</a>
+          · <a href="/mortgage">Ипотека</a>
+          · <a href="/credit">Кредит</a>
+          · <a href="/dismissal">Увольнение</a>
+          · <a href="/articles/">Статьи</a>
         </p>
         <p class="footer-note">Калькулятор предоставляет справочные расчёты. Калькулятор не является юридической или бухгалтерской консультацией.</p>
         <p class="footer-nav">
-          <a href="about.html">О проекте</a>
-          · <a href="privacy.html">Конфиденциальность</a>
-          · <a href="terms.html">Соглашение</a>
+          <a href="/about">О проекте</a>
+          · <a href="/privacy">Конфиденциальность</a>
+          · <a href="/terms">Соглашение</a>
         </p>
         <p class="footer-copy">© FinPulse</p>
       </footer>
@@ -393,7 +391,7 @@
     <script src="js/calculators.js?v=41"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
-    <script src="js/seo.js?v=1"></script>
+    <script src="js/seo.js?v=5"></script>
     <script src="js/feedback.js?v=3"></script>
   </body>
 </html>

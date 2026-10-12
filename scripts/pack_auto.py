@@ -10,12 +10,12 @@ PACKS = ROOT / "seo-agent" / "packs"
 ARTICLES = ROOT / "articles"
 
 CALC = {
-    "/salary.html": ("../salary.html", "Калькулятор зарплаты"),
-    "/vacation.html": ("../vacation.html", "Калькулятор отпускных"),
-    "/sick.html": ("../sick.html", "Калькулятор больничного"),
-    "/mortgage.html": ("../mortgage.html", "Калькулятор ипотеки"),
-    "/compound.html": ("../compound.html", "Калькулятор накоплений"),
-    "/budget.html": ("../budget.html", "Шаблон бюджета"),
+    "/salary.html": ("/salary", "Калькулятор зарплаты"),
+    "/vacation.html": ("/vacation", "Калькулятор отпускных"),
+    "/sick.html": ("/sick", "Калькулятор больничного"),
+    "/mortgage.html": ("/mortgage", "Калькулятор ипотеки"),
+    "/compound.html": ("/compound", "Калькулятор накоплений"),
+    "/budget.html": ("/budget", "Шаблон бюджета"),
 }
 
 
@@ -42,14 +42,15 @@ def related_for(owner: str, skip: str) -> list[dict]:
         if path.name in {"index.html", skip}:
             continue
         html = path.read_text(encoding="utf-8")
-        if Path(owner).name not in html:
+        stem = Path(owner).stem
+        if Path(owner).name not in html and f"/{stem}" not in html:
             continue
         m = None
         for line in html.splitlines():
             if "<h1>" in line:
                 m = line.split("<h1>", 1)[1].split("</h1>", 1)[0].strip()
                 break
-        out.append({"href": path.name, "label": m or path.stem})
+        out.append({"href": f"/articles/{path.stem}", "label": m or path.stem})
         if len(out) >= 3:
             break
     return out
@@ -59,7 +60,7 @@ def build(cluster: dict, fact: dict) -> dict:
     q = ((cluster.get("main") or {}).get("q") or cluster.get("id") or "расчёт").strip()
     stem = Path(cluster.get("page") or "article.html").name
     owner = owner_for(cluster)
-    calc, calc_label = CALC.get(owner, ("../salary.html", "Калькулятор зарплаты"))
+    calc, calc_label = CALC.get(owner, ("/salary", "Калькулятор зарплаты"))
     h1 = q[:1].upper() + q[1:] if q else stem
     title = f"{q} в 2026 | FinPulse"
     desc = (
