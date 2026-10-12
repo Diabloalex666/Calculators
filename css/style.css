@@ -450,6 +450,27 @@ textarea:focus {
   font-weight: 600;
 }
 
+.dismissal-result,
+.dismissal-result strong,
+#dismissal-steps .calc-steps td {
+  overflow-wrap: anywhere;
+}
+
+.dismissal-result .result-row {
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.dismissal-result .result-row span:first-child {
+  margin-right: auto;
+}
+
+.dismissal-result .result-row span:last-child {
+  margin-left: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+
 .calc-steps-title {
   margin: 1.25rem 0 0.75rem;
   font-size: 1rem;

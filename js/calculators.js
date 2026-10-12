@@ -615,13 +615,40 @@ function calcCredit(form) {
   setHtml("credit-schedule", renderCreditSchedule(sim.schedule));
 }
 
+// Потолок поля с деньгами: выше него число перестаёт быть точным и рвёт блок результата.
+const DISMISSAL_MONEY_CAP = 999_999_999_999;
+
+function capField(input, fallbackMax) {
+  const fromAttr = input.max !== "" ? Number(input.max) : NaN;
+  const max = Number.isFinite(fromAttr) ? fromAttr : fallbackMax;
+  const min = input.min !== "" ? Number(input.min) : NaN;
+  const hasMax = Number.isFinite(max);
+  const normalized = String(input.value).replace(/\s/g, "").replace(",", ".");
+  if (normalized === "" || normalized === "-" || normalized === "." || normalized === "-.") return 0;
+  const n = Number(normalized);
+  if (n === Infinity && hasMax) {
+    input.value = String(max);
+    return max;
+  }
+  if (!Number.isFinite(n)) return 0;
+  if (hasMax && n > max) {
+    input.value = String(max);
+    return max;
+  }
+  if (Number.isFinite(min) && min > 0 && n > 0 && n < min) {
+    input.value = String(min);
+    return min;
+  }
+  return n;
+}
+
 function calcDismissal(form) {
-  const salary = parseNumber(form.salary.value);
-  const workDays = parseNumber(form.workDays.value);
-  const workedDays = parseNumber(form.workedDays.value);
-  const monthsWorked = Math.max(1, Math.min(12, parseNumber(form.months.value) || 12));
-  const income = parseNumber(form.income.value);
-  const unusedDays = parseNumber(form.unusedDays.value) || 0;
+  const salary = capField(form.salary, DISMISSAL_MONEY_CAP);
+  const workDays = capField(form.workDays);
+  const workedDays = capField(form.workedDays);
+  const monthsWorked = Math.max(1, Math.min(12, capField(form.months) || 12));
+  const income = capField(form.income, DISMISSAL_MONEY_CAP);
+  const unusedDays = capField(form.unusedDays) || 0;
 
   const daysGross = workDays > 0 ? (salary / workDays) * workedDays : 0;
   const avgDaily = income / monthsWorked / CALENDAR_MONTH_DAYS;
