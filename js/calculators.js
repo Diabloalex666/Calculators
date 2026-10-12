@@ -895,6 +895,7 @@ const periodMarks = {};
 let periodAnchor = null;
 let periodCalSig = "";
 let periodCalBound = false;
+let periodPaletteBound = false;
 let periodViewMonth = null;
 let periodYearOpen = false;
 let periodSeenMonth = null;
@@ -1247,14 +1248,14 @@ function calcPeriodPay(input) {
       monthStats[m] = { workedDays: 0, workedHours: 0, sick: 0, vacation: 0, offHours: 0 };
     }
     const off = prodOff(m, d);
-    if (mark === "sick" && !off) {
+    if (mark === "sick") {
       monthStats[m].sick += 1;
       sickDays += 1;
     } else if (mark === "vacation") {
-      if (!off) monthStats[m].vacation = (monthStats[m].vacation || 0) + 1;
+      monthStats[m].vacation = (monthStats[m].vacation || 0) + 1;
     } else if (mark === "work" && off) {
       monthStats[m].offHours += PROD_2026.hoursPerDay;
-    } else if (!off) {
+    } else if (mark === "work") {
       monthStats[m].workedDays += 1;
       monthStats[m].workedHours += prodShort(m, d) ? PROD_2026.shortHours : PROD_2026.hoursPerDay;
     }
@@ -1503,18 +1504,15 @@ function renderPeriodMonth(m, from, to, advanceKey, salaryKey) {
       button.textContent = String(d);
       const off = prodOff(m, d);
       const short = prodShort(m, d);
-      const inside = inDateRange(PROD_2026.year, m, d, from, to);
       if (off) button.classList.add("is-off");
       if (short) button.classList.add("is-short");
-      if (inside && !off) button.classList.add("is-in");
       const mark = periodMarks[key];
-      const worked = mark === "work" || (inside && !off && mark !== "sick" && mark !== "vacation");
       if (mark === "sick") button.classList.add("is-sick");
       else if (mark === "vacation") button.classList.add("is-vacation");
-      else if (worked) button.classList.add("is-work");
+      else if (mark === "work") button.classList.add("is-work");
       if (key === advanceKey) button.classList.add("is-advance");
       if (key === salaryKey) button.classList.add("is-salary");
-      const state = mark === "sick" ? "болезнь" : mark === "vacation" ? "отпуск" : worked ? "отработан" : "не отмечен";
+      const state = mark === "sick" ? "болезнь" : mark === "vacation" ? "отпуск" : mark === "work" ? "отработан" : "не отмечен";
       const payNote = [
         key === advanceKey ? "день аванса" : "",
         key === salaryKey ? "день зарплаты" : "",
@@ -1527,6 +1525,40 @@ function renderPeriodMonth(m, from, to, advanceKey, salaryKey) {
     }
     month.appendChild(grid);
   return month;
+}
+
+function syncPeriodPalette(form) {
+  const palette = document.getElementById("period-palette");
+  if (!palette || !form) return;
+  const mode = markModeValue(form);
+  palette.querySelectorAll("[data-paint]").forEach((button) => {
+    const on = button.dataset.paint === mode;
+    button.classList.toggle("is-selected", on);
+    button.setAttribute("aria-pressed", on ? "true" : "false");
+  });
+}
+
+function bindPeriodPalette(form) {
+  const palette = document.getElementById("period-palette");
+  if (!palette) return;
+  if (!periodPaletteBound) {
+    periodPaletteBound = true;
+    palette.addEventListener("click", (event) => {
+      const reset = event.target.closest("[data-palette-reset]");
+      if (reset && palette.contains(reset)) {
+        resetPeriodMarks(form);
+        return;
+      }
+      const button = event.target.closest("[data-paint]");
+      if (!button || !palette.contains(button)) return;
+      const radio = form.querySelector(`input[name="markMode"][value="${button.dataset.paint}"]`);
+      if (!radio) return;
+      radio.checked = true;
+      radio.dispatchEvent(new Event("change", { bubbles: true }));
+    });
+    form.addEventListener("change", () => syncPeriodPalette(form));
+  }
+  syncPeriodPalette(form);
 }
 
 function renderPeriodCalendar(form) {
@@ -1602,7 +1634,7 @@ function setPeriodDragRange(form, start, end) {
   periodAwaitingEnd = false;
 }
 
-function markPeriodSpan(start, end, mode) {
+function markPeriodSpan(start, end, mode, quick) {
   if (!start || !end || (mode !== "work" && mode !== "sick" && mode !== "vacation")) return;
   const from = dateOrder(start, end) <= 0 ? start : end;
   const to = dateOrder(start, end) <= 0 ? end : start;
@@ -1610,7 +1642,13 @@ function markPeriodSpan(start, end, mode) {
   const last = Date.UTC(to.y, to.m - 1, to.d);
   while (cursor <= last) {
     const dt = new Date(cursor);
-    periodMarks[isoDate(dt.getUTCFullYear(), dt.getUTCMonth() + 1, dt.getUTCDate())] = mode;
+    const month = dt.getUTCMonth() + 1;
+    const day = dt.getUTCDate();
+    const key = isoDate(dt.getUTCFullYear(), month, day);
+    const current = periodMarks[key];
+    const skipOff = quick && mode === "work" && prodOff(month, day);
+    const blocked = skipOff || (quick && current && current !== mode);
+    if (!blocked) periodMarks[key] = mode;
     cursor += 86400000;
   }
 }
@@ -1621,34 +1659,50 @@ function togglePeriodMark(key, mode) {
   else periodMarks[key] = mode;
 }
 
-function dayHasExplicitMark(form, key) {
-  if (periodMarks[key] === "work" || periodMarks[key] === "sick" || periodMarks[key] === "vacation") return true;
-  const advance = payDayKey(form && form.advanceDay ? form.advanceDay.value : "");
-  const salary = payDayKey(form && form.salaryDay ? form.salaryDay.value : "");
-  return key === advance || key === salary;
+function periodPaintMode(form) {
+  const mode = markModeValue(form);
+  if (mode === "sick" || mode === "vacation") return mode;
+  return "work";
 }
 
-function clearDayMarks(form, key) {
-  if (periodMarks[key]) delete periodMarks[key];
-  if (form.advanceDay && payDayKey(form.advanceDay.value) === key) form.advanceDay.value = "";
-  if (form.salaryDay && payDayKey(form.salaryDay.value) === key) form.salaryDay.value = "";
+function paintPeriodCells(form, start, end, mode, quick) {
+  if (!start || !end) return;
+  markPeriodSpan(start, end, mode, quick);
+  expandPeriodToDate(form, start);
+  expandPeriodToDate(form, end);
 }
 
-function applyPeriodDayClick(form, date, key, shift) {
+function resetPeriodMarks(form) {
+  Object.keys(periodMarks).forEach((key) => {
+    delete periodMarks[key];
+  });
+  periodAnchor = null;
+  periodAwaitingEnd = false;
+  periodCalSig = "";
+  if (form) calcPeriodSalary(form);
+}
+
+function applyPeriodDayClick(form, date, key) {
   if (!form || !date || !key) return;
-  if (shift) {
-    const mode = markModeValue(form);
-    if (mode === "advance" || mode === "salary") setPayDay(form, mode, date);
-    else togglePeriodMark(key, mode === "sick" ? "sick" : mode === "vacation" ? "vacation" : "work");
-  } else if (dayHasExplicitMark(form, key)) {
-    clearDayMarks(form, key);
-  } else if (periodAwaitingEnd && periodAnchor && dateOrder(periodAnchor, date) !== 0) {
-    setPeriodDragRange(form, periodAnchor, date);
+  const mode = markModeValue(form);
+  if (mode === "advance" || mode === "salary") {
+    setPayDay(form, mode, date);
   } else {
-    form.from.value = formatDotDate(date.y, date.m, date.d);
-    form.to.value = formatDotDate(date.y, date.m, date.d);
-    periodAnchor = date;
-    periodAwaitingEnd = true;
+    const paint = periodPaintMode(form);
+    const extending = periodAwaitingEnd && periodAnchor && dateOrder(periodAnchor, date) !== 0;
+    if (extending) {
+      paintPeriodCells(form, periodAnchor, date, paint, true);
+      periodAnchor = null;
+      periodAwaitingEnd = false;
+    } else if (periodMarks[key] === paint) {
+      togglePeriodMark(key, paint);
+      periodAnchor = null;
+      periodAwaitingEnd = false;
+    } else {
+      periodAnchor = date;
+      periodAwaitingEnd = true;
+      paintPeriodCells(form, date, date, paint);
+    }
   }
   periodCalSig = "";
   calcPeriodSalary(form);
@@ -1672,10 +1726,11 @@ function onPeriodPointerDown(event) {
   if (!form || !host) return;
   periodIgnoreClick = false;
   periodReleaseHandled = false;
+  const mode = markModeValue(form);
   periodDrag = {
     pointerId: event.pointerId,
-    marking: event.shiftKey,
-    mode: markModeValue(form),
+    marking: mode === "work" || mode === "sick" || mode === "vacation",
+    mode,
     startKey: button.dataset.date,
     startDate: parseIsoDate(button.dataset.date),
     lastKey: button.dataset.date,
@@ -1701,11 +1756,9 @@ function onPeriodPointerMove(event) {
   const key = button.dataset.date;
   periodDrag.moved = true;
   if (periodDrag.marking) {
-    if (periodDrag.mode === "advance" || periodDrag.mode === "salary") {
-      setPayDay(form, periodDrag.mode, parseIsoDate(key));
-    } else {
-      markPeriodSpan(periodDrag.startDate, parseIsoDate(key), periodDrag.mode);
-    }
+    paintPeriodCells(form, periodDrag.startDate, parseIsoDate(key), periodDrag.mode, true);
+  } else if (periodDrag.mode === "advance" || periodDrag.mode === "salary") {
+    setPayDay(form, periodDrag.mode, parseIsoDate(key));
   } else {
     setPeriodDragRange(form, periodDrag.startDate, parseIsoDate(key));
   }
@@ -1737,7 +1790,7 @@ function onPeriodPointerUp(event) {
   const key = under && under.dataset.date ? under.dataset.date : drag.startKey;
   if (key !== drag.startKey) return;
   periodReleaseHandled = true;
-  applyPeriodDayClick(form, drag.startDate, key, Boolean(event && event.shiftKey));
+  applyPeriodDayClick(form, drag.startDate, key);
 }
 
 function onPeriodCalendarClick(event) {
@@ -1764,7 +1817,7 @@ function onPeriodCalendarClick(event) {
   if (!button || button.disabled) return;
   const date = parseIsoDate(button.dataset.date);
   if (!date) return;
-  applyPeriodDayClick(form, date, button.dataset.date, event.shiftKey);
+  applyPeriodDayClick(form, date, button.dataset.date);
 }
 
 function expandPeriodToDate(form, date) {
@@ -1781,25 +1834,7 @@ function expandPeriodToDate(form, date) {
 }
 
 function updatePeriodMarkCount(form) {
-  const worked = new Set();
-  const from = form ? parseIsoDate(form.from.value) : null;
-  const to = form ? parseIsoDate(form.to.value) : null;
-  if (from && to && from.y === PROD_2026.year && to.y === PROD_2026.year && dateOrder(from, to) <= 0) {
-    let cursor = Date.UTC(from.y, from.m - 1, from.d);
-    const end = Date.UTC(to.y, to.m - 1, to.d);
-    while (cursor <= end) {
-      const dt = new Date(cursor);
-      const m = dt.getUTCMonth() + 1;
-      const d = dt.getUTCDate();
-      const key = isoDate(PROD_2026.year, m, d);
-      if (!prodOff(m, d) && periodMarks[key] !== "sick" && periodMarks[key] !== "vacation") worked.add(key);
-      cursor += 86400000;
-    }
-  }
-  Object.keys(periodMarks).forEach((key) => {
-    if (periodMarks[key] === "work") worked.add(key);
-  });
-  setText("mark-work-count", `${worked.size} дн.`);
+  setText("mark-work-count", `${periodMarkedDays(form, "work")} дн.`);
   setText("mark-sick-count", `${periodMarkedDays(form, "sick")} дн.`);
   setText("mark-vacation-count", `${periodMarkedDays(form, "vacation")} дн.`);
 }
@@ -1914,7 +1949,7 @@ function periodAdvanceWorkedDays(month, fromValue, toValue) {
     if (prodOff(month, day)) continue;
     if (!inDateRange(PROD_2026.year, month, day, from, to)) continue;
     const key = isoDate(PROD_2026.year, month, day);
-    if (periodMarks[key] === "sick" || periodMarks[key] === "vacation") continue;
+    if (periodMarks[key] !== "work") continue;
     worked += 1;
   }
   return worked;
@@ -2056,6 +2091,9 @@ function calcPeriodSalary(form) {
   bindDotDateField(form.salaryDay);
   const calendar = document.getElementById("period-calendar");
   if (calendar) calendar.hidden = !byDays;
+  const palette = document.getElementById("period-palette");
+  if (palette) palette.hidden = !byDays;
+  bindPeriodPalette(form);
   const calHint = document.getElementById("period-cal-hint");
   if (calHint) calHint.hidden = !byDays;
   const overtimeRow = document.getElementById("period-overtime-row");

@@ -15,6 +15,7 @@ Disallow: /AGENTS.md
 Disallow: /.env
 Disallow: /.github/
 Disallow: /_config.yml
+Disallow: /dev-preview/
 
 User-agent: GPTBot
 Allow: /
@@ -29,6 +30,7 @@ Disallow: /scripts/
 Disallow: /seo-agent/
 Disallow: /docs/
 Disallow: /Обновление/
+Disallow: /dev-preview/
 Host: finraz.ru
 
 Sitemap: https://finraz.ru/sitemap.xml

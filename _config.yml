@@ -19,6 +19,8 @@ exclude:
   - node_modules
   - _live-check
   - _site
+  - dev-preview
+  - dev-preview/
   - vendor/bundle
   - Gemfile
   - Gemfile.lock

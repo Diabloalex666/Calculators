@@ -30,7 +30,7 @@
     <meta property="og:locale" content="ru_RU" />
     <meta property="og:image" content="https://finraz.ru/apple-touch-icon.png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=29-pay-grid" />
+    <link rel="stylesheet" href="css/style.css?v=34-no-cal-scroll" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -104,7 +104,7 @@
                 <input id="from" name="from" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
                 <input id="to" name="to" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
               </div>
-              <p class="period-mark-hint">Даты можно вписать или выбрать на календаре: первый клик — начало, второй — конец. Выходные и праздники сами в оплату не входят.</p>
+              <p class="period-mark-hint">Даты периода вписываются в поля. Клетка красится выбранным цветом. Протягивание или второй клик красит сразу несколько дней и не закрашивает клетки другого цвета. Для работы выходные и праздники пропускаются, для болезни и отпуска — нет.</p>
             </div>
             <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Отметка на календаре</span>
@@ -171,7 +171,7 @@
                   <input id="period-vacation-months" name="vacationMonths" type="number" value="12" min="1" max="12" />
                 </div>
               </div>
-              <p class="period-mark-hint">Обычный клик выбирает период. Shift ставит выбранную пометку. Повторный клик по пометке снимает её.</p>
+              <p class="period-mark-hint">Выберите «Отработал», «Болел» или «Отпуск». Клик и протягивание ставят эту отметку. Повторный клик по ней снимает её.</p>
             </div>
             <div class="form-row" data-field="by-days">
               <div class="segment" role="radiogroup" aria-label="День аванса или зарплаты">
@@ -192,7 +192,7 @@
                 <input id="advance-day" name="advanceDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
                 <input id="salary-day" name="salaryDay" type="text" inputmode="text" autocomplete="off" maxlength="10" placeholder="ДД.ММ.ГГГГ" />
               </div>
-              <p class="period-mark-hint">Впишите дату или отметьте день на календаре: режим «Аванс» или «Зарплата», затем Shift и клик.</p>
+              <p class="period-mark-hint">Впишите дату или выберите «Аванс» или «Зарплата» и кликните день на календаре.</p>
             </div>
             <div class="form-row">
               <span class="block-label" style="margin-bottom: 0.45rem">Выплата в день аванса</span>
@@ -249,8 +249,25 @@
         </div>
 
         <div class="period-sticky">
+          <div class="period-cal-pin">
           <div id="period-calendar" data-field="by-days" aria-label="Производственный календарь 2026"></div>
+          <div class="period-palette" id="period-palette" role="group" aria-label="Цвет отметки на календаре">
+            <button type="button" class="period-swatch is-selected" data-paint="work" aria-pressed="true">
+              <span class="period-swatch-chip period-swatch-work" aria-hidden="true"></span>
+              Работа
+            </button>
+            <button type="button" class="period-swatch" data-paint="sick" aria-pressed="false">
+              <span class="period-swatch-chip period-swatch-sick" aria-hidden="true"></span>
+              Болел
+            </button>
+            <button type="button" class="period-swatch" data-paint="vacation" aria-pressed="false">
+              <span class="period-swatch-chip period-swatch-vacation" aria-hidden="true"></span>
+              Отпуск
+            </button>
+            <button type="button" class="period-swatch period-swatch-reset" data-palette-reset="1">Сброс</button>
+          </div>
           <p class="period-mark-hint" id="period-cal-hint">Серые дни — выходные и праздники. В расчёт они попадут, только если отметить работу.</p>
+          </div>
         <aside class="result result-panel" id="result">
           <p class="result-kicker">На руки</p>
           <p class="result-hero" id="period-net" aria-live="polite">—</p>
@@ -373,7 +390,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=36"></script>
+    <script src="js/calculators.js?v=41"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=1"></script>
