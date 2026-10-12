@@ -13,6 +13,7 @@ window.FINPULSE_CONFIG = {
   siteUrl: "https://finraz.ru/",
   boostyUrl: "https://boosty.to/alexeyvasilev/donate",
   yandexMetrikaId: "109961609",
+  topMailRuCounterId: "3801530",
   googleSearchConsoleVerification: "",
   yandexWebmasterVerification: "",
   indexNowKey: "a8c3e17f6b924d0ea51c8f2d9b4e60c1",

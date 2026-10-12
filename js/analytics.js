@@ -1,6 +1,6 @@
 (function initFinPulse() {
   const config = window.FINPULSE_CONFIG || {};
-  const NOTICE_KEY = "finpulse_cookie_notice";
+  const NOTICE_KEY = "finpulse_cookie_notice_v2";
 
   if (location.hostname.endsWith("github.io")) {
     const robots = document.createElement("meta");
@@ -71,6 +71,19 @@
       document.body.appendChild(noscript);
     }
 
+    const mailRuId = String(config.topMailRuCounterId || "").replace(/[^\d]/g, "");
+    if (mailRuId && !document.getElementById("tmr-code")) {
+      window._tmr = window._tmr || [];
+      window._tmr.push({ id: mailRuId, type: "pageView", start: new Date().getTime() });
+      const ts = document.createElement("script");
+      ts.async = true;
+      ts.id = "tmr-code";
+      ts.src = "https://top-fwz1.mail.ru/js/code.js";
+      const first = document.getElementsByTagName("script")[0];
+      if (first && first.parentNode) first.parentNode.insertBefore(ts, first);
+      else document.head.appendChild(ts);
+    }
+
     if (config.yandexAutoplacementPageId) {
       loadScript("https://yandex.ru/ads/system/context.js");
       loadScript("https://yandex.ru/ads/system/ap-loader.js", {
@@ -111,8 +124,9 @@
     bar.setAttribute("aria-label", "Уведомление о cookie");
     bar.innerHTML = `
       <p class="cookie-banner__text">
-        Используем cookie для статистики (Яндекс.Метрика) и рекламы (РСЯ).
-        Подробнее — <a href="privacy.html">политика конфиденциальности</a>.
+        Используем cookie для статистики (Яндекс.Метрика), рекламы (РСЯ)
+        и учёта переходов в VK Рекламе (счётчик Top.Mail.Ru).
+        Подробнее — <a href="/privacy">политика конфиденциальности</a>.
       </p>
       <button type="button" class="cookie-banner__btn">Понятно</button>
     `;
