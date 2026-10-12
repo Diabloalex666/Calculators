@@ -62,6 +62,148 @@
         gap: 0.75rem;
         margin-top: 1rem;
       }
+
+      .budget-legend {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.65rem 1.25rem;
+        margin: 0.35rem 0 0.85rem;
+        font-size: 0.9rem;
+      }
+
+      .budget-legend__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+      }
+
+      .budget-legend__hint {
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .budget-swatch {
+        width: 1rem;
+        height: 1rem;
+        border: 1px solid var(--line);
+      }
+
+      .budget-swatch--income,
+      .budget-type--income,
+      tr[data-type="income"] input[data-field="name"] {
+        background: #d9f3e3;
+      }
+
+      tr[data-type="income"] input[data-field="name"] {
+        border-color: #8fceb0;
+      }
+
+      .budget-swatch--expense,
+      .budget-type--expense,
+      tr[data-type="expense"] input[data-field="name"] {
+        background: #f8d4d4;
+      }
+
+      tr[data-type="expense"] input[data-field="name"] {
+        border-color: #e3a3a3;
+      }
+
+      .budget-name {
+        display: flex;
+        gap: 0.4rem;
+        align-items: center;
+      }
+
+      .budget-name input {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .budget-type,
+      .budget-remove {
+        flex: 0 0 auto;
+        border: 1px solid var(--line);
+        font: inherit;
+        font-size: 0.82rem;
+        line-height: 1.2;
+        padding: 0.45rem 0.6rem;
+        cursor: pointer;
+        color: var(--text);
+      }
+
+      .budget-remove {
+        background: transparent;
+        color: var(--muted);
+      }
+
+      .budget-remove:hover {
+        color: var(--text);
+        border-color: var(--text);
+      }
+
+      .budget-table td.budget-actions {
+        width: 1%;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 720px) {
+        .budget-table thead {
+          display: none;
+        }
+
+        .budget-table,
+        .budget-table tbody,
+        .budget-table tr,
+        .budget-table td {
+          display: block;
+          width: auto;
+        }
+
+        .budget-table tr {
+          padding: 0.75rem 0 0.35rem;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .budget-table td {
+          border: 0;
+          padding: 0.3rem 0;
+        }
+
+        .budget-name {
+          flex-direction: column;
+          align-items: stretch;
+        }
+
+        .budget-type {
+          align-self: flex-start;
+        }
+
+        .budget-table td[data-label]::before {
+          content: attr(data-label);
+          display: block;
+          margin-bottom: 0.2rem;
+          font-size: 0.8rem;
+          color: var(--muted);
+        }
+
+        .budget-table td.budget-actions {
+          width: auto;
+          white-space: normal;
+        }
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
     </style>
   </head>
   <body>
@@ -88,7 +230,19 @@
       <div class="panel">
         <div class="form-row no-print">
           <label for="month-name">Месяц</label>
-          <input id="month-name" type="text" placeholder="Июнь 2026" />
+          <input id="month-name" type="text" maxlength="40" />
+        </div>
+
+        <div class="budget-legend" aria-label="Цвета статей">
+          <span class="budget-legend__item">
+            <span class="budget-swatch budget-swatch--income" aria-hidden="true"></span>
+            Доход
+          </span>
+          <span class="budget-legend__item">
+            <span class="budget-swatch budget-swatch--expense" aria-hidden="true"></span>
+            Расход
+          </span>
+          <span class="budget-legend__hint">Нажмите метку в строке, чтобы переключить.</span>
         </div>
 
         <table class="budget-table" id="budget-table">
@@ -97,6 +251,7 @@
               <th>Статья</th>
               <th>План (₽)</th>
               <th>Факт (₽)</th>
+              <th class="no-print"><span class="visually-hidden">Убрать</span></th>
             </tr>
           </thead>
           <tbody id="budget-body"></tbody>
@@ -164,8 +319,8 @@
           <li>расходы: аренда или ипотека, продукты, транспорт, подписки, накопления.</li>
         </ul>
         <p>
-          Нажмите «+ Статья», чтобы добавить свои категории — детский сад, кредит, спорт.
-          Кнопка «Распечатать / PDF» сохранит таблицу без кнопок и формы.
+          Нажмите «+ Статья», чтобы добавить категорию, и «Убрать» в строке, чтобы удалить.
+          Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
         </p>
 
         <h3>Зачем вести бюджет</h3>
@@ -297,6 +452,16 @@
       const monthInput = document.getElementById("month-name");
       monthInput.maxLength = 40;
 
+      function currentMonthLabel() {
+        const raw = new Intl.DateTimeFormat("ru-RU", { month: "long", year: "numeric" }).format(new Date());
+        const clean = raw.replace(/\s*г\.?$/u, "").trim();
+        return clean.charAt(0).toLocaleUpperCase("ru-RU") + clean.slice(1);
+      }
+
+      function emptyState() {
+        return { month: currentMonthLabel(), rows: structuredClone(DEFAULT_ROWS) };
+      }
+
       function clampMoney(value) {
         const n = Number(value);
         if (!Number.isFinite(n) || n < 0) return 0;
@@ -306,11 +471,12 @@
       function loadState() {
         try {
           const raw = localStorage.getItem(STORAGE_KEY);
-          if (!raw || raw.length > 20000) return { month: "", rows: structuredClone(DEFAULT_ROWS) };
+          if (!raw || raw.length > 20000) return emptyState();
           const data = JSON.parse(raw);
           const source = Array.isArray(data.rows) ? data.rows.slice(0, 40) : DEFAULT_ROWS;
+          const month = String((data && data.month) || "").trim().slice(0, 40);
           return {
-            month: String((data && data.month) || "").slice(0, 40),
+            month: month || currentMonthLabel(),
             rows: source.map((row) => ({
               name: String((row && row.name) || "").replace(/[\u0000-\u001F\u007F]/g, "").slice(0, 80),
               type: row && row.type === "income" ? "income" : "expense",
@@ -319,7 +485,7 @@
             })),
           };
         } catch {
-          return { month: "", rows: structuredClone(DEFAULT_ROWS) };
+          return emptyState();
         }
       }
 
@@ -330,15 +496,16 @@
       function readStateFromDom() {
         const rows = [...body.querySelectorAll("tr")].map((row) => ({
           name: row.querySelector('[data-field="name"]').value,
-          type: row.dataset.type,
+          type: row.dataset.type === "income" ? "income" : "expense",
           plan: parseNumber(row.querySelector('[data-field="plan"]').value),
           fact: parseNumber(row.querySelector('[data-field="fact"]').value),
         }));
         return { month: monthInput.value, rows };
       }
 
-      function moneyInput(field, value) {
+      function moneyInput(field, value, label) {
         const td = document.createElement("td");
+        td.dataset.label = label;
         const input = document.createElement("input");
         input.dataset.field = field;
         input.type = "number";
@@ -346,15 +513,38 @@
         input.step = "100";
         input.max = "999999999999";
         input.value = String(clampMoney(value));
+        input.setAttribute("aria-label", label);
         input.classList.add("ym-disable-keys", "ym-hide-content");
         td.appendChild(input);
         return td;
       }
 
       function renderRow(row, index) {
+        const type = row.type === "income" ? "income" : "expense";
         const tr = document.createElement("tr");
-        tr.dataset.type = row.type === "income" ? "income" : "expense";
+        tr.dataset.type = type;
+        tr.dataset.index = String(index);
+
         const nameCell = document.createElement("td");
+        const nameWrap = document.createElement("div");
+        nameWrap.className = "budget-name";
+
+        const typeBtn = document.createElement("button");
+        typeBtn.type = "button";
+        typeBtn.className = "budget-type budget-type--" + type;
+        typeBtn.textContent = type === "income" ? "Доход" : "Расход";
+        typeBtn.setAttribute(
+          "aria-label",
+          type === "income" ? "Доход. Нажмите, чтобы сделать расходом" : "Расход. Нажмите, чтобы сделать доходом"
+        );
+        typeBtn.addEventListener("click", () => {
+          const state = readStateFromDom();
+          const current = state.rows[index];
+          if (!current) return;
+          current.type = current.type === "income" ? "expense" : "income";
+          render(state);
+        });
+
         const nameInput = document.createElement("input");
         nameInput.dataset.field = "name";
         nameInput.type = "text";
@@ -362,8 +552,25 @@
         nameInput.value = String(row.name || "").slice(0, 80);
         nameInput.setAttribute("aria-label", "Статья " + (index + 1));
         nameInput.classList.add("ym-disable-keys", "ym-hide-content");
-        nameCell.appendChild(nameInput);
-        tr.append(nameCell, moneyInput("plan", row.plan), moneyInput("fact", row.fact));
+
+        nameWrap.append(typeBtn, nameInput);
+        nameCell.appendChild(nameWrap);
+
+        const actionCell = document.createElement("td");
+        actionCell.className = "budget-actions no-print";
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.className = "budget-remove";
+        removeBtn.textContent = "Убрать";
+        removeBtn.setAttribute("aria-label", "Убрать статью " + (index + 1));
+        removeBtn.addEventListener("click", () => {
+          const state = readStateFromDom();
+          state.rows.splice(index, 1);
+          render(state);
+        });
+        actionCell.appendChild(removeBtn);
+
+        tr.append(nameCell, moneyInput("plan", row.plan, "План (₽)"), moneyInput("fact", row.fact, "Факт (₽)"), actionCell);
         body.appendChild(tr);
       }
 
@@ -384,8 +591,8 @@
       }
 
       function render(state) {
-        body.innerHTML = "";
-        monthInput.value = state.month || "";
+        body.replaceChildren();
+        monthInput.value = state.month || currentMonthLabel();
         state.rows.forEach(renderRow);
         updateTotals();
       }
@@ -401,7 +608,7 @@
 
       document.getElementById("reset-budget").addEventListener("click", () => {
         if (!confirm("Сбросить бюджет к шаблону?")) return;
-        render({ month: "", rows: structuredClone(DEFAULT_ROWS) });
+        render({ month: currentMonthLabel(), rows: structuredClone(DEFAULT_ROWS) });
       });
 
       render(loadState());
