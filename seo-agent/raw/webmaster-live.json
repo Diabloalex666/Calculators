@@ -1,12 +1,9 @@
 {
-  "updated": "2026-10-09",
-  "connected": true,
+  "updated": "2026-10-12",
+  "connected": false,
   "source": "webmaster-api",
   "queries": [],
-  "error": null,
-  "user_id": 1035357254,
-  "host_id": "https:finraz.ru:443",
-  "date_from": "2026-09-28",
-  "date_to": "2026-10-04",
-  "count": 0
+  "error": "не удалось получить user_id",
+  "user_id": null,
+  "host_id": null
 }

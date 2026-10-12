@@ -1,8 +1,8 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-12",
   "webmaster": {
-    "connected": true,
-    "error": null,
+    "connected": false,
+    "error": "не удалось получить user_id",
     "n": 0
   },
   "wordstat": {
