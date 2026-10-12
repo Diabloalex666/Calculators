@@ -64,6 +64,8 @@ def check(path: Path) -> list[str]:
         errors.append(f"H1 count={len(p.h1)}")
     if "finraz.ru" not in p.canonical:
         errors.append("canonical не на finraz.ru")
+    if p.canonical.split("?")[0].split("#")[0].endswith(".html"):
+        errors.append("canonical с .html")
     slug = path.name
     if slug != slug.lower() or re.search(r"[А-Яа-я]", slug):
         errors.append("slug не латиница/нижний регистр")

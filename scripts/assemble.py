@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -11,6 +12,68 @@ ROOT = Path(__file__).resolve().parents[1]
 PACKS = ROOT / "seo-agent" / "packs"
 QUEUE = ROOT / "seo-agent" / "queue"
 SITE = "https://finraz.ru"
+
+
+def strip_public_html(html: str) -> str:
+    """New pages keep .html on disk. Links and canonicals do not."""
+
+    def public_path(path: str) -> str | None:
+        name = path.rstrip("/").split("/")[-1]
+        if not name.endswith(".html"):
+            return None
+        if name.startswith(("yandex_", "google")) or name == "404.html":
+            return None
+        if path.rstrip("/").endswith("/index.html") or name == "index.html":
+            parent = path[: -len("index.html")]
+            return parent if parent.endswith("/") else "/"
+        return path[:-5]
+
+    def one(url: str) -> str | None:
+        def split_extra(raw: str) -> tuple[str, str]:
+            path = raw
+            extra = ""
+            if "#" in path:
+                path, frag = path.split("#", 1)
+                extra = "#" + frag
+            if "?" in path:
+                path, query = path.split("?", 1)
+                extra = "?" + query + extra
+            return path, extra
+
+        if url.startswith(SITE + "/"):
+            path, extra = split_extra(url[len(SITE) :])
+            cleaned = public_path(path)
+            return None if cleaned is None else SITE + cleaned + extra
+        path, extra = split_extra(url)
+        if not path.endswith(".html"):
+            return None
+        if path.startswith("/"):
+            cleaned = public_path(path)
+            return None if cleaned is None else cleaned + extra
+        leaf = path.split("/")[-1]
+        if path.startswith("../"):
+            if leaf == "index.html":
+                return "/" + extra
+            cleaned = public_path("/" + leaf)
+            return None if cleaned is None else cleaned + extra
+        if leaf == "index.html":
+            return "/articles/" + extra
+        return "/articles/" + leaf[:-5] + extra
+
+    def repl_href(match: re.Match) -> str:
+        quote, url = match.group(1), match.group(2)
+        new = one(url)
+        if not new or new == url:
+            return match.group(0)
+        return f"href={quote}{new}{quote}"
+
+    html = re.sub(r"\bhref=(['\"])([^'\"]+)\1", repl_href, html)
+    html = re.sub(
+        r"https://finraz\.ru/[^\"'\s<>]*\.html",
+        lambda match: one(match.group(0)) or match.group(0),
+        html,
+    )
+    return html
 
 
 def load_pack(slug: str) -> dict:
@@ -88,7 +151,7 @@ def render(pack: dict) -> str:
         "сверяйте с расчётным листком."
     )
     cta = pack.get("cta") or f"Посчитайте полный оклад на руки в калькуляторе."
-    return f"""<!DOCTYPE html>
+    html = f"""<!DOCTYPE html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
@@ -182,10 +245,11 @@ def render(pack: dict) -> str:
     </div>
     <script src="../js/config.js?v=4"></script>
     <script src="../js/analytics.js?v=4"></script>
-    <script src="../js/seo.js?v=4"></script>
+    <script src="../js/seo.js?v=5"></script>
   </body>
 </html>
 """
+    return strip_public_html(html)
 
 
 def write_queue(pack: dict) -> Path:

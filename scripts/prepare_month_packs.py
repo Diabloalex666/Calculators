@@ -61,7 +61,7 @@ EXTRA_FACTS = [
         "id": "edu-no-rate",
         "value": "справочная методика без нормативных ставок и лимитов; суммы — только из калькулятора и документов пользователя",
         "law": "рамка контента FinPulse (стоп-лист: не выдумывать ставки)",
-        "source": "https://finraz.ru/about.html",
+        "source": "https://finraz.ru/about",
         "status": "verified",
         "expires": "2027-01-01",
         "used_by": [],
@@ -649,12 +649,12 @@ TOPICS = [
 ]
 
 CALC = {
-    "salary": ("../salary.html", "Калькулятор зарплаты"),
-    "vacation": ("../vacation.html", "Калькулятор отпускных"),
-    "sick": ("../sick.html", "Калькулятор больничного"),
-    "mortgage": ("../mortgage.html", "Калькулятор ипотеки"),
-    "compound": ("../compound.html", "Калькулятор накоплений"),
-    "budget": ("../budget.html", "Шаблон бюджета"),
+    "salary": ("/salary", "Калькулятор зарплаты"),
+    "vacation": ("/vacation", "Калькулятор отпускных"),
+    "sick": ("/sick", "Калькулятор больничного"),
+    "mortgage": ("/mortgage", "Калькулятор ипотеки"),
+    "compound": ("/compound", "Калькулятор накоплений"),
+    "budget": ("/budget", "Шаблон бюджета"),
 }
 
 
@@ -770,9 +770,9 @@ def build_pack(t: dict, facts: dict[str, dict]) -> dict:
         ],
         "related": related
         or [
-            {"href": "avans-ot-oklada.html", "label": "Аванс от оклада"},
-            {"href": "zarplata-za-nepolnyy-mesyats.html", "label": "Неполный месяц"},
-            {"href": "ndfl-15-procentov-kogda.html", "label": "Когда НДФЛ 15%"},
+            {"href": "/articles/avans-ot-oklada", "label": "Аванс от оклада"},
+            {"href": "/articles/zarplata-za-nepolnyy-mesyats", "label": "Неполный месяц"},
+            {"href": "/articles/ndfl-15-procentov-kogda", "label": "Когда НДФЛ 15%"},
         ],
     }
 
