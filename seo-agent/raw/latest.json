@@ -1,12 +1,12 @@
 {
-  "generated": "2026-10-09T07:31:20",
+  "generated": "2026-10-12T07:32:29",
   "semantics": {
     "counts": {
-      "published": 40,
-      "planned": 24
+      "published": 41,
+      "planned": 25
     },
     "holes": [],
-    "total": 64
+    "total": 66
   },
   "briefs": {
     "created": [],
@@ -29,11 +29,11 @@
     ]
   },
   "monitor": {
-    "ok": 46,
+    "ok": 47,
     "bad": [],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 46
+    "checked": 47
   },
   "audit": {
     "orphans": [],
@@ -66,44 +66,45 @@
     "files": []
   },
   "yandex": {
-    "updated": "2026-10-09",
+    "updated": "2026-10-12",
     "webmaster": {
-      "connected": true,
-      "error": null,
+      "connected": false,
+      "error": "не удалось получить user_id",
       "n": 0
     },
     "wordstat": {
-      "connected": false,
-      "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
-      "n": 0
+      "connected": true,
+      "error": "пустой ответ",
+      "n": 14
     }
   },
   "demand": {
-    "suggest_ok": 31,
-    "webmaster": true,
-    "wordstat": false,
+    "suggest_ok": 26,
+    "suggest_error": "",
+    "webmaster": false,
+    "wordstat": true,
     "added": [],
     "retired": [],
     "top": [
       "ипотечный калькулятор",
+      "калькулятор больничного",
       "калькулятор отпускных",
+      "вычет на детей ндфл",
       "калькулятор сложного процента",
       "калькулятор больничного листа в 2026 году онлайн",
-      "калькулятор зарплаты на руки",
-      "вычет на детей ндфл сколько",
-      "когда ндфл 15 процентов",
-      "как посчитать аванс от оклада"
+      "калькулятор налогового вычета",
+      "калькулятор налоговой нагрузки"
     ]
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 24 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 25 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
     "missing": [
-      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [

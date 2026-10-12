@@ -1,10 +1,10 @@
 {
-  "generated": "2026-10-09",
+  "generated": "2026-10-12",
   "verdict": "yellow",
   "verdictText": "Жёлтый.",
   "reasons": [
-    "в очереди 24 planned",
-    "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+    "в очереди 25 planned",
+    "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
   ],
   "actions": [
     {
@@ -17,30 +17,31 @@
     "yesterday": 0,
     "plan": 1,
     "latest": [
-      "ndfl-18-20-22-procenta.html"
+      "zarplata-pri-uvolnenii.html"
     ]
   },
   "topics": {
-    "planned": 24,
+    "planned": 25,
     "reserved": 0,
-    "published": 40,
+    "published": 41,
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "Вебмастер API: 0 запросов"
+    "status": "файлов нет — положи CSV в seo-agent/raw/"
   },
   "positions": {
     "status": "спрос самообновляется",
     "top": [
       {
         "q": "ипотечный калькулятор",
-        "score": 2923650.0,
+        "score": 3274780.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 292364.0,
+        "freq": 327477.0,
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
@@ -49,14 +50,31 @@
         "status": "published"
       },
       {
-        "q": "калькулятор отпускных",
-        "score": 655230.0,
+        "q": "калькулятор больничного",
+        "score": 559759.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 65522.0,
+        "freq": 55975.0,
+        "suggest": 9.0,
+        "sources": [
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
+        ],
+        "cluster": "bolnichny",
+        "page": "/sick.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор отпускных",
+        "score": 558370.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 55836.0,
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
@@ -65,14 +83,29 @@
         "status": "published"
       },
       {
-        "q": "калькулятор сложного процента",
-        "score": 387480.0,
+        "q": "вычет на детей ндфл",
+        "score": 484710.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 38747.0,
+        "freq": 48471.0,
+        "suggest": 0.0,
+        "sources": [
+          "wordstat-api"
+        ],
+        "cluster": "ndfl-vychet-deti",
+        "page": "/articles/ndfl-vychet-na-detey.html",
+        "status": "published"
+      },
+      {
+        "q": "калькулятор сложного процента",
+        "score": 385980.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 38597.0,
         "suggest": 10.0,
         "sources": [
           "wordstat-json",
+          "wordstat-api",
           "seed",
           "yandex-suggest"
         ],
@@ -96,67 +129,32 @@
         "status": "published"
       },
       {
-        "q": "калькулятор зарплаты на руки",
-        "score": 6480.0,
+        "q": "калькулятор налогового вычета",
+        "score": 51660.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 647.0,
-        "suggest": 10.0,
+        "freq": 5166.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "cluster": "zarplata-na-ruki",
-        "page": "/salary.html",
-        "status": "published"
+        "cluster": "nalogovyy-vychet",
+        "page": "/nalogovyy-vychet.html",
+        "status": "planned"
       },
       {
-        "q": "вычет на детей ндфл сколько",
-        "score": 5071.0,
+        "q": "калькулятор налоговой нагрузки",
+        "score": 8630.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 507.0,
-        "suggest": 1.0,
+        "freq": 863.0,
+        "suggest": 0.0,
         "sources": [
-          "wordstat-json",
-          "seed"
+          "wordstat-api"
         ],
-        "cluster": "ndfl-vychet-deti",
-        "page": "/articles/ndfl-vychet-na-detey.html",
-        "status": "published"
-      },
-      {
-        "q": "когда ндфл 15 процентов",
-        "score": 4370.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 436.0,
-        "suggest": 10.0,
-        "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
-        ],
-        "cluster": "ndfl-15-kogda",
-        "page": "/articles/ndfl-15-procentov-kogda.html",
-        "status": "published"
-      },
-      {
-        "q": "как посчитать аванс от оклада",
-        "score": 799.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 79.0,
-        "suggest": 9.0,
-        "sources": [
-          "wordstat-json",
-          "seed",
-          "yandex-suggest"
-        ],
-        "cluster": "avans-ot-oklada",
-        "page": "/articles/avans-ot-oklada.html",
-        "status": "published"
+        "cluster": "nalogovaya-nagruzka",
+        "page": "/nalogovaya-nagruzka.html",
+        "status": "planned"
       }
     ]
   },
@@ -186,20 +184,20 @@
     "noindex": []
   },
   "health": {
-    "ok": 46,
+    "ok": 47,
     "bad": [],
     "robots": "200",
     "indexnow_key": "200",
-    "checked": 46
+    "checked": 47
   },
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 24 planned",
-      "не все контуры подключены: Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "в очереди 25 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
     "missing": [
-      "Wordstat: XMLRIVER_USER/KEY (опционально) или wordstat.csv"
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [

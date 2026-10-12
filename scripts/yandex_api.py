@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Live Yandex data: Webmaster popular queries + optional Wordstat via XMLRiver.
+"""Live Yandex data: Webmaster popular queries + Wordstat.
 
 Secrets never go into the repo. Read from env or local .env (gitignored):
   YANDEX_WEBMASTER_TOKEN
   YANDEX_WEBMASTER_HOST_ID   (optional; auto-detect finraz.ru)
-  XMLRIVER_USER              (optional Wordstat proxy)
+  YANDEX_CLOUD_API_KEY       (optional, Yandex Cloud Wordstat)
+  YC_FOLDER_ID
+  XMLRIVER_USER              (optional Wordstat proxy, only if Cloud key is absent)
   XMLRIVER_KEY
 """
 from __future__ import annotations
@@ -12,6 +14,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -175,6 +179,142 @@ def fetch_webmaster_popular(limit: int = 500) -> dict:
     return out
 
 
+WORDSTAT_URL = "https://searchapi.api.cloud.yandex.net/v2/wordstat/topRequests"
+WORDSTAT_CAP = 20
+WORDSTAT_CHECK_PHRASES = (
+    "ипотечный калькулятор",
+    "калькулятор отпускных",
+    "калькулятор сложного процента",
+    "калькулятор больничного",
+    "калькулятор зарплаты на руки",
+    "вычет на детей ндфл",
+    "когда ндфл 15 процентов",
+    "как посчитать аванс от оклада",
+    "калькулятор налогового вычета",
+    "калькулятор налоговой нагрузки",
+)
+
+
+def cloud_wordstat_credentials() -> tuple[str, str]:
+    load_dotenv()
+    key = (os.environ.get("YANDEX_CLOUD_API_KEY") or "").strip()
+    folder = (os.environ.get("YC_FOLDER_ID") or "").strip()
+    return key, folder
+
+
+def redact_wordstat_text(text: str, key: str, folder: str) -> str:
+    cleaned = text or ""
+    for secret in (key, folder):
+        if secret and len(secret) >= 6:
+            cleaned = cleaned.replace(secret, "")
+    cleaned = re.sub(r"Api-Key\s+\S+", "Api-Key", cleaned, flags=re.I)
+    return re.sub(r"\s+", " ", cleaned).strip()
+
+
+def yandex_http_error(exc: urllib.error.HTTPError, key: str, folder: str) -> str:
+    raw = ""
+    try:
+        raw = exc.read().decode("utf-8", "replace")
+    except Exception:
+        raw = ""
+    message = ""
+    try:
+        payload = json.loads(raw) if raw else {}
+    except json.JSONDecodeError:
+        payload = None
+    if isinstance(payload, dict):
+        err = payload.get("error")
+        if isinstance(err, dict):
+            message = str(err.get("message") or "")
+        else:
+            message = str(payload.get("message") or "")
+    if not message:
+        message = raw.strip()
+    if message:
+        text = f"HTTP {exc.code}: {message}"
+    elif exc.code == 429:
+        text = "квота"
+    else:
+        text = f"HTTP {exc.code}"
+    return redact_wordstat_text(text, key, folder)[:300]
+
+
+def fetch_wordstat_cloud(phrases: list[str], cap: int = WORDSTAT_CAP) -> dict:
+    """Yandex Cloud Wordstat. Frequency is totalCount. Empty body is not zero."""
+    key, folder = cloud_wordstat_credentials()
+    out = {
+        "updated": date.today().isoformat(),
+        "connected": False,
+        "source": "wordstat-api",
+        "queries": [],
+        "error": None if (key and folder) else "нет YANDEX_CLOUD_API_KEY/YC_FOLDER_ID",
+    }
+    if not key or not folder:
+        return out
+    rows = []
+    error = None
+    limit = min(int(cap or WORDSTAT_CAP), WORDSTAT_CAP)
+    for index, phrase in enumerate(phrases[:limit]):
+        if index:
+            time.sleep(0.25)
+        body = json.dumps(
+            {
+                "folderId": folder,
+                "phrase": phrase,
+                "numPhrases": 5,
+                "regions": ["225"],
+            },
+            ensure_ascii=False,
+        ).encode("utf-8")
+        req = urllib.request.Request(WORDSTAT_URL, data=body, method="POST")
+        req.add_header("Authorization", f"Api-Key {key}")
+        req.add_header("Content-Type", "application/json")
+        try:
+            with urllib.request.urlopen(req, timeout=40) as resp:
+                payload = json.loads(resp.read().decode("utf-8", "replace") or "{}")
+        except urllib.error.HTTPError as exc:
+            error = yandex_http_error(exc, key, folder)
+            if exc.code in (400, 429):
+                break
+            continue
+        except Exception as exc:
+            error = f"{type(exc).__name__} timeout" if isinstance(exc, TimeoutError) else type(exc).__name__
+            continue
+        raw_count = payload.get("totalCount") if isinstance(payload, dict) else None
+        if not isinstance(payload, dict) or "totalCount" not in payload or raw_count is None or raw_count == "":
+            error = "пустой ответ"
+            break
+        try:
+            freq = int(str(raw_count))
+        except (TypeError, ValueError):
+            error = "пустой ответ"
+            break
+        rows.append({"query": phrase, "freq": freq, "source": "wordstat-api"})
+    out["queries"] = rows
+    out["connected"] = bool(rows)
+    out["error"] = None if rows and not error else error
+    save_json(RAW / "wordstat-live.json", out)
+    return out
+
+
+def fetch_wordstat(phrases: list[str], cap: int = WORDSTAT_CAP) -> dict:
+    """Cloud Wordstat when the key and folder exist. XMLRiver only without the Cloud key."""
+    key, folder = cloud_wordstat_credentials()
+    if key and folder:
+        return fetch_wordstat_cloud(phrases, cap=cap)
+    if key:
+        out = {
+            "updated": date.today().isoformat(),
+            "connected": False,
+            "source": "wordstat-api",
+            "queries": [],
+            "error": "нет YC_FOLDER_ID",
+        }
+        save_json(RAW / "wordstat-live.json", out)
+        return out
+    return fetch_wordstat_xmlriver(phrases, cap=cap)
+
+
 def fetch_wordstat_xmlriver(phrases: list[str], cap: int = 20) -> dict:
     """Optional: XMLRiver Wordstat proxy. Without keys — empty, no crash."""
     load_dotenv()
@@ -225,6 +365,7 @@ def fetch_wordstat_xmlriver(phrases: list[str], cap: int = 20) -> dict:
             if found:
                 rows.append({"query": phrase, "freq": float(found.group(1)), "source": "xmlriver-wordstat"})
     out["queries"] = rows
+    out["connected"] = bool(rows)
     if rows:
         out["error"] = None
     save_json(RAW / "wordstat-live.json", out)
@@ -282,9 +423,11 @@ def pull_all(seed_phrases: list[str] | None = None) -> dict:
         "аванс от оклада",
         "ндфл 15 процентов",
     ]
-    # Prefer top webmaster queries as Wordstat seeds when connected
+    # Prefer top webmaster queries as Wordstat seeds when connected.
+    # Checked phrases stay first so the 20-cap does not drop the live set.
     if wm.get("connected") and wm.get("queries"):
         seeds = [q["query"] for q in wm["queries"][:12]] + seeds
+    seeds = list(WORDSTAT_CHECK_PHRASES) + list(seeds)
     # unique keep order
     seen = set()
     uniq = []
@@ -294,7 +437,7 @@ def pull_all(seed_phrases: list[str] | None = None) -> dict:
             continue
         seen.add(k)
         uniq.append(s)
-    ws = fetch_wordstat_xmlriver(uniq)
+    ws = fetch_wordstat(uniq)
     summary = {
         "updated": date.today().isoformat(),
         "webmaster": {
@@ -313,6 +456,18 @@ def pull_all(seed_phrases: list[str] | None = None) -> dict:
 
 
 def main() -> int:
+    if "--wordstat" in sys.argv:
+        rep = fetch_wordstat(list(WORDSTAT_CHECK_PHRASES))
+        safe = {
+            "connected": bool(rep.get("connected")),
+            "error": rep.get("error"),
+            "queries": [
+                {"query": row.get("query"), "freq": row.get("freq")}
+                for row in (rep.get("queries") or [])
+            ],
+        }
+        print(json.dumps(safe, ensure_ascii=False))
+        return 0
     rep = pull_all()
     print(json.dumps(rep["summary"], ensure_ascii=False))
     return 0

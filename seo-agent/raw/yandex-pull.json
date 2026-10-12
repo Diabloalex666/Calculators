@@ -1,13 +1,13 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-12",
   "webmaster": {
-    "connected": true,
-    "error": null,
+    "connected": false,
+    "error": "не удалось получить user_id",
     "n": 0
   },
   "wordstat": {
-    "connected": false,
-    "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем",
-    "n": 0
+    "connected": true,
+    "error": "пустой ответ",
+    "n": 14
   }
 }

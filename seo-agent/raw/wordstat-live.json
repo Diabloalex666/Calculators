@@ -1,7 +1,78 @@
 {
-  "updated": "2026-10-09",
-  "connected": false,
-  "source": "xmlriver-wordstat",
-  "queries": [],
-  "error": "нет XMLRIVER_USER/XMLRIVER_KEY — Wordstat API пропускаем"
+  "updated": "2026-10-12",
+  "connected": true,
+  "source": "wordstat-api",
+  "queries": [
+    {
+      "query": "ипотечный калькулятор",
+      "freq": 327477,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор отпускных",
+      "freq": 55836,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор сложного процента",
+      "freq": 38597,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор больничного",
+      "freq": 55975,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор зарплаты на руки",
+      "freq": 620,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "вычет на детей ндфл",
+      "freq": 48471,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "когда ндфл 15 процентов",
+      "freq": 648,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "как посчитать аванс от оклада",
+      "freq": 100,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор налогового вычета",
+      "freq": 5166,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор налоговой нагрузки",
+      "freq": 863,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "калькулятор зарплаты за период",
+      "freq": 35,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "100000 на руки какой оклад",
+      "freq": 4,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "80000 на руки сколько до ндфл",
+      "freq": 1,
+      "source": "wordstat-api"
+    },
+    {
+      "query": "120000 до ндфл сколько на руки",
+      "freq": 1,
+      "source": "wordstat-api"
+    }
+  ],
+  "error": "пустой ответ"
 }
