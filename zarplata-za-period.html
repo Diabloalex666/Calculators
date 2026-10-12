@@ -212,7 +212,7 @@
             </div>
             <div class="form-row" data-field="by-hours" hidden>
               <label for="worked-hours">Отработано часов</label>
-              <input id="worked-hours" name="workedHours" type="number" min="0" step="0.5" value="0" />
+              <input id="worked-hours" name="workedHours" type="number" min="0" step="0.5" value="0" max="744" />
             </div>
             <div class="form-row" data-field="by-hours" hidden>
               <label for="norm-month">Месяц нормы часов</label>
@@ -220,7 +220,7 @@
             </div>
             <div class="form-row" data-field="by-days">
               <label for="overtime">Переработка, часы</label>
-              <input id="overtime" name="overtime" type="number" min="0" step="0.5" value="0" />
+              <input id="overtime" name="overtime" type="number" min="0" step="0.5" value="0" max="744" />
             </div>
             <div class="form-row" data-field="by-days">
               <span class="block-label" style="margin-bottom: 0.45rem">Оплата переработки</span>
@@ -350,11 +350,11 @@
         <form id="feedback-form" class="feedback-form" novalidate>
           <div class="form-row">
             <label for="feedback-message">Ваше сообщение</label>
-            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Например: калькулятор рефинансирования"></textarea>
+            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="4000" placeholder="Например: калькулятор рефинансирования"></textarea>
           </div>
           <div class="form-row">
             <label for="feedback-contact">Контакт для ответа (необязательно)</label>
-            <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
+            <input id="feedback-contact" name="contact" type="text" maxlength="1000" placeholder="Email или @username" />
           </div>
           <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <label class="feedback-consent">
@@ -387,11 +387,11 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=41"></script>
+    <script src="js/common.js?v=4"></script>
+    <script src="js/calculators.js?v=42"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=5"></script>
-    <script src="js/feedback.js?v=3"></script>
+    <script src="js/feedback.js?v=4"></script>
   </body>
 </html>

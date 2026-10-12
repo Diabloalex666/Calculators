@@ -29,7 +29,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=15-mono" />
+    <link rel="stylesheet" href="css/style.css?v=18-mono" />
   </head>
   <body>
       <header class="site-header">
@@ -58,7 +58,7 @@
         <form id="credit-form">
           <div class="form-row">
             <label for="amount">Сумма кредита (₽)</label>
-            <input id="amount" name="amount" type="number" value="100000" min="0" step="1000" />
+            <input id="amount" name="amount" type="number" value="100000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row">
             <label for="rate">Ставка (% годовых)</label>
@@ -78,11 +78,11 @@
           </div>
           <div class="form-row">
             <label for="fee">Разовая комиссия (₽), необязательно</label>
-            <input id="fee" name="fee" type="number" value="0" min="0" step="100" />
+            <input id="fee" name="fee" type="number" value="0" min="0" step="100" max="999999999999" />
           </div>
           <div class="form-row">
             <label for="insurance">Страховка разово (₽), необязательно</label>
-            <input id="insurance" name="insurance" type="number" value="0" min="0" step="100" />
+            <input id="insurance" name="insurance" type="number" value="0" min="0" step="100" max="999999999999" />
             <p class="note">Комиссия и страховка учитываются только если вы сами ввели сумму. Это не официальная ПСК.</p>
           </div>
           <div class="form-row">
@@ -94,7 +94,7 @@
           </div>
           <div class="form-row" data-field="early">
             <label for="extra">Сумма досрочного платежа (₽)</label>
-            <input id="extra" name="extra" type="number" value="10000" min="0" step="1000" />
+            <input id="extra" name="extra" type="number" value="10000" min="0" step="1000" max="999999999999" />
             <p class="note">Сумма учитывается, только если выше выбрано «С досрочным платежом».</p>
           </div>
           <div class="form-row" data-field="early">
@@ -241,11 +241,11 @@
         <form id="feedback-form" class="feedback-form" novalidate>
           <div class="form-row">
             <label for="feedback-message">Ваше сообщение</label>
-            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Например: калькулятор рефинансирования"></textarea>
+            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="4000" placeholder="Например: калькулятор рефинансирования"></textarea>
           </div>
           <div class="form-row">
             <label for="feedback-contact">Контакт для ответа (необязательно)</label>
-            <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
+            <input id="feedback-contact" name="contact" type="text" maxlength="1000" placeholder="Email или @username" />
           </div>
           <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <label class="feedback-consent">
@@ -270,11 +270,11 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=11"></script>
+    <script src="js/common.js?v=4"></script>
+    <script src="js/calculators.js?v=12"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=5"></script>
-    <script src="js/feedback.js?v=3"></script>
+    <script src="js/feedback.js?v=4"></script>
   </body>
 </html>

@@ -421,6 +421,8 @@ textarea:focus {
   border-radius: 0;
   background: var(--accent-soft);
   border: 1px solid var(--line);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .result-row[hidden] {
@@ -441,32 +443,21 @@ textarea:focus {
 
 .result-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   gap: 1rem;
+  min-width: 0;
   font-size: 0.95rem;
+}
+
+.result-row span:first-child {
+  margin-right: auto;
 }
 
 .result-row span:last-child {
   font-weight: 600;
-}
-
-.dismissal-result,
-.dismissal-result strong,
-#dismissal-steps .calc-steps td {
-  overflow-wrap: anywhere;
-}
-
-.dismissal-result .result-row {
-  flex-wrap: wrap;
-  min-width: 0;
-}
-
-.dismissal-result .result-row span:first-child {
-  margin-right: auto;
-}
-
-.dismissal-result .result-row span:last-child {
   margin-left: auto;
+  max-width: 100%;
   text-align: right;
   white-space: nowrap;
 }
@@ -488,6 +479,7 @@ textarea:focus {
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
+  overflow-wrap: anywhere;
 }
 
 .calc-steps th {
@@ -913,6 +905,17 @@ footer {
 }
 
 .feedback-status--error {
+  color: var(--danger);
+}
+
+.feedback-count {
+  margin: 0.35rem 0 0;
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.feedback-count.is-full {
   color: var(--danger);
 }
 
@@ -1493,6 +1496,8 @@ input[type="range"]::-moz-range-thumb {
   padding: 1.35rem 1.4rem 1.1rem;
   background: var(--surface);
   border: 1px solid var(--line);
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .result-kicker {
@@ -1512,6 +1517,7 @@ input[type="range"]::-moz-range-thumb {
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.04em;
   line-height: 1;
+  overflow-wrap: anywhere;
   color: var(--text);
 }
 
@@ -1523,9 +1529,11 @@ input[type="range"]::-moz-range-thumb {
 
 .result-panel .result-row {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
   min-height: 2.75rem;
   border-top: 1px solid var(--line);
   font-size: 0.92rem;

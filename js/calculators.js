@@ -211,7 +211,7 @@ function calcCompound(form) {
   const start = parseNumber(form.start.value);
   const monthly = parseNumber(form.monthly.value);
   const rate = parseNumber(form.rate.value) / 100 / 12;
-  const months = parseNumber(form.months.value);
+  const months = Math.max(0, Math.min(600, Math.floor(parseNumber(form.months.value))));
 
   let balance = start;
   for (let i = 0; i < months; i += 1) {
@@ -396,7 +396,7 @@ function simulateMortgage(amount, annualRate, years, extraPayment, extraMonth) {
 function calcMortgage(form) {
   const amount = parseNumber(form.amount.value);
   const annualRate = parseNumber(form.rate.value) / 100;
-  const years = parseNumber(form.years.value) || 1;
+  const years = Math.max(1, Math.min(40, parseNumber(form.years.value) || 1));
   const extraPayment = parseNumber(form.extra.value);
   const extraMonth = parseNumber(form.extraMonth.value);
   const useEarly = form.earlyMode.value === "on";
@@ -444,7 +444,7 @@ function calcMortgage(form) {
 
 function simulateCredit(options) {
   const amount = Math.max(0, options.amount || 0);
-  const months = Math.max(1, Math.floor(options.months || 1));
+  const months = Math.max(1, Math.min(360, Math.floor(options.months || 1)));
   const monthlyRate = (options.annualRate || 0) / 12;
   const type = options.type === "diff" ? "diff" : "annuity";
   const earlyOn = options.earlyMode === "on";
@@ -544,7 +544,7 @@ function renderCreditSchedule(schedule) {
 
 function calcCredit(form) {
   const amount = parseNumber(form.amount.value);
-  const months = Math.max(1, Math.floor(parseNumber(form.months.value) || 1));
+  const months = Math.max(1, Math.min(360, Math.floor(parseNumber(form.months.value) || 1)));
   const annualRate = parseNumber(form.rate.value) / 100;
   const type = form.paymentType.value === "diff" ? "diff" : "annuity";
   const earlyMode = form.earlyMode.value === "on" ? "on" : "off";

@@ -3,6 +3,32 @@
   const status = document.getElementById("feedback-status");
   if (!form || !status) return;
 
+  const MAX_MESSAGE = 4000;
+  const MAX_CONTACT = 1000;
+
+  function attachCounter(field, max) {
+    field.maxLength = max;
+    const counter = document.createElement("p");
+    counter.className = "feedback-count";
+    counter.setAttribute("aria-live", "polite");
+    field.insertAdjacentElement("afterend", counter);
+    const update = () => {
+      const length = field.value.length;
+      counter.textContent = `${length} / ${max}`;
+      counter.classList.toggle("is-full", length >= max);
+    };
+    field.addEventListener("input", update);
+    form.addEventListener("reset", () => {
+      setTimeout(update, 0);
+    });
+    update();
+  }
+
+  const messageField = form.querySelector('[name="message"]');
+  const contactField = form.querySelector('[name="contact"]');
+  if (messageField) attachCounter(messageField, MAX_MESSAGE);
+  if (contactField) attachCounter(contactField, MAX_CONTACT);
+
   const config = window.FINPULSE_CONFIG || {};
   const endpoint = config.feedbackEndpoint;
 
@@ -42,8 +68,8 @@
 
     const rawMessage = form.querySelector('[name="message"]').value;
     const rawContact = form.querySelector('[name="contact"]').value;
-    const message = sanitizeText(rawMessage, 2000);
-    const contact = sanitizeText(rawContact, 120);
+    const message = sanitizeText(rawMessage, 4000);
+    const contact = sanitizeText(rawContact, 1000);
 
     if (message.length < 5) {
       setStatus("Напишите чуть подробнее (минимум 5 символов).", "error");

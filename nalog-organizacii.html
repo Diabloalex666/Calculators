@@ -25,7 +25,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=16-mono" />
+    <link rel="stylesheet" href="css/style.css?v=18-mono" />
   </head>
   <body>
       <header class="site-header">
@@ -57,11 +57,11 @@
           </div>
           <div class="form-row">
             <label for="income">Доход (₽)</label>
-            <input id="income" name="income" type="number" value="1000000" min="0" step="1000" />
+            <input id="income" name="income" type="number" value="1000000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row" data-field="expenses" hidden>
             <label for="expenses">Расходы (₽)</label>
-            <input id="expenses" name="expenses" type="number" value="400000" min="0" step="1000" />
+            <input id="expenses" name="expenses" type="number" value="400000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row" data-field="rate-income">
             <label for="rateIncome">Ставка УСН «доходы», %</label>
@@ -75,7 +75,7 @@
           </div>
           <div class="form-row">
             <label for="dividends">Дивиденды (₽)</label>
-            <input id="dividends" name="dividends" type="number" value="0" min="0" step="1000" />
+            <input id="dividends" name="dividends" type="number" value="0" min="0" step="1000" max="999999999999" />
           </div>
         </form>
         <div class="result">
@@ -135,11 +135,11 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=11"></script>
+    <script src="js/common.js?v=4"></script>
+    <script src="js/calculators.js?v=12"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=5"></script>
-    <script src="js/feedback.js?v=3"></script>
+    <script src="js/feedback.js?v=4"></script>
   </body>
 </html>

@@ -62,15 +62,15 @@
           </div>
           <div class="form-row" data-field="total-income">
             <label for="income2y">Доход за 2 года (₽, с НДФЛ)</label>
-            <input id="income2y" name="income2y" type="number" value="2880000" min="0" step="1000" />
+            <input id="income2y" name="income2y" type="number" value="2880000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row" data-field="split-income" hidden>
             <label for="income2024">Доход за 2024 год (₽)</label>
-            <input id="income2024" name="income2024" type="number" value="1440000" min="0" step="1000" />
+            <input id="income2024" name="income2024" type="number" value="1440000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row" data-field="split-income" hidden>
             <label for="income2025">Доход за 2025 год (₽)</label>
-            <input id="income2025" name="income2025" type="number" value="1440000" min="0" step="1000" />
+            <input id="income2025" name="income2025" type="number" value="1440000" min="0" step="1000" max="999999999999" />
           </div>
           <div class="form-row">
             <label for="days">Дней на больничном</label>
@@ -249,11 +249,11 @@
         <form id="feedback-form" class="feedback-form" novalidate>
           <div class="form-row">
             <label for="feedback-message">Ваше сообщение</label>
-            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="2000" placeholder="Например: калькулятор декретных или налоговый вычет"></textarea>
+            <textarea id="feedback-message" name="message" rows="4" required minlength="5" maxlength="4000" placeholder="Например: калькулятор декретных или налоговый вычет"></textarea>
           </div>
           <div class="form-row">
             <label for="feedback-contact">Контакт для ответа (необязательно)</label>
-            <input id="feedback-contact" name="contact" type="text" maxlength="120" placeholder="Email или @username" />
+            <input id="feedback-contact" name="contact" type="text" maxlength="1000" placeholder="Email или @username" />
           </div>
           <input type="text" name="website" class="feedback-honeypot" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <label class="feedback-consent">
@@ -278,11 +278,11 @@
         <p class="footer-copy">© FinPulse</p>
       </footer>
     </div>
-    <script src="js/common.js?v=3"></script>
-    <script src="js/calculators.js?v=12"></script>
+    <script src="js/common.js?v=4"></script>
+    <script src="js/calculators.js?v=13"></script>
     <script src="js/config.js?v=2"></script>
     <script src="js/analytics.js?v=2"></script>
     <script src="js/seo.js?v=5"></script>
-    <script src="js/feedback.js?v=3"></script>
+    <script src="js/feedback.js?v=4"></script>
   </body>
 </html>

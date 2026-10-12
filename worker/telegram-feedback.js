@@ -2,9 +2,9 @@
 // Hardening: CORS allowlist, body limits, sanitize, IP rate-limit (Cache API)
 
 const ALLOWED_ORIGINS = ["https://finraz.ru", "https://www.finraz.ru"];
-const MAX_MESSAGE = 2000;
-const MAX_CONTACT = 120;
-const MAX_BODY_BYTES = 8_000;
+const MAX_MESSAGE = 4000;
+const MAX_CONTACT = 1000;
+const MAX_BODY_BYTES = 32_000;
 const RATE_WINDOW_MS = 60_000;
 const RATE_MAX = 5;
 
@@ -73,32 +73,19 @@ export default {
       }
 
       const textMsg = [
-        "FinPulse feedback",
+        "📩 FinPulse — обратная связь",
         "",
-        `Page: ${page}`,
-        `Message: ${message}`,
-        `Contact: ${contact || "—"}`,
-        `IP: ${ip}`,
+        `📄 Страница: ${page}`,
+        `💬 Сообщение: ${message}`,
+        `📧 Контакт: ${contact || "не указан"}`,
       ].join("\n");
 
       if (!env.BOT_TOKEN || !env.CHAT_ID) {
         return json({ ok: false, error: "misconfigured" }, 500, corsHeaders);
       }
 
-      const telegram = await fetch(
-        `https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            chat_id: env.CHAT_ID,
-            text: textMsg,
-            disable_web_page_preview: true,
-          }),
-        }
-      );
-
-      if (!telegram.ok) {
+      const delivered = await sendTelegram(env, textMsg);
+      if (!delivered) {
         return json({ ok: false, error: "upstream error" }, 502, corsHeaders);
       }
 
@@ -124,6 +111,34 @@ function sanitize(input, maxLen) {
 function sanitizePage(path) {
   const p = String(path || "/").slice(0, 200);
   return /^\/[\w\-./]*$/.test(p) ? p : "/";
+}
+
+const TELEGRAM_TEXT_LIMIT = 4096;
+
+async function sendTelegram(env, text) {
+  const chunks = [];
+  let rest = text;
+  while (rest.length > TELEGRAM_TEXT_LIMIT) {
+    let cut = rest.lastIndexOf("\n", TELEGRAM_TEXT_LIMIT);
+    if (cut < TELEGRAM_TEXT_LIMIT / 2) cut = TELEGRAM_TEXT_LIMIT;
+    chunks.push(rest.slice(0, cut));
+    rest = rest.slice(cut).replace(/^\n/, "");
+  }
+  if (rest) chunks.push(rest);
+
+  for (const chunk of chunks) {
+    const telegram = await fetch(`https://api.telegram.org/bot${env.BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: env.CHAT_ID,
+        text: chunk,
+        disable_web_page_preview: true,
+      }),
+    });
+    if (!telegram.ok) return false;
+  }
+  return true;
 }
 
 async function isRateLimited(ip) {
