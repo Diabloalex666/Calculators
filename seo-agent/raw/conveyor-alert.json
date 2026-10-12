@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-09",
+  "updated": "2026-10-12",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
@@ -22,12 +22,10 @@
     "uderzhaniya-iz-zarplaty-predel.html",
     "vychet-na-detey-kak-rabotaet.html",
     "zarplata-ne-rezhe-polumesyaca.html",
-    "zarplata-pri-uvolnenii.html",
     "zarplata-za-neskolko-dney.html",
     "zarplata-za-pervuyu-nedelyu.html"
   ],
   "ready_packs": [
-    "zarplata-pri-uvolnenii",
     "vychet-na-detey-kak-rabotaet",
     "uderzhaniya-iz-zarplaty-predel",
     "zarplata-ne-rezhe-polumesyaca",
@@ -51,7 +49,7 @@
     "oklad-220000-ndfl-15",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 26,
+  "planned": 25,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -72,5 +70,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=23, ready_packs=23"
+  "message": "На конвейере: queue=22, ready_packs=22"
 }

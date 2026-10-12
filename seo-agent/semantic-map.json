@@ -1,6 +1,6 @@
 {
   "site": "https://finraz.ru",
-  "updated": "2026-10-09",
+  "updated": "2026-10-12",
   "note": "Частотности — гипотеза до выгрузки Wordstat/консолей. Не использовать как факт в статьях.",
   "clusters": [
     {
@@ -13,11 +13,12 @@
         "vol": 620
       },
       "demand": {
-        "score": 1.0,
+        "score": 6200.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -30,11 +31,11 @@
         "vol": 35
       },
       "demand": {
-        "score": 4.0,
+        "score": 350.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -47,11 +48,11 @@
         "vol": 4
       },
       "demand": {
-        "score": 10.0,
+        "score": 40.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -64,11 +65,11 @@
         "vol": 1
       },
       "demand": {
-        "score": 8.0,
+        "score": 10.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -81,12 +82,11 @@
         "vol": 1
       },
       "demand": {
-        "score": 11.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -116,11 +116,12 @@
         "vol": 648
       },
       "demand": {
-        "score": 1.0,
+        "score": 6480.0,
         "sources": [
-          "seed"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -133,11 +134,11 @@
         "vol": 507
       },
       "demand": {
-        "score": 6.0,
+        "score": 5070.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -150,11 +151,12 @@
         "vol": 55836
       },
       "demand": {
-        "score": 1.0,
+        "score": 558360.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -235,11 +237,11 @@
         "vol": 14648
       },
       "demand": {
-        "score": 1.0,
+        "score": 146480.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -338,11 +340,12 @@
         "vol": 327477
       },
       "demand": {
-        "score": 1.0,
+        "score": 3274770.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -474,11 +477,12 @@
         "vol": 38597
       },
       "demand": {
-        "score": 1.0,
+        "score": 385970.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -542,11 +546,11 @@
         "vol": 49
       },
       "demand": {
-        "score": 1.0,
+        "score": 490.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -559,11 +563,12 @@
         "vol": 100
       },
       "demand": {
-        "score": 1.0,
+        "score": 1000.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -580,13 +585,13 @@
         "sources": [
           "wordstat-json"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
       "id": "zarplata-pri-uvolnenii",
       "page": "/articles/zarplata-pri-uvolnenii.html",
-      "status": "planned",
+      "status": "published",
       "intent": "info",
       "main": {
         "q": "зарплата при увольнении когда выплатить",
@@ -1103,11 +1108,11 @@
         "vol": 5166
       },
       "demand": {
-        "score": 1.0,
+        "score": 51660.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     },
     {
@@ -1120,11 +1125,11 @@
         "vol": 863
       },
       "demand": {
-        "score": 2.0,
+        "score": 8630.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-09"
+        "updated": "2026-10-12"
       }
     }
   ]
