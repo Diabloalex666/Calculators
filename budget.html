@@ -113,6 +113,34 @@
         border-color: #e3a3a3;
       }
 
+      .budget-drag {
+        width: 1.7rem;
+        height: var(--control-h);
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        cursor: grab;
+        touch-action: none;
+      }
+
+      .budget-drag:hover,
+      tr.is-dragging .budget-drag {
+        color: var(--text);
+        border-color: var(--text);
+      }
+
+      tr.is-dragging .budget-drag {
+        cursor: grabbing;
+      }
+
+      tr.is-dragging {
+        opacity: 0.55;
+      }
+
       .budget-name {
         display: flex;
         gap: 0.4rem;
@@ -183,8 +211,11 @@
         }
 
         .budget-name {
-          flex-direction: column;
-          align-items: stretch;
+          flex-wrap: wrap;
+        }
+
+        .budget-name input {
+          flex: 1 1 100%;
         }
 
         .budget-type {
@@ -255,7 +286,7 @@
             <span class="budget-swatch budget-swatch--expense" aria-hidden="true"></span>
             Расход
           </span>
-          <span class="budget-legend__hint">Нажмите метку в строке, чтобы переключить.</span>
+          <span class="budget-legend__hint">Нажмите метку, чтобы переключить. Потяните точки слева, чтобы подвинуть строку.</span>
         </div>
 
         <table class="budget-table" id="budget-table">
@@ -336,7 +367,7 @@
         </ul>
         <p>
           Нажмите «+ Статья» под таблицей, чтобы добавить категорию, и минус в строке, чтобы удалить.
-          Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
+          Точки слева от метки двигают строку выше или ниже. Метка «Доход» или «Расход» переключает тип. «Распечатать / PDF» сохранит таблицу без кнопок.
         </p>
 
         <h3>Зачем вести бюджет</h3>
@@ -535,6 +566,77 @@
         return td;
       }
 
+      function indexOfRow(tr) {
+        return [...body.querySelectorAll("tr")].indexOf(tr);
+      }
+
+      function gripIcon() {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("viewBox", "0 0 10 16");
+        svg.setAttribute("width", "10");
+        svg.setAttribute("height", "16");
+        svg.setAttribute("aria-hidden", "true");
+        [[2.5, 3], [7.5, 3], [2.5, 8], [7.5, 8], [2.5, 13], [7.5, 13]].forEach(([cx, cy]) => {
+          const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+          dot.setAttribute("cx", String(cx));
+          dot.setAttribute("cy", String(cy));
+          dot.setAttribute("r", "1.15");
+          dot.setAttribute("fill", "currentColor");
+          svg.appendChild(dot);
+        });
+        return svg;
+      }
+
+      function placeForY(y, dragging) {
+        const rows = [...body.querySelectorAll("tr")].filter((row) => row !== dragging);
+        for (const row of rows) {
+          const rect = row.getBoundingClientRect();
+          if (y < rect.top + rect.height / 2) return { row, before: true };
+          if (y <= rect.bottom) return { row, before: false };
+        }
+        const last = rows[rows.length - 1];
+        return last ? { row: last, before: false } : null;
+      }
+
+      function bindDrag(tr, handle) {
+        handle.addEventListener("pointerdown", (event) => {
+          if (event.button !== 0) return;
+          event.preventDefault();
+          try {
+            handle.setPointerCapture(event.pointerId);
+          } catch (error) {
+            /* захват может не сработать, слушаем окно */
+          }
+          let dragging = false;
+
+          const onMove = (ev) => {
+            if (ev.pointerId !== event.pointerId) return;
+            if (!dragging && Math.abs(ev.clientY - event.clientY) < 4) return;
+            dragging = true;
+            tr.classList.add("is-dragging");
+            if (ev.clientY < 72) window.scrollBy(0, -14);
+            else if (ev.clientY > window.innerHeight - 72) window.scrollBy(0, 14);
+            const place = placeForY(ev.clientY, tr);
+            if (!place) return;
+            const ref = place.before ? place.row : place.row.nextElementSibling;
+            if (ref !== tr) body.insertBefore(tr, ref);
+          };
+
+          const onUp = (ev) => {
+            if (ev.pointerId !== event.pointerId) return;
+            window.removeEventListener("pointermove", onMove);
+            window.removeEventListener("pointerup", onUp);
+            window.removeEventListener("pointercancel", onUp);
+            tr.classList.remove("is-dragging");
+            if (dragging) render(readStateFromDom());
+          };
+
+          window.addEventListener("pointermove", onMove);
+          window.addEventListener("pointerup", onUp);
+          window.addEventListener("pointercancel", onUp);
+        });
+      }
+
       function renderRow(row, index) {
         const type = row.type === "income" ? "income" : "expense";
         const tr = document.createElement("tr");
@@ -544,6 +646,13 @@
         const nameCell = document.createElement("td");
         const nameWrap = document.createElement("div");
         nameWrap.className = "budget-name";
+
+        const dragBtn = document.createElement("button");
+        dragBtn.type = "button";
+        dragBtn.className = "budget-drag no-print";
+        dragBtn.setAttribute("aria-label", "Перетащить статью " + (index + 1));
+        dragBtn.appendChild(gripIcon());
+        bindDrag(tr, dragBtn);
 
         const typeBtn = document.createElement("button");
         typeBtn.type = "button";
@@ -555,7 +664,8 @@
         );
         typeBtn.addEventListener("click", () => {
           const state = readStateFromDom();
-          const current = state.rows[index];
+          const currentIndex = indexOfRow(tr);
+          const current = state.rows[currentIndex];
           if (!current) return;
           current.type = current.type === "income" ? "expense" : "income";
           render(state);
@@ -569,7 +679,7 @@
         nameInput.setAttribute("aria-label", "Статья " + (index + 1));
         nameInput.classList.add("ym-disable-keys", "ym-hide-content");
 
-        nameWrap.append(typeBtn, nameInput);
+        nameWrap.append(dragBtn, typeBtn, nameInput);
         nameCell.appendChild(nameWrap);
 
         const actionCell = document.createElement("td");
@@ -581,7 +691,9 @@
         removeBtn.setAttribute("aria-label", "Убрать статью " + (index + 1));
         removeBtn.addEventListener("click", () => {
           const state = readStateFromDom();
-          state.rows.splice(index, 1);
+          const currentIndex = indexOfRow(tr);
+          if (currentIndex < 0) return;
+          state.rows.splice(currentIndex, 1);
           render(state);
         });
         actionCell.appendChild(removeBtn);
