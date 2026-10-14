@@ -10,13 +10,12 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор зарплаты на руки",
-        "vol": 620
+        "vol": 665
       },
       "demand": {
-        "score": 6200.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -28,12 +27,14 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор зарплаты за период",
-        "vol": 35
+        "vol": 39
       },
       "demand": {
-        "score": 350.0,
+        "score": 400.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -45,12 +46,13 @@
       "intent": "info",
       "main": {
         "q": "100000 на руки какой оклад",
-        "vol": 4
+        "vol": 10
       },
       "demand": {
-        "score": 40.0,
+        "score": 101.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-14"
       }
@@ -62,12 +64,13 @@
       "intent": "info",
       "main": {
         "q": "80000 на руки сколько до ндфл",
-        "vol": 1
+        "vol": 2
       },
       "demand": {
-        "score": 10.0,
+        "score": 21.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-14"
       }
@@ -82,9 +85,10 @@
         "vol": 1
       },
       "demand": {
-        "score": 10.0,
+        "score": 11.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-14"
       }
@@ -96,14 +100,15 @@
       "intent": "info",
       "main": {
         "q": "зарплата 200000 ндфл 15",
-        "vol": null
+        "vol": 1
       },
       "demand": {
-        "score": 1.0,
+        "score": 11.0,
         "sources": [
+          "wordstat-api",
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -113,13 +118,12 @@
       "intent": "info",
       "main": {
         "q": "когда ндфл 15 процентов 2026",
-        "vol": 648
+        "vol": 112
       },
       "demand": {
-        "score": 6480.0,
+        "score": 2.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -131,12 +135,12 @@
       "intent": "info",
       "main": {
         "q": "вычет на детей ндфл сколько",
-        "vol": 507
+        "vol": 646
       },
       "demand": {
-        "score": 5070.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-json"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -148,13 +152,12 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор отпускных онлайн",
-        "vol": 55836
+        "vol": 33100
       },
       "demand": {
-        "score": 558360.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -166,15 +169,14 @@
       "intent": "info",
       "main": {
         "q": "отпускные за 14 дней",
-        "vol": null
+        "vol": 1473
       },
       "demand": {
-        "score": 8.0,
+        "score": 9.0,
         "sources": [
-          "seed",
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -184,14 +186,14 @@
       "intent": "info",
       "main": {
         "q": "отпускные при зарплате 50000",
-        "vol": null
+        "vol": 65
       },
       "demand": {
         "score": 8.0,
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -208,7 +210,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -225,7 +227,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -238,9 +240,9 @@
         "vol": 14648
       },
       "demand": {
-        "score": 146480.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -259,7 +261,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -276,7 +278,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -294,7 +296,7 @@
           "seed",
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -311,7 +313,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -328,7 +330,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -338,13 +340,12 @@
       "intent": "tool",
       "main": {
         "q": "ипотечный калькулятор",
-        "vol": 327477
+        "vol": 339967
       },
       "demand": {
-        "score": 3274770.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -363,7 +364,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -380,7 +381,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -397,7 +398,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -414,7 +415,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -431,7 +432,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -448,7 +449,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -465,7 +466,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -475,13 +476,12 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор сложного процента",
-        "vol": 38597
+        "vol": 39374
       },
       "demand": {
-        "score": 385970.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -500,7 +500,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -518,7 +518,7 @@
           "seed",
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -548,9 +548,9 @@
         "vol": 49
       },
       "demand": {
-        "score": 490.0,
+        "score": 8.0,
         "sources": [
-          "wordstat-json"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -562,13 +562,12 @@
       "intent": "info",
       "main": {
         "q": "как посчитать аванс от оклада",
-        "vol": 100
+        "vol": 108
       },
       "demand": {
-        "score": 1000.0,
+        "score": 8.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-14"
       }
@@ -604,7 +603,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -621,7 +620,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -1097,7 +1096,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-13"
+        "updated": "2026-10-14"
       }
     },
     {
@@ -1107,10 +1106,10 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор налогового вычета",
-        "vol": 5166
+        "vol": 5467
       },
       "demand": {
-        "score": 51660.0,
+        "score": 54670.0,
         "sources": [
           "wordstat-api"
         ],
@@ -1124,10 +1123,10 @@
       "intent": "tool",
       "main": {
         "q": "калькулятор налоговой нагрузки",
-        "vol": 863
+        "vol": 1039
       },
       "demand": {
-        "score": 8630.0,
+        "score": 10390.0,
         "sources": [
           "wordstat-api"
         ],

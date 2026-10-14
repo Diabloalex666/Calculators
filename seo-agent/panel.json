@@ -8,12 +8,12 @@
   ],
   "actions": [
     {
-      "title": "залиты из очереди: ndfl-s-premii.html",
+      "title": "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
   "publish": {
-    "today": 1,
+    "today": 0,
     "yesterday": 0,
     "plan": 1,
     "latest": [
@@ -34,14 +34,16 @@
     "top": [
       {
         "q": "ипотечный калькулятор",
-        "score": 3274770.0,
+        "score": 3399680.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 327477.0,
-        "suggest": 0.0,
+        "freq": 339967.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "ipoteka",
         "page": "/mortgage.html",
@@ -49,13 +51,15 @@
       },
       {
         "q": "калькулятор больничного",
-        "score": 559750.0,
+        "score": 608079.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 55975.0,
-        "suggest": 0.0,
+        "freq": 60807.0,
+        "suggest": 9.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -63,14 +67,16 @@
       },
       {
         "q": "калькулятор отпускных",
-        "score": 558360.0,
+        "score": 583400.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 55836.0,
-        "suggest": 0.0,
+        "freq": 58339.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "otpusknye",
         "page": "/vacation.html",
@@ -78,10 +84,10 @@
       },
       {
         "q": "вычет на детей ндфл",
-        "score": 484710.0,
+        "score": 549970.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 48471.0,
+        "freq": 54997.0,
         "suggest": 0.0,
         "sources": [
           "wordstat-api"
@@ -92,28 +98,47 @@
       },
       {
         "q": "калькулятор сложного процента",
-        "score": 385970.0,
+        "score": 393750.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 38597.0,
-        "suggest": 0.0,
+        "freq": 39374.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "compound",
         "page": "/compound.html",
         "status": "published"
       },
       {
+        "q": "калькулятор отпускных онлайн",
+        "score": 331010.0,
+        "clicks": 0.0,
+        "impressions": 0.0,
+        "freq": 33100.0,
+        "suggest": 10.0,
+        "sources": [
+          "wordstat-api",
+          "yandex-suggest",
+          "seed"
+        ],
+        "cluster": "otpusknye",
+        "page": "/vacation.html",
+        "status": "published"
+      },
+      {
         "q": "калькулятор больничного листа в 2026 году онлайн",
-        "score": 146480.0,
+        "score": 146490.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 14648.0,
-        "suggest": 0.0,
+        "suggest": 10.0,
         "sources": [
-          "wordstat-json"
+          "wordstat-json",
+          "yandex-suggest"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -121,30 +146,16 @@
       },
       {
         "q": "калькулятор налогового вычета",
-        "score": 51660.0,
+        "score": 54670.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 5166.0,
+        "freq": 5467.0,
         "suggest": 0.0,
         "sources": [
           "wordstat-api"
         ],
         "cluster": "nalogovyy-vychet",
         "page": "/nalogovyy-vychet.html",
-        "status": "planned"
-      },
-      {
-        "q": "калькулятор налоговой нагрузки",
-        "score": 8630.0,
-        "clicks": 0.0,
-        "impressions": 0.0,
-        "freq": 863.0,
-        "suggest": 0.0,
-        "sources": [
-          "wordstat-api"
-        ],
-        "cluster": "nalogovaya-nagruzka",
-        "page": "/nalogovaya-nagruzka.html",
         "status": "planned"
       }
     ]
@@ -175,11 +186,11 @@
     "noindex": []
   },
   "health": {
-    "ok": 0,
+    "ok": 49,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 49
   },
   "advisor": {
     "verdict": "yellow",
@@ -192,7 +203,7 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: ndfl-s-premii.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

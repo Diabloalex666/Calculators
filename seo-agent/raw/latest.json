@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-14T10:30:21",
+  "generated": "2026-10-14T07:32:19",
   "semantics": {
     "counts": {
       "published": 43,
@@ -18,29 +18,22 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "очередь уже не пуста"
+      "дневной кап уже выбран"
     ]
   },
   "drip": {
-    "enabled": true,
-    "published": [
-      "ndfl-s-premii.html"
-    ],
+    "enabled": false,
+    "published": [],
     "skipped": [
-      "annuitet-vs-differencirovannyy.html: нет первоисточника",
-      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
-      "byudzhet-50-30-20.html: нет первоисточника",
-      "ipoteka-srok-ili-platezh.html: нет первоисточника",
-      "podushka-bezopasnosti-skolko.html: нет первоисточника",
-      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
-    "ok": 0,
+    "ok": 49,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 49
   },
   "audit": {
     "orphans": [],
@@ -72,9 +65,21 @@
     "connected": false,
     "files": []
   },
-  "yandex": {},
+  "yandex": {
+    "updated": "2026-10-14",
+    "webmaster": {
+      "connected": false,
+      "error": "не удалось получить user_id",
+      "n": 0
+    },
+    "wordstat": {
+      "connected": true,
+      "error": null,
+      "n": 20
+    }
+  },
   "demand": {
-    "suggest_ok": 0,
+    "suggest_ok": 26,
     "suggest_error": "",
     "webmaster": false,
     "wordstat": true,
@@ -86,9 +91,9 @@
       "калькулятор отпускных",
       "вычет на детей ндфл",
       "калькулятор сложного процента",
+      "калькулятор отпускных онлайн",
       "калькулятор больничного листа в 2026 году онлайн",
-      "калькулятор налогового вычета",
-      "калькулятор налоговой нагрузки"
+      "калькулятор налогового вычета"
     ]
   },
   "covers": "пропуск: обложки не генерируем",
@@ -103,7 +108,7 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: ndfl-s-premii.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
