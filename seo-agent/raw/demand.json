@@ -1,22 +1,20 @@
 {
-  "updated": "2026-10-14",
+  "updated": "2026-10-15",
   "note": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается.",
-  "suggest_seeds_ok": 26,
+  "suggest_seeds_ok": 0,
   "webmaster_connected": false,
   "wordstat_connected": true,
   "queries": [
     {
       "q": "ипотечный калькулятор",
-      "score": 3399680.0,
+      "score": 3399670.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 339967.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "ipoteka",
       "page": "/mortgage.html",
@@ -24,15 +22,13 @@
     },
     {
       "q": "калькулятор больничного",
-      "score": 608079.0,
+      "score": 608070.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 60807.0,
-      "suggest": 9.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -40,16 +36,14 @@
     },
     {
       "q": "калькулятор отпускных",
-      "score": 583400.0,
+      "score": 583390.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 58339.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye",
       "page": "/vacation.html",
@@ -71,16 +65,14 @@
     },
     {
       "q": "калькулятор сложного процента",
-      "score": 393750.0,
+      "score": 393740.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 39374.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "compound",
       "page": "/compound.html",
@@ -88,15 +80,13 @@
     },
     {
       "q": "калькулятор отпускных онлайн",
-      "score": 331010.0,
+      "score": 331000.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 33100.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "yandex-suggest",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "otpusknye",
       "page": "/vacation.html",
@@ -104,14 +94,13 @@
     },
     {
       "q": "калькулятор больничного листа в 2026 году онлайн",
-      "score": 146490.0,
+      "score": 146480.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 14648.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-json",
-        "yandex-suggest"
+        "wordstat-json"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -133,15 +122,13 @@
     },
     {
       "q": "отпускные за 14 дней",
-      "score": 14738.0,
+      "score": 14730.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1473.0,
-      "suggest": 8.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye-14",
       "page": "/articles/otpusknye-14-dney.html",
@@ -163,16 +150,14 @@
     },
     {
       "q": "когда ндфл 15 процентов",
-      "score": 7320.0,
+      "score": 7310.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 731.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
@@ -180,16 +165,14 @@
     },
     {
       "q": "калькулятор зарплаты на руки",
-      "score": 6660.0,
+      "score": 6650.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 665.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "zarplata-na-ruki",
       "page": "/salary.html",
@@ -197,15 +180,14 @@
     },
     {
       "q": "вычет на детей ндфл сколько",
-      "score": 6461.0,
+      "score": 6460.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 646.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
@@ -213,14 +195,13 @@
     },
     {
       "q": "когда ндфл 15 процентов 2026",
-      "score": 1121.0,
+      "score": 1120.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 112.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
@@ -228,16 +209,14 @@
     },
     {
       "q": "как посчитать аванс от оклада",
-      "score": 1089.0,
+      "score": 1080.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 108.0,
-      "suggest": 9.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "avans-ot-oklada",
       "page": "/articles/avans-ot-oklada.html",
@@ -245,15 +224,13 @@
     },
     {
       "q": "отпускные при зарплате 50000",
-      "score": 660.0,
+      "score": 650.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 65.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye-50000",
       "page": "/articles/otpusknye-pri-zarplate-50000.html",
@@ -261,15 +238,13 @@
     },
     {
       "q": "как посчитать зарплату за неполный месяц",
-      "score": 500.0,
+      "score": 490.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 49.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-json",
-        "seed",
-        "yandex-suggest"
+        "wordstat-json"
       ],
       "cluster": "zarplata-nepolnyy-mesyats",
       "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
@@ -277,15 +252,13 @@
     },
     {
       "q": "калькулятор зарплаты за период",
-      "score": 400.0,
+      "score": 390.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 39.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "zarplata-za-period",
       "page": "/zarplata-za-period.html",
@@ -307,14 +280,13 @@
     },
     {
       "q": "100000 на руки какой оклад",
-      "score": 101.0,
+      "score": 100.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 10.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-100000",
       "page": "/articles/zarplata-100000-na-ruki.html",
@@ -322,14 +294,13 @@
     },
     {
       "q": "80000 на руки сколько до ндфл",
-      "score": 21.0,
+      "score": 20.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 2.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-80000",
       "page": "/articles/zarplata-80000-na-ruki.html",
@@ -337,14 +308,13 @@
     },
     {
       "q": "120000 до ндфл сколько на руки",
-      "score": 11.0,
+      "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-120000",
       "page": "/articles/zarplata-120000-ndfl.html",
@@ -352,841 +322,30 @@
     },
     {
       "q": "зарплата 200000 ндфл 15",
-      "score": 11.0,
+      "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-200000",
       "page": "/articles/zarplata-200000-ndfl-15.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать аванс от оклада за отработанные дни",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "avans-ot-oklada",
-      "page": "/articles/avans-ot-oklada.html",
-      "status": "published"
-    },
-    {
-      "q": "когда ндфл 15 процентов в 2026",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-15-kogda",
-      "page": "/articles/ndfl-15-procentov-kogda.html",
-      "status": "published"
-    },
-    {
-      "q": "зарплата при увольнении сроки выплаты",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
-      "status": "planned"
-    },
-    {
-      "q": "компенсация отпуска при увольнении в 2026 году калькулятор онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "published"
-    },
-    {
-      "q": "сколько вычет на детей в 2026 году по ндфл",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-vychet-deti",
-      "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "отпускные за 14 дней расчет онлайн калькулятор",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-14",
-      "page": "/articles/otpusknye-14-dney.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный стаж менее 5 лет",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5",
-      "page": "/articles/bolnichny-stazh-menshe-5-let.html",
-      "status": "published"
-    },
-    {
-      "q": "стаж от 5 до 8 лет сколько процентов больничный",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5-8",
-      "page": "/articles/bolnichny-stazh-5-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный стаж 8 лет",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-8",
-      "page": "/articles/bolnichny-stazh-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный 2026",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-max-2026",
-      "page": "/articles/bolnichny-maksimum-2026.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор потребительского кредита",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "credit",
-      "page": "/credit.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт при увольнении сроки выплаты",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "dismissal",
-      "page": "/dismissal.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ип",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-ip",
-      "page": "/nalog-ip.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ооо",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-organizacii",
-      "page": "/nalog-organizacii.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога самозанятого",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
-      "q": "бюджет на месяц шаблон",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "budget",
-      "page": "/budget.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор зарплаты на руки за вычетом ндфл",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-na-ruki",
-      "page": "/salary.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать зарплату за неполный месяц по окладу калькулятор",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-nepolnyy-mesyats",
-      "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных в 2026 году калькулятор онлайн",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "зарплата при увольнении",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
-      "status": "published"
-    },
-    {
-      "q": "компенсация отпуска при увольнении",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт отпускных в 2026 калькулятор онлайн",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "отпускные за 14 дней расчет",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-14",
-      "page": "/articles/otpusknye-14-dney.html",
-      "status": "published"
-    },
-    {
-      "q": "какие будут отпускные при зарплате 50000",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-50000",
-      "page": "/articles/otpusknye-pri-zarplate-50000.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный из мрот стаж менее 5 лет",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5",
-      "page": "/articles/bolnichny-stazh-menshe-5-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный в 2026",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-max-2026",
-      "page": "/articles/bolnichny-maksimum-2026.html",
-      "status": "published"
-    },
-    {
-      "q": "ипотечный калькулятор онлайн",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ipoteka",
-      "page": "/mortgage.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор потребительского кредита в сбербанке",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "credit",
-      "page": "/credit.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт при увольнении сроки выплаты и перечисления",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "dismissal",
-      "page": "/dismissal.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ип на усн 6 без работников 2026",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-ip",
-      "page": "/nalog-ip.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ооо с ндс",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-organizacii",
-      "page": "/nalog-organizacii.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога самозанятого онлайн калькулятор расчета",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор сложного процента с пополнением",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "compound",
-      "page": "/compound.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор зарплаты на руки 2026",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-na-ruki",
-      "page": "/salary.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать аванс от оклада за отработанные дни калькулятор",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "avans-ot-oklada",
-      "page": "/articles/avans-ot-oklada.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать зарплату за неполный месяц по окладу",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-nepolnyy-mesyats",
-      "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных дней",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор больничного листа",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny",
-      "page": "/sick.html",
-      "status": "published"
-    },
-    {
-      "q": "когда ндфл 15 процентов в 2025",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-15-kogda",
-      "page": "/articles/ndfl-15-procentov-kogda.html",
-      "status": "published"
-    },
-    {
-      "q": "зарплата при увольнении по собственному желанию сроки выплаты",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
-      "status": "planned"
-    },
-    {
-      "q": "компенсация отпуска при увольнении калькулятор",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных онлайн рассчитать",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "сколько будут отпускные при зарплате 50000",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-50000",
-      "page": "/articles/otpusknye-pri-zarplate-50000.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный если стаж менее 5 лет",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5",
-      "page": "/articles/bolnichny-stazh-menshe-5-let.html",
-      "status": "published"
-    },
-    {
-      "q": "если стаж 8 лет сколько процентов больничный",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5-8",
-      "page": "/articles/bolnichny-stazh-5-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный 2026 в день",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-max-2026",
-      "page": "/articles/bolnichny-maksimum-2026.html",
-      "status": "published"
-    },
-    {
-      "q": "ипотечный калькулятор 2026",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ipoteka",
-      "page": "/mortgage.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор потребительского кредита в альфа банке 2026",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "credit",
-      "page": "/credit.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт при увольнении сроки",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "dismissal",
-      "page": "/dismissal.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ип упрощенка 2025",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-ip",
-      "page": "/nalog-ip.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога самозанятого онлайн",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор сложного процента онлайн",
-      "score": 8.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 8.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "compound",
-      "page": "/compound.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор зарплаты на руки за вычетом ндфл и взносов",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-na-ruki",
-      "page": "/salary.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор отпускных при увольнении",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye",
-      "page": "/vacation.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор больничного листа в 2026 году",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny",
-      "page": "/sick.html",
-      "status": "published"
-    },
-    {
-      "q": "когда ндфл становится 15 процентов",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-15-kogda",
-      "page": "/articles/ndfl-15-procentov-kogda.html",
-      "status": "published"
-    },
-    {
-      "q": "зарплата при увольнении калькулятор",
-      "score": 7.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 7.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-pri-uvolnenii",
-      "page": "/articles/zarplata-pri-uvolnenii.html",
       "status": "published"
     }
   ],
   "ranked": [
     {
       "q": "ипотечный калькулятор",
-      "score": 3399680.0,
+      "score": 3399670.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 339967.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "ipoteka",
       "page": "/mortgage.html",
@@ -1194,15 +353,13 @@
     },
     {
       "q": "калькулятор больничного",
-      "score": 608079.0,
+      "score": 608070.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 60807.0,
-      "suggest": 9.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -1210,16 +367,14 @@
     },
     {
       "q": "калькулятор отпускных",
-      "score": 583400.0,
+      "score": 583390.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 58339.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye",
       "page": "/vacation.html",
@@ -1241,16 +396,14 @@
     },
     {
       "q": "калькулятор сложного процента",
-      "score": 393750.0,
+      "score": 393740.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 39374.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "compound",
       "page": "/compound.html",
@@ -1258,15 +411,13 @@
     },
     {
       "q": "калькулятор отпускных онлайн",
-      "score": 331010.0,
+      "score": 331000.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 33100.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "yandex-suggest",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "otpusknye",
       "page": "/vacation.html",
@@ -1274,14 +425,13 @@
     },
     {
       "q": "калькулятор больничного листа в 2026 году онлайн",
-      "score": 146490.0,
+      "score": 146480.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 14648.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-json",
-        "yandex-suggest"
+        "wordstat-json"
       ],
       "cluster": "bolnichny",
       "page": "/sick.html",
@@ -1303,15 +453,13 @@
     },
     {
       "q": "отпускные за 14 дней",
-      "score": 14738.0,
+      "score": 14730.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1473.0,
-      "suggest": 8.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye-14",
       "page": "/articles/otpusknye-14-dney.html",
@@ -1333,16 +481,14 @@
     },
     {
       "q": "когда ндфл 15 процентов",
-      "score": 7320.0,
+      "score": 7310.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 731.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
@@ -1350,16 +496,14 @@
     },
     {
       "q": "калькулятор зарплаты на руки",
-      "score": 6660.0,
+      "score": 6650.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 665.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "zarplata-na-ruki",
       "page": "/salary.html",
@@ -1367,15 +511,14 @@
     },
     {
       "q": "вычет на детей ндфл сколько",
-      "score": 6461.0,
+      "score": 6460.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 646.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "ndfl-vychet-deti",
       "page": "/articles/ndfl-vychet-na-detey.html",
@@ -1383,14 +526,13 @@
     },
     {
       "q": "когда ндфл 15 процентов 2026",
-      "score": 1121.0,
+      "score": 1120.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 112.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "ndfl-15-kogda",
       "page": "/articles/ndfl-15-procentov-kogda.html",
@@ -1398,16 +540,14 @@
     },
     {
       "q": "как посчитать аванс от оклада",
-      "score": 1089.0,
+      "score": 1080.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 108.0,
-      "suggest": 9.0,
+      "suggest": 0.0,
       "sources": [
         "wordstat-json",
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "avans-ot-oklada",
       "page": "/articles/avans-ot-oklada.html",
@@ -1415,15 +555,13 @@
     },
     {
       "q": "отпускные при зарплате 50000",
-      "score": 660.0,
+      "score": 650.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 65.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "otpusknye-50000",
       "page": "/articles/otpusknye-pri-zarplate-50000.html",
@@ -1431,15 +569,13 @@
     },
     {
       "q": "как посчитать зарплату за неполный месяц",
-      "score": 500.0,
+      "score": 490.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 49.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-json",
-        "seed",
-        "yandex-suggest"
+        "wordstat-json"
       ],
       "cluster": "zarplata-nepolnyy-mesyats",
       "page": "/articles/zarplata-za-nepolnyy-mesyats.html",
@@ -1447,15 +583,13 @@
     },
     {
       "q": "калькулятор зарплаты за период",
-      "score": 400.0,
+      "score": 390.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 39.0,
-      "suggest": 10.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed",
-        "yandex-suggest"
+        "wordstat-api"
       ],
       "cluster": "zarplata-za-period",
       "page": "/zarplata-za-period.html",
@@ -1477,14 +611,13 @@
     },
     {
       "q": "100000 на руки какой оклад",
-      "score": 101.0,
+      "score": 100.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 10.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-100000",
       "page": "/articles/zarplata-100000-na-ruki.html",
@@ -1492,14 +625,13 @@
     },
     {
       "q": "80000 на руки сколько до ндфл",
-      "score": 21.0,
+      "score": 20.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 2.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-80000",
       "page": "/articles/zarplata-80000-na-ruki.html",
@@ -1507,14 +639,13 @@
     },
     {
       "q": "120000 до ндфл сколько на руки",
-      "score": 11.0,
+      "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-120000",
       "page": "/articles/zarplata-120000-ndfl.html",
@@ -1522,263 +653,16 @@
     },
     {
       "q": "зарплата 200000 ндфл 15",
-      "score": 11.0,
+      "score": 10.0,
       "clicks": 0.0,
       "impressions": 0.0,
       "freq": 1.0,
-      "suggest": 1.0,
+      "suggest": 0.0,
       "sources": [
-        "wordstat-api",
-        "seed"
+        "wordstat-api"
       ],
       "cluster": "zarplata-200000",
       "page": "/articles/zarplata-200000-ndfl-15.html",
-      "status": "published"
-    },
-    {
-      "q": "как посчитать аванс от оклада за отработанные дни",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "avans-ot-oklada",
-      "page": "/articles/avans-ot-oklada.html",
-      "status": "published"
-    },
-    {
-      "q": "когда ндфл 15 процентов в 2026",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-15-kogda",
-      "page": "/articles/ndfl-15-procentov-kogda.html",
-      "status": "published"
-    },
-    {
-      "q": "зарплата при увольнении сроки выплаты",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
-      "page": "/articles/zarplata-pri-uvolnenii-po-sobstvennomu-zhelaniyu.html",
-      "status": "planned"
-    },
-    {
-      "q": "компенсация отпуска при увольнении в 2026 году калькулятор онлайн",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "kompensaciya-otpuska-pri-uvolnenii",
-      "page": "/articles/kompensaciya-otpuska-pri-uvolnenii.html",
-      "status": "published"
-    },
-    {
-      "q": "сколько вычет на детей в 2026 году по ндфл",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "ndfl-vychet-deti",
-      "page": "/articles/ndfl-vychet-na-detey.html",
-      "status": "published"
-    },
-    {
-      "q": "отпускные за 14 дней расчет онлайн калькулятор",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "otpusknye-14",
-      "page": "/articles/otpusknye-14-dney.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный стаж менее 5 лет",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5",
-      "page": "/articles/bolnichny-stazh-menshe-5-let.html",
-      "status": "published"
-    },
-    {
-      "q": "стаж от 5 до 8 лет сколько процентов больничный",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-5-8",
-      "page": "/articles/bolnichny-stazh-5-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "больничный стаж 8 лет",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-stazh-8",
-      "page": "/articles/bolnichny-stazh-8-let.html",
-      "status": "published"
-    },
-    {
-      "q": "максимальный больничный 2026",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "bolnichny-max-2026",
-      "page": "/articles/bolnichny-maksimum-2026.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор потребительского кредита",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "credit",
-      "page": "/credit.html",
-      "status": "published"
-    },
-    {
-      "q": "расчёт при увольнении сроки выплаты",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "dismissal",
-      "page": "/dismissal.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ип",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-ip",
-      "page": "/nalog-ip.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога ооо",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "nalog-organizacii",
-      "page": "/nalog-organizacii.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор налога самозанятого",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "samozanyaty",
-      "page": "/samozanyaty.html",
-      "status": "published"
-    },
-    {
-      "q": "бюджет на месяц шаблон",
-      "score": 10.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 10.0,
-      "sources": [
-        "seed",
-        "yandex-suggest"
-      ],
-      "cluster": "budget",
-      "page": "/budget.html",
-      "status": "published"
-    },
-    {
-      "q": "калькулятор зарплаты на руки за вычетом ндфл",
-      "score": 9.0,
-      "clicks": 0.0,
-      "impressions": 0.0,
-      "freq": 0.0,
-      "suggest": 9.0,
-      "sources": [
-        "yandex-suggest"
-      ],
-      "cluster": "zarplata-na-ruki",
-      "page": "/salary.html",
       "status": "published"
     }
   ],
@@ -1788,15 +672,15 @@
   "cluster_rank": [
     {
       "id": "ipoteka",
-      "score": 3399680.0
+      "score": 3399670.0
     },
     {
       "id": "bolnichny",
-      "score": 608079.0
+      "score": 608070.0
     },
     {
       "id": "otpusknye",
-      "score": 583400.0
+      "score": 583390.0
     },
     {
       "id": "ndfl-vychet-deti",
@@ -1804,7 +688,7 @@
     },
     {
       "id": "compound",
-      "score": 393750.0
+      "score": 393740.0
     },
     {
       "id": "nalogovyy-vychet",
@@ -1812,7 +696,7 @@
     },
     {
       "id": "otpusknye-14",
-      "score": 14738.0
+      "score": 14730.0
     },
     {
       "id": "nalogovaya-nagruzka",
@@ -1820,27 +704,27 @@
     },
     {
       "id": "ndfl-15-kogda",
-      "score": 7320.0
+      "score": 7310.0
     },
     {
       "id": "zarplata-na-ruki",
-      "score": 6660.0
+      "score": 6650.0
     },
     {
       "id": "avans-ot-oklada",
-      "score": 1089.0
+      "score": 1080.0
     },
     {
       "id": "otpusknye-50000",
-      "score": 660.0
+      "score": 650.0
     },
     {
       "id": "zarplata-nepolnyy-mesyats",
-      "score": 500.0
+      "score": 490.0
     },
     {
       "id": "zarplata-za-period",
-      "score": 400.0
+      "score": 390.0
     },
     {
       "id": "ndfl-18-20-22",
@@ -1848,95 +732,19 @@
     },
     {
       "id": "zarplata-100000",
-      "score": 101.0
+      "score": 100.0
     },
     {
       "id": "zarplata-80000",
-      "score": 21.0
+      "score": 20.0
     },
     {
       "id": "zarplata-120000",
-      "score": 11.0
+      "score": 10.0
     },
     {
       "id": "zarplata-200000",
-      "score": 11.0
-    },
-    {
-      "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
       "score": 10.0
-    },
-    {
-      "id": "kompensaciya-otpuska-pri-uvolnenii",
-      "score": 10.0
-    },
-    {
-      "id": "bolnichny-stazh-5",
-      "score": 10.0
-    },
-    {
-      "id": "bolnichny-stazh-5-8",
-      "score": 10.0
-    },
-    {
-      "id": "bolnichny-stazh-8",
-      "score": 10.0
-    },
-    {
-      "id": "bolnichny-max-2026",
-      "score": 10.0
-    },
-    {
-      "id": "credit",
-      "score": 10.0
-    },
-    {
-      "id": "dismissal",
-      "score": 10.0
-    },
-    {
-      "id": "nalog-ip",
-      "score": 10.0
-    },
-    {
-      "id": "nalog-organizacii",
-      "score": 10.0
-    },
-    {
-      "id": "samozanyaty",
-      "score": 10.0
-    },
-    {
-      "id": "budget",
-      "score": 10.0
-    },
-    {
-      "id": "zarplata-pri-uvolnenii",
-      "score": 9.0
-    },
-    {
-      "id": "otpusknye-nepolnyy-god",
-      "score": 1.0
-    },
-    {
-      "id": "otpusknye-28",
-      "score": 1.0
-    },
-    {
-      "id": "bolnichny-10-dney",
-      "score": 1.0
-    },
-    {
-      "id": "ipoteka-dosrochnoe",
-      "score": 1.0
-    },
-    {
-      "id": "ipoteka-6mln",
-      "score": 1.0
-    },
-    {
-      "id": "compound-10000",
-      "score": 1.0
     }
   ]
 }
