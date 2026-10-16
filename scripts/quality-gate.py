@@ -71,6 +71,8 @@ def check(path: Path) -> list[str]:
         errors.append("slug не латиница/нижний регистр")
     if "noindex" in p.robots.lower():
         errors.append("noindex")
+    if re.search(r"""href=(['"])/seo-agent/?""", html):
+        errors.append("ссылка ведёт в /seo-agent/")
     if "Обновлено:" not in html and path.parent.name in {"articles", "blog"}:
         errors.append("нет видимой даты «Обновлено»")
     return errors

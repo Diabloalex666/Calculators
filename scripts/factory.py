@@ -552,6 +552,30 @@ def drip_rank_key(score, name: str) -> tuple[float, str]:
     return (-value, name)
 
 
+def rewrite_queue_hrefs(html: str) -> str:
+    """Queue files sit in seo-agent/queue/ and publish at /articles/.
+
+    The clean-URL pass resolved relative links against the queue folder,
+    so the logo and the back link pointed at /seo-agent/.
+    """
+
+    def repl(match: re.Match) -> str:
+        quote, url = match.group(1), match.group(2)
+        if url in ("/seo-agent", "/seo-agent/"):
+            new = "/"
+        elif url in ("/seo-agent/queue", "/seo-agent/queue/"):
+            new = "/articles/"
+        elif url.startswith("/seo-agent/queue/"):
+            new = "/articles/" + url[len("/seo-agent/queue/") :]
+        elif url.startswith("/seo-agent/"):
+            new = "/" + url[len("/seo-agent/") :]
+        else:
+            return match.group(0)
+        return f"href={quote}{new}{quote}"
+
+    return re.sub(r"""\bhref=(['"])([^'"]+)\1""", repl, html)
+
+
 def sys6_drip(smap: dict) -> dict:
     conf = cfg()
     cap = int(conf.get("dailyArticleCap") or 1)
@@ -574,6 +598,10 @@ def sys6_drip(smap: dict) -> dict:
     published_today = list(stamp.get("files") or []) if stamp.get("date") == today else []
     ready: list[tuple[tuple[float, str], Path]] = []
     for src in queue_dir.glob("*.html"):
+        raw_html = src.read_text(encoding="utf-8")
+        fixed_html = rewrite_queue_hrefs(raw_html)
+        if fixed_html != raw_html:
+            src.write_text(fixed_html, encoding="utf-8", newline="\n")
         dest = ROOT / "articles" / src.name
         if dest.exists():
             result["skipped"].append(f"{src.name} уже в articles/")
