@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-15T07:32:02",
+  "generated": "2026-10-16T10:34:36",
   "semantics": {
     "counts": {
-      "published": 44,
-      "planned": 22
+      "published": 45,
+      "planned": 21
     },
     "holes": [],
     "total": 66
@@ -18,22 +18,29 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "очередь уже не пуста"
     ]
   },
   "drip": {
-    "enabled": false,
-    "published": [],
+    "enabled": true,
+    "published": [
+      "oklad-180000-na-ruki.html"
+    ],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника",
+      "podushka-bezopasnosti-skolko.html: нет первоисточника",
+      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 50,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 50
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -65,21 +72,9 @@
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-10-15",
-    "webmaster": {
-      "connected": false,
-      "error": "не удалось получить user_id",
-      "n": 0
-    },
-    "wordstat": {
-      "connected": true,
-      "error": null,
-      "n": 20
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 26,
+    "suggest_ok": 0,
     "suggest_error": "",
     "webmaster": false,
     "wordstat": true,
@@ -100,7 +95,7 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 22 planned",
+      "в очереди 21 planned",
       "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
     "missing": [
@@ -108,7 +103,7 @@
     ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "залиты из очереди: oklad-180000-na-ruki.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
