@@ -77,6 +77,11 @@
             </select>
           </div>
           <div class="form-row">
+            <label for="payMonthly">Плачу каждый месяц (₽), необязательно</label>
+            <input id="payMonthly" name="payMonthly" type="number" value="" min="0" step="1000" max="999999999999" />
+            <p class="note" id="credit-pay-note">Если сумма больше расчётного платежа, срок и переплата пересчитываются. Пустое поле — платёж по графику.</p>
+          </div>
+          <div class="form-row">
             <label for="fee">Разовая комиссия (₽), необязательно</label>
             <input id="fee" name="fee" type="number" value="0" min="0" step="100" max="999999999999" />
           </div>
@@ -119,6 +124,10 @@
         <div class="result">
           <div>Платёж: <strong id="credit-payment">—</strong></div>
           <div class="result-grid">
+            <div class="result-row" id="credit-scheduled-row" hidden>
+              <span>Расчётный платёж</span>
+              <span id="credit-scheduled">—</span>
+            </div>
             <div class="result-row">
               <span>Переплата по процентам</span>
               <span id="credit-overpay">—</span>
@@ -180,6 +189,7 @@
           <li><strong>Уменьшить срок</strong> — платёж тот же, кредит закрывается раньше.</li>
           <li><strong>Уменьшить платёж</strong> — срок тот же, после досрочного пересчитывается платёж.</li>
           <li>Несколько взносов — отдельными строками, каждая на свой месяц.</li>
+          <li><strong>Плачу каждый месяц</strong> — если сумма больше расчётного платежа, лишнее гасит долг весь срок. Срок короче, переплата меньше.</li>
         </ul>
 
         <h3>Комиссия и страховка</h3>
@@ -278,7 +288,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=5"></script>
-    <script src="js/calculators.js?v=45"></script>
+    <script src="js/calculators.js?v=46"></script>
     <script src="js/config.js?v=6"></script>
     <script src="js/analytics.js?v=6"></script>
     <script src="js/seo.js?v=5"></script>

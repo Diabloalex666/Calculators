@@ -449,6 +449,7 @@ function simulateCredit(options) {
   const type = options.type === "diff" ? "diff" : "annuity";
   const earlyOn = options.earlyMode === "on";
   const reducePayment = options.earlyEffect === "payment";
+  const payMonthly = Math.max(0, options.payMonthly || 0);
   const extrasByMonth = new Map();
   if (earlyOn) {
     (options.earlyPayments || []).forEach((item) => {
@@ -468,6 +469,7 @@ function simulateCredit(options) {
 
   let annuityPay = type === "annuity" ? annuityPayment(amount, monthlyRate, months) : 0;
   let diffPrincipal = type === "diff" ? amount / months : 0;
+  let raised = false;
 
   const maxMonths = months;
 
@@ -478,13 +480,21 @@ function simulateCredit(options) {
 
     if (principalDue > balance) principalDue = balance;
 
-    let extra = 0;
+    let lump = 0;
     const plannedExtra = extrasByMonth.get(month) || 0;
     if (earlyOn && plannedExtra > 0) {
-      extra = Math.min(plannedExtra, Math.max(0, balance - principalDue));
+      lump = Math.min(plannedExtra, Math.max(0, balance - principalDue));
     }
 
-    let principal = principalDue + extra;
+    const scheduled = type === "annuity" ? annuityPay : interest + diffPrincipal;
+    let monthlyExtra = 0;
+    if (payMonthly > scheduled + 0.5) {
+      const room = Math.max(0, balance - principalDue - lump);
+      monthlyExtra = Math.min(payMonthly - scheduled, room);
+      if (monthlyExtra > 0.5) raised = true;
+    }
+
+    let principal = principalDue + lump + monthlyExtra;
     if (principal > balance) principal = balance;
 
     const paymentTotal = interest + principal;
@@ -505,7 +515,7 @@ function simulateCredit(options) {
 
     if (balance <= 0) break;
 
-    if (earlyOn && extra > 0 && reducePayment) {
+    if (earlyOn && lump > 0 && reducePayment) {
       const left = months - month;
       if (left > 0) {
         if (type === "annuity") {
@@ -533,6 +543,7 @@ function simulateCredit(options) {
     totalPrincipal,
     totalPayments,
     balance,
+    raised,
   };
 }
 
@@ -569,6 +580,7 @@ function calcCredit(form) {
     });
   });
   const earlyEffect = form.earlyEffect.value === "payment" ? "payment" : "term";
+  const payMonthly = Math.max(0, parseNumber(form.payMonthly ? form.payMonthly.value : 0));
   const fee = Math.max(0, parseNumber(form.fee.value));
   const insurance = Math.max(0, parseNumber(form.insurance.value));
 
@@ -580,16 +592,38 @@ function calcCredit(form) {
     earlyMode,
     earlyPayments,
     earlyEffect,
+    payMonthly,
   });
 
   const extrasTotal = fee + insurance;
   const grandTotal = sim.totalPayments + extrasTotal;
-  const paymentLabel =
+  const monthlyRate = annualRate / 12;
+  const scheduledPay =
     type === "annuity"
+      ? annuityPayment(amount, monthlyRate, months)
+      : amount / months + amount * monthlyRate;
+  const paymentLabel = sim.raised
+    ? type === "annuity"
+      ? formatRub(payMonthly)
+      : `${formatRub(sim.firstPayment)} → ${formatRub(sim.lastPayment)}`
+    : type === "annuity"
       ? formatRub(sim.basePayment)
       : `${formatRub(sim.firstPayment)} → ${formatRub(sim.lastPayment)}`;
 
   setText("credit-payment", paymentLabel);
+  const scheduledRow = document.getElementById("credit-scheduled-row");
+  if (scheduledRow) scheduledRow.hidden = !sim.raised;
+  if (sim.raised) setText("credit-scheduled", formatRub(scheduledPay));
+  const payNote = document.getElementById("credit-pay-note");
+  if (payNote) {
+    if (sim.raised) {
+      payNote.textContent = "Сумма больше расчётного платежа: срок и переплата пересчитаны. Разовый досрочный платёж по-прежнему добавляется сверху в свой месяц.";
+    } else if (payMonthly > 0) {
+      payNote.textContent = "Сумма не больше расчётного платежа, график без изменений.";
+    } else {
+      payNote.textContent = "Если сумма больше расчётного платежа, срок и переплата пересчитываются. Пустое поле — платёж по графику.";
+    }
+  }
   setText("credit-overpay", formatRub(sim.totalInterest));
   setText("credit-total", formatRub(grandTotal));
   setText("credit-months", `${sim.monthCount} мес.`);
@@ -617,6 +651,13 @@ function calcCredit(form) {
   }
   if (extrasTotal > 0) {
     steps.push({ label: "Всего с комиссией и страховкой", value: formatRub(grandTotal) });
+  }
+
+  if (sim.raised) {
+    steps.push({
+      label: "Плачу каждый месяц",
+      value: `${formatRub(payMonthly)} вместо ${formatRub(scheduledPay)}. Срок ${sim.monthCount} мес.`,
+    });
   }
 
   if (earlyMode === "on") {
