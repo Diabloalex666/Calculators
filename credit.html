@@ -92,16 +92,15 @@
               <option value="on">С досрочным платежом</option>
             </select>
           </div>
-          <div class="form-row" data-field="early">
+          <div class="form-row" data-field="early" hidden>
             <label for="extra">Сумма досрочного платежа (₽)</label>
             <input id="extra" name="extra" type="number" value="10000" min="0" step="1000" max="999999999999" />
-            <p class="note">Сумма учитывается, только если выше выбрано «С досрочным платежом».</p>
           </div>
-          <div class="form-row" data-field="early">
+          <div class="form-row" data-field="early" hidden>
             <label for="extraMonth">На каком месяце (№)</label>
             <input id="extraMonth" name="extraMonth" type="number" value="3" min="1" max="360" />
           </div>
-          <div class="form-row" data-field="early">
+          <div class="form-row" data-field="early" hidden>
             <label for="earlyEffect">Как применить досрочное</label>
             <select id="earlyEffect" name="earlyEffect">
               <option value="term" selected>Уменьшить срок</option>
@@ -271,7 +270,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=5"></script>
-    <script src="js/calculators.js?v=43"></script>
+    <script src="js/calculators.js?v=44"></script>
     <script src="js/config.js?v=6"></script>
     <script src="js/analytics.js?v=6"></script>
     <script src="js/seo.js?v=5"></script>

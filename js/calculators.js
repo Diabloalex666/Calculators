@@ -548,6 +548,7 @@ function calcCredit(form) {
   const annualRate = parseNumber(form.rate.value) / 100;
   const type = form.paymentType.value === "diff" ? "diff" : "annuity";
   const earlyMode = form.earlyMode.value === "on" ? "on" : "off";
+  toggleFormFields(form, "early", earlyMode === "on");
   const extraPayment = parseNumber(form.extra.value);
   const extraMonth = Math.floor(parseNumber(form.extraMonth.value) || 0);
   const earlyEffect = form.earlyEffect.value === "payment" ? "payment" : "term";
