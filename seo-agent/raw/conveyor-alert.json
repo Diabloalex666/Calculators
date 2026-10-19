@@ -1,12 +1,11 @@
 {
-  "updated": "2026-10-16",
+  "updated": "2026-10-19",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
     "bolnichny-procent-ot-stazha-kak.html",
     "byudzhet-50-30-20.html",
     "ipoteka-srok-ili-platezh.html",
-    "oklad-220000-ndfl-15.html",
     "oklad-300000-ndfl.html",
     "oklad-na-ruki-obratnyy-schyot.html",
     "otpusk-i-uvolnenie-raznica.html",
@@ -38,10 +37,9 @@
     "raschetnyy-listok-chto-smotret",
     "oklad-na-ruki-obratnyy-schyot",
     "otpusknye-i-ndfl",
-    "oklad-220000-ndfl-15",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 21,
+  "planned": 20,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -62,5 +60,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=18, ready_packs=18"
+  "message": "На конвейере: queue=17, ready_packs=17"
 }
