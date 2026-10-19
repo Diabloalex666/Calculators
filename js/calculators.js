@@ -448,9 +448,17 @@ function simulateCredit(options) {
   const monthlyRate = (options.annualRate || 0) / 12;
   const type = options.type === "diff" ? "diff" : "annuity";
   const earlyOn = options.earlyMode === "on";
-  const extraPayment = Math.max(0, options.extraPayment || 0);
-  const extraMonth = Math.max(0, Math.floor(options.extraMonth || 0));
   const reducePayment = options.earlyEffect === "payment";
+  const extrasByMonth = new Map();
+  if (earlyOn) {
+    (options.earlyPayments || []).forEach((item) => {
+      const month = Math.max(0, Math.floor(item.month || 0));
+      const amount = Math.max(0, item.amount || 0);
+      if (month > 0 && amount > 0) {
+        extrasByMonth.set(month, (extrasByMonth.get(month) || 0) + amount);
+      }
+    });
+  }
 
   const schedule = [];
   let balance = amount;
@@ -471,8 +479,9 @@ function simulateCredit(options) {
     if (principalDue > balance) principalDue = balance;
 
     let extra = 0;
-    if (earlyOn && extraPayment > 0 && month === extraMonth) {
-      extra = Math.min(extraPayment, Math.max(0, balance - principalDue));
+    const plannedExtra = extrasByMonth.get(month) || 0;
+    if (earlyOn && plannedExtra > 0) {
+      extra = Math.min(plannedExtra, Math.max(0, balance - principalDue));
     }
 
     let principal = principalDue + extra;
@@ -496,7 +505,7 @@ function simulateCredit(options) {
 
     if (balance <= 0) break;
 
-    if (earlyOn && extraPayment > 0 && month === extraMonth && reducePayment) {
+    if (earlyOn && extra > 0 && reducePayment) {
       const left = months - month;
       if (left > 0) {
         if (type === "annuity") {
@@ -549,8 +558,16 @@ function calcCredit(form) {
   const type = form.paymentType.value === "diff" ? "diff" : "annuity";
   const earlyMode = form.earlyMode.value === "on" ? "on" : "off";
   toggleFormFields(form, "early", earlyMode === "on");
-  const extraPayment = parseNumber(form.extra.value);
-  const extraMonth = Math.floor(parseNumber(form.extraMonth.value) || 0);
+  const earlyPayments = [];
+  form.querySelectorAll("[data-early-row]").forEach((row) => {
+    const amountInput = row.querySelector(".early-amount");
+    const monthInput = row.querySelector(".early-month");
+    if (!amountInput || !monthInput) return;
+    earlyPayments.push({
+      amount: Math.max(0, parseNumber(amountInput.value)),
+      month: Math.floor(parseNumber(monthInput.value) || 0),
+    });
+  });
   const earlyEffect = form.earlyEffect.value === "payment" ? "payment" : "term";
   const fee = Math.max(0, parseNumber(form.fee.value));
   const insurance = Math.max(0, parseNumber(form.insurance.value));
@@ -561,8 +578,7 @@ function calcCredit(form) {
     annualRate,
     type,
     earlyMode,
-    extraPayment,
-    extraMonth,
+    earlyPayments,
     earlyEffect,
   });
 
@@ -603,12 +619,14 @@ function calcCredit(form) {
     steps.push({ label: "Всего с комиссией и страховкой", value: formatRub(grandTotal) });
   }
 
-  if (earlyMode === "on" && extraPayment > 0) {
-    steps.push({
-      label: "Досрочное погашение",
-      value: `${formatRub(extraPayment)} на ${extraMonth}-м мес. (${
-        earlyEffect === "payment" ? "уменьшить платёж" : "уменьшить срок"
-      })`,
+  if (earlyMode === "on") {
+    const effectLabel = earlyEffect === "payment" ? "уменьшить платёж" : "уменьшить срок";
+    earlyPayments.forEach((item) => {
+      if (item.amount <= 0 || item.month <= 0) return;
+      steps.push({
+        label: "Досрочное погашение",
+        value: `${formatRub(item.amount)} на ${item.month}-м мес. (${effectLabel})`,
+      });
     });
   }
 
@@ -2208,6 +2226,55 @@ function calcPeriodSalary(form) {
   setHtml("period-steps", renderStepsTable(result.steps));
 }
 
+function bindCreditEarlyRows() {
+  const form = document.getElementById("credit-form");
+  const list = form && form.querySelector("[data-early-list]");
+  const addBtn = document.getElementById("credit-early-add");
+  if (!form || !list || !addBtn || form.dataset.earlyBound === "1") return;
+  form.dataset.earlyBound = "1";
+  const maxRows = 24;
+
+  const syncRows = () => {
+    const rows = list.querySelectorAll("[data-early-row]");
+    rows.forEach((row) => {
+      const btn = row.querySelector(".early-remove");
+      if (btn) btn.hidden = rows.length < 2;
+    });
+    addBtn.disabled = rows.length >= maxRows;
+  };
+
+  addBtn.addEventListener("click", () => {
+    const rows = list.querySelectorAll("[data-early-row]");
+    if (rows.length >= maxRows) return;
+    const last = rows[rows.length - 1];
+    const copy = last.cloneNode(true);
+    const amount = copy.querySelector(".early-amount");
+    const month = copy.querySelector(".early-month");
+    const lastMonth = Math.floor(parseNumber(last.querySelector(".early-month").value) || 0);
+    if (amount) {
+      amount.value = "";
+      amount.removeAttribute("value");
+    }
+    if (month) month.value = String(Math.min(360, Math.max(1, lastMonth + 1)));
+    list.insertBefore(copy, list.querySelector(".note"));
+    syncRows();
+    form.dispatchEvent(new Event("input", { bubbles: true }));
+    if (amount) amount.focus();
+  });
+
+  list.addEventListener("click", (event) => {
+    const btn = event.target.closest(".early-remove");
+    if (!btn || list.querySelectorAll("[data-early-row]").length < 2) return;
+    const row = btn.closest("[data-early-row]");
+    if (!row) return;
+    row.remove();
+    syncRows();
+    form.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+
+  syncRows();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const periodForm = document.getElementById("period-form");
   if (periodForm) {
@@ -2230,6 +2297,7 @@ document.addEventListener("DOMContentLoaded", () => {
   bindCalculator("compound-form", calcCompound);
   bindCalculator("sick-form", calcSick);
   bindCalculator("mortgage-form", calcMortgage);
+  bindCreditEarlyRows();
   bindCalculator("credit-form", calcCredit);
   bindCalculator("dismissal-form", calcDismissal);
   bindCalculator("npd-form", calcSamozanyaty);

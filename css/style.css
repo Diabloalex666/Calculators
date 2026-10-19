@@ -370,6 +370,52 @@ span.mark-new {
   display: none !important;
 }
 
+.early-payments[hidden] {
+  display: none !important;
+}
+
+.early-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr) auto;
+  gap: 0.75rem;
+  align-items: end;
+  margin-bottom: 0.75rem;
+}
+
+.early-row .form-row {
+  margin-bottom: 0;
+}
+
+.early-remove {
+  width: var(--control-h);
+  height: var(--control-h);
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.early-remove[hidden] {
+  display: none !important;
+}
+
+.early-add {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 720px) {
+  .early-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .early-row .form-row:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
 label {
   font-size: 0.9rem;
   color: var(--muted);
