@@ -1,41 +1,41 @@
 {
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "connected": true,
   "source": "wordstat-api",
   "queries": [
     {
       "query": "ипотечный калькулятор",
-      "freq": 339967,
+      "freq": 339674,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор отпускных",
-      "freq": 58339,
+      "freq": 58340,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор сложного процента",
-      "freq": 39374,
+      "freq": 39324,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор больничного",
-      "freq": 60807,
+      "freq": 60831,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор зарплаты на руки",
-      "freq": 665,
+      "freq": 662,
       "source": "wordstat-api"
     },
     {
       "query": "вычет на детей ндфл",
-      "freq": 54997,
+      "freq": 54896,
       "source": "wordstat-api"
     },
     {
       "query": "когда ндфл 15 процентов",
-      "freq": 731,
+      "freq": 730,
       "source": "wordstat-api"
     },
     {
@@ -45,7 +45,7 @@
     },
     {
       "query": "калькулятор налогового вычета",
-      "freq": 5467,
+      "freq": 5462,
       "source": "wordstat-api"
     },
     {
@@ -85,17 +85,17 @@
     },
     {
       "query": "вычет на детей ндфл сколько",
-      "freq": 646,
+      "freq": 645,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор отпускных онлайн",
-      "freq": 33100,
+      "freq": 33124,
       "source": "wordstat-api"
     },
     {
       "query": "отпускные за 14 дней",
-      "freq": 1473,
+      "freq": 1467,
       "source": "wordstat-api"
     },
     {
