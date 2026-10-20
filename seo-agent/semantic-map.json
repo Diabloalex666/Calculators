@@ -1,6 +1,6 @@
 {
   "site": "https://finraz.ru",
-  "updated": "2026-10-19",
+  "updated": "2026-10-20",
   "note": "Частотности — гипотеза до выгрузки Wordstat/консолей. Не использовать как факт в статьях.",
   "clusters": [
     {
@@ -13,11 +13,12 @@
         "vol": 665
       },
       "demand": {
-        "score": 1.0,
+        "score": 6650.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -30,13 +31,11 @@
         "vol": 39
       },
       "demand": {
-        "score": 400.0,
+        "score": 390.0,
         "sources": [
-          "wordstat-api",
-          "seed",
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -49,12 +48,11 @@
         "vol": 10
       },
       "demand": {
-        "score": 101.0,
+        "score": 100.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -67,12 +65,11 @@
         "vol": 2
       },
       "demand": {
-        "score": 21.0,
+        "score": 20.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -85,12 +82,11 @@
         "vol": 1
       },
       "demand": {
-        "score": 11.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -103,12 +99,11 @@
         "vol": 1
       },
       "demand": {
-        "score": 11.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -121,11 +116,11 @@
         "vol": 112
       },
       "demand": {
-        "score": 2.0,
+        "score": 1120.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -138,11 +133,12 @@
         "vol": 646
       },
       "demand": {
-        "score": 10.0,
+        "score": 6460.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -155,11 +151,11 @@
         "vol": 33100
       },
       "demand": {
-        "score": 1.0,
+        "score": 331000.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -172,11 +168,11 @@
         "vol": 1473
       },
       "demand": {
-        "score": 9.0,
+        "score": 14730.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -189,11 +185,11 @@
         "vol": 65
       },
       "demand": {
-        "score": 8.0,
+        "score": 650.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -240,11 +236,11 @@
         "vol": 14648
       },
       "demand": {
-        "score": 1.0,
+        "score": 146480.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -343,11 +339,12 @@
         "vol": 339967
       },
       "demand": {
-        "score": 1.0,
+        "score": 3399670.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -479,11 +476,12 @@
         "vol": 39374
       },
       "demand": {
-        "score": 1.0,
+        "score": 393740.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -548,11 +546,11 @@
         "vol": 49
       },
       "demand": {
-        "score": 8.0,
+        "score": 490.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -565,11 +563,12 @@
         "vol": 108
       },
       "demand": {
-        "score": 8.0,
+        "score": 1080.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -586,7 +585,7 @@
         "sources": [
           "wordstat-json"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -728,7 +727,7 @@
     {
       "id": "oklad-300000-ndfl",
       "page": "/articles/oklad-300000-ndfl.html",
-      "status": "planned",
+      "status": "published",
       "intent": "info",
       "main": {
         "q": "оклад 300000 какой ндфл",
@@ -1113,7 +1112,7 @@
         "sources": [
           "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     },
     {
@@ -1130,7 +1129,7 @@
         "sources": [
           "wordstat-api"
         ],
-        "updated": "2026-10-19"
+        "updated": "2026-10-20"
       }
     }
   ]
