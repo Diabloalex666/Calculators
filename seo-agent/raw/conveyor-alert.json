@@ -1,12 +1,11 @@
 {
-  "updated": "2026-10-20",
+  "updated": "2026-10-21",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
     "bolnichny-procent-ot-stazha-kak.html",
     "byudzhet-50-30-20.html",
     "ipoteka-srok-ili-platezh.html",
-    "oklad-na-ruki-obratnyy-schyot.html",
     "otpusk-i-uvolnenie-raznica.html",
     "otpusknye-i-ndfl.html",
     "otpusknye-sredniy-zarabotok.html",
@@ -33,11 +32,10 @@
     "byudzhet-50-30-20",
     "podushka-bezopasnosti-skolko",
     "raschetnyy-listok-chto-smotret",
-    "oklad-na-ruki-obratnyy-schyot",
     "otpusknye-i-ndfl",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 19,
+  "planned": 18,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -58,5 +56,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=16, ready_packs=16"
+  "message": "На конвейере: queue=15, ready_packs=15"
 }
