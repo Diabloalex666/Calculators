@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-27T07:31:41",
+  "generated": "2026-10-28T10:30:07",
   "semantics": {
     "counts": {
-      "published": 52,
-      "planned": 14
+      "published": 53,
+      "planned": 13
     },
     "holes": [],
     "total": 66
@@ -18,27 +18,29 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "очередь уже не пуста"
     ]
   },
   "drip": {
-    "enabled": false,
-    "published": [],
+    "enabled": true,
+    "published": [
+      "uderzhaniya-iz-zarplaty-predel.html"
+    ],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника",
+      "podushka-bezopasnosti-skolko.html: нет первоисточника",
+      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 57,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/ndfl-15-procentov-kogda",
-        "status": "503"
-      }
-    ],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 58
+    "ok": 0,
+    "bad": [],
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -70,21 +72,9 @@
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-10-27",
-    "webmaster": {
-      "connected": true,
-      "error": null,
-      "n": 0
-    },
-    "wordstat": {
-      "connected": true,
-      "error": null,
-      "n": 20
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 26,
+    "suggest_ok": 0,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -103,15 +93,17 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 13 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
-    "missing": [],
+    "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+    ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
-      "починить URL из monitor.bad"
+      "залиты из очереди: uderzhaniya-iz-zarplaty-predel.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
