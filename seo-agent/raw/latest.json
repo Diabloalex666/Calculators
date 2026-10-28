@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-28T10:30:07",
+  "generated": "2026-10-28T07:31:45",
   "semantics": {
     "counts": {
       "published": 53,
@@ -18,29 +18,22 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "очередь уже не пуста"
+      "дневной кап уже выбран"
     ]
   },
   "drip": {
-    "enabled": true,
-    "published": [
-      "uderzhaniya-iz-zarplaty-predel.html"
-    ],
+    "enabled": false,
+    "published": [],
     "skipped": [
-      "annuitet-vs-differencirovannyy.html: нет первоисточника",
-      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
-      "byudzhet-50-30-20.html: нет первоисточника",
-      "ipoteka-srok-ili-platezh.html: нет первоисточника",
-      "podushka-bezopasnosti-skolko.html: нет первоисточника",
-      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
-    "ok": 0,
+    "ok": 59,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 59
   },
   "audit": {
     "orphans": [],
@@ -72,9 +65,21 @@
     "connected": false,
     "files": []
   },
-  "yandex": {},
+  "yandex": {
+    "updated": "2026-10-28",
+    "webmaster": {
+      "connected": true,
+      "error": null,
+      "n": 0
+    },
+    "wordstat": {
+      "connected": true,
+      "error": null,
+      "n": 20
+    }
+  },
   "demand": {
-    "suggest_ok": 0,
+    "suggest_ok": 26,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -95,15 +100,12 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 13 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+      "в очереди 13 planned"
     ],
-    "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
-    ],
+    "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "залиты из очереди: uderzhaniya-iz-zarplaty-predel.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

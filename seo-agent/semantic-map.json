@@ -13,10 +13,9 @@
         "vol": 662
       },
       "demand": {
-        "score": 6620.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -31,9 +30,11 @@
         "vol": 39
       },
       "demand": {
-        "score": 390.0,
+        "score": 400.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -48,9 +49,10 @@
         "vol": 10
       },
       "demand": {
-        "score": 100.0,
+        "score": 101.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-28"
       }
@@ -65,9 +67,10 @@
         "vol": 2
       },
       "demand": {
-        "score": 20.0,
+        "score": 21.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-28"
       }
@@ -82,9 +85,10 @@
         "vol": 1
       },
       "demand": {
-        "score": 10.0,
+        "score": 11.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-28"
       }
@@ -99,9 +103,10 @@
         "vol": 1
       },
       "demand": {
-        "score": 10.0,
+        "score": 11.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed"
         ],
         "updated": "2026-10-28"
       }
@@ -116,9 +121,9 @@
         "vol": 112
       },
       "demand": {
-        "score": 1120.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -133,10 +138,9 @@
         "vol": 645
       },
       "demand": {
-        "score": 6450.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -151,9 +155,9 @@
         "vol": 33124
       },
       "demand": {
-        "score": 331240.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -168,9 +172,9 @@
         "vol": 1467
       },
       "demand": {
-        "score": 14670.0,
+        "score": 9.0,
         "sources": [
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -185,9 +189,9 @@
         "vol": 65
       },
       "demand": {
-        "score": 650.0,
+        "score": 8.0,
         "sources": [
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -206,7 +210,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -223,7 +227,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -236,9 +240,9 @@
         "vol": 14648
       },
       "demand": {
-        "score": 146480.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -257,7 +261,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -274,7 +278,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -292,7 +296,7 @@
           "seed",
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -309,7 +313,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -326,7 +330,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -339,10 +343,9 @@
         "vol": 339674
       },
       "demand": {
-        "score": 3396740.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -361,7 +364,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -378,7 +381,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -395,7 +398,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -412,7 +415,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -429,7 +432,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -446,7 +449,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -463,7 +466,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -476,10 +479,9 @@
         "vol": 39324
       },
       "demand": {
-        "score": 393240.0,
+        "score": 1.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -498,7 +500,7 @@
         "sources": [
           "seed"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -516,7 +518,7 @@
           "seed",
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -546,9 +548,9 @@
         "vol": 49
       },
       "demand": {
-        "score": 490.0,
+        "score": 8.0,
         "sources": [
-          "wordstat-json"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -563,10 +565,9 @@
         "vol": 108
       },
       "demand": {
-        "score": 1080.0,
+        "score": 8.0,
         "sources": [
-          "wordstat-json",
-          "wordstat-api"
+          "yandex-suggest"
         ],
         "updated": "2026-10-28"
       }
@@ -602,7 +603,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -619,7 +620,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
@@ -1095,7 +1096,7 @@
         "sources": [
           "yandex-suggest"
         ],
-        "updated": "2026-10-27"
+        "updated": "2026-10-28"
       }
     },
     {
