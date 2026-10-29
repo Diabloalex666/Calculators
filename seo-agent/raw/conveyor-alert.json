@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28",
+  "updated": "2026-10-29",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
@@ -8,13 +8,11 @@
     "ipoteka-srok-ili-platezh.html",
     "podushka-bezopasnosti-skolko.html",
     "slozhnyy-procent-s-popolneniem.html",
-    "vychet-na-detey-kak-rabotaet.html",
     "zarplata-ne-rezhe-polumesyaca.html",
     "zarplata-za-neskolko-dney.html",
     "zarplata-za-pervuyu-nedelyu.html"
   ],
   "ready_packs": [
-    "vychet-na-detey-kak-rabotaet",
     "zarplata-ne-rezhe-polumesyaca",
     "zarplata-za-neskolko-dney",
     "bolnichny-procent-ot-stazha-kak",
@@ -25,7 +23,7 @@
     "podushka-bezopasnosti-skolko",
     "zarplata-za-pervuyu-nedelyu"
   ],
-  "planned": 13,
+  "planned": 12,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -46,5 +44,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=10, ready_packs=10"
+  "message": "На конвейере: queue=9, ready_packs=9"
 }
