@@ -1,9 +1,9 @@
 {
-  "generated": "2026-10-29T07:31:57",
+  "generated": "2026-10-30T10:32:13",
   "semantics": {
     "counts": {
-      "published": 54,
-      "planned": 12
+      "published": 55,
+      "planned": 11
     },
     "holes": [],
     "total": 66
@@ -18,22 +18,29 @@
     "enabled": true,
     "queued": [],
     "skipped": [
-      "дневной кап уже выбран"
+      "очередь уже не пуста"
     ]
   },
   "drip": {
-    "enabled": false,
-    "published": [],
+    "enabled": true,
+    "published": [
+      "zarplata-ne-rezhe-polumesyaca.html"
+    ],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника",
+      "podushka-bezopasnosti-skolko.html: нет первоисточника",
+      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 60,
+    "ok": 0,
     "bad": [],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 60
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -65,21 +72,9 @@
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-10-29",
-    "webmaster": {
-      "connected": true,
-      "error": null,
-      "n": 0
-    },
-    "wordstat": {
-      "connected": true,
-      "error": null,
-      "n": 20
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 26,
+    "suggest_ok": 0,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -100,12 +95,15 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 12 planned"
+      "в очереди 11 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
-    "missing": [],
+    "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+    ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "залиты из очереди: zarplata-ne-rezhe-polumesyaca.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
