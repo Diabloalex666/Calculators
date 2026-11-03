@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02",
+  "updated": "2026-11-03",
   "empty": false,
   "queue": [
     "annuitet-vs-differencirovannyy.html",
@@ -7,8 +7,7 @@
     "byudzhet-50-30-20.html",
     "ipoteka-srok-ili-platezh.html",
     "podushka-bezopasnosti-skolko.html",
-    "slozhnyy-procent-s-popolneniem.html",
-    "zarplata-za-pervuyu-nedelyu.html"
+    "slozhnyy-procent-s-popolneniem.html"
   ],
   "ready_packs": [
     "bolnichny-procent-ot-stazha-kak",
@@ -16,10 +15,9 @@
     "annuitet-vs-differencirovannyy",
     "slozhnyy-procent-s-popolneniem",
     "byudzhet-50-30-20",
-    "podushka-bezopasnosti-skolko",
-    "zarplata-za-pervuyu-nedelyu"
+    "podushka-bezopasnosti-skolko"
   ],
-  "planned": 10,
+  "planned": 9,
   "blocked": [
     {
       "id": "zarplata_pri_uvolnenii_po_sobstvennomu_z",
@@ -40,5 +38,5 @@
       "reason": "нет пакета в seo-agent/packs/"
     }
   ],
-  "message": "На конвейере: queue=7, ready_packs=7"
+  "message": "На конвейере: queue=6, ready_packs=6"
 }
