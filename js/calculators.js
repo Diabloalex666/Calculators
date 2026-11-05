@@ -354,6 +354,27 @@ function annuityPayment(amount, monthlyRate, months) {
   return (amount * monthlyRate * factor) / (factor - 1);
 }
 
+// Федеральный материнский капитал с 1 февраля 2026 года.
+// https://sfr.gov.ru/grazhdanam/semyam_s_detmi/materinskij_kapital/razmer/
+// На третьего и следующих отдельный сертификат не выдаётся, если право уже было.
+const MATKAPITAL_KOPEKS = {
+  "1": 72892190,
+  "2": 96324317,
+  "3": 96324317,
+};
+
+function matkapitalByChildren(value) {
+  const kopeks = MATKAPITAL_KOPEKS[String(value)] || 0;
+  return kopeks / 100;
+}
+
+function matkapitalChildLabel(value) {
+  if (value === "1") return "1 ребёнок";
+  if (value === "2") return "2 ребёнка";
+  if (value === "3") return "3 и больше";
+  return "";
+}
+
 function simulateMortgage(amount, annualRate, years, extraPayment, extraMonth) {
   const months = years * 12;
   const monthlyRate = annualRate / 12;
@@ -397,13 +418,38 @@ function calcMortgage(form) {
   const amount = parseNumber(form.amount.value);
   const annualRate = parseNumber(form.rate.value) / 100;
   const years = Math.max(1, Math.min(40, parseNumber(form.years.value) || 1));
-  const extraPayment = parseNumber(form.extra.value);
-  const extraMonth = parseNumber(form.extraMonth.value);
   const useEarly = form.earlyMode.value === "on";
+  const extraPayment = useEarly ? parseNumber(form.extra.value) : 0;
+  const extraMonth = useEarly ? parseNumber(form.extraMonth.value) : 0;
+  const children = form.matkapital ? form.matkapital.value : "0";
+  const capital = matkapitalByChildren(children);
+  const applied = Math.min(capital, Math.max(0, amount));
+  const financed = Math.max(0, amount - applied);
+
+  if (form.matkapital && form.matkapital.dataset.sums !== "1") {
+    form.matkapital.dataset.sums = "1";
+    Array.from(form.matkapital.options).forEach((option) => {
+      const sum = matkapitalByChildren(option.value);
+      const label = matkapitalChildLabel(option.value);
+      if (sum > 0 && label) option.textContent = `${label} — ${formatRubPrecise(sum)}`;
+    });
+  }
 
   toggleFormFields(form, "early", useEarly);
 
-  const sim = simulateMortgage(amount, annualRate, years, extraPayment, extraMonth);
+  const capitalRow = document.getElementById("mortgage-capital-row");
+  const financedRow = document.getElementById("mortgage-financed-row");
+  if (capital > 0) {
+    setText("mortgage-capital", formatRubPrecise(capital));
+    setText("mortgage-financed", formatRubPrecise(financed));
+    if (capitalRow) capitalRow.hidden = false;
+    if (financedRow) financedRow.hidden = false;
+  } else {
+    if (capitalRow) capitalRow.hidden = true;
+    if (financedRow) financedRow.hidden = true;
+  }
+
+  const sim = simulateMortgage(financed, annualRate, years, extraPayment, extraMonth);
   const base = sim.base;
 
   setText("mortgage-payment", formatRub(base.payment));
@@ -412,14 +458,26 @@ function calcMortgage(form) {
 
   const steps = [
     { label: "Сумма кредита", value: formatRub(amount) },
+  ];
+  if (capital > 0) {
+    steps.push({
+      label: "Маткапитал",
+      value: `${formatRubPrecise(capital)} (${matkapitalChildLabel(children)})`,
+    });
+    if (applied < capital) {
+      steps.push({ label: "Учтено в кредите", value: formatRubPrecise(applied) });
+    }
+    steps.push({ label: "В расчёте", value: formatRubPrecise(financed) });
+  }
+  steps.push(
     { label: "Ставка годовых", value: formatPercent(annualRate) },
     { label: "Срок", value: `${years} лет (${sim.months} мес.)` },
     { label: "Ежемесячный платёж", value: formatRub(base.payment) },
     { label: "Выплатите всего", value: formatRub(base.totalPaid) },
     { label: "Переплата (проценты)", value: formatRub(base.interestPaid) },
-  ];
+  );
 
-  if (sim.early) {
+  if (useEarly && sim.early) {
     const saved = base.interestPaid - sim.early.interestPaid;
     const monthsSaved = base.monthCount - sim.early.monthCount;
 
