@@ -370,6 +370,24 @@ span.mark-new {
   display: none !important;
 }
 
+.check-line {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: var(--control-h);
+  color: var(--text);
+  cursor: pointer;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.check-line input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin: 0;
+  accent-color: var(--accent);
+}
+
 .early-payments[hidden] {
   display: none !important;
 }

@@ -421,7 +421,8 @@ function calcMortgage(form) {
   const useEarly = form.earlyMode.value === "on";
   const extraPayment = useEarly ? parseNumber(form.extra.value) : 0;
   const extraMonth = useEarly ? parseNumber(form.extraMonth.value) : 0;
-  const children = form.matkapital ? form.matkapital.value : "0";
+  const useCapital = Boolean(form.matkapitalOn && form.matkapitalOn.checked);
+  const children = useCapital && form.matkapital ? form.matkapital.value : "0";
   const capital = matkapitalByChildren(children);
   const applied = Math.min(capital, Math.max(0, amount));
   const financed = Math.max(0, amount - applied);
@@ -435,6 +436,7 @@ function calcMortgage(form) {
     });
   }
 
+  toggleFormFields(form, "matkapital", useCapital);
   toggleFormFields(form, "early", useEarly);
 
   const capitalRow = document.getElementById("mortgage-capital-row");

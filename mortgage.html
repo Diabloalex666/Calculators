@@ -26,7 +26,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="ru_RU" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css?v=18-mono" />
+    <link rel="stylesheet" href="css/style.css?v=20-mono" />
   </head>
   <body>
       <header class="site-header">
@@ -66,10 +66,15 @@
             <input id="years" name="years" type="number" value="20" min="1" max="40" />
           </div>
           <div class="form-row">
-            <label for="matkapital">Маткапитал</label>
+            <label class="check-line" for="matkapitalOn">
+              <input id="matkapitalOn" name="matkapitalOn" type="checkbox" />
+              <span>Есть маткапитал</span>
+            </label>
+          </div>
+          <div class="form-row" data-field="matkapital" hidden>
+            <label for="matkapital">Число детей</label>
             <select id="matkapital" name="matkapital">
-              <option value="0" selected>Не использовать</option>
-              <option value="1">1 ребёнок</option>
+              <option value="1" selected>1 ребёнок</option>
               <option value="2">2 ребёнка</option>
               <option value="3">3 и больше</option>
             </select>
@@ -77,7 +82,7 @@
               С 1 февраля 2026 года, <a href="https://sfr.gov.ru/grazhdanam/semyam_s_detmi/materinskij_kapital/razmer/" target="_blank" rel="noopener">Социальный фонд</a>:
               на первого ребёнка 728&nbsp;921,90&nbsp;₽, на второго к этой сумме добавляется 234&nbsp;321,27&nbsp;₽.
               На третьего и дальше отдельный капитал не выдают, если право уже было: в списке та же сумма, что на двоих.
-              Выбранная сумма вычитается из кредита до процентов.
+              Сумма вычитается из кредита до процентов. Без галочки в расчёт не входит.
             </p>
           </div>
           <div class="form-row">
@@ -136,8 +141,8 @@
 
         <p class="note">
           Аннуитетная схема без страховок и комиссий. Маткапитал вычитается из суммы кредита
-          до процентов. Досрочный платёж уменьшает срок при том же ежемесячном платеже —
-          только если выбран режим «С досрочным платежом».
+          до процентов, только если стоит галочка «Есть маткапитал». Досрочный платёж
+          уменьшает срок при том же ежемесячном платеже — только в режиме «С досрочным платежом».
         </p>
       </div>
 
@@ -178,8 +183,9 @@
 
         <h3>Материнский капитал</h3>
         <p>
-          В списке «Маткапитал» сумма берётся по числу детей и вычитается из кредита
-          до начисления процентов — как будто капитал пошёл в первоначальный взнос.
+          Поставьте галочку «Есть маткапитал» и выберите число детей. Без галочки капитал
+          в расчёт не входит. С галочкой сумма вычитается из кредита до начисления процентов —
+          как будто капитал пошёл в первоначальный взнос.
           С 1 февраля 2026 года Социальный фонд указывает
           <strong>728&nbsp;921,90&nbsp;₽</strong> на первого ребёнка и ещё
           <strong>234&nbsp;321,27&nbsp;₽</strong> при появлении второго. Вместе это
@@ -241,7 +247,8 @@
         <div class="faq-item">
           <h3>Как в калькуляторе учитывается материнский капитал?</h3>
           <p>
-            Выберите число детей. На одного ребёнка с 1 февраля 2026 года Социальный фонд
+            Поставьте галочку «Есть маткапитал» и выберите число детей. Без галочки капитал в расчёт не входит.
+            На одного ребёнка с 1 февраля 2026 года Социальный фонд
             указывает 728 921,90 ₽, на двоих — 963 243,17 ₽: сумма на первого плюс доплата
             234 321,27 ₽ на второго. На третьего и дальше федеральный капитал отдельно не
             растёт, если право уже возникало, поэтому в расчёте та же сумма, что на двоих.
@@ -318,7 +325,7 @@
       </footer>
     </div>
     <script src="js/common.js?v=5"></script>
-    <script src="js/calculators.js?v=47"></script>
+    <script src="js/calculators.js?v=48"></script>
     <script src="js/config.js?v=6"></script>
     <script src="js/analytics.js?v=6"></script>
     <script src="js/seo.js?v=5"></script>
