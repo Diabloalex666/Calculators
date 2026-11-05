@@ -13,9 +13,10 @@
         "vol": 662
       },
       "demand": {
-        "score": 1.0,
+        "score": 6620.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -30,11 +31,9 @@
         "vol": 39
       },
       "demand": {
-        "score": 400.0,
+        "score": 390.0,
         "sources": [
-          "wordstat-api",
-          "seed",
-          "yandex-suggest"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -49,10 +48,9 @@
         "vol": 10
       },
       "demand": {
-        "score": 101.0,
+        "score": 100.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -67,10 +65,9 @@
         "vol": 2
       },
       "demand": {
-        "score": 21.0,
+        "score": 20.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -85,10 +82,9 @@
         "vol": 1
       },
       "demand": {
-        "score": 11.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -103,10 +99,9 @@
         "vol": 1
       },
       "demand": {
-        "score": 11.0,
+        "score": 10.0,
         "sources": [
-          "wordstat-api",
-          "seed"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -121,9 +116,9 @@
         "vol": 112
       },
       "demand": {
-        "score": 1.0,
+        "score": 1120.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -138,9 +133,10 @@
         "vol": 645
       },
       "demand": {
-        "score": 10.0,
+        "score": 6450.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -155,9 +151,9 @@
         "vol": 33124
       },
       "demand": {
-        "score": 1.0,
+        "score": 331240.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -172,9 +168,9 @@
         "vol": 1467
       },
       "demand": {
-        "score": 9.0,
+        "score": 14670.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -189,9 +185,9 @@
         "vol": 65
       },
       "demand": {
-        "score": 8.0,
+        "score": 650.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -240,9 +236,9 @@
         "vol": 14648
       },
       "demand": {
-        "score": 1.0,
+        "score": 146480.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "updated": "2026-11-05"
       }
@@ -343,9 +339,10 @@
         "vol": 339674
       },
       "demand": {
-        "score": 1.0,
+        "score": 3396740.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -479,9 +476,10 @@
         "vol": 39324
       },
       "demand": {
-        "score": 1.0,
+        "score": 393240.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
@@ -548,9 +546,9 @@
         "vol": 49
       },
       "demand": {
-        "score": 8.0,
+        "score": 490.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json"
         ],
         "updated": "2026-11-05"
       }
@@ -565,9 +563,10 @@
         "vol": 108
       },
       "demand": {
-        "score": 8.0,
+        "score": 1080.0,
         "sources": [
-          "yandex-suggest"
+          "wordstat-json",
+          "wordstat-api"
         ],
         "updated": "2026-11-05"
       }
