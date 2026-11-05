@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T07:32:12",
+  "generated": "2026-11-05T07:36:34",
   "semantics": {
     "counts": {
       "published": 57,
@@ -29,8 +29,13 @@
     ]
   },
   "monitor": {
-    "ok": 63,
-    "bad": [],
+    "ok": 62,
+    "bad": [
+      {
+        "url": "https://finraz.ru/",
+        "status": "503"
+      }
+    ],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 63
@@ -98,14 +103,15 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 9 planned"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

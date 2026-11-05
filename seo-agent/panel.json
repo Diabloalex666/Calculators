@@ -1,13 +1,17 @@
 {
   "generated": "2026-11-05",
-  "verdict": "yellow",
-  "verdictText": "Жёлтый.",
+  "verdict": "red",
+  "verdictText": "Красный.",
   "reasons": [
-    "в очереди 9 planned"
+    "дыры в карте, живые 4xx или дубли интента"
   ],
   "actions": [
     {
       "title": "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+    },
+    {
+      "title": "починить URL из monitor.bad",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
@@ -185,21 +189,27 @@
     "noindex": []
   },
   "health": {
-    "ok": 63,
-    "bad": [],
+    "ok": 62,
+    "bad": [
+      {
+        "url": "https://finraz.ru/",
+        "status": "503"
+      }
+    ],
     "robots": "200",
     "indexnow_key": "200",
     "checked": 63
   },
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 9 planned"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
     "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
