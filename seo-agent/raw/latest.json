@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-05T07:36:34",
+  "generated": "2026-11-06T10:30:05",
   "semantics": {
     "counts": {
       "published": 57,
@@ -22,23 +22,23 @@
     ]
   },
   "drip": {
-    "enabled": false,
+    "enabled": true,
     "published": [],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника",
+      "podushka-bezopasnosti-skolko.html: нет первоисточника",
+      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 62,
-    "bad": [
-      {
-        "url": "https://finraz.ru/",
-        "status": "503"
-      }
-    ],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 63
+    "ok": 0,
+    "bad": [],
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -70,21 +70,9 @@
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-11-05",
-    "webmaster": {
-      "connected": true,
-      "error": null,
-      "n": 0
-    },
-    "wordstat": {
-      "connected": true,
-      "error": null,
-      "n": 20
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 26,
+    "suggest_ok": 0,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -103,15 +91,17 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 9 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
-    "missing": [],
+    "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+    ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
-      "починить URL из monitor.bad"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
