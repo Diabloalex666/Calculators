@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-06T10:30:05",
+  "generated": "2026-11-06T07:31:41",
   "semantics": {
     "counts": {
       "published": 57,
@@ -22,23 +22,18 @@
     ]
   },
   "drip": {
-    "enabled": true,
+    "enabled": false,
     "published": [],
     "skipped": [
-      "annuitet-vs-differencirovannyy.html: нет первоисточника",
-      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
-      "byudzhet-50-30-20.html: нет первоисточника",
-      "ipoteka-srok-ili-platezh.html: нет первоисточника",
-      "podushka-bezopasnosti-skolko.html: нет первоисточника",
-      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
+      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
     ]
   },
   "monitor": {
-    "ok": 0,
+    "ok": 63,
     "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 63
   },
   "audit": {
     "orphans": [],
@@ -70,9 +65,21 @@
     "connected": false,
     "files": []
   },
-  "yandex": {},
+  "yandex": {
+    "updated": "2026-11-06",
+    "webmaster": {
+      "connected": true,
+      "error": null,
+      "n": 0
+    },
+    "wordstat": {
+      "connected": true,
+      "error": null,
+      "n": 20
+    }
+  },
   "demand": {
-    "suggest_ok": 0,
+    "suggest_ok": 26,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -93,12 +100,9 @@
   "advisor": {
     "verdict": "yellow",
     "reasons": [
-      "в очереди 9 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+      "в очереди 9 planned"
     ],
-    "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
-    ],
+    "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
       "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
