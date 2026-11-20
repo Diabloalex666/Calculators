@@ -1,14 +1,17 @@
 {
   "generated": "2026-11-20",
-  "verdict": "yellow",
-  "verdictText": "Жёлтый.",
+  "verdict": "red",
+  "verdictText": "Красный.",
   "reasons": [
-    "в очереди 9 planned",
-    "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+    "дыры в карте, живые 4xx или дубли интента"
   ],
   "actions": [
     {
       "title": "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
+    },
+    {
+      "title": "починить URL из monitor.bad",
       "prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
     }
   ],
@@ -27,21 +30,23 @@
     "daysLeft": "Ранг: Вебмастер API (показы/клики) + Wordstat live/CSV + подсказки. Частотность Wordstat без ключа не выдумывается."
   },
   "traffic": {
-    "status": "файлов нет — положи CSV в seo-agent/raw/"
+    "status": "Показов в Вебмастере: 0. Это ноль, не подтверждение спроса."
   },
   "positions": {
     "status": "спрос самообновляется",
     "top": [
       {
         "q": "ипотечный калькулятор",
-        "score": 3387720.0,
+        "score": 2730540.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 338772.0,
-        "suggest": 0.0,
+        "freq": 273053.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "ipoteka",
         "page": "/mortgage.html",
@@ -49,13 +54,15 @@
       },
       {
         "q": "калькулятор больничного",
-        "score": 617570.0,
+        "score": 680319.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 61757.0,
-        "suggest": 0.0,
+        "freq": 68031.0,
+        "suggest": 9.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -63,14 +70,16 @@
       },
       {
         "q": "калькулятор отпускных",
-        "score": 575920.0,
+        "score": 566010.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 57592.0,
-        "suggest": 0.0,
+        "freq": 56600.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "otpusknye",
         "page": "/vacation.html",
@@ -78,10 +87,10 @@
       },
       {
         "q": "вычет на детей ндфл",
-        "score": 558580.0,
+        "score": 420820.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 55858.0,
+        "freq": 42082.0,
         "suggest": 0.0,
         "sources": [
           "wordstat-api"
@@ -92,14 +101,16 @@
       },
       {
         "q": "калькулятор сложного процента",
-        "score": 394610.0,
+        "score": 392440.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 39461.0,
-        "suggest": 0.0,
+        "freq": 39243.0,
+        "suggest": 10.0,
         "sources": [
           "wordstat-json",
-          "wordstat-api"
+          "wordstat-api",
+          "seed",
+          "yandex-suggest"
         ],
         "cluster": "compound",
         "page": "/compound.html",
@@ -107,13 +118,15 @@
       },
       {
         "q": "калькулятор отпускных онлайн",
-        "score": 327770.0,
+        "score": 302170.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 32777.0,
-        "suggest": 0.0,
+        "freq": 30216.0,
+        "suggest": 10.0,
         "sources": [
-          "wordstat-api"
+          "wordstat-api",
+          "yandex-suggest",
+          "seed"
         ],
         "cluster": "otpusknye",
         "page": "/vacation.html",
@@ -121,13 +134,14 @@
       },
       {
         "q": "калькулятор больничного листа в 2026 году онлайн",
-        "score": 146480.0,
+        "score": 146490.0,
         "clicks": 0.0,
         "impressions": 0.0,
         "freq": 14648.0,
-        "suggest": 0.0,
+        "suggest": 10.0,
         "sources": [
-          "wordstat-json"
+          "wordstat-json",
+          "yandex-suggest"
         ],
         "cluster": "bolnichny",
         "page": "/sick.html",
@@ -135,10 +149,10 @@
       },
       {
         "q": "калькулятор налогового вычета",
-        "score": 54860.0,
+        "score": 80660.0,
         "clicks": 0.0,
         "impressions": 0.0,
-        "freq": 5486.0,
+        "freq": 8066.0,
         "suggest": 0.0,
         "sources": [
           "wordstat-api"
@@ -175,24 +189,27 @@
     "noindex": []
   },
   "health": {
-    "ok": 0,
-    "bad": [],
-    "robots": "offline",
-    "indexnow_key": "offline",
-    "checked": 0
+    "ok": 62,
+    "bad": [
+      {
+        "url": "https://finraz.ru/articles/otpusknye-i-ndfl",
+        "status": "503"
+      }
+    ],
+    "robots": "200",
+    "indexnow_key": "200",
+    "checked": 63
   },
   "advisor": {
-    "verdict": "yellow",
+    "verdict": "red",
     "reasons": [
-      "в очереди 9 planned",
-      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+      "дыры в карте, живые 4xx или дубли интента"
     ],
-    "missing": [
-      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
-    ],
+    "missing": [],
     "tempo": "1 статья в сутки из пакета",
     "week": [
-      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html"
+      "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
+      "починить URL из monitor.bad"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }

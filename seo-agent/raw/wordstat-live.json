@@ -1,66 +1,66 @@
 {
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "connected": true,
   "source": "wordstat-api",
   "queries": [
     {
       "query": "ипотечный калькулятор",
-      "freq": 338772,
+      "freq": 273053,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор отпускных",
-      "freq": 57592,
+      "freq": 56600,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор сложного процента",
-      "freq": 39461,
+      "freq": 39243,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор больничного",
-      "freq": 61757,
+      "freq": 68031,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор зарплаты на руки",
-      "freq": 664,
+      "freq": 520,
       "source": "wordstat-api"
     },
     {
       "query": "вычет на детей ндфл",
-      "freq": 55858,
+      "freq": 42082,
       "source": "wordstat-api"
     },
     {
       "query": "когда ндфл 15 процентов",
-      "freq": 772,
+      "freq": 570,
       "source": "wordstat-api"
     },
     {
       "query": "как посчитать аванс от оклада",
-      "freq": 115,
+      "freq": 69,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор налогового вычета",
-      "freq": 5486,
+      "freq": 8066,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор налоговой нагрузки",
-      "freq": 1098,
+      "freq": 1690,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор зарплаты за период",
-      "freq": 34,
+      "freq": 19,
       "source": "wordstat-api"
     },
     {
       "query": "100000 на руки какой оклад",
-      "freq": 14,
+      "freq": 17,
       "source": "wordstat-api"
     },
     {
@@ -75,32 +75,32 @@
     },
     {
       "query": "зарплата 200000 ндфл 15",
-      "freq": 3,
+      "freq": 1,
       "source": "wordstat-api"
     },
     {
       "query": "когда ндфл 15 процентов 2026",
-      "freq": 122,
+      "freq": 106,
       "source": "wordstat-api"
     },
     {
       "query": "вычет на детей ндфл сколько",
-      "freq": 637,
+      "freq": 575,
       "source": "wordstat-api"
     },
     {
       "query": "калькулятор отпускных онлайн",
-      "freq": 32777,
+      "freq": 30216,
       "source": "wordstat-api"
     },
     {
       "query": "отпускные за 14 дней",
-      "freq": 1467,
+      "freq": 1155,
       "source": "wordstat-api"
     },
     {
       "query": "отпускные при зарплате 50000",
-      "freq": 68,
+      "freq": 52,
       "source": "wordstat-api"
     }
   ],
