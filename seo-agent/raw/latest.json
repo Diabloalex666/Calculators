@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-20T07:31:21",
+  "generated": "2026-11-23T10:30:07",
   "semantics": {
     "counts": {
       "published": 57,
@@ -22,23 +22,23 @@
     ]
   },
   "drip": {
-    "enabled": false,
+    "enabled": true,
     "published": [],
     "skipped": [
-      "дрип выключен (нужны publishQueue и FACTORY_DRIP=1 или --drip)"
+      "annuitet-vs-differencirovannyy.html: нет первоисточника",
+      "bolnichny-procent-ot-stazha-kak.html: нет первоисточника",
+      "byudzhet-50-30-20.html: нет первоисточника",
+      "ipoteka-srok-ili-platezh.html: нет первоисточника",
+      "podushka-bezopasnosti-skolko.html: нет первоисточника",
+      "slozhnyy-procent-s-popolneniem.html: нет первоисточника"
     ]
   },
   "monitor": {
-    "ok": 62,
-    "bad": [
-      {
-        "url": "https://finraz.ru/articles/otpusknye-i-ndfl",
-        "status": "503"
-      }
-    ],
-    "robots": "200",
-    "indexnow_key": "200",
-    "checked": 63
+    "ok": 0,
+    "bad": [],
+    "robots": "offline",
+    "indexnow_key": "offline",
+    "checked": 0
   },
   "audit": {
     "orphans": [],
@@ -65,26 +65,87 @@
     ],
     "noindex": []
   },
-  "refresh": [],
+  "refresh": [
+    {
+      "file": "bolnichny-10-dney-raschet.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "bolnichny-maksimum-2026.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "bolnichny-stazh-5-8-let.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "bolnichny-stazh-8-let.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "bolnichny-stazh-menshe-5-let.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "byudzhet-semi-na-mesyats.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "ipoteka-6-millionov-platezh.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "ipoteka-dosrochnoe-pogashenie.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "ndfl-15-procentov-kogda.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "ndfl-vychet-na-detey.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "otpusknye-14-dney.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "otpusknye-nepolnyy-god.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "otpusknye-pri-zarplate-50000.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "slozhnyy-procent-10000-v-mesyats.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "zarplata-100000-na-ruki.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "zarplata-120000-ndfl.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "zarplata-200000-ndfl-15.html",
+      "updated": "2026-07-25"
+    },
+    {
+      "file": "zarplata-80000-na-ruki.html",
+      "updated": "2026-07-25"
+    }
+  ],
   "console": {
     "connected": false,
     "files": []
   },
-  "yandex": {
-    "updated": "2026-11-20",
-    "webmaster": {
-      "connected": true,
-      "error": null,
-      "n": 0
-    },
-    "wordstat": {
-      "connected": true,
-      "error": null,
-      "n": 20
-    }
-  },
+  "yandex": {},
   "demand": {
-    "suggest_ok": 26,
+    "suggest_ok": 0,
     "suggest_error": "",
     "webmaster": true,
     "wordstat": true,
@@ -103,15 +164,18 @@
   },
   "covers": "пропуск: обложки не генерируем",
   "advisor": {
-    "verdict": "red",
+    "verdict": "yellow",
     "reasons": [
-      "дыры в карте, живые 4xx или дубли интента"
+      "в очереди 9 planned",
+      "не все контуры подключены: YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
     ],
-    "missing": [],
+    "missing": [
+      "YANDEX_WEBMASTER_TOKEN (или CSV в seo-agent/raw/)"
+    ],
     "tempo": "1 статья в сутки из пакета",
     "week": [
       "дрип очереди: annuitet-vs-differencirovannyy.html, bolnichny-procent-ot-stazha-kak.html, byudzhet-50-30-20.html",
-      "починить URL из monitor.bad"
+      "рефреш 18 статей старше 120 дней"
     ],
     "next_prompt": "В очереди annuitet-vs-differencirovannyy.html. Завод сам прогонит гейт и зальёт не больше одной статьи за сутки."
   }
